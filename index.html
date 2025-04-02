@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="cs">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -58,8 +58,8 @@
     }
 
     .cube {
-      width: 150px;
-      height: 150px;
+      width: 100px;
+      height: 100px;
       margin: 40px auto;
       position: relative;
       transform-style: preserve-3d;
@@ -68,36 +68,44 @@
 
     .face {
       position: absolute;
-      width: 150px;
-      height: 150px;
+      width: 100px;
+      height: 100px;
       background: rgba(0, 255, 136, 0.1);
       border: 1px solid #00ff88;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.2rem;
+      font-size: 0.9rem;
     }
 
-    .face:nth-child(1) { transform: rotateY(0deg) translateZ(75px); }
-    .face:nth-child(2) { transform: rotateY(90deg) translateZ(75px); }
-    .face:nth-child(3) { transform: rotateY(180deg) translateZ(75px); }
-    .face:nth-child(4) { transform: rotateY(-90deg) translateZ(75px); }
-    .face:nth-child(5) { transform: rotateX(90deg) translateZ(75px); }
+    .face:nth-child(1) { transform: rotateY(0deg) translateZ(50px); }
+    .face:nth-child(2) { transform: rotateY(90deg) translateZ(50px); }
+    .face:nth-child(3) { transform: rotateY(180deg) translateZ(50px); }
+    .face:nth-child(4) { transform: rotateY(-90deg) translateZ(50px); }
+    .face:nth-child(5) { transform: rotateX(90deg) translateZ(50px); }
 
     @keyframes spin {
       0% { transform: rotateX(0deg) rotateY(0deg); }
+      25% { transform: rotateX(180deg) rotateY(90deg); }
       50% { transform: rotateX(360deg) rotateY(180deg); }
+      75% { transform: rotateX(540deg) rotateY(270deg); }
       100% { transform: rotateX(720deg) rotateY(360deg); }
     }
 
     @keyframes float {
       0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-20px); }
+      50% { transform: translateY(-30px); }
     }
 
     @keyframes glow {
       0%, 100% { opacity: 0.8; }
       50% { opacity: 1; text-shadow: 0 0 20px #00ff88; }
+    }
+
+    footer {
+      margin-top: 2rem;
+      font-size: 0.6rem;
+      color: #00885a;
     }
   </style>
 </head>
@@ -105,7 +113,7 @@
   <canvas id="matrix"></canvas>
 
   <h1>Error 404</h1>
-  <p>Stránka nenalezena. Možná visím někde na stožáru... 🧗‍♂️</p>
+  <p>Page not found. Maybe I'm hanging on a tower somewhere... 🧗‍♂️</p>
 
   <div class="cube">
     <div class="face">SKY</div>
@@ -116,24 +124,28 @@
   </div>
 
   <div class="notice">
-    Web je ve výstavbě.<br>
-    <strong>Klikni kamkoliv</strong> pro spuštění hudby 💽<br>
-    <small>Připojení do Matrixu se navazuje...</small>
+    Website under construction.<br>
+    <strong>Click anywhere</strong> to start the music 💽<br>
+    <small>Connecting to the Matrix...</small>
   </div>
+
+  <footer>
+    &copy; 2025 | English • Deutsch • 中文 • Klingon 🖖
+  </footer>
 
   <audio id="bg-music" preload="auto" loop>
     <source src="bg.mp3" type="audio/mpeg">
-    Tvůj prohlížeč nepodporuje audio přehrávač.
+    Your browser does not support the audio element.
   </audio>
 
   <script>
-    // Matrix background effect s vlastním textem
+    // Matrix background effect with clean symbols
     const canvas = document.getElementById("matrix");
     const ctx = canvas.getContext("2d");
     canvas.height = window.innerHeight;
     canvas.width = window.innerWidth;
 
-    const letters = "OPICHALJEKOKOT".split("");
+    const letters = "SKYTELMONTAGE".split("");
     const fontSize = 14;
     const columns = canvas.width / fontSize;
     const drops = Array(Math.floor(columns)).fill(1);
@@ -166,7 +178,7 @@
       input += e.keyCode;
       if (input.includes(konami)) {
         document.body.style.filter = 'invert(1) hue-rotate(180deg)';
-        alert('Připojeno. Ale zatím visím za nohu.');
+        alert('Connected. But I'm still hanging upside down.');
       }
       if (input.length > 20) input = input.slice(-20);
     });
