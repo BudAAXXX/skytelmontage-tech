@@ -1,54 +1,182 @@
-import React, { useEffect, useState } from "react";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 | SYSTEM ERROR</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-export default function App() {
-  const [visitor, setVisitor] = useState(null);
+    body {
+      background: black;
+      color: #00ff88;
+      font-family: 'Orbitron', sans-serif;
+      overflow: hidden;
+      text-align: center;
+      text-shadow: 0 0 10px #00ff88;
+    }
 
-  useEffect(() => {
-    fetch("https://ipapi.co/json/")
-      .then((res) => res.json())
-      .then((data) => {
-        setVisitor({ city: data.city, country: data.country_name, ip: data.ip });
+    h1 {
+      font-size: 4rem;
+      margin-top: 10vh;
+      animation: glow 2s infinite ease-in-out;
+    }
+
+    p {
+      font-size: 1.4rem;
+      margin: 1rem auto;
+      max-width: 80%;
+      color: #ff5;
+      background: rgba(255, 255, 0, 0.05);
+      padding: 1rem;
+      border-radius: 10px;
+      border: 1px dashed #ff0;
+    }
+
+    .notice {
+      display: inline-block;
+      padding: 1rem 2rem;
+      border: 2px dashed #00ff88;
+      background: rgba(0, 255, 136, 0.1);
+      margin-top: 2rem;
+      max-width: 600px;
+      font-size: 1rem;
+      border-radius: 10px;
+    }
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+
+    .virus-animation {
+      width: 120px;
+      height: 120px;
+      margin: 40px auto;
+      border-radius: 50%;
+      border: 3px dashed #00ff88;
+      animation: spinvirus 3s linear infinite, pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes spinvirus {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 10px #00ff88, 0 0 20px #00ff88; }
+      50% { box-shadow: 0 0 20px #ff0, 0 0 40px #0f0; }
+    }
+
+    @keyframes glow {
+      0%, 100% { opacity: 0.8; }
+      50% { opacity: 1; text-shadow: 0 0 20px #00ff88; }
+    }
+
+    footer {
+      margin-top: 2rem;
+      font-size: 0.6rem;
+      color: #00885a;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="matrix"></canvas>
+
+  <h1>!! SYSTEM BREACH !!</h1>
+  <p id="joke">Loading joke...</p>
+
+  <div class="virus-animation"></div>
+
+  <div class="notice">
+    Website under construction.<br>
+    <strong>Click anywhere</strong> to start the music 🎵<br>
+    <small>Connecting to the Matrix...</small>
+  </div>
+
+  <footer>
+    &copy; 2025 | English • Deutsch • 中文 • Klingon 🖖
+  </footer>
+
+  <audio id="bg-music" preload="auto" loop>
+    <source src="bg.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <script>
+    const canvas = document.getElementById("matrix");
+    const ctx = canvas.getContext("2d");
+    canvas.height = window.innerHeight;
+    canvas.width = window.innerWidth;
+
+    const matrixChars = ["0", "1", "0", "1", "0", "1", "BudAA"];
+    const fontSize = 16;
+    const columns = canvas.width / fontSize;
+    const drops = Array(Math.floor(columns)).fill(1);
+
+    function drawMatrix() {
+      ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = "#0f0";
+      ctx.font = fontSize + "px Orbitron";
+      drops.forEach((y, i) => {
+        const char = Math.random() < 0.98
+          ? matrixChars[Math.floor(Math.random() * 6)] // mostly 0/1
+          : "BudAA";
+        ctx.fillText(char, i * fontSize, y * fontSize);
+        drops[i] = y * fontSize > canvas.height && Math.random() > 0.975 ? 0 : y + 1;
       });
-  }, []);
+    }
 
-  return (
-    <div className="min-h-screen bg-black text-white font-orbitron">
-      <video
-        autoPlay
-        muted
-        loop
-        className="fixed w-full h-full object-cover -z-10"
-      >
-        <source src="/assets/video/background.mp4" type="video/mp4" />
-      </video>
+    setInterval(drawMatrix, 33);
 
-      <header className="bg-black/60 backdrop-blur-md px-6 py-4 flex justify-between items-center">
-        <h1 className="text-2xl text-cyan-400">SkyTel Montage</h1>
-        <nav className="space-x-4">
-          <a href="#vybaveni" className="hover:text-cyan-400">Vybavení</a>
-          <a href="#certifikaty" className="hover:text-cyan-400">Certifikáty</a>
-          <a href="#prace" className="hover:text-cyan-400">Naše práce</a>
-          <a href="#onas" className="hover:text-cyan-400">O nás</a>
-        </nav>
-      </header>
+    const music = document.getElementById('bg-music');
+    document.addEventListener('click', () => {
+      music.volume = 0.7;
+      music.play().catch(err => console.warn('Autoplay error:', err));
+      document.body.style.background = "radial-gradient(circle, #000 0%, #002b00 100%)";
+      showJoke();
+    });
 
-      <main className="flex flex-col items-center justify-center text-center pt-48 px-4">
-        <h2 className="text-4xl md:text-6xl mb-4 text-cyan-400 drop-shadow">
-          Výškové práce a telekomunikační montáže
-        </h2>
-        <p className="text-lg md:text-xl max-w-2xl text-gray-300">
-          Specializujeme se na výstavbu, servis a integraci BTS stanic, stožárů a telekomunikační techniky v Německu a Česku.
-        </p>
-        {visitor && (
-          <p className="mt-6 text-sm text-gray-400">
-            📍 Připojil ses z: {visitor.city}, {visitor.country} – IP: {visitor.ip}
-          </p>
-        )}
-      </main>
+    let input = '';
+    const konami = '38384040373937396665';
+    document.addEventListener('keydown', (e) => {
+      input += e.keyCode;
+      if (input.includes(konami)) {
+        document.body.style.filter = 'invert(1) hue-rotate(180deg)';
+        alert('You have unlocked the glitch dimension!');
+      }
+      if (input.length > 20) input = input.slice(-20);
+    });
 
-      <footer className="absolute bottom-4 w-full text-center text-xs text-gray-500">
-        &copy; {new Date().getFullYear()} SkyTel Montage. Všechna práva vyhrazena.
-      </footer>
-    </div>
-  );
-}
+    const jokes = [
+      "Warum ging der Programmierer nicht ins Kino? Weil er auf den JavaScript gewartet hat.",
+      "Ein Bit trifft ein anderes Bit. Sagt das eine: 'Na, auch schon wieder gesetzt?'",
+      "Warum mögen Java-Entwickler keinen Kaffee? Sie haben schon genug Exceptions.",
+      "Ein TCP-Paket kommt in eine Bar. 'Hallo, darf ich bestellen?', 'Hallo, darf ich bestellen?', 'Hallo...'",
+      "Chuck Norris counted to infinity. Twice. (Aber nur auf Assembly.)",
+      "Der kürzeste Horrorfilm für ITler: 'Kein Backup vorhanden.'",
+      "Warum weint der Server? Weil er überlastet ist!",
+      "Ich hatte ein Problem. Dann habe ich ein Regex benutzt. Jetzt habe ich zwei Probleme.",
+      "Wenn dein Code funktioniert, ohne dass du weißt warum – mach ein Backup!",
+      "404: Joke not found. Try again."
+    ];
+
+    function showJoke() {
+      const jokeEl = document.getElementById("joke");
+      const randomJoke = jokes[Math.floor(Math.random() * jokes.length)];
+      jokeEl.textContent = randomJoke;
+    }
+
+    window.onload = showJoke;
+  </script>
+</body>
+</html>
