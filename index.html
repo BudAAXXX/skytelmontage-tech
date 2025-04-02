@@ -1,95 +1,54 @@
-<!DOCTYPE html>
-<html lang="cs">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="SkyTel Montage – profesionální montáže telekomunikačních systémů a výškových konstrukcí v Česku a Německu." />
-  <meta name="keywords" content="SkyTel, SkyTel Montage, telekomunikace, výškové práce, stožáry, BTS, Česko, Německo" />
-  <meta name="author" content="SkyTel Montage" />
-  <title>SkyTel Montage | Telekomunikační montáže a výškové práce</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'Orbitron', sans-serif;
-      color: #fff;
-      background-color: #000;
-      overflow: hidden;
-    }
-    header {
-      position: absolute;
-      top: 0; left: 0; width: 100%;
-      background: rgba(0,0,0,0.5);
-      padding: 1rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      z-index: 10;
-    }
-    header h1 { font-size: 1.5rem; }
-    nav a {
-      margin-left: 1rem;
-      color: #00ffe0;
-      text-decoration: none;
-      transition: 0.3s;
-    }
-    nav a:hover { color: #ffffff; }
-    .hero {
-      position: relative;
-      height: 100vh;
-      width: 100vw;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      z-index: 1;
-    }
-    .hero video {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      object-fit: cover;
-      z-index: 0;
-    }
-    .hero .content {
-      position: relative;
-      z-index: 2;
-      background: rgba(0, 0, 0, 0.6);
-      padding: 2rem;
-      border-radius: 1rem;
-      backdrop-filter: blur(10px);
-    }
-    .content h2 {
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-      color: #00ffe0;
-    }
-    .content p {
-      font-size: 1.1rem;
-      color: #ccc;
-    }
-  </style>
-</head>
-<body>
-  <header>
-    <h1>SkyTel Montage</h1>
-    <nav>
-      <a href="/vybaveni.html">Vybavení</a>
-      <a href="/certifikaty.html">Certifikáty</a>
-      <a href="/prace.html">Naše práce</a>
-      <a href="/o-nas.html">O nás</a>
-    </nav>
-  </header>
+import React, { useEffect, useState } from "react";
 
-  <div class="hero">
-    <video autoplay muted loop>
-      <source src="/assets/video/background.mp4" type="video/mp4">
-      Tvoje prohlížeč nepodporuje video.
-    </video>
-    <div class="content">
-      <h2>Profesionální montáže ve výškách</h2>
-      <p>Komplexní telekomunikační řešení, stožáry, BTS, instalace, servis a integrace</p>
+export default function App() {
+  const [visitor, setVisitor] = useState(null);
+
+  useEffect(() => {
+    fetch("https://ipapi.co/json/")
+      .then((res) => res.json())
+      .then((data) => {
+        setVisitor({ city: data.city, country: data.country_name, ip: data.ip });
+      });
+  }, []);
+
+  return (
+    <div className="min-h-screen bg-black text-white font-orbitron">
+      <video
+        autoPlay
+        muted
+        loop
+        className="fixed w-full h-full object-cover -z-10"
+      >
+        <source src="/assets/video/background.mp4" type="video/mp4" />
+      </video>
+
+      <header className="bg-black/60 backdrop-blur-md px-6 py-4 flex justify-between items-center">
+        <h1 className="text-2xl text-cyan-400">SkyTel Montage</h1>
+        <nav className="space-x-4">
+          <a href="#vybaveni" className="hover:text-cyan-400">Vybavení</a>
+          <a href="#certifikaty" className="hover:text-cyan-400">Certifikáty</a>
+          <a href="#prace" className="hover:text-cyan-400">Naše práce</a>
+          <a href="#onas" className="hover:text-cyan-400">O nás</a>
+        </nav>
+      </header>
+
+      <main className="flex flex-col items-center justify-center text-center pt-48 px-4">
+        <h2 className="text-4xl md:text-6xl mb-4 text-cyan-400 drop-shadow">
+          Výškové práce a telekomunikační montáže
+        </h2>
+        <p className="text-lg md:text-xl max-w-2xl text-gray-300">
+          Specializujeme se na výstavbu, servis a integraci BTS stanic, stožárů a telekomunikační techniky v Německu a Česku.
+        </p>
+        {visitor && (
+          <p className="mt-6 text-sm text-gray-400">
+            📍 Připojil ses z: {visitor.city}, {visitor.country} – IP: {visitor.ip}
+          </p>
+        )}
+      </main>
+
+      <footer className="absolute bottom-4 w-full text-center text-xs text-gray-500">
+        &copy; {new Date().getFullYear()} SkyTel Montage. Všechna práva vyhrazena.
+      </footer>
     </div>
-  </div>
-</body>
-</html>
+  );
+}
