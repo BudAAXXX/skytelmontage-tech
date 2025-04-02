@@ -92,7 +92,7 @@
   <canvas id="matrix"></canvas>
 
   <h1>!! SYSTEM BREACH !!</h1>
-  <p>Unauthorized access detected. Launching countermeasures... ☠️</p>
+  <p id="joke">Loading joke...</p>
 
   <div class="virus-animation"></div>
 
@@ -100,8 +100,6 @@
     Website under construction.<br>
     <strong>Click anywhere</strong> to start the music 🎵<br>
     <small>Connecting to the Matrix...</small>
-    <br><br>
-    <em>Warum ging der Programmierer nicht ins Kino? Weil er auf den JavaScript gewartet hat.</em>
   </div>
 
   <footer>
@@ -119,7 +117,7 @@
     canvas.height = window.innerHeight;
     canvas.width = window.innerWidth;
 
-    const matrixChars = ["0", "1", "BudAA"];
+    const matrixChars = ["0", "1", "0", "1", "0", "1", "BudAA"];
     const fontSize = 16;
     const columns = canvas.width / fontSize;
     const drops = Array(Math.floor(columns)).fill(1);
@@ -130,8 +128,8 @@
       ctx.fillStyle = "#0f0";
       ctx.font = fontSize + "px Orbitron";
       drops.forEach((y, i) => {
-        const char = Math.random() < 0.985
-          ? matrixChars[Math.floor(Math.random() * 2)] // 0 or 1
+        const char = Math.random() < 0.98
+          ? matrixChars[Math.floor(Math.random() * 6)] // mostly 0/1
           : "BudAA";
         ctx.fillText(char, i * fontSize, y * fontSize);
         drops[i] = y * fontSize > canvas.height && Math.random() > 0.975 ? 0 : y + 1;
@@ -145,7 +143,8 @@
       music.volume = 0.7;
       music.play().catch(err => console.warn('Autoplay error:', err));
       document.body.style.background = "radial-gradient(circle, #000 0%, #002b00 100%)";
-    }, { once: true });
+      showJoke();
+    });
 
     let input = '';
     const konami = '38384040373937396665';
@@ -157,6 +156,27 @@
       }
       if (input.length > 20) input = input.slice(-20);
     });
+
+    const jokes = [
+      "Warum ging der Programmierer nicht ins Kino? Weil er auf den JavaScript gewartet hat.",
+      "Ein Bit trifft ein anderes Bit. Sagt das eine: 'Na, auch schon wieder gesetzt?'",
+      "Warum mögen Java-Entwickler keinen Kaffee? Sie haben schon genug Exceptions.",
+      "Ein TCP-Paket kommt in eine Bar. 'Hallo, darf ich bestellen?', 'Hallo, darf ich bestellen?', 'Hallo...'",
+      "Chuck Norris counted to infinity. Twice. (Aber nur auf Assembly.)",
+      "Der kürzeste Horrorfilm für ITler: 'Kein Backup vorhanden.'",
+      "Warum weint der Server? Weil er überlastet ist!",
+      "Ich hatte ein Problem. Dann habe ich ein Regex benutzt. Jetzt habe ich zwei Probleme.",
+      "Wenn dein Code funktioniert, ohne dass du weißt warum – mach ein Backup!",
+      "404: Joke not found. Try again."
+    ];
+
+    function showJoke() {
+      const jokeEl = document.getElementById("joke");
+      const randomJoke = jokes[Math.floor(Math.random() * jokes.length)];
+      jokeEl.textContent = randomJoke;
+    }
+
+    window.onload = showJoke;
   </script>
 </body>
 </html>
