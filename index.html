@@ -97,9 +97,11 @@
   <div class="virus-animation"></div>
 
   <div class="notice">
-    Malware injection initialized.<br>
-    <strong>Click anywhere</strong> to trigger mainframe breach 💽<br>
-    <small>Loading payload into Matrix...</small>
+    Website under construction.<br>
+    <strong>Click anywhere</strong> to start the music 🎵<br>
+    <small>Connecting to the Matrix...</small>
+    <br><br>
+    <em>Warum ging der Programmierer nicht ins Kino? Weil er auf den JavaScript gewartet hat.</em>
   </div>
 
   <footer>
@@ -112,13 +114,12 @@
   </audio>
 
   <script>
-    // Matrix background effect (virus-style)
     const canvas = document.getElementById("matrix");
     const ctx = canvas.getContext("2d");
     canvas.height = window.innerHeight;
     canvas.width = window.innerWidth;
 
-    const letters = "MARTINMISHAHACKED".split("");
+    const matrixChars = ["0", "1", "BudAA"];
     const fontSize = 16;
     const columns = canvas.width / fontSize;
     const drops = Array(Math.floor(columns)).fill(1);
@@ -129,14 +130,16 @@
       ctx.fillStyle = "#0f0";
       ctx.font = fontSize + "px Orbitron";
       drops.forEach((y, i) => {
-        const text = letters[Math.floor(Math.random() * letters.length)];
-        ctx.fillText(text, i * fontSize, y * fontSize);
+        const char = Math.random() < 0.985
+          ? matrixChars[Math.floor(Math.random() * 2)] // 0 or 1
+          : "BudAA";
+        ctx.fillText(char, i * fontSize, y * fontSize);
         drops[i] = y * fontSize > canvas.height && Math.random() > 0.975 ? 0 : y + 1;
       });
     }
+
     setInterval(drawMatrix, 33);
 
-    // Trigger music and visuals
     const music = document.getElementById('bg-music');
     document.addEventListener('click', () => {
       music.volume = 0.7;
@@ -144,7 +147,6 @@
       document.body.style.background = "radial-gradient(circle, #000 0%, #002b00 100%)";
     }, { once: true });
 
-    // Konami Code Easter Egg
     let input = '';
     const konami = '38384040373937396665';
     document.addEventListener('keydown', (e) => {
