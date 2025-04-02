@@ -24,24 +24,30 @@
 
     h1 {
       font-size: 4rem;
-      margin-top: 15vh;
+      margin-top: 10vh;
       animation: glow 2s infinite ease-in-out;
     }
 
     p {
-      font-size: 1.2rem;
-      margin: 1rem 0;
-      color: #8affc1;
+      font-size: 1.4rem;
+      margin: 1rem auto;
+      max-width: 80%;
+      color: #b7ffe0;
+      background: rgba(0, 255, 136, 0.05);
+      padding: 1rem;
+      border-radius: 10px;
+      border: 1px solid #00ff88;
     }
 
     .notice {
       display: inline-block;
       padding: 1rem 2rem;
       border: 2px dashed #00ff88;
-      background: rgba(0, 255, 136, 0.05);
+      background: rgba(0, 255, 136, 0.1);
       margin-top: 2rem;
       max-width: 600px;
       font-size: 1rem;
+      border-radius: 10px;
     }
 
     canvas {
@@ -49,6 +55,44 @@
       top: 0;
       left: 0;
       z-index: -1;
+    }
+
+    .cube {
+      width: 150px;
+      height: 150px;
+      margin: 40px auto;
+      position: relative;
+      transform-style: preserve-3d;
+      animation: spin 10s infinite linear, float 4s infinite ease-in-out;
+    }
+
+    .face {
+      position: absolute;
+      width: 150px;
+      height: 150px;
+      background: rgba(0, 255, 136, 0.1);
+      border: 1px solid #00ff88;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+    }
+
+    .face:nth-child(1) { transform: rotateY(0deg) translateZ(75px); }
+    .face:nth-child(2) { transform: rotateY(90deg) translateZ(75px); }
+    .face:nth-child(3) { transform: rotateY(180deg) translateZ(75px); }
+    .face:nth-child(4) { transform: rotateY(-90deg) translateZ(75px); }
+    .face:nth-child(5) { transform: rotateX(90deg) translateZ(75px); }
+
+    @keyframes spin {
+      0% { transform: rotateX(0deg) rotateY(0deg); }
+      50% { transform: rotateX(360deg) rotateY(180deg); }
+      100% { transform: rotateX(720deg) rotateY(360deg); }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
     }
 
     @keyframes glow {
@@ -62,8 +106,18 @@
 
   <h1>Error 404</h1>
   <p>Stránka nenalezena. Možná visím někde na stožáru... 🧗‍♂️</p>
+
+  <div class="cube">
+    <div class="face">SKY</div>
+    <div class="face">TEL</div>
+    <div class="face">404</div>
+    <div class="face">XD</div>
+    <div class="face">BOOM</div>
+  </div>
+
   <div class="notice">
-    Web je ve výstavbě. Klikni kamkoliv pro spuštění hudby.<br>
+    Web je ve výstavbě.<br>
+    <strong>Klikni kamkoliv</strong> pro spuštění hudby 💽<br>
     <small>Připojení do Matrixu se navazuje...</small>
   </div>
 
@@ -73,13 +127,13 @@
   </audio>
 
   <script>
-    // Matrix background effect
+    // Matrix background effect s vlastním textem
     const canvas = document.getElementById("matrix");
     const ctx = canvas.getContext("2d");
     canvas.height = window.innerHeight;
     canvas.width = window.innerWidth;
 
-    const letters = "01".split("");
+    const letters = "OPICHALJEKOKOT".split("");
     const fontSize = 14;
     const columns = canvas.width / fontSize;
     const drops = Array(Math.floor(columns)).fill(1);
