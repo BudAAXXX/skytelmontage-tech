@@ -1,182 +1,95 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="cs">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>404 | SYSTEM ERROR</title>
-  <link rel="icon" type="image/png" href="favicon.png">
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="SkyTel Montage – profesionální montáže telekomunikačních systémů a výškových konstrukcí v Česku a Německu." />
+  <meta name="keywords" content="SkyTel, SkyTel Montage, telekomunikace, výškové práce, stožáry, BTS, Česko, Německo" />
+  <meta name="author" content="SkyTel Montage" />
+  <title>SkyTel Montage | Telekomunikační montáže a výškové práce</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
-      background: black;
-      color: #00ff88;
       font-family: 'Orbitron', sans-serif;
+      color: #fff;
+      background-color: #000;
       overflow: hidden;
-      text-align: center;
-      text-shadow: 0 0 10px #00ff88;
     }
-
-    h1 {
-      font-size: 4rem;
-      margin-top: 10vh;
-      animation: glow 2s infinite ease-in-out;
-    }
-
-    p {
-      font-size: 1.4rem;
-      margin: 1rem auto;
-      max-width: 80%;
-      color: #ff5;
-      background: rgba(255, 255, 0, 0.05);
+    header {
+      position: absolute;
+      top: 0; left: 0; width: 100%;
+      background: rgba(0,0,0,0.5);
       padding: 1rem;
-      border-radius: 10px;
-      border: 1px dashed #ff0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 10;
     }
-
-    .notice {
-      display: inline-block;
-      padding: 1rem 2rem;
-      border: 2px dashed #00ff88;
-      background: rgba(0, 255, 136, 0.1);
-      margin-top: 2rem;
-      max-width: 600px;
-      font-size: 1rem;
-      border-radius: 10px;
+    header h1 { font-size: 1.5rem; }
+    nav a {
+      margin-left: 1rem;
+      color: #00ffe0;
+      text-decoration: none;
+      transition: 0.3s;
     }
-
-    canvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      z-index: -1;
+    nav a:hover { color: #ffffff; }
+    .hero {
+      position: relative;
+      height: 100vh;
+      width: 100vw;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      z-index: 1;
     }
-
-    .virus-animation {
-      width: 120px;
-      height: 120px;
-      margin: 40px auto;
-      border-radius: 50%;
-      border: 3px dashed #00ff88;
-      animation: spinvirus 3s linear infinite, pulse 2s ease-in-out infinite;
+    .hero video {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      z-index: 0;
     }
-
-    @keyframes spinvirus {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
+    .hero .content {
+      position: relative;
+      z-index: 2;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 2rem;
+      border-radius: 1rem;
+      backdrop-filter: blur(10px);
     }
-
-    @keyframes pulse {
-      0%, 100% { box-shadow: 0 0 10px #00ff88, 0 0 20px #00ff88; }
-      50% { box-shadow: 0 0 20px #ff0, 0 0 40px #0f0; }
+    .content h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: #00ffe0;
     }
-
-    @keyframes glow {
-      0%, 100% { opacity: 0.8; }
-      50% { opacity: 1; text-shadow: 0 0 20px #00ff88; }
-    }
-
-    footer {
-      margin-top: 2rem;
-      font-size: 0.6rem;
-      color: #00885a;
+    .content p {
+      font-size: 1.1rem;
+      color: #ccc;
     }
   </style>
 </head>
 <body>
-  <canvas id="matrix"></canvas>
+  <header>
+    <h1>SkyTel Montage</h1>
+    <nav>
+      <a href="/vybaveni.html">Vybavení</a>
+      <a href="/certifikaty.html">Certifikáty</a>
+      <a href="/prace.html">Naše práce</a>
+      <a href="/o-nas.html">O nás</a>
+    </nav>
+  </header>
 
-  <h1>!! SYSTEM BREACH !!</h1>
-  <p id="joke">Loading joke...</p>
-
-  <div class="virus-animation"></div>
-
-  <div class="notice">
-    Website under construction.<br>
-    <strong>Click anywhere</strong> to start the music 🎵<br>
-    <small>Connecting to the Matrix...</small>
+  <div class="hero">
+    <video autoplay muted loop>
+      <source src="/assets/video/background.mp4" type="video/mp4">
+      Tvoje prohlížeč nepodporuje video.
+    </video>
+    <div class="content">
+      <h2>Profesionální montáže ve výškách</h2>
+      <p>Komplexní telekomunikační řešení, stožáry, BTS, instalace, servis a integrace</p>
+    </div>
   </div>
-
-  <footer>
-    &copy; 2025 | English • Deutsch • 中文 • Klingon 🖖
-  </footer>
-
-  <audio id="bg-music" preload="auto" loop>
-    <source src="bg.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
-  </audio>
-
-  <script>
-    const canvas = document.getElementById("matrix");
-    const ctx = canvas.getContext("2d");
-    canvas.height = window.innerHeight;
-    canvas.width = window.innerWidth;
-
-    const matrixChars = ["0", "1", "0", "1", "0", "1", "BudAA"];
-    const fontSize = 16;
-    const columns = canvas.width / fontSize;
-    const drops = Array(Math.floor(columns)).fill(1);
-
-    function drawMatrix() {
-      ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = "#0f0";
-      ctx.font = fontSize + "px Orbitron";
-      drops.forEach((y, i) => {
-        const char = Math.random() < 0.98
-          ? matrixChars[Math.floor(Math.random() * 6)] // mostly 0/1
-          : "BudAA";
-        ctx.fillText(char, i * fontSize, y * fontSize);
-        drops[i] = y * fontSize > canvas.height && Math.random() > 0.975 ? 0 : y + 1;
-      });
-    }
-
-    setInterval(drawMatrix, 33);
-
-    const music = document.getElementById('bg-music');
-    document.addEventListener('click', () => {
-      music.volume = 0.7;
-      music.play().catch(err => console.warn('Autoplay error:', err));
-      document.body.style.background = "radial-gradient(circle, #000 0%, #002b00 100%)";
-      showJoke();
-    });
-
-    let input = '';
-    const konami = '38384040373937396665';
-    document.addEventListener('keydown', (e) => {
-      input += e.keyCode;
-      if (input.includes(konami)) {
-        document.body.style.filter = 'invert(1) hue-rotate(180deg)';
-        alert('You have unlocked the glitch dimension!');
-      }
-      if (input.length > 20) input = input.slice(-20);
-    });
-
-    const jokes = [
-      "Warum ging der Programmierer nicht ins Kino? Weil er auf den JavaScript gewartet hat.",
-      "Ein Bit trifft ein anderes Bit. Sagt das eine: 'Na, auch schon wieder gesetzt?'",
-      "Warum mögen Java-Entwickler keinen Kaffee? Sie haben schon genug Exceptions.",
-      "Ein TCP-Paket kommt in eine Bar. 'Hallo, darf ich bestellen?', 'Hallo, darf ich bestellen?', 'Hallo...'",
-      "Chuck Norris counted to infinity. Twice. (Aber nur auf Assembly.)",
-      "Der kürzeste Horrorfilm für ITler: 'Kein Backup vorhanden.'",
-      "Warum weint der Server? Weil er überlastet ist!",
-      "Ich hatte ein Problem. Dann habe ich ein Regex benutzt. Jetzt habe ich zwei Probleme.",
-      "Wenn dein Code funktioniert, ohne dass du weißt warum – mach ein Backup!",
-      "404: Joke not found. Try again."
-    ];
-
-    function showJoke() {
-      const jokeEl = document.getElementById("joke");
-      const randomJoke = jokes[Math.floor(Math.random() * jokes.length)];
-      jokeEl.textContent = randomJoke;
-    }
-
-    window.onload = showJoke;
-  </script>
 </body>
 </html>
