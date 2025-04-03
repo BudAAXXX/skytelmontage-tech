@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SkyTel Montage – Ve výstavbě</title>
-  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
       background: black;
-      color: #00ff00;
-      font-family: 'Share Tech Mono', monospace;
+      color: #66ffcc;
+      font-family: 'Roboto Mono', monospace;
       overflow: hidden;
     }
     .matrix {
@@ -38,25 +38,65 @@
     .message p {
       font-size: 1.2rem;
     }
+    .lang-switcher {
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      z-index: 20;
+    }
+    .controls {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      z-index: 20;
+    }
+    .controls button {
+      background: #111;
+      color: #66ffcc;
+      border: 1px solid #66ffcc;
+      padding: 5px 10px;
+      margin-left: 5px;
+      cursor: pointer;
+    }
+    .trademark {
+      position: fixed;
+      bottom: 10px;
+      width: 100%;
+      text-align: center;
+      color: #009977;
+      font-size: 0.8rem;
+      z-index: 10;
+    }
   </style>
 </head>
 <body>
   <div class="matrix">
     <canvas id="matrixCanvas"></canvas>
     <div class="message">
-      <h1>Stránka je ve výstavbě...</h1>
-      <p>Možná někde lezu po stožáru. Přijď později 💻🧗‍♂️</p>
+      <h1 id="title">Stránka je ve výstavbě...</h1>
+      <p id="subtitle">Možná někde lezu po stožáru. Přijď později 💻🧗‍♂️</p>
     </div>
+    <div class="lang-switcher">
+      <select onchange="changeLang(this.value)">
+        <option value="cs">Čeština</option>
+        <option value="en">English</option>
+        <option value="de">Deutsch</option>
+        <option value="tlh">Klingon</option>
+      </select>
+    </div>
+    <div class="controls">
+      <button onclick="playMusic('bg2.mp3')">▶️</button>
+      <button onclick="stopMusic()">⏹️</button>
+    </div>
+    <div class="trademark">&copy; SkyTel Montage™ – Vytvořil BudAA</div>
   </div>
 
   <script>
     const canvas = document.getElementById("matrixCanvas");
     const ctx = canvas.getContext("2d");
-
     canvas.height = window.innerHeight;
     canvas.width = window.innerWidth;
-
-    const letters = "01";
+    const letters = "01BUDaa";
     const fontSize = 14;
     const columns = canvas.width / fontSize;
     const drops = Array.from({ length: columns }).fill(1);
@@ -64,22 +104,44 @@
     function draw() {
       ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = "#0F0";
+      ctx.fillStyle = "#66ffcc";
       ctx.font = fontSize + "px monospace";
-
       drops.forEach((y, i) => {
         const text = letters.charAt(Math.floor(Math.random() * letters.length));
         const x = i * fontSize;
         ctx.fillText(text, x, y * fontSize);
-
-        if (y * fontSize > canvas.height && Math.random() > 0.975) {
-          drops[i] = 0;
-        }
+        if (y * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
         drops[i]++;
       });
     }
+    setInterval(draw, 33);
 
-    setInterval(draw, 35);
+    const langs = {
+      cs: ["Stránka je ve výstavbě...", "Možná někde lezu po stožáru. Přijď později 💻🧗‍♂️"],
+      en: ["This page is under construction...", "I might be climbing a tower right now. Come back later 💻🧗‍♂️"],
+      de: ["Diese Seite befindet sich im Aufbau...", "Vielleicht klettere ich gerade auf einen Mast. Komm später wieder 💻🧗‍♂️"],
+      tlh: ["Dochmey chu' SuvwI' ghoS...", "toQDuj vIlegh, yIchegh! 💻🧗‍♂️"]
+    };
+
+    function changeLang(lang) {
+      document.getElementById("title").innerText = langs[lang][0];
+      document.getElementById("subtitle").innerText = langs[lang][1];
+    }
+
+    let audio;
+    function playMusic(file) {
+      stopMusic();
+      audio = new Audio(file);
+      audio.loop = true;
+      audio.volume = 0.4;
+      audio.play();
+    }
+    function stopMusic() {
+      if (audio) {
+        audio.pause();
+        audio.currentTime = 0;
+      }
+    }
   </script>
 </body>
 </html>
