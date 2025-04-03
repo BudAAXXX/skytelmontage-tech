@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SkyTel Montage – Ve výstavbě</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500&display=swap" rel="stylesheet" />
   <style>
     * {
       box-sizing: border-box;
@@ -12,7 +12,7 @@
     body {
       margin: 0;
       background: black;
-      font-family: 'Orbitron', sans-serif;
+      font-family: 'Rajdhani', sans-serif;
       color: #00ffcc;
       overflow: hidden;
     }
@@ -90,7 +90,7 @@
       padding: 0.3rem 0.6rem;
       margin: 0 0.2rem;
       border-radius: 5px;
-      font-family: 'Orbitron', sans-serif;
+      font-family: 'Rajdhani', sans-serif;
       cursor: pointer;
     }
   </style>
@@ -110,76 +110,25 @@
   </div>
   <div class="footer" id="footerText">SkyTel Montage – vytvořil BudAA</div>
   <script>
-    const canvas = document.getElementById("matrix");
-    const ctx = canvas.getContext("2d");
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    const cols = Math.floor(canvas.width / 20);
-    const drops = Array(cols).fill(1);
-    function drawMatrix() {
-      ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = "#00ffcc";
-      ctx.font = "20px monospace";
-      for (let i = 0; i < drops.length; i++) {
-        const text = Math.random() > 0.5 ? "0" : "1";
-        ctx.fillText(text, i * 20, drops[i] * 20);
-        if (drops[i] * 20 > canvas.height && Math.random() > 0.975) drops[i] = 0;
-        drops[i]++;
-      }
-    }
-    setInterval(drawMatrix, 33);
-
-    const audio = new Audio("bg2.mp3");
-    document.body.addEventListener('click', () => {
-      audio.loop = true;
-      audio.volume = 0.4;
-      audio.play();
-    }, { once: true });
-    function stopMusic() {
-      audio.pause();
-      audio.currentTime = 0;
-    }
-
-    const jokes = [
-      "Proč telekomunikační lezec nepoužívá Wi-Fi? Protože má rád přímé spojení!",
-      "Jak poznáš výškového technika v hospodě? Vždycky sedí nejvýš!",
-      "Co říká anténa anténě? Držme signál!",
-      "Lezec do BTS: Vždy ve výšce, ale nikdy mimo pokrytí.",
-      "Když dojde kabel... zavolej lezeckou jednotku!",
-      "5G je rychlé, ale lezec je rychlejší.",
-      "Signál je jako motivace – musíš ho držet nahoře!",
-      "Když technik spadne, signál padá s ním... ale jen vtipem!",
-      "Kolik lezců je potřeba na výměnu antény? Jen jeden, ale 3 musí jistit!",
-      "Ztratil jsi signál? Možná jsi jen mimo frekvenci reality."
-    ];
-    let jokeIndex = 0;
-    function showNextJoke() {
-      const box = document.getElementById("jokeBox");
-      box.textContent = jokes[jokeIndex];
-      jokeIndex = (jokeIndex + 1) % jokes.length;
-    }
-    setInterval(showNextJoke, 10000);
-    showNextJoke();
-
     const translations = {
       cs: {
         title: "Stránka je ve výstavbě... Zrovna někde lezu 🧗‍♂️",
         footer: "SkyTel Montage – vytvořil BudAA"
       },
       de: {
-        title: "Seite im Aufbau... Wir klettern irgendwo 🧗‍♂️",
+        title: "Seite im Aufbau... Ich bin gerade am Klettern 🧗‍♂️",
         footer: "SkyTel Montage – erstellt von BudAA"
       },
       en: {
-        title: "Website under construction... Somewhere climbing 🧗‍♂️",
+        title: "Website under construction... I'm currently climbing 🧗‍♂️",
         footer: "SkyTel Montage – created by BudAA"
       },
       tlh: {
-        title: "QumwI' chen... SuvwI' DungDaq 🧗‍♂️",
+        title: "QumwI' veb... jIyItlh! 🧗‍♂️",
         footer: "SkyTel Montage – chenmoHta' BudAA"
       }
     };
+
     function changeLang(lang) {
       const t = translations[lang] || translations.en;
       document.getElementById("mainTitle").textContent = t.title;
