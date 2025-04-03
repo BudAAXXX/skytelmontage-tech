@@ -30,6 +30,45 @@
       transition: background 0.5s ease;
     }
 
+    header {
+      padding: 2rem;
+      text-align: center;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2rem;
+      color: var(--primary);
+      background: #000;
+      border-bottom: 1px solid var(--accent);
+      letter-spacing: 4px;
+    }
+
+    .hero {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 80vh;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: var(--accent);
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      max-width: 700px;
+      line-height: 1.6;
+    }
+
+    section {
+      padding: 3rem 2rem;
+      max-width: 900px;
+      margin: auto;
+    }
+
     #puzzleGame {
       position: fixed;
       bottom: 30px;
@@ -115,17 +154,27 @@
         result.style.color = 'yellow';
       }
     }
-
-    function changeLanguage(lang) {
-      const elements = document.querySelectorAll('[data-lang]');
-      elements.forEach(el => {
-        el.innerText = el.dataset[lang];
-      });
-    }
   </script>
 </head>
 
 <body>
+  <header>SKYTEL MONTAGE</header>
+
+  <div class="hero">
+    <h1>LTE a 5G výškové technologie</h1>
+    <p>Realizujeme modernizaci základnových stanic, montáže antén, inspekce a vedení profesionálních týmů v náročných podmínkách. Náš přístup spojuje technickou přesnost, bezpečnost a budoucnost sítí.</p>
+  </div>
+
+  <section>
+    <h2>Služby</h2>
+    <ul>
+      <li>Montáže LTE / 5G sektorů a antén</li>
+      <li>Kompletní obsluha stožárů a technologických věží</li>
+      <li>Inspekce pomocí dronů a fotodokumentace</li>
+      <li>Výškové práce dle německých norem</li>
+    </ul>
+  </section>
+
   <div id="puzzleGame">
     <p>🧠 Malá logická hádanka:</p>
     <p>Kolik je 6 × 7?</p>
@@ -134,8 +183,6 @@
     <p id="puzzleResult"></p>
     <p class="hint">💡 Tip: Odpověď zná každý správný geek...</p>
   </div>
-
-  <!-- zbytek webu -->
 </body>
 
 </html>
