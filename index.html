@@ -144,7 +144,7 @@
   </div>
 
   <canvas id="matrix"></canvas>
-  <h1 id="main-title"></h1>
+  <h1 id="main-title">SkyTelMontage.tech</h1>
   <div class="lang-switcher">
     <button onclick="setLang('en')">EN</button>
     <button onclick="setLang('cz')">CZ</button>
@@ -197,31 +197,23 @@
 
     let clickCount = 0;
     document.addEventListener('click', () => {
-      startMatrix();
-      if (clickCount === 0) {
-        music.src = tracks[currentTrack].src;
-        music.play().then(() => {
-          credit.textContent = 'Source: FreePD.com';
-          credit.style.opacity = 1;
-        });
-        clickCount++;
-      } else if (clickCount < tracks.length) {
-        currentTrack++;
-        music.src = tracks[currentTrack % tracks.length].src;
-        music.play();
-        credit.textContent = 'Source: FreePD.com';
-        credit.style.opacity = 1;
-        clickCount++;
-      }
+  startMatrix();
+  if (clickCount === 0) {
+    music.src = tracks[currentTrack].src;
+    music.play().then(() => {
+      credit.textContent = 'Source: FreePD.com';
+      credit.style.opacity = 1;
     });
-      } else {
-        currentTrack = (currentTrack + 1) % tracks.length;
-        music.src = tracks[currentTrack].src;
-        music.play();
-      }
-      clickCount++;
-    });
-    });
+    clickCount++;
+  } else if (clickCount < tracks.length) {
+    currentTrack++;
+    music.src = tracks[currentTrack % tracks.length].src;
+    music.play();
+    credit.textContent = 'Source: FreePD.com';
+    credit.style.opacity = 1;
+    clickCount++;
+  }
+
 
     credit.addEventListener('click', () => {
       currentTrack = (currentTrack + 1) % tracks.length;
@@ -338,16 +330,34 @@ window.addEventListener('load', () => {
 });
 
     function setLang(lang) {
-      document.documentElement.lang = lang === 'cz' ? 'cs' : lang;
-      currentLang = lang;
-      clearInterval(jokeInterval);
-      startJokeCycle(lang);
+  document.documentElement.lang = lang === 'cz' ? 'cs' : lang;
+  currentLang = lang;
+  clearInterval(jokeInterval);
+  startJokeCycle(lang);
 
-      const uiText = {
-        en: {
-          jokePlaceholder: "Loading intergalactic humour...",
-          title: "SkyTelMontage.tech"
-        },
+  const uiText = {
+    en: {
+      jokePlaceholder: "Loading intergalactic humour...",
+      title: "SkyTelMontage.tech"
+    },
+    cz: {
+      jokePlaceholder: "Načítám meziplanetární humor...",
+      title: "SkyTelMontage.tech"
+    },
+    de: {
+      jokePlaceholder: "Lade intergalaktischen Humor...",
+      title: "SkyTelMontage.tech"
+    },
+    tlh: {
+      jokePlaceholder: "QIb mIw vIghoj...",
+      title: "SkyTelMontage.tech"
+    }
+  };
+
+  const t = uiText[lang] || uiText['en'];
+  document.getElementById("joke").textContent = t.jokePlaceholder;
+  document.getElementById("main-title").textContent = t.title;
+},
         cz: {
           jokePlaceholder: "Načítám meziplanetární humor...",
           title: "SkyTelMontage.tech"
