@@ -21,6 +21,8 @@
       position: fixed;
       top: 0;
       left: 0;
+      right: 0;
+      bottom: 0;
       width: 100vw;
       height: 100vh;
       z-index: -1;
@@ -82,8 +84,36 @@
     }
   </style>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2301861770702896" crossorigin="anonymous"></script>
+  <style>
+    .glitch-intro {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 10000;
+      color: #ff0000;
+      font-size: 3rem;
+      font-family: 'Orbitron', monospace;
+      animation: glitchFade 2.5s forwards;
+    }
+
+    @keyframes glitchFade {
+      0% { opacity: 1; transform: scale(1) skewX(0deg); }
+      20% { transform: scale(1.05) skewX(-5deg); }
+      40% { transform: scale(0.95) skewX(5deg); }
+      60% { transform: scale(1.02) skewX(-3deg); }
+      80% { transform: scale(0.98) skewX(2deg); }
+      100% { opacity: 0; transform: scale(1) skewX(0deg); visibility: hidden; }
+    }
+  </style>
 </head>
 <body>
+  <div class="glitch-intro" id="glitchIntro">SkyTelMontage</div>
   <canvas id="matrix"></canvas>
   <h1 id="main-title"></h1>
   <div class="lang-switcher">
@@ -216,6 +246,7 @@
       }
     }
     window.onload = () => {
+      document.getElementById("glitchIntro").style.display = "none";
       setupMatrix();
       setInterval(drawMatrix, 33);
       startJokes();
