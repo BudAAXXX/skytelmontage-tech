@@ -20,18 +20,15 @@
       text-align: center;
       overflow: hidden;
     }
-
     #main-title {
       font-size: clamp(24px, 8vw, 60px);
       margin-top: 120px;
       animation: redPulse 2s infinite;
     }
-
     @keyframes redPulse {
       0%, 100% { color: #ff0000; text-shadow: 0 0 5px #ff0000; }
       50% { color: #990000; text-shadow: 0 0 10px #ff0000; }
     }
-
     canvas {
       position: fixed;
       top: 0;
@@ -40,7 +37,6 @@
       height: 100vh;
       z-index: -1;
     }
-
     #joke {
       font-size: clamp(12px, 4vw, 24px);
       margin-top: 2rem;
@@ -51,30 +47,8 @@
       max-width: 90%;
       margin-left: auto;
       margin-right: auto;
-      cursor: pointer;
       transition: opacity 0.3s;
     }
-
-    .virus-animation {
-      width: 80px;
-      height: 80px;
-      margin: 2rem auto;
-      border-radius: 25%;
-      border: 2px solid #00ff88;
-      animation: spinvirus 2s linear infinite, pulse 2s ease-in-out infinite;
-      cursor: pointer;
-    }
-
-    @keyframes spinvirus {
-      20% { transform: rotate(5deg); }
-      80% { transform: rotate(360deg); }
-    }
-
-    @keyframes pulse {
-      0%, 100% { box-shadow: 0 0 10px #00ff88, 0 0 20px #00ff88; }
-      50% { box-shadow: 0 0 20px #ff0, 0 0 40px #0f0; }
-    }
-
     footer {
       position: fixed;
       bottom: 0;
@@ -84,7 +58,6 @@
       color: #ff0000;
       animation: redPulse 2s infinite;
     }
-
     .music-credit {
       position: fixed;
       bottom: 2.5rem;
@@ -99,7 +72,6 @@
       opacity: 0;
       transition: opacity 1s ease-in-out;
     }
-
     .lang-switcher {
       display: flex;
       justify-content: center;
@@ -107,7 +79,6 @@
       margin-top: 1rem;
       flex-wrap: wrap;
     }
-
     .lang-switcher button {
       background: none;
       border: 2px solid #ff0000;
@@ -117,7 +88,6 @@
       cursor: pointer;
       animation: redPulse 2s infinite;
     }
-
     .ad-banner {
       position: fixed;
       top: 0;
@@ -133,7 +103,7 @@
 <body>
   <div class="ad-banner"></div>
   <canvas id="matrix"></canvas>
-  <h1 id="main-title">SkyTelMontage.tech</h1>
+  <h1 id="main-title"></h1>
   <div class="lang-switcher">
     <button onclick="setLang('en')">EN</button>
     <button onclick="setLang('cz')">CZ</button>
@@ -141,17 +111,46 @@
     <button onclick="setLang('tlh')">🖖 Klingon</button>
   </div>
   <p id="joke">Loading intergalactic humour...</p>
-  <div class="virus-animation" id="virusBox"></div>
   <footer>&copy; 2025 SkyTel Montage™ — All rights reserved.</footer>
   <div class="music-credit" id="musicCredit">Source: FreePD.com</div>
   <audio id="bg-music" preload="auto" loop></audio>
   <script>
+    function animateTitle() {
+      const title = "SkyTelMontage.tech";
+      const titleEl = document.getElementById("main-title");
+      let i = 0;
+      function spinLetter(pos, char) {
+        const spins = ["|", "/", "-", "\"];
+        let spinIndex = 0;
+        const interval = setInterval(() => {
+          if (spinIndex < spins.length) {
+            titleEl.textContent = titleEl.textContent.substring(0, pos) + spins[spinIndex] + titleEl.textContent.substring(pos + 1);
+            spinIndex++;
+          } else {
+            clearInterval(interval);
+            titleEl.textContent = titleEl.textContent.substring(0, pos) + char + titleEl.textContent.substring(pos + 1);
+            i++;
+            if (i < title.length) spinLetter(i, title[i]);
+          }
+        }, 100);
+      }
+      titleEl.textContent = "".padEnd(title.length, " ");
+      spinLetter(0, title[0]);
+    }
     const canvas = document.getElementById("matrix");
     const ctx = canvas.getContext("2d");
+    let matrixInterval;
     const matrixChars = Array(100).fill("0").concat(Array(100).fill("1"), Array(20).fill("BudAA"));
     const fontSize = 16;
-    const columns = Math.floor(window.innerWidth / fontSize);
-    const drops = Array(columns).fill(1);
+    let columns, drops;
+
+    function setupMatrix() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      columns = Math.floor(canvas.width / fontSize);
+      drops = Array(columns).fill(1);
+    }
+
     function drawMatrix() {
       ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -160,27 +159,66 @@
       for (let i = 0; i < drops.length; i++) {
         const text = matrixChars[Math.floor(Math.random() * matrixChars.length)];
         ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-          drops[i] = 0;
-        }
-        drops[i]++;
+        drops[i] = (drops[i] * fontSize > canvas.height && Math.random() > 0.975) ? 0 : drops[i] + 1;
       }
-    }
-    function startMatrix() {
-      setInterval(drawMatrix, 33);
     }
 
     const jokes = {
-      en: ["Why do programmers prefer dark mode? Because light attracts bugs.", "404: Joke not found.", "There’s no place like 127.0.0.1."],
-      cz: ["Proč programátoři milují tmu? Protože světlo přitahuje chyby.", "404: Vtip nenalezen.", "Není nad 127.0.0.1."],
-      de: ["Warum bevorzugen Programmierer Dunkelmodus? Weil Licht Bugs anzieht.", "404: Witz nicht gefunden.", "Es gibt keinen Ort wie 127.0.0.1."],
-      tlh: ["Qapla’! jIyajchu’bogh vItIv.", "QIb mIw vIghoj...", "yIntagh code DaQoy'bej!"]
-    };
+  en: [
+    "Why do programmers prefer dark mode? Because light attracts bugs.",
+    "404: Joke not found.",
+    "There’s no place like 127.0.0.1.",
+    "A SQL query walks into a bar, walks up to two tables and asks: 'Can I join you?'",
+    "Why did the telecom engineer get promoted? He had great bandwidth.",
+    "Why was the JavaScript developer sad? Because he didn't know how to 'null' his feelings.",
+    "I would tell you a joke about UDP, but you might not get it.",
+    "A telecom tech never gets lost—he just loops back to base.",
+    "Binary is as easy as 01, 10, 11.",
+    "Why do routers make bad partners? Too many connections."
+  ],
+  cz: [
+    "Proč programátoři milují tmu? Protože světlo přitahuje chyby.",
+    "404: Vtip nenalezen.",
+    "Není nad 127.0.0.1.",
+    "Dotaz SQL vejde do baru, přistoupí ke dvěma tabulkám a říká: 'Můžu se připojit?'",
+    "Proč byl telekomunikační technik povýšen? Měl skvělou šířku pásma.",
+    "Proč byl JavaScriptový vývojář smutný? Protože nevěděl, jak vynulovat své pocity.",
+    "Řekl bych ti vtip o UDP, ale možná ho nedostaneš.",
+    "Telekomunikační technik se nikdy neztratí – jen se vrací na základnu.",
+    "Binárně je to jednoduché: 01, 10, 11.",
+    "Proč nejsou routry dobrými partnery? Mají příliš mnoho spojení."
+  ],
+  de: [
+    "Warum bevorzugen Programmierer Dunkelmodus? Weil Licht Bugs anzieht.",
+    "404: Witz nicht gefunden.",
+    "Es gibt keinen Ort wie 127.0.0.1.",
+    "Ein SQL-Befehl betritt eine Bar, geht zu zwei Tischen und fragt: 'Darf ich mich euch anschließen?'",
+    "Warum wurde der Telekom-Techniker befördert? Er hatte eine tolle Bandbreite.",
+    "Warum war der JavaScript-Entwickler traurig? Weil er seine Gefühle nicht nullen konnte.",
+    "Ich würde dir einen Witz über UDP erzählen, aber du bekommst ihn vielleicht nicht.",
+    "Ein Telekomtechniker verirrt sich nie – er kehrt nur zur Basis zurück.",
+    "Binär ist ganz einfach: 01, 10, 11.",
+    "Warum sind Router schlechte Partner? Zu viele Verbindungen."
+  ],
+  tlh: [
+    "Qapla’! jIyajchu’bogh vItIv.",
+    "QIb mIw vIghoj...",
+    "yIntagh code DaQoy'bej!",
+    "loQ De' pe'bogh — vaj qaja' je!",
+    "Hoch connectionmey 'oH router'e'.",
+    "logh SIQpu'bogh developer — QubHa'!",
+    "127.0.0.1 — juH vIghoS.",
+    "tlhIngan De'wI' Qul pagh wov.",
+    "null feelings? not SuvwI'!",
+    "QInmey wIlo', Qapla' net tu'."
+  ]
+};
 
     let currentLang = 'en';
     let jokeIndex = 0;
     let jokeInterval;
     const jokeEl = document.getElementById("joke");
+
     function showJoke() {
       const list = jokes[currentLang] || jokes.en;
       jokeEl.style.opacity = 0;
@@ -190,6 +228,7 @@
         jokeIndex++;
       }, 300);
     }
+
     function startJokes() {
       showJoke();
       clearInterval(jokeInterval);
@@ -205,12 +244,15 @@
     const tracks = ['bg.mp3', 'bg2.mp3', 'bg3.mp3'];
     let trackIndex = 0;
     let started = false;
+
     document.addEventListener('click', () => {
       if (!started) {
-        startMatrix();
+        setupMatrix();
+        matrixInterval = setInterval(drawMatrix, 33);
         startJokes();
         music.src = tracks[trackIndex];
         music.play();
+        document.getElementById('musicCredit').style.opacity = 1;
         started = true;
       } else {
         trackIndex = (trackIndex + 1) % tracks.length;
@@ -219,16 +261,10 @@
       }
     });
 
-    document.getElementById('virusBox').addEventListener('click', () => {
-      const isMobile = /Mobi|Android/i.test(navigator.userAgent);
-      const msg = {
-        en: "I just hacked into your PC!",
-        cz: "Právě jsem se ti naboural do počítače!",
-        de: "Ich habe mich gerade in deinen PC gehackt!",
-        tlh: "jIH HACKED lIj De'wI'!"
-      }[currentLang] || "I just hacked into your device!";
-      alert(isMobile ? msg.replace('PC', 'phone') : msg);
-    });
+    window.onload = () => {
+      setupMatrix();
+      animateTitle();
+    };
   </script>
 </body>
 </html>
