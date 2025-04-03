@@ -1,148 +1,85 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SkyTel Montage</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SkyTel Montage – Ve výstavbě</title>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --primary: #00fff7;
-      --bg: #0a0a0a;
-      --text: #ffffff;
-      --accent: #1bfffc;
-    }
     body {
-      font-family: 'Share Tech Mono', monospace;
-      background-color: var(--bg);
-      color: var(--text);
       margin: 0;
-      background-image: radial-gradient(circle at 30% 30%, rgba(0,255,255,0.05), transparent 70%), radial-gradient(circle at 70% 70%, rgba(0,255,255,0.05), transparent 70%);
-      background-size: cover;
-      background-repeat: no-repeat;
-    }
-    .hidden { display: none; }
-    .glitch {
-      position: relative;
-      color: #0ff;
-      animation: glitch 1s infinite;
-    }
-    @keyframes glitch {
-      0% { text-shadow: 2px 2px red; }
-      20% { text-shadow: -2px -2px lime; }
-      40% { text-shadow: 2px -2px blue; }
-      60% { text-shadow: -2px 2px magenta; }
-      80% { text-shadow: 1px 1px yellow; }
-      100% { text-shadow: none; }
-    }
-    #terminalGame {
-      display: none;
-      position: fixed;
-      bottom: 2rem;
-      left: 2rem;
-      width: 300px;
-      height: 180px;
-      background: #111;
-      color: #0f0;
+      background: black;
+      color: #00ff00;
       font-family: 'Share Tech Mono', monospace;
-      padding: 1rem;
-      border: 2px solid #0f0;
-      box-shadow: 0 0 10px #0f0;
-      overflow-y: auto;
-      z-index: 10000;
+      overflow: hidden;
+    }
+    .matrix {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: black;
+      overflow: hidden;
+    }
+    canvas {
+      display: block;
+    }
+    .message {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      z-index: 10;
+    }
+    .message h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+    .message p {
+      font-size: 1.2rem;
     }
   </style>
-  <script>
-    const translations = {
-      cs: {
-        heroTitle: "Technologie budoucnosti ve výškách",
-        heroText: "Profesionální montáže LTE a 5G sítí, inspekce, modernizace a vedení projektů.",
-        aboutTitle: "O nás",
-        aboutText: "SkyTel Montage vznikl na základě mnohaleté praxe...",
-        servicesTitle: "Služby a zkušenosti",
-        terminalText: "Zadej kód: 5G-ELITE"
-      },
-      de: {
-        heroTitle: "Technologien der Zukunft in der Höhe",
-        heroText: "Professionelle LTE- und 5G-Installationen, Inspektionen und Modernisierungen.",
-        aboutTitle: "Über uns",
-        aboutText: "SkyTel Montage entstand aus jahrelanger Erfahrung...",
-        servicesTitle: "Dienstleistungen & Erfahrung",
-        terminalText: "Gib den Code ein: 5G-ELITE"
-      },
-      en: {
-        heroTitle: "Future Technology in the Heights",
-        heroText: "Professional LTE and 5G installations, inspections, modernization and project leadership.",
-        aboutTitle: "About Us",
-        aboutText: "SkyTel Montage was born from years of experience...",
-        servicesTitle: "Services & Experience",
-        terminalText: "Enter code: 5G-ELITE"
-      },
-      tlh: {
-        heroTitle: "'entepray' telDaq Qapchu'!",
-        heroText: "LTE / 5G SeQmey, Qapchu' Qul, 'ej DuQ!",
-        aboutTitle: "maHvaD",
-        aboutText: "SkyTel Montage chenmoH wIneHbogh HoS Qul.",
-        servicesTitle: "Qapmey & SuvwI' nIv",
-        terminalText: "QIn yI'ang: 5G-ELITE"
-      }
-    };
-
-    function changeLanguage(lang) {
-      const t = translations[lang];
-      document.getElementById("heroTitle").innerText = t.heroTitle;
-      document.getElementById("heroText").innerText = t.heroText;
-      document.getElementById("aboutTitle").innerText = t.aboutTitle;
-      document.getElementById("aboutText").innerText = t.aboutText;
-      document.getElementById("servicesTitle").innerText = t.servicesTitle;
-      document.getElementById("terminalGame").innerText = t.terminalText;
-
-      if (lang === 'tlh') {
-        document.body.classList.add('glitch');
-        const audio = new Audio('bg3.mp3');
-        audio.loop = true;
-        audio.play();
-        document.getElementById('terminalGame').style.display = 'block';
-      } else {
-        document.body.classList.remove('glitch');
-        document.getElementById('terminalGame').style.display = 'none';
-      }
-    }
-  </script>
 </head>
 <body>
-  <div id="languageSwitcher" style="position: fixed; top: 1rem; right: 1rem;">
-    <select onchange="changeLanguage(this.value)">
-      <option value="cs">Čeština</option>
-      <option value="de">Deutsch</option>
-      <option value="en">English</option>
-      <option value="tlh">Klingonština</option>
-    </select>
-  </div>
-
-  <div id="terminalGame">Zadej kód: 5G-ELITE</div>
-
-  <header>SKYTEL MONTAGE</header>
-
-  <div class="hero">
-    <div>
-      <h1 id="heroTitle">Technologie budoucnosti ve výškách</h1>
-      <p id="heroText">Profesionální montáže LTE a 5G sítí, inspekce, modernizace a vedení projektů.</p>
+  <div class="matrix">
+    <canvas id="matrixCanvas"></canvas>
+    <div class="message">
+      <h1>Stránka je ve výstavbě...</h1>
+      <p>Možná někde lezu po stožáru. Přijď později 💻🧗‍♂️</p>
     </div>
   </div>
 
-  <section id="about">
-    <h2 id="aboutTitle">O nás</h2>
-    <p id="aboutText">SkyTel Montage vznikl na základě mnohaleté praxe...</p>
-  </section>
+  <script>
+    const canvas = document.getElementById("matrixCanvas");
+    const ctx = canvas.getContext("2d");
 
-  <section id="services">
-    <h2 id="servicesTitle">Služby a zkušenosti</h2>
-    <p>— obsah zůstává —</p>
-  </section>
+    canvas.height = window.innerHeight;
+    canvas.width = window.innerWidth;
 
-  <footer>
-    &copy; 2025 SkyTel Montage | Vytvořil Patrik Budinský
-  </footer>
+    const letters = "01";
+    const fontSize = 14;
+    const columns = canvas.width / fontSize;
+    const drops = Array.from({ length: columns }).fill(1);
+
+    function draw() {
+      ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = "#0F0";
+      ctx.font = fontSize + "px monospace";
+
+      drops.forEach((y, i) => {
+        const text = letters.charAt(Math.floor(Math.random() * letters.length));
+        const x = i * fontSize;
+        ctx.fillText(text, x, y * fontSize);
+
+        if (y * fontSize > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+        drops[i]++;
+      });
+    }
+
+    setInterval(draw, 35);
+  </script>
 </body>
 </html>
