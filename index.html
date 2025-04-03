@@ -13,101 +13,37 @@
       overflow: hidden;
       color: #66ffcc;
     }
-    canvas {
+    .atomic-clock {
       position: fixed;
-      top: 0;
-      left: 0;
-      z-index: 1;
-    }
-    .title {
-      position: absolute;
-      top: 50%;
+      top: 5px;
       left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 2rem;
-      text-align: center;
-      animation: collapse 6s ease-in-out forwards;
-      z-index: 10;
-      text-shadow: 0 0 10px #00ffcc;
-    }
-    @keyframes collapse {
-      0% { transform: translate(-50%, -50%) scale(1) rotate(0); opacity: 1; }
-      50% { transform: translate(-50%, -50%) scale(1.1) rotate(5deg); }
-      100% { transform: translate(-50%, 200%) scale(0.2) rotate(1440deg); opacity: 0; }
-    }
-    .footer {
-      position: fixed;
-      bottom: 10px;
-      left: 10px;
+      transform: translateX(-50%);
       font-size: 0.7rem;
-      color: red;
-      animation: pulse 2s infinite;
-      z-index: 10;
-    }
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.4; }
-    }
-    .language-select {
-      position: fixed;
-      bottom: 10px;
-      right: 10px;
-      z-index: 10;
-    }
-    .joke-box {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: rgba(0,0,0,0.6);
       color: #66ffcc;
-      font-size: 0.9rem;
-      padding: 10px 20px;
-      border: 1px solid #66ffcc;
-      border-radius: 8px;
-      max-width: 400px;
-      text-align: center;
-      z-index: 9;
-      opacity: 0;
-      transition: opacity 1s ease-in-out;
+      animation: levitate 3s ease-in-out infinite;
+      z-index: 999;
+    }
+    @keyframes levitate {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(-5px); }
     }
   </style>
 </head>
 <body>
+  <div class="atomic-clock" id="clock"></div>
+  <div class="intro-light"></div>
   <canvas id="matrix"></canvas>
-  <div class="title" id="mainTitle">Probíhá přestavba systému... V tuto chvíli jsme ve výškách 🧗‍♂️</div>
-  <div class="footer">SkyTel Montage – vytvořil BudAA</div>
+  <div class="title" id="mainTitle"></div>
+  <div class="footer" id="footerText"></div>
   <div class="language-select">
-    <select id="langSelect" onchange="changeLang(this.value)">
-      <option value="cs">CZ</option>
-      <option value="de">DE</option>
-      <option value="en">EN</option>
-      <option value="tlh">Klingon</option>
-    </select>
+    <button onclick="changeLang('cs')" id="btn-cs">CZ</button>
+    <button onclick="changeLang('de')" id="btn-de">DE</button>
+    <button onclick="changeLang('en')" id="btn-en">EN</button>
+    <button onclick="changeLang('tlh')" id="btn-tlh">Klingon</button>
   </div>
+  <button class="stop-button" onclick="stopMusic()" id="btn-stop">⏹️ Stop</button>
   <div class="joke-box" id="jokeBox"></div>
-
   <script>
-    const canvas = document.getElementById("matrix");
-    const ctx = canvas.getContext("2d");
-    canvas.height = window.innerHeight;
-    canvas.width = window.innerWidth;
-    const cols = Math.floor(canvas.width / 14);
-    const drops = Array(cols).fill(1);
-    function drawMatrix() {
-      ctx.fillStyle = "rgba(0, 0, 0, 0.1)";
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-      ctx.font = "14px monospace";
-      const wave = Date.now() * 0.003;
-      for (let i = 0; i < drops.length; i++) {
-        const hue = Math.sin(i * 0.3 + wave) * 180 + 180;
-        ctx.fillStyle = `hsl(${hue}, 100%, 60%)`;
-        ctx.fillText("0", i * 14, drops[i] * 14);
-        drops[i] = drops[i] * 14 > canvas.height && Math.random() > 0.975 ? 0 : drops[i] + 1;
-      }
-    }
-    setInterval(drawMatrix, 40);
-
     const audio = new Audio("bg2.mp3");
     document.body.addEventListener('click', () => {
       audio.loop = true;
@@ -115,127 +51,66 @@
       audio.play();
     }, { once: true });
 
-    const jokes = {
-  cs: [
-    "Proč má věž vždy signál? Protože má pokrytí na úrovni! 📡",
-    "Když ti spadne kabel, nebreč. Máš ještě optiku!",
-    "Vzal jsem si do práce klíč 17. A otevřel jsem WiFi.",
-    "Můj router má více světel než vánoční stromeček.",
-    "Když elektrikář žertuje, má to napětí.",
-    "Vysílač nechodí na dovolenou – má plné pokrytí.",
-    "Síť v kanceláři je tak pomalá, že ji překonám po LANce.",
-    "V práci mě neustále napínají – pracuju pod napětím.",
-    "Vždycky když resetuju modem, cítím se jako bůh.",
-    "Signál není vše, ale bez něj je ticho.",
-    "5G je rychlejší než moje myšlenky.",
-    "Moje WiFi heslo je: Neprozradím!",
-    "Když padne síť, padne i nálada.",
-    "Kabel je spolehlivější než slib od operátora.",
-    "Technik nikdy nespí, jen čeká na výpadek.",
-    "Moje přítelkyně mě opustila kvůli signálu. Prý ji neposlouchám.",
-    "Telekomunikační humor je drátově propojený.",
-    "Věže nikdy nelžou – vždycky se tyčí nad pravdou.",
-    "Signál v tunelu je jako naděje – mizí.",
-    "Když ztratím signál, cítím se jako bez duše."
-  ],
-  de: [
-    "Warum hat ein Mast immer Empfang? Weil er hoch hinaus will!",
-    "Ohne Signal? Vielleicht liegt das an deinem Humor.",
-    "Mein WLAN heißt jetzt: 'Du schaffst das nicht'.",
-    "Ich habe 5G – und trotzdem keine Ahnung.",
-    "Mein Router blinkt mehr als mein Auto.",
-    "Netzwerkprobleme – auch eine Art Kommunikation.",
-    "Wenn das WLAN geht, geht alles.",
-    "Techniker schlafen nie – sie laden nur.",
-    "Warum fiel das Netz aus? Es brauchte eine Pause.",
-    "Verbindung verloren. Realität gefunden.",
-    "Starkes Signal, schwacher Kaffee.",
-    "Mehr Balken als Fitnessstudio.",
-    "Router an – Stimmung an.",
-    "Ich streame, also bin ich.",
-    "Netzabdeckung: 0%. Vertrauen: 0%.",
-    "Warum lachen Techniker selten? Zu viel Spannung.",
-    "Kein WLAN – kein Friede.",
-    "Reboot ist meine Therapie.",
-    "Ich bin online, also glücklich.",
-    "Signal schwach. Humor stark."
-  ],
-  en: [
-    "Why do towers never lie? They always signal the truth.",
-    "Dropped your cable? At least it's not your 5G coverage!",
-    "I installed 5G and now my dog connects to the fridge.",
-    "Electricians do it with more resistance.",
-    "My router blinked at me. I think it’s flirting.",
-    "Strong signal, weak coffee. Priorities.",
-    "If WiFi is down, so is productivity.",
-    "I'm not ignoring you, I'm just out of range.",
-    "Why did the antenna apply for a job? Great communication skills.",
-    "In telecom, we wire to inspire.",
-    "Life without internet is just... life.",
-    "Cabling is like relationships. It needs connection.",
-    "Ping me, maybe?",
-    "Reboot your day, restart your soul.",
-    "My modem's faster than my motivation.",
-    "No signal, no stress? Nope.",
-    "5G changed my cat. She streams now.",
-    "All you need is love... and bandwidth.",
-    "Lost signal, found inner peace.",
-    "Signal low. Morale lower."
-  ],
-  tlh: [
-    "QumwI' Qel – pagh 'oH pongmey!",
-    "Qapla'! 'ach wej lo'taH signal.",
-    "Hoch Daq HIq, SuvwI' chu' Qum!",
-    "Signal HIvje' vItlhutlh – yItlhutlh!",
-    "WiFi ghajbe' – SuvwI' chennIS.",
-    "Qum 'oH – vaj batlh.",
-    "Qochbe' QumwI'.",
-    "QumwI' vItlh – jIQuch.",
-    "'Internet' – neH, 'Qapla'!",
-    "jIvang, jIlogin.",
-    "ping! – jIlegh.",
-    "RouterwIj vIHar – tIq.",
-    "He' Qapbe'. jIQuchbe'.",
-    "WIFI' SuvwI' vIghoj.",
-    "reH Qum – reH Qapla'.",
-    "vIghro' je vIQum. Now she's streaming!",
-    "Qum Duj – vIghro' naQ.",
-    "Qo'noS net access – batlh net ghaj.",
-    "Data ghotpu' – QumtaH.",
-    "jIH QumwI', HIQIj."
-  ]
-};
+    function stopMusic() {
+      audio.pause();
+      audio.currentTime = 0;
+    }
 
-    let currentLang = "cs";
-    const title = document.getElementById("mainTitle");
-    const jokeBox = document.getElementById("jokeBox");
+    const translations = {
+      cs: {
+        title: "Probíhá přestavba systému... V tuto chvíli jsme ve výškách 🧗‍♂️",
+        footer: "SkyTel Montage – vytvořil BudAA",
+        stop: "⏹️ Zastavit",
+        btns: { cs: "CZ", de: "DE", en: "EN", tlh: "Klingon" }
+      },
+      de: {
+        title: "Systemumbau läuft... Wir arbeiten gerade in der Höhe 🧗‍♂️",
+        footer: "SkyTel Montage – erstellt von BudAA",
+        stop: "⏹️ Stopp",
+        btns: { cs: "CZ", de: "DE", en: "EN", tlh: "Klingon" }
+      },
+      en: {
+        title: "System under reconstruction... Currently working at height 🧗‍♂️",
+        footer: "SkyTel Montage – created by BudAA",
+        stop: "⏹️ Stop",
+        btns: { cs: "CZ", de: "DE", en: "EN", tlh: "Klingon" }
+      },
+      tlh: {
+        title: "QumwI' ghoS... QongmeH SuvwI' DungDaq 🧗‍♂️",
+        footer: "SkyTel Montage – chenmoHta' BudAA",
+        stop: "⏹️ mej",
+        btns: { cs: "CZ", de: "DE", en: "EN", tlh: "tlhIngan Hol" }
+      }
+    };
 
     function changeLang(lang) {
-      currentLang = lang;
-      title.textContent = {
-        cs: "Probíhá přestavba systému... V tuto chvíli jsme ve výškách 🧗‍♂️",
-        de: "Systemumbau läuft... Wir arbeiten gerade in der Höhe 🧗‍♂️",
-        en: "System under reconstruction... Currently working at height 🧗‍♂️",
-        tlh: "QumwI' ghoS... QongmeH SuvwI' DungDaq 🧗‍♂️"
-      }[lang];
+      const t = translations[lang] || translations.en;
+      document.getElementById("mainTitle").textContent = t.title;
+      document.getElementById("footerText").textContent = t.footer;
+      document.getElementById("btn-stop").textContent = t.stop;
+      document.getElementById("btn-cs").textContent = t.btns.cs;
+      document.getElementById("btn-de").textContent = t.btns.de;
+      document.getElementById("btn-en").textContent = t.btns.en;
+      document.getElementById("btn-tlh").textContent = t.btns.tlh;
     }
 
-    changeLang("cs");
-
-    setTimeout(() => {
-      jokeBox.style.opacity = 1;
-      showJokes();
-    }, 7000);
-
-    function showJokes() {
-      const langJokes = jokes[currentLang];
-      let index = 0;
-      jokeBox.textContent = langJokes[index];
-      setInterval(() => {
-        index = (index + 1) % langJokes.length;
-        jokeBox.textContent = langJokes[index];
-      }, 10000);
+    function detectLanguage() {
+      const lang = navigator.language || navigator.userLanguage;
+      if (lang.startsWith("cs")) return "cs";
+      if (lang.startsWith("de")) return "de";
+      return "en";
     }
+
+    changeLang(detectLanguage());
+
+    // Atomic clock display
+    function updateClock() {
+      const now = new Date();
+      const timeString = now.toLocaleTimeString();
+      document.getElementById("clock").textContent = timeString;
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
   </script>
 </body>
 </html>
