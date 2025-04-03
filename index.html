@@ -49,6 +49,7 @@
       max-width: 90%;
       margin-left: auto;
       margin-right: auto;
+      cursor: pointer;
     }
 
     .virus-animation {
@@ -116,27 +117,24 @@
       animation: redPulse 2s infinite;
     }
 
-    #popup {
-      display: none;
+    .ad-banner {
       position: fixed;
-      bottom: 20px;
-      right: 20px;
-      width: 300px;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 90px;
       background: #111;
-      border: 2px solid #0f0;
-      padding: 10px;
-      z-index: 9999;
-      box-shadow: 0 0 20px #0f0;
-    }
-    #popup a {
-      color: #0f0;
-      text-decoration: underline;
-      display: block;
-      margin-top: 10px;
+      border-bottom: 2px solid #0f0;
+      z-index: 10000;
     }
   </style>
 </head>
-<body onclick="showPopup()">
+<body>
+  <div class="ad-banner">
+    <!-- Google AdSense nebo jiná reklama sem -->
+    <iframe src="https://tvoje-reklama.cz" style="width:100%; height:90px; border:none;"></iframe>
+  </div>
+
   <canvas id="matrix"></canvas>
   <h1 id="main-title"></h1>
   <div class="lang-switcher">
@@ -146,30 +144,15 @@
   </div>
   <p id="joke">Loading intergalactic humour...</p>
   <div class="virus-animation" id="virusBox"></div>
-  <div id="popup">
-    <audio autoplay>
-      <source src="hudba.mp3" type="audio/mpeg">
-    </audio>
-    <p>[ Připojení navázáno... Hudba spuštěna ]</p>
-    <a href="https://tvoje-reklama.cz" target="_blank">👉 Klikni pro přístup k systému</a>
-  </div>
   <footer>&copy; 2025 SkyTel Montage™ — All rights reserved.</footer>
   <div class="music-credit" id="musicCredit"></div>
   <audio id="bg-music" preload="auto" loop></audio>
   <script>
-    let popupShown = false;
-    function showPopup() {
-      if (!popupShown) {
-        document.getElementById("popup").style.display = "block";
-        popupShown = true;
-      }
-    }
-
     const canvas = document.getElementById("matrix");
     const ctx = canvas.getContext("2d");
     canvas.height = window.innerHeight;
     canvas.width = window.innerWidth;
-    const matrixChars = Array(50).fill("0").concat(Array(50).fill("1"), Array(10).fill("BudAA"));
+    const matrixChars = Array(80).fill("0").concat(Array(80).fill("1"), Array(20).fill("BudAA"));
     const fontSize = 16;
     const columns = Math.floor(canvas.width / fontSize);
     const drops = Array(columns).fill(1);
@@ -190,9 +173,9 @@
     const music = document.getElementById('bg-music');
     const credit = document.getElementById('musicCredit');
     const tracks = [
-      { src: 'bg.mp3', credit: '🎵 Music: "Free" by Play House (FMA) • CC BY 4.0' },
-      { src: 'bg2.mp3', credit: '🎵 Track 2: "Cyber Haze" by GhostLoop (CC BY)' },
-      { src: 'bg3.mp3', credit: '🎵 Track 3: "Digital Storm" by BitRunner (CC BY)' }
+      { src: 'bg.mp3' },
+      { src: 'bg2.mp3' },
+      { src: 'bg3.mp3' }
     ];
     let currentTrack = 0;
 
@@ -253,26 +236,28 @@
     let currentLang = 'en';
     let currentJokeIndex = 0;
     let jokeInterval;
-    function showJoke(lang = 'en') {
+
+    function startJokeCycle(lang = 'en') {
       const jokeEl = document.getElementById("joke");
       const jokeList = jokes[lang] || jokes['en'];
-      jokeEl.textContent = "Loading intergalactic humour...";
-      clearInterval(jokeInterval);
-
-      setTimeout(() => {
+      jokeEl.textContent = jokeList[currentJokeIndex];
+      currentJokeIndex = (currentJokeIndex + 1) % jokeList.length;
+      jokeInterval = setInterval(() => {
         jokeEl.textContent = jokeList[currentJokeIndex];
         currentJokeIndex = (currentJokeIndex + 1) % jokeList.length;
-        jokeInterval = setInterval(() => {
-          jokeEl.textContent = jokeList[currentJokeIndex];
-          currentJokeIndex = (currentJokeIndex + 1) % jokeList.length;
-        }, 5000);
-      }, 1500);
+      }, 10000);
     }
+
+    document.getElementById("joke").addEventListener("click", () => {
+      clearInterval(jokeInterval);
+      startJokeCycle(currentLang);
+    });
 
     function setLang(lang) {
       document.documentElement.lang = lang === 'cz' ? 'cs' : lang;
       currentLang = lang;
-      showJoke(lang);
+      clearInterval(jokeInterval);
+      startJokeCycle(lang);
     }
 
     document.getElementById('virusBox').addEventListener('click', () => {
@@ -287,7 +272,7 @@
 
     window.onload = () => {
       animateTitle();
-      showJoke(currentLang);
+      setTimeout(() => startJokeCycle(currentLang), 10000);
     };
   </script>
 </body>
