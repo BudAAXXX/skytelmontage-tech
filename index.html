@@ -5,7 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <meta name="google-adsense-account" content="ca-pub-2301861770702896">
   <title>SkyTelMontage.tech</title>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2301861770702896" crossorigin="anonymous"></script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2301861770702896" crossorigin="anonymous">const bgMusic = new Audio('bg.mp3');
+bgMusic.loop = true;
+let musicPlaying = false;
+function toggleMusic() {
+  if (!musicPlaying) {
+    bgMusic.play();
+    musicPlaying = true;
+  } else {
+    bgMusic.pause();
+    musicPlaying = false;
+  }
+}
+</script>
   <link rel="icon" href="favicon.png" type="image/png" />
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet" />
   <style>
@@ -89,6 +101,10 @@
 </head>
 <body>
   <div class="ad-banner"></div>
+  <div style="margin-top: 1rem;">
+    <button onclick="toggleMusic()" style="background:#111; color:#0f0; border:1px solid #0f0; padding:0.5rem 1rem; font-family: 'Orbitron', monospace; cursor:pointer;">▶️ Play / ⏸️ Pause Music</button>
+    <div style="font-size: 0.7rem; margin-top: 0.3rem; color: #008855;">Music source: <a href='https://freepd.com/' style='color:#00ff88;' target='_blank'>FreePD.com</a></div>
+  </div>
   <canvas id="matrix"></canvas>
   <h1 id="main-title"></h1>
   <div class="lang-switcher">
@@ -138,7 +154,7 @@
       ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
       ctx.fillStyle = "#0f0";
-      ctx.font = fontSize + "px Orbitron";
+      ctx.font = fontSize + "px Orbitron, monospace, Arial";
       for (let i = 0; i < drops.length; i++) {
         const text = matrixChars[Math.floor(Math.random() * matrixChars.length)];
         ctx.fillText(text, i * fontSize, drops[i] * fontSize);
@@ -198,6 +214,9 @@
     window.onload = () => {
       setupMatrix();
       setInterval(drawMatrix, 33);
+      window.addEventListener('resize', () => {
+        setupMatrix();
+      });
       startJokes();
     };
   </script>
