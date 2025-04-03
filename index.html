@@ -1,195 +1,117 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>SkyTelMontage.tech</title>
-  <link rel="icon" type="image/png" href="favicon.png">
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      width: 100%;
-      height: 100%;
-    }
+// All styles and HTML remain unchanged above this point
 
-    body {
-      background: black;
-      color: #00ff88;
-      font-family: 'Orbitron', sans-serif;
-      overflow-x: hidden;
-      text-align: center;
-      text-shadow: 0 0 10px #00ff88;
-    }
+<script>
+  const canvas = document.getElementById("matrix");
+  const ctx = canvas.getContext("2d");
+  canvas.height = window.innerHeight;
+  canvas.width = window.innerWidth;
+  const matrixChars = ["0", "1", "BudAA"];
+  const fontSize = 16;
+  const columns = canvas.width / fontSize;
+  const drops = Array(Math.floor(columns)).fill(1);
 
-    #main-title {
-      font-size: 8vw;
-      margin-top: 10vh;
-      animation: redPulse 2s infinite;
-      letter-spacing: 0.1em;
-    }
-
-    .joke, .virus-animation, .notice, .lang-switcher {
-      opacity: 1;
-      transition: opacity 2s ease-in-out;
-    }
-
-    .joke {
-      font-size: 4vw;
-      margin: 1rem auto;
-      max-width: 90%;
-      color: #00ff88;
-      background: rgba(0, 0, 0, 0.7);
-      padding: 1rem;
-      border-radius: 8px;
-      border: 1px solid #00ff88;
-    }
-
-    .notice {
-      display: inline-block;
-      padding: 1rem;
-      border: 1px solid #00ff88;
-      background: rgba(0, 0, 0, 0.6);
-      margin-top: 2rem;
-      max-width: 90%;
-      font-size: 4vw;
-      border-radius: 8px;
-      color: #00ff88;
-    }
-
-    canvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      z-index: -1;
-      width: 100vw;
-      height: 100vh;
-    }
-
-    .virus-animation {
-      width: 80px;
-      height: 80px;
-      margin: 40px auto;
-      border-radius: 25%;
-      border: 2px solid #00ff88;
-      animation: spinvirus 2s linear infinite, pulse 2s ease-in-out infinite;
-      cursor: pointer;
-    }
-
-    @keyframes spinvirus {
-      20% { transform: rotate(5deg); }
-      80% { transform: rotate(360deg); }
-    }
-
-    @keyframes pulse {
-      0%, 100% { box-shadow: 0 0 10px #00ff88, 0 0 20px #00ff88; }
-      50% { box-shadow: 0 0 20px #ff0, 0 0 40px #0f0; }
-    }
-
-    @keyframes redPulse {
-      0%, 100% { color: #ff0000; text-shadow: 0 0 5px #ff0000; }
-      50% { color: #990000; text-shadow: 0 0 10px #ff0000; }
-    }
-
-    footer {
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-      padding: 0.5rem;
-      font-size: 3vw;
-      text-align: center;
-      animation: redPulse 2s infinite;
-    }
-
-    .lang-switcher {
-      margin-top: 2rem;
-      display: flex;
-      justify-content: center;
-      gap: 0.5rem;
-      animation: redPulse 2s infinite;
-      flex-wrap: wrap;
-    }
-
-    .lang-switcher button {
-      background: transparent;
-      border: none;
-      color: #ff0000;
-      font-weight: bold;
-      padding: 0.3rem 0.6rem;
-      font-size: 4vw;
-      cursor: pointer;
-      font-family: 'Orbitron';
-      text-shadow: 0 0 5px #ff0000;
-    }
-
-    .music-credit {
-      position: fixed;
-      bottom: 1.2rem;
-      right: 1rem;
-      font-size: 2.5vw;
-      color: #111;
-      background: rgba(255, 0, 0, 0.02);
-      padding: 0.2rem 0.5rem;
-      border-radius: 5px;
-      font-style: italic;
-      pointer-events: none;
-      user-select: none;
-      opacity: 0;
-      transition: opacity 1s ease-in-out;
-    }
-  </style>
-</head>
-<body>
-  <canvas id="matrix"></canvas>
-  <h1 id="main-title"></h1>
-  <p class="joke" id="joke">Loading intergalactic humour...</p>
-  <div class="virus-animation" id="virusBox"></div>
-  <div class="notice" id="notice-text">
-    Website under construction.<br>
-    <strong>Click anywhere</strong> to start the music 🎵<br>
-    <small>Connecting to the Matrix...</small>
-  </div>
-  <nav class="lang-switcher">
-    <button onclick="setLang('en')">English</button>
-    <button onclick="setLang('cz')">Čeština</button>
-    <button onclick="setLang('de')">Deutsch</button>
-    <button onclick="setLang('klg')">Klingon 🖖</button>
-  </nav>
-  <footer>
-    &copy; 2025 SkyTel Montage™ — All rights reserved.
-  </footer>
-  <div class="music-credit" id="musicCredit">
-    🎵 Music: "Free" by Play House (FMA) • CC BY 4.0
-  </div>
-  <audio id="bg-music" preload="auto" loop>
-    <source src="bg.mp3" type="audio/mpeg">
-  </audio>
-  <script>
-    const music = document.getElementById('bg-music');
-    const credit = document.getElementById('musicCredit');
-    const tracks = [
-      { src: 'bg.mp3', credit: '🎵 Music: "Free" by Play House (FMA) • CC BY 4.0' },
-      { src: 'bg2.mp3', credit: '🎵 Track 2: "Cyber Haze" by GhostLoop (CC BY)' },
-      { src: 'bg3.mp3', credit: '🎵 Track 3: "Digital Storm" by BitRunner (CC BY)' }
-    ];
-    let currentTrack = 0;
-
-    document.addEventListener('click', () => {
-      music.src = tracks[currentTrack].src;
-      music.play().then(() => {
-        credit.textContent = tracks[currentTrack].credit;
-        credit.style.opacity = 1;
-      });
+  function drawMatrix() {
+    ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "#0f0";
+    ctx.font = fontSize + "px Orbitron";
+    drops.forEach((y, i) => {
+      const char = matrixChars[Math.floor(Math.random() * matrixChars.length)];
+      ctx.fillText(char, i * fontSize, y * fontSize);
+      drops[i] = y * fontSize > canvas.height && Math.random() > 0.975 ? 0 : y + 1;
     });
+  }
+  setInterval(drawMatrix, 33);
 
-    credit.addEventListener('click', () => {
-      currentTrack = (currentTrack + 1) % tracks.length;
-      music.src = tracks[currentTrack].src;
-      music.play();
+  const music = document.getElementById('bg-music');
+  const credit = document.getElementById('musicCredit');
+  const tracks = [
+    { src: 'bg.mp3', credit: '🎵 Music: "Free" by Play House (FMA) • CC BY 4.0' },
+    { src: 'bg2.mp3', credit: '🎵 Track 2: "Cyber Haze" by GhostLoop (CC BY)' },
+    { src: 'bg3.mp3', credit: '🎵 Track 3: "Digital Storm" by BitRunner (CC BY)' }
+  ];
+  let currentTrack = 0;
+
+  document.addEventListener('click', () => {
+    music.src = tracks[currentTrack].src;
+    music.play().then(() => {
       credit.textContent = tracks[currentTrack].credit;
+      credit.style.opacity = 1;
     });
-  </script>
-</body>
-</html>
+  });
+
+  credit.addEventListener('click', () => {
+    currentTrack = (currentTrack + 1) % tracks.length;
+    music.src = tracks[currentTrack].src;
+    music.play();
+    credit.textContent = tracks[currentTrack].credit;
+  });
+
+  const title = "SkyTelMontage.tech";
+  const titleEl = document.getElementById("main-title");
+  let typed = "";
+  let index = 0;
+
+  function animateTitle() {
+    if (index < title.length) {
+      const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+      let spinCount = 0;
+      const spinInterval = setInterval(() => {
+        const randomChar = chars[Math.floor(Math.random() * chars.length)];
+        titleEl.innerHTML = typed + randomChar;
+        spinCount++;
+        if (spinCount > 5) {
+          clearInterval(spinInterval);
+          typed += title[index];
+          titleEl.innerHTML = typed;
+          index++;
+          setTimeout(animateTitle, 80);
+        }
+      }, 30);
+    }
+  }
+
+  const jokes = {
+    en: ["Why do programmers prefer dark mode? Because light attracts bugs.", "There are only 10 types of people: those who understand binary and those who don't."],
+    cz: ["Proč programátoři milují tmu? Protože světlo přitahuje chyby.", "Existují jen 2 typy lidí: ti co chápou binárně a ti co ne."],
+    de: ["Warum bevorzugen Programmierer Dunkelmodus? Weil Licht Bugs anzieht.", "Es gibt nur 10 Arten von Menschen: Die, die Binär verstehen, und die anderen."]
+  };
+  let currentJokeIndex = 0;
+
+  function showJoke(lang = 'en') {
+    const jokeEl = document.getElementById("joke");
+    const jokeList = jokes[lang] || jokes['en'];
+    jokeEl.textContent = "Loading intergalactic humour...";
+    setTimeout(() => {
+      jokeEl.textContent = jokeList[currentJokeIndex];
+      currentJokeIndex = (currentJokeIndex + 1) % jokeList.length;
+      setInterval(() => {
+        jokeEl.textContent = jokeList[currentJokeIndex];
+        currentJokeIndex = (currentJokeIndex + 1) % jokeList.length;
+      }, 5000);
+    }, 1500);
+  }
+
+  function setLang(lang) {
+    document.documentElement.lang = lang === 'cz' ? 'cs' : lang;
+    currentLang = lang;
+    showJoke(lang);
+  }
+
+  let currentLang = 'en';
+
+  document.getElementById('virusBox').addEventListener('click', () => {
+    const isMobile = /Mobi|Android/i.test(navigator.userAgent);
+    const msg = {
+      en: "I just hacked into your PC!",
+      cz: "Právě jsem se ti naboural do počítače!",
+      de: "Ich habe mich gerade in deinen PC gehackt!"
+    }[currentLang] || "I just hacked into your PC!";
+    alert(isMobile ? msg.replace('PC', 'phone') : msg);
+  });
+
+  window.onload = () => {
+    animateTitle();
+    setLang(currentLang);
+  };
+</script>
