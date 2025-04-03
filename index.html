@@ -109,14 +109,102 @@
     setInterval(drawMatrix, 40);
 
     const audio = new Audio("bg2.mp3");
-    setTimeout(() => { audio.loop = true; audio.volume = 0.3; audio.play(); }, 6000);
+    document.body.addEventListener('click', () => {
+      audio.loop = true;
+      audio.volume = 0.3;
+      audio.play();
+    }, { once: true });
 
     const jokes = {
-      cs: ["Vtip 1 CZ", "Vtip 2 CZ", "Vtip 3 CZ"],
-      de: ["Witz 1 DE", "Witz 2 DE", "Witz 3 DE"],
-      en: ["Joke 1 EN", "Joke 2 EN", "Joke 3 EN"],
-      tlh: ["tlh 1", "tlh 2", "tlh 3"]
-    };
+  cs: [
+    "Proč má věž vždy signál? Protože má pokrytí na úrovni! 📡",
+    "Když ti spadne kabel, nebreč. Máš ještě optiku!",
+    "Vzal jsem si do práce klíč 17. A otevřel jsem WiFi.",
+    "Můj router má více světel než vánoční stromeček.",
+    "Když elektrikář žertuje, má to napětí.",
+    "Vysílač nechodí na dovolenou – má plné pokrytí.",
+    "Síť v kanceláři je tak pomalá, že ji překonám po LANce.",
+    "V práci mě neustále napínají – pracuju pod napětím.",
+    "Vždycky když resetuju modem, cítím se jako bůh.",
+    "Signál není vše, ale bez něj je ticho.",
+    "5G je rychlejší než moje myšlenky.",
+    "Moje WiFi heslo je: Neprozradím!",
+    "Když padne síť, padne i nálada.",
+    "Kabel je spolehlivější než slib od operátora.",
+    "Technik nikdy nespí, jen čeká na výpadek.",
+    "Moje přítelkyně mě opustila kvůli signálu. Prý ji neposlouchám.",
+    "Telekomunikační humor je drátově propojený.",
+    "Věže nikdy nelžou – vždycky se tyčí nad pravdou.",
+    "Signál v tunelu je jako naděje – mizí.",
+    "Když ztratím signál, cítím se jako bez duše."
+  ],
+  de: [
+    "Warum hat ein Mast immer Empfang? Weil er hoch hinaus will!",
+    "Ohne Signal? Vielleicht liegt das an deinem Humor.",
+    "Mein WLAN heißt jetzt: 'Du schaffst das nicht'.",
+    "Ich habe 5G – und trotzdem keine Ahnung.",
+    "Mein Router blinkt mehr als mein Auto.",
+    "Netzwerkprobleme – auch eine Art Kommunikation.",
+    "Wenn das WLAN geht, geht alles.",
+    "Techniker schlafen nie – sie laden nur.",
+    "Warum fiel das Netz aus? Es brauchte eine Pause.",
+    "Verbindung verloren. Realität gefunden.",
+    "Starkes Signal, schwacher Kaffee.",
+    "Mehr Balken als Fitnessstudio.",
+    "Router an – Stimmung an.",
+    "Ich streame, also bin ich.",
+    "Netzabdeckung: 0%. Vertrauen: 0%.",
+    "Warum lachen Techniker selten? Zu viel Spannung.",
+    "Kein WLAN – kein Friede.",
+    "Reboot ist meine Therapie.",
+    "Ich bin online, also glücklich.",
+    "Signal schwach. Humor stark."
+  ],
+  en: [
+    "Why do towers never lie? They always signal the truth.",
+    "Dropped your cable? At least it's not your 5G coverage!",
+    "I installed 5G and now my dog connects to the fridge.",
+    "Electricians do it with more resistance.",
+    "My router blinked at me. I think it’s flirting.",
+    "Strong signal, weak coffee. Priorities.",
+    "If WiFi is down, so is productivity.",
+    "I'm not ignoring you, I'm just out of range.",
+    "Why did the antenna apply for a job? Great communication skills.",
+    "In telecom, we wire to inspire.",
+    "Life without internet is just... life.",
+    "Cabling is like relationships. It needs connection.",
+    "Ping me, maybe?",
+    "Reboot your day, restart your soul.",
+    "My modem's faster than my motivation.",
+    "No signal, no stress? Nope.",
+    "5G changed my cat. She streams now.",
+    "All you need is love... and bandwidth.",
+    "Lost signal, found inner peace.",
+    "Signal low. Morale lower."
+  ],
+  tlh: [
+    "QumwI' Qel – pagh 'oH pongmey!",
+    "Qapla'! 'ach wej lo'taH signal.",
+    "Hoch Daq HIq, SuvwI' chu' Qum!",
+    "Signal HIvje' vItlhutlh – yItlhutlh!",
+    "WiFi ghajbe' – SuvwI' chennIS.",
+    "Qum 'oH – vaj batlh.",
+    "Qochbe' QumwI'.",
+    "QumwI' vItlh – jIQuch.",
+    "'Internet' – neH, 'Qapla'!",
+    "jIvang, jIlogin.",
+    "ping! – jIlegh.",
+    "RouterwIj vIHar – tIq.",
+    "He' Qapbe'. jIQuchbe'.",
+    "WIFI' SuvwI' vIghoj.",
+    "reH Qum – reH Qapla'.",
+    "vIghro' je vIQum. Now she's streaming!",
+    "Qum Duj – vIghro' naQ.",
+    "Qo'noS net access – batlh net ghaj.",
+    "Data ghotpu' – QumtaH.",
+    "jIH QumwI', HIQIj."
+  ]
+};
 
     let currentLang = "cs";
     const title = document.getElementById("mainTitle");
