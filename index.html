@@ -262,9 +262,10 @@
     });
 
     window.onload = () => {
-      setupMatrix();
-      animateTitle();
-    };
+  setupMatrix();
+  matrixInterval = setInterval(drawMatrix, 33);
+  animateTitle();
+};
   </script>
 </body>
 </html>
