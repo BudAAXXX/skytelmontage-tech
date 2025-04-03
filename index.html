@@ -26,12 +26,10 @@
       font-size: 4rem;
       margin-top: 10vh;
       animation: glow 2s infinite ease-in-out;
-      opacity: 0;
-      transition: opacity 2s ease-in-out;
     }
 
     .joke, .virus-animation, .notice, .lang-switcher {
-      opacity: 0;
+      opacity: 1;
       transition: opacity 2s ease-in-out;
     }
 
@@ -134,3 +132,85 @@
   </nav>
   <footer>
     &copy; 2025 SkyTel Montage™ — All rights reserved.
+  </footer>
+  <audio id="bg-music" preload="auto" loop>
+    <source src="bg.mp3" type="audio/mpeg">
+  </audio>
+  <script>
+    const canvas = document.getElementById("matrix");
+    const ctx = canvas.getContext("2d");
+    canvas.height = window.innerHeight;
+    canvas.width = window.innerWidth;
+    const matrixChars = ["0", "1", "0", "1", "0", "1", "BudAA"];
+    const fontSize = 16;
+    const columns = canvas.width / fontSize;
+    const drops = Array(Math.floor(columns)).fill(1);
+
+    function drawMatrix() {
+      ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = "#0f0";
+      ctx.font = fontSize + "px Orbitron";
+      drops.forEach((y, i) => {
+        const char = Math.random() < 0.98 ? matrixChars[Math.floor(Math.random() * 6)] : "BudAA";
+        ctx.fillText(char, i * fontSize, y * fontSize);
+        drops[i] = y * fontSize > canvas.height && Math.random() > 0.975 ? 0 : y + 1;
+      });
+    }
+    setInterval(drawMatrix, 33);
+
+    const music = document.getElementById('bg-music');
+    document.addEventListener('click', () => {
+      music.volume = 0.7;
+      music.play().catch(err => alert('Enable sound manually to hear the Matrix soundtrack.'));
+    });
+
+    const jokes = {
+      en: ["Why do programmers prefer dark mode? Because light attracts bugs."],
+      cz: ["Proč programátoři milují tmu? Protože světlo přitahuje chyby."],
+      de: ["Warum bevorzugen Programmierer den Dunkelmodus? Weil Licht Bugs anzieht."],
+      klg: ["bIjatlh 'e' yImev! SuvwI'vam Qapchu'."]
+    };
+
+    const notices = {
+      en: "Website under construction.<br><strong>Click anywhere</strong> to start the music 🎵<br><small>Connecting to the Matrix...</small>",
+      cz: "Stránka je ve výstavbě.<br><strong>Klikni kamkoliv</strong> pro spuštění hudby 🎵<br><small>Připojování k Matrixu...</small>",
+      de: "Webseite im Aufbau.<br><strong>Klicke irgendwo</strong> um Musik zu starten 🎵<br><small>Matrix wird verbunden...</small>",
+      klg: "vebDaq Qutlh.<br><strong>tIqwIj DaQoy</strong> 'ej bom tIQ Dajel 🎵<br><small>Matrix Dapol...</small>"
+    };
+
+    const hacks = {
+      en: "I just hacked into your PC!",
+      cz: "Právě jsem se ti naboural do počítače!",
+      de: "Ich habe mich gerade in deinen PC gehackt!",
+      klg: "De'wI'lIj vISeHta'."
+    };
+
+    function showJoke(lang = 'en') {
+      const jokeEl = document.getElementById("joke");
+      const jokeList = jokes[lang] || jokes['en'];
+      jokeEl.textContent = jokeList[Math.floor(Math.random() * jokeList.length)];
+    }
+
+    function setLang(lang) {
+      document.documentElement.lang = lang === 'cz' ? 'cs' : lang;
+      currentLang = lang;
+      showJoke(lang);
+      document.getElementById('notice-text').innerHTML = notices[lang] || notices['en'];
+    }
+
+    let currentLang = 'en';
+
+    document.getElementById('virusBox').addEventListener('click', () => {
+      const isMobile = /Mobi|Android/i.test(navigator.userAgent);
+      const msg = hacks[currentLang] || hacks['en'];
+      alert(isMobile ? msg.replace('PC', 'phone') : msg);
+    });
+
+    window.onload = () => {
+      setLang('en');
+      showJoke();
+    }
+  </script>
+</body>
+</html>
