@@ -1,3 +1,4 @@
+<!-- COMPLETE HTML WITH SPECIAL TOWER COLLAPSE EFFECT -->
 <!DOCTYPE html>
 <html lang="cs">
 <head>
@@ -13,75 +14,207 @@
       font-family: 'Orbitron', sans-serif;
       overflow: hidden;
     }
-    .intro-logo {
-      position: fixed;
-      top: 30%;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 4rem;
-      color: #00ffcc;
-      animation: flicker 4s ease-in-out;
-      z-index: 10;
-      text-shadow: 0 0 10px #00ffcc;
+    .matrix {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: black;
+      overflow: hidden;
+      z-index: 1;
     }
-    @keyframes flicker {
-      0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; }
-      20%, 22%, 24%, 55% { opacity: 0; }
+    canvas {
+      display: block;
     }
     .title-assemble {
       position: fixed;
-      top: 60%;
+      top: 50%;
       left: 50%;
-      transform: translateX(-50%);
+      transform: translate(-50%, -50%) scale(1);
       font-size: 2rem;
       color: #66ffcc;
       text-shadow: 0 0 10px #00ffcc;
-      z-index: 11;
-      animation: assemble 5s ease-in-out;
+      z-index: 10;
+      animation: towerCollapse 6s ease-in-out forwards;
     }
-    @keyframes assemble {
-      from { opacity: 0; letter-spacing: 5em; }
-      to { opacity: 1; letter-spacing: normal; }
+    @keyframes towerCollapse {
+      0% {
+        transform: translate(-50%, -50%) scale(1) rotate(0deg);
+        opacity: 1;
+      }
+      40% {
+        transform: translate(-50%, -50%) scale(1.05) rotate(3deg);
+      }
+      60% {
+        transform: translate(-50%, -50%) scale(1.2) rotate(-6deg);
+        opacity: 0.9;
+      }
+      80% {
+        transform: translate(-50%, -50%) scale(0.5) rotate(720deg);
+        opacity: 0.5;
+      }
+      100% {
+        transform: translate(-50%, 200%) scale(0.1) rotate(1440deg);
+        opacity: 0;
+      }
     }
-    .countdown {
+    .footer {
       position: fixed;
-      top: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 1rem;
+      bottom: 10px;
+      left: 10px;
+      font-size: 0.7rem;
+      color: red;
+      animation: pulse 2s infinite;
       z-index: 20;
-      background: rgba(0,0,0,0.7);
-      padding: 6px 12px;
-      border-radius: 5px;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+    .language-select {
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+      z-index: 20;
+    }
+    .joke-box {
+      position: fixed;
+      bottom: 50px;
+      right: 10px;
+      background: rgba(0, 0, 0, 0.6);
+      color: #66ffcc;
+      font-size: 0.6rem;
+      padding: 4px 8px;
       border: 1px solid #66ffcc;
+      border-radius: 5px;
+      max-width: 200px;
+      z-index: 20;
+    }
+    .audio-controls {
+      position: fixed;
+      bottom: 90px;
+      right: 10px;
+      z-index: 20;
+      opacity: 0.2;
+    }
+    .audio-controls button {
+      background: none;
+      border: 1px solid #66ffcc;
+      color: #66ffcc;
+      padding: 2px 6px;
+      margin-right: 2px;
+      cursor: pointer;
+    }
+    .snake-container {
+      position: fixed;
+      bottom: 130px;
+      right: 10px;
+      width: 120px;
+      height: 120px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid #66ffcc;
+      z-index: 20;
     }
   </style>
 </head>
-<body class="signal-loss">
-  <div class="intro-logo">BudAA</div>
-  <div class="title-assemble">SkyTel Montage</div>
-  <div class="countdown" id="countdown"></div>
+<body>
+  <div class="matrix">
+    <canvas id="matrixCanvas"></canvas>
+  </div>
+
+  <div class="title-assemble" id="mainTitle">Stránka je v konstrukci. Zrovna někde lezu 🧗‍♂️</div>
+  <div class="footer">SkyTel Montage – vytvořil BudAA</div>
+  <div class="language-select">
+    <select id="langSelect" onchange="changeLang(this.value)">
+      <option value="cs">Čeština</option>
+      <option value="en">English</option>
+      <option value="de">Deutsch</option>
+      <option value="tlh">Klingon</option>
+    </select>
+  </div>
+  <div class="joke-box" id="jokeBox"></div>
+  <div class="audio-controls">
+    <button onclick="playMusic()">▶️</button>
+    <button onclick="stopMusic()">⏹️</button>
+  </div>
+  <div class="snake-container" id="snake"></div>
 
   <script>
-    function updateCountdown() {
-      const countEl = document.getElementById("countdown");
-      const launchDate = new Date("2025-07-01T00:00:00").getTime();
-      const now = new Date().getTime();
-      const distance = launchDate - now;
-
-      if (distance < 0) {
-        countEl.innerHTML = "Spuštěno!";
-        return;
+    const canvas = document.getElementById("matrixCanvas");
+    const ctx = canvas.getContext("2d");
+    canvas.height = window.innerHeight;
+    canvas.width = window.innerWidth;
+    const letters = "01BudAABudAA";
+    const fontSize = 14;
+    const columns = Math.floor(canvas.width / fontSize);
+    const drops = Array(columns).fill(1);
+    let hue = 0;
+    function draw() {
+      ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = `hsl(${hue}, 100%, 60%)`;
+      ctx.font = fontSize + "px monospace";
+      for (let i = 0; i < drops.length; i++) {
+        const text = letters.charAt(Math.floor(Math.random() * letters.length));
+        const x = i * fontSize;
+        const y = drops[i] * fontSize;
+        ctx.fillText(text, x, y);
+        if (y > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
       }
-
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-      countEl.innerHTML = `Start za: ${days}d ${hours}h ${minutes}m ${seconds}s`;
+      hue = (hue + 1) % 360;
     }
-    setInterval(updateCountdown, 1000);
+    setInterval(draw, 35);
+
+    let audio;
+    function playMusic() {
+      if (!audio) audio = new Audio("bg2.mp3");
+      audio.loop = true;
+      audio.volume = 0.3;
+      audio.play();
+    }
+    function stopMusic() {
+      if (audio) {
+        audio.pause();
+        audio.currentTime = 0;
+      }
+    }
+
+    const jokes = {
+      cs: [
+        "Proč má věž vždy signál? Protože má pokrytí na úrovni! 📡",
+        "Když ti spadne kabel, nebreč. Máš ještě optiku!",
+        "Vzal jsem si do práce klíč 17. A otevřel jsem WiFi."
+      ],
+      en: [
+        "Why do towers never lie? They always signal the truth.",
+        "Dropped your cable? At least it's not your 5G coverage!",
+        "I installed 5G and now my dog connects to the fridge."
+      ],
+      de: [
+        "Warum hat ein Mast immer Empfang? Weil er hoch hinaus will!",
+        "Ohne Signal? Vielleicht liegt das an deinem Humor.",
+        "Mein WLAN heißt jetzt: 'Du schaffst das nicht'."
+      ],
+      tlh: [
+        "QumwI' Qel – pagh 'oH pongmey!",
+        "Qapla'! 'ach wej lo'taH signal.",
+        "Hoch Daq HIq, SuvwI' chu' Qum!"
+      ]
+    };
+
+    function changeLang(lang) {
+      const title = document.getElementById("mainTitle");
+      const box = document.getElementById("jokeBox");
+      const joke = jokes[lang][Math.floor(Math.random() * jokes[lang].length)];
+
+      if (lang === "cs") title.innerText = "Stránka je v konstrukci. Zrovna někde lezu 🧗‍♂️";
+      if (lang === "en") title.innerText = "Page under construction. Somewhere climbing 🧗‍♂️";
+      if (lang === "de") title.innerText = "Seite im Aufbau. Ich klettere gerade 🧗‍♂️";
+      if (lang === "tlh") title.innerText = "bIQ'a' wIjDaq SuvwI'. HIchegh 🧗‍♂️";
+
+      box.innerText = joke;
+    }
+    changeLang("cs");
   </script>
 </body>
 </html>
