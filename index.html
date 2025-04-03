@@ -5,12 +5,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SkyTel Montage</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Share+Tech+Mono&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary: #0ff;
+      --primary: #00fff7;
       --bg: #0a0a0a;
-      --text: #fff;
+      --text: #ffffff;
+      --accent: #1bfffc;
+      --glitch1: #ff005a;
+      --glitch2: #00fff7;
     }
 
     * {
@@ -20,117 +23,119 @@
     }
 
     body {
-      font-family: 'Orbitron', sans-serif;
+      font-family: 'Share Tech Mono', monospace;
       background-color: var(--bg);
       color: var(--text);
       overflow-x: hidden;
+      transition: background 0.5s ease;
     }
 
-    header {
-      padding: 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: rgba(0, 255, 255, 0.05);
-      border-bottom: 1px solid var(--primary);
+    #puzzleGame {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 280px;
+      background: rgba(10, 10, 10, 0.95);
+      border: 2px solid var(--accent);
+      padding: 1.5rem;
+      display: none;
+      z-index: 10000;
+      border-radius: 8px;
+      box-shadow: 0 0 15px var(--accent);
     }
 
-    nav a {
-      color: var(--primary);
-      margin-left: 2rem;
-      text-decoration: none;
-      transition: all 0.3s ease-in-out;
+    #puzzleGame p {
+      margin-bottom: 0.6rem;
+      font-size: 0.95rem;
+      color: var(--accent);
     }
 
-    nav a:hover {
-      color: white;
+    #puzzleGame input[type="number"] {
+      width: 80px;
+      padding: 0.4rem;
+      font-family: 'Share Tech Mono', monospace;
+      border: 1px solid var(--accent);
+      background: #111;
+      color: var(--text);
+      border-radius: 4px;
     }
 
-    .hero {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      text-align: center;
-      background: radial-gradient(circle at center, #0ff1, #000);
+    #puzzleGame button {
+      background: var(--accent);
+      border: none;
+      color: #000;
+      font-weight: bold;
+      padding: 0.5rem 0.8rem;
+      cursor: pointer;
+      margin-left: 0.5rem;
+      border-radius: 4px;
+      transition: background 0.3s ease-in-out;
     }
 
-    .hero h1 {
-      font-size: 3rem;
-      margin-bottom: 1rem;
+    #puzzleGame button:hover {
+      background: var(--primary);
     }
 
-    .hero p {
-      font-size: 1.2rem;
-      max-width: 600px;
+    #puzzleResult {
+      margin-top: 0.6rem;
+      font-weight: bold;
     }
 
-    section {
-      padding: 4rem 2rem;
-      max-width: 900px;
-      margin: 0 auto;
-    }
-
-    h2 {
-      font-size: 2rem;
-      color: var(--primary);
-      margin-bottom: 1rem;
-    }
-
-    ul li {
-      margin: 1rem 0;
-      font-size: 1.1rem;
-    }
-
-    footer {
-      text-align: center;
-      padding: 2rem;
-      background-color: #111;
-      border-top: 1px solid var(--primary);
+    .hint {
+      margin-top: 0.5rem;
+      font-size: 0.8rem;
+      color: #888;
     }
   </style>
+  <script>
+    document.addEventListener('contextmenu', function (e) {
+      e.preventDefault();
+      const game = document.getElementById('puzzleGame');
+      game.style.display = game.style.display === 'block' ? 'none' : 'block';
+    });
+
+    function checkAnswer() {
+      const input = document.getElementById('puzzleInput');
+      const result = document.getElementById('puzzleResult');
+      const value = parseInt(input.value);
+
+      if (!isNaN(value)) {
+        if (value === 42) {
+          result.textContent = '✅ Správně! Vítej mezi zasvěcenými.';
+          result.style.color = 'lime';
+        } else if (value === 0) {
+          result.textContent = '💣 To není nulačíslo, to je sabotáž!';
+          result.style.color = 'red';
+        } else {
+          result.textContent = '❌ Zkus to znovu. Logika je tvůj klíč.';
+          result.style.color = 'orange';
+        }
+      } else {
+        result.textContent = '❗ Zadej celé číslo.';
+        result.style.color = 'yellow';
+      }
+    }
+
+    function changeLanguage(lang) {
+      const elements = document.querySelectorAll('[data-lang]');
+      elements.forEach(el => {
+        el.innerText = el.dataset[lang];
+      });
+    }
+  </script>
 </head>
 
 <body>
-  <header>
-    <div class="logo">🧗‍♂️ SkyTel Montage</div>
-    <nav>
-      <a href="#about">O nás</a>
-      <a href="#services">Služby</a>
-      <a href="#contact">Kontakt</a>
-    </nav>
-  </header>
+  <div id="puzzleGame">
+    <p>🧠 Malá logická hádanka:</p>
+    <p>Kolik je 6 × 7?</p>
+    <input type="number" id="puzzleInput" placeholder="Zadej výsledek" />
+    <button onclick="checkAnswer()">Odpovědět</button>
+    <p id="puzzleResult"></p>
+    <p class="hint">💡 Tip: Odpověď zná každý správný geek...</p>
+  </div>
 
-  <section class="hero">
-    <h1>Výškové práce a montáže v celé Evropě</h1>
-    <p>Moderní přístup, profesionální vybavení, certifikovaný tým.</p>
-  </section>
-
-  <section id="about">
-    <h2>O nás</h2>
-    <p>Text o firmě zde...</p>
-  </section>
-
-  <section id="services">
-    <h2>Služby</h2>
-    <ul>
-      <li>Montáže telekomunikačních zařízení</li>
-      <li>Inspekce a údržba stožárů</li>
-      <li>Instalace 5G zařízení</li>
-      <li>Bezpečnostní poradenství a školení</li>
-    </ul>
-  </section>
-
-  <section id="contact">
-    <h2>Kontakt</h2>
-    <p>Email: <a href="mailto:patrik.budinsky@skytelmontage.cz">patrik.budinsky@skytelmontage.cz</a></p>
-    <p>Telefon: <a href="tel:+420739977089">+420 739 977 089</a></p>
-  </section>
-
-  <footer>
-    &copy; 2025 SkyTel Montage. Všechna práva vyhrazena.
-  </footer>
+  <!-- zbytek webu -->
 </body>
 
 </html>
