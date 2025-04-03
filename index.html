@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2301861770702896" crossorigin="anonymous"></script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="google-adsense-account" content="ca-pub-2301861770702896">
   <title>SkyTelMontage.tech</title>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2301861770702896" crossorigin="anonymous"></script>
   <link rel="icon" href="favicon.png" type="image/png" />
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet" />
   <style>
@@ -51,6 +52,7 @@
       margin-left: auto;
       margin-right: auto;
       cursor: pointer;
+      transition: opacity 0.3s;
     }
 
     .virus-animation {
@@ -93,11 +95,9 @@
       padding: 0.3rem 0.6rem;
       border-radius: 4px;
       font-style: italic;
-      pointer-events: auto;
       user-select: none;
       opacity: 0;
       transition: opacity 1s ease-in-out;
-      cursor: pointer;
     }
 
     .lang-switcher {
@@ -128,21 +128,10 @@
       border-bottom: 2px solid #0f0;
       z-index: 10000;
     }
-    #main-title {
-    display: block;
-    width: 100%;
-    text-align: center;
-    position: relative;
-    z-index: 10;
-  }
-</style>
+  </style>
 </head>
 <body>
-  <div class="ad-banner">
-    <!-- Google AdSense nebo jiná reklama sem -->
-    <iframe src="https://tvoje-reklama.cz" style="width:100%; height:90px; border:none;"></iframe>
-  </div>
-
+  <div class="ad-banner"></div>
   <canvas id="matrix"></canvas>
   <h1 id="main-title">SkyTelMontage.tech</h1>
   <div class="lang-switcher">
@@ -154,243 +143,92 @@
   <p id="joke">Loading intergalactic humour...</p>
   <div class="virus-animation" id="virusBox"></div>
   <footer>&copy; 2025 SkyTel Montage™ — All rights reserved.</footer>
-  <div class="music-credit" id="musicCredit"></div>
+  <div class="music-credit" id="musicCredit">Source: FreePD.com</div>
   <audio id="bg-music" preload="auto" loop></audio>
   <script>
     const canvas = document.getElementById("matrix");
     const ctx = canvas.getContext("2d");
-    canvas.height = window.innerHeight;
-    canvas.width = window.innerWidth;
-    const matrixChars = Array(80).fill("0").concat(Array(80).fill("1"), Array(20).fill("BudAA"));
+    const matrixChars = Array(100).fill("0").concat(Array(100).fill("1"), Array(20).fill("BudAA"));
     const fontSize = 16;
-    const columns = Math.floor(canvas.width / fontSize);
+    const columns = Math.floor(window.innerWidth / fontSize);
     const drops = Array(columns).fill(1);
-
     function drawMatrix() {
       ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
       ctx.fillStyle = "#0f0";
       ctx.font = fontSize + "px Orbitron";
-      drops.forEach((y, i) => {
-        const char = matrixChars[Math.floor(Math.random() * matrixChars.length)];
-        ctx.fillText(char, i * fontSize, y * fontSize);
-        drops[i] = y * fontSize > canvas.height && Math.random() > 0.975 ? 0 : y + 1;
-      });
+      for (let i = 0; i < drops.length; i++) {
+        const text = matrixChars[Math.floor(Math.random() * matrixChars.length)];
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+        drops[i]++;
+      }
     }
-    // Matrix effect starts after click
-    let matrixStarted = false;
     function startMatrix() {
-      if (!matrixStarted) {
-        setInterval(drawMatrix, 33);
-        matrixStarted = true;
-      }
-    }
-
-    const music = document.getElementById('bg-music');
-    const credit = document.getElementById('musicCredit');
-    const tracks = [
-      { src: 'bg.mp3' },
-      { src: 'bg2.mp3' },
-      { src: 'bg3.mp3' }
-    ];
-    let currentTrack = 0;
-
-    let clickCount = 0;
-    document.addEventListener('click', () => {
-  startMatrix();
-  if (clickCount === 0) {
-    music.src = tracks[currentTrack].src;
-    music.play().then(() => {
-      credit.textContent = 'Source: FreePD.com';
-      credit.style.opacity = 1;
-    });
-    clickCount++;
-  } else if (clickCount < tracks.length) {
-    currentTrack++;
-    music.src = tracks[currentTrack % tracks.length].src;
-    music.play();
-    credit.textContent = 'Source: FreePD.com';
-    credit.style.opacity = 1;
-    clickCount++;
-  }
-
-
-    credit.addEventListener('click', () => {
-      currentTrack = (currentTrack + 1) % tracks.length;
-      music.src = tracks[currentTrack].src;
-      music.play();
-      credit.textContent = 'Source: FreePD.com';
-    });
-
-    const title = "SkyTelMontage.tech";
-    const titleEl = document.getElementById("main-title");
-    let typed = "";
-    let index = 0;
-
-    function animateTitle() {
-      if (index < title.length) {
-        const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-        let spinCount = 0;
-        const spinInterval = setInterval(() => {
-          const randomChar = chars[Math.floor(Math.random() * chars.length)];
-          titleEl.innerHTML = typed + randomChar;
-          spinCount++;
-          if (spinCount > 5) {
-            clearInterval(spinInterval);
-            typed += title[index];
-            titleEl.innerHTML = typed;
-            index++;
-            setTimeout(animateTitle, 80);
-          }
-        }, 30);
-      }
+      setInterval(drawMatrix, 33);
     }
 
     const jokes = {
-      en: [
-        "Why do Java developers wear glasses? Because they can't C#.",
-        "To understand what recursion is, you must first understand recursion.",
-        "Real programmers count from 0.",
-        "404: Joke not found.",
-        "There’s no place like 127.0.0.1.",
-        "I changed my password to 'incorrect'. So when I forget it, the computer will say, 'Your password is incorrect.'",
-        "Why did the developer go broke? Because he used up all his cache.",
-        "I would tell you a UDP joke, but you might not get it.",
-        "Chuck Norris doesn't need to debug. His code is always right.",
-        "Why did the programmer quit his job? Because he didn't get arrays."
-      ],
-      cz: [
-        "Proč Java vývojáři nosí brýle? Protože nevidí #C.",
-        "Abys pochopil rekurzi, musíš nejdřív pochopit rekurzi.",
-        "Skuteční programátoři počítají od nuly.",
-        "404: Vtip nenalezen.",
-        "Není nad 127.0.0.1.",
-        "Změnil jsem si heslo na 'nesprávné'. Když ho zapomenu, počítač mi řekne: 'Vaše heslo je nesprávné.'",
-        "Proč programátor zkrachoval? Protože vyčerpal všechen svůj cache.",
-        "Řekl bych ti UDP vtip, ale možná ho nedostaneš.",
-        "Chuck Norris nemusí ladit. Jeho kód je vždy správně.",
-        "Proč programátor opustil práci? Protože nedostal pole (arrays)."
-      ],
-      de: [
-        "Warum tragen Java-Entwickler Brillen? Weil sie C# nicht sehen können.",
-        "Um Rekursion zu verstehen, musst du zuerst Rekursion verstehen.",
-        "Echte Programmierer zählen ab 0.",
-        "404: Witz nicht gefunden.",
-        "Es gibt keinen Ort wie 127.0.0.1.",
-        "Ich habe mein Passwort auf 'falsch' geändert. Wenn ich es vergesse, sagt der Computer: 'Ihr Passwort ist falsch.'",
-        "Warum ging der Entwickler pleite? Weil er seinen gesamten Cache verbraucht hat.",
-        "Ich würde dir einen UDP-Witz erzählen, aber du bekommst ihn vielleicht nicht.",
-        "Chuck Norris muss nicht debuggen. Sein Code ist immer richtig.",
-        "Warum kündigte der Programmierer? Weil er keine Arrays bekam."
-      ],
-      tlh: [
-        "Qapla’! jIyajchu’bogh vItIv.",
-        "tlhIngan Hol vIghoj, vaj Quch jIH!",
-        "yIntagh code DaQoy'bej!",
-        "vItlhutlh 'e' vIneH – vaj jIyweS.",
-        "Binary jIyaj: wa' pagh wa' pagh.",
-        "'e' Qaghbe' Qel!",
-        "Dujvam lughbe' law' Hoch lugh.",
-        "HIqmey bIr Qel, Qapla' ghajbogh.",
-        "'ejyo' De'wI' He' Dalo'chugh, He' Qaghbe'.",
-        "QIbHeS 'oH programming'e' – vaj DaqaH Qun!"
-      ]
+      en: ["Why do programmers prefer dark mode? Because light attracts bugs.", "404: Joke not found.", "There’s no place like 127.0.0.1."],
+      cz: ["Proč programátoři milují tmu? Protože světlo přitahuje chyby.", "404: Vtip nenalezen.", "Není nad 127.0.0.1."],
+      de: ["Warum bevorzugen Programmierer Dunkelmodus? Weil Licht Bugs anzieht.", "404: Witz nicht gefunden.", "Es gibt keinen Ort wie 127.0.0.1."],
+      tlh: ["Qapla’! jIyajchu’bogh vItIv.", "QIb mIw vIghoj...", "yIntagh code DaQoy'bej!"]
     };
 
     let currentLang = 'en';
-    let currentJokeIndex = 0;
+    let jokeIndex = 0;
     let jokeInterval;
-
-    function startJokeCycle(lang = 'en') {
-      const jokeEl = document.getElementById("joke");
-      const jokeList = jokes[lang] || jokes['en'];
+    const jokeEl = document.getElementById("joke");
+    function showJoke() {
+      const list = jokes[currentLang] || jokes.en;
       jokeEl.style.opacity = 0;
-        setTimeout(() => {
-          jokeEl.textContent = jokeList[currentJokeIndex];
-          jokeEl.style.opacity = 1;
-        }, 300);
-      currentJokeIndex = (currentJokeIndex + 1) % jokeList.length;
-      jokeInterval = setInterval(() => {
-        jokeEl.style.opacity = 0;
       setTimeout(() => {
-        jokeEl.textContent = jokeList[currentJokeIndex];
+        jokeEl.textContent = list[jokeIndex % list.length];
         jokeEl.style.opacity = 1;
+        jokeIndex++;
       }, 300);
-      currentJokeIndex = (currentJokeIndex + 1) % jokeList.length;
-      }, 10000);
     }
-
-    document.getElementById("joke").addEventListener("click", () => {
-  clearInterval(jokeInterval);
-  startJokeCycle(currentLang);
-});
-
-window.addEventListener('load', () => {
-  setTimeout(() => startJokeCycle(currentLang), 1000);
-});
+    function startJokes() {
+      showJoke();
+      clearInterval(jokeInterval);
+      jokeInterval = setInterval(showJoke, 7000);
+    }
 
     function setLang(lang) {
-  document.documentElement.lang = lang === 'cz' ? 'cs' : lang;
-  currentLang = lang;
-  clearInterval(jokeInterval);
-  startJokeCycle(lang);
-
-  const uiText = {
-    en: {
-      jokePlaceholder: "Loading intergalactic humour...",
-      title: "SkyTelMontage.tech"
-    },
-    cz: {
-      jokePlaceholder: "Načítám meziplanetární humor...",
-      title: "SkyTelMontage.tech"
-    },
-    de: {
-      jokePlaceholder: "Lade intergalaktischen Humor...",
-      title: "SkyTelMontage.tech"
-    },
-    tlh: {
-      jokePlaceholder: "QIb mIw vIghoj...",
-      title: "SkyTelMontage.tech"
+      currentLang = lang;
+      startJokes();
     }
-  };
 
-  const t = uiText[lang] || uiText['en'];
-  document.getElementById("joke").textContent = t.jokePlaceholder;
-  document.getElementById("main-title").textContent = t.title;
-},
-        cz: {
-          jokePlaceholder: "Načítám meziplanetární humor...",
-          title: "SkyTelMontage.tech"
-        },
-        de: {
-          jokePlaceholder: "Lade intergalaktischen Humor...",
-          title: "SkyTelMontage.tech"
-        },
-        tlh: {
-          jokePlaceholder: "QIb mIw vIghoj...",
-          title: "SkyTelMontage.tech"
-        }
-      };
-
-      const t = uiText[lang] || uiText['en'];
-      document.getElementById("joke").textContent = t.jokePlaceholder;
-      document.getElementById("main-title").textContent = t.title;
-    }
-    }
+    const music = document.getElementById('bg-music');
+    const tracks = ['bg.mp3', 'bg2.mp3', 'bg3.mp3'];
+    let trackIndex = 0;
+    let started = false;
+    document.addEventListener('click', () => {
+      if (!started) {
+        startMatrix();
+        startJokes();
+        music.src = tracks[trackIndex];
+        music.play();
+        started = true;
+      } else {
+        trackIndex = (trackIndex + 1) % tracks.length;
+        music.src = tracks[trackIndex];
+        music.play();
+      }
+    });
 
     document.getElementById('virusBox').addEventListener('click', () => {
       const isMobile = /Mobi|Android/i.test(navigator.userAgent);
       const msg = {
         en: "I just hacked into your PC!",
         cz: "Právě jsem se ti naboural do počítače!",
-        de: "Ich habe mich gerade in deinen PC gehackt!"
-      }[currentLang] || "I just hacked into your PC!";
+        de: "Ich habe mich gerade in deinen PC gehackt!",
+        tlh: "jIH HACKED lIj De'wI'!"
+      }[currentLang] || "I just hacked into your device!";
       alert(isMobile ? msg.replace('PC', 'phone') : msg);
     });
-
-    window.onload = () => {
-  animateTitle();
-};
   </script>
 </body>
 </html>
