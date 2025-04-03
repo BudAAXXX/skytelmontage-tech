@@ -12,8 +12,6 @@
       --bg: #0a0a0a;
       --text: #ffffff;
       --accent: #1bfffc;
-      --glitch1: #ff005a;
-      --glitch2: #00fff7;
     }
 
     * {
@@ -26,33 +24,33 @@
       font-family: 'Share Tech Mono', monospace;
       background-color: var(--bg);
       color: var(--text);
-      overflow-x: hidden;
-      transition: background 0.5s ease;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
 
     header {
+      background: #000;
       padding: 2rem;
       text-align: center;
       font-family: 'Orbitron', sans-serif;
-      font-size: 2rem;
+      font-size: 2.2rem;
       color: var(--primary);
-      background: #000;
+      letter-spacing: 3px;
       border-bottom: 1px solid var(--accent);
-      letter-spacing: 4px;
     }
 
     .hero {
+      flex: 1;
       display: flex;
-      flex-direction: column;
-      justify-content: center;
       align-items: center;
-      height: 80vh;
+      justify-content: center;
       text-align: center;
-      padding: 2rem;
+      padding: 3rem;
     }
 
     .hero h1 {
-      font-size: 2.5rem;
+      font-size: 3rem;
       margin-bottom: 1rem;
       color: var(--accent);
     }
@@ -63,126 +61,30 @@
       line-height: 1.6;
     }
 
-    section {
-      padding: 3rem 2rem;
-      max-width: 900px;
-      margin: auto;
-    }
-
-    #puzzleGame {
-      position: fixed;
-      bottom: 30px;
-      right: 30px;
-      width: 280px;
-      background: rgba(10, 10, 10, 0.95);
-      border: 2px solid var(--accent);
-      padding: 1.5rem;
-      display: none;
-      z-index: 10000;
-      border-radius: 8px;
-      box-shadow: 0 0 15px var(--accent);
-    }
-
-    #puzzleGame p {
-      margin-bottom: 0.6rem;
-      font-size: 0.95rem;
+    footer {
+      background: #000;
       color: var(--accent);
-    }
-
-    #puzzleGame input[type="number"] {
-      width: 80px;
-      padding: 0.4rem;
-      font-family: 'Share Tech Mono', monospace;
-      border: 1px solid var(--accent);
-      background: #111;
-      color: var(--text);
-      border-radius: 4px;
-    }
-
-    #puzzleGame button {
-      background: var(--accent);
-      border: none;
-      color: #000;
-      font-weight: bold;
-      padding: 0.5rem 0.8rem;
-      cursor: pointer;
-      margin-left: 0.5rem;
-      border-radius: 4px;
-      transition: background 0.3s ease-in-out;
-    }
-
-    #puzzleGame button:hover {
-      background: var(--primary);
-    }
-
-    #puzzleResult {
-      margin-top: 0.6rem;
-      font-weight: bold;
-    }
-
-    .hint {
-      margin-top: 0.5rem;
-      font-size: 0.8rem;
-      color: #888;
+      text-align: center;
+      padding: 1.5rem;
+      border-top: 1px solid var(--accent);
+      font-size: 0.9rem;
     }
   </style>
-  <script>
-    document.addEventListener('contextmenu', function (e) {
-      e.preventDefault();
-      const game = document.getElementById('puzzleGame');
-      game.style.display = game.style.display === 'block' ? 'none' : 'block';
-    });
-
-    function checkAnswer() {
-      const input = document.getElementById('puzzleInput');
-      const result = document.getElementById('puzzleResult');
-      const value = parseInt(input.value);
-
-      if (!isNaN(value)) {
-        if (value === 42) {
-          result.textContent = '✅ Správně! Vítej mezi zasvěcenými.';
-          result.style.color = 'lime';
-        } else if (value === 0) {
-          result.textContent = '💣 To není nulačíslo, to je sabotáž!';
-          result.style.color = 'red';
-        } else {
-          result.textContent = '❌ Zkus to znovu. Logika je tvůj klíč.';
-          result.style.color = 'orange';
-        }
-      } else {
-        result.textContent = '❗ Zadej celé číslo.';
-        result.style.color = 'yellow';
-      }
-    }
-  </script>
 </head>
 
 <body>
   <header>SKYTEL MONTAGE</header>
 
   <div class="hero">
-    <h1>LTE a 5G výškové technologie</h1>
-    <p>Realizujeme modernizaci základnových stanic, montáže antén, inspekce a vedení profesionálních týmů v náročných podmínkách. Náš přístup spojuje technickou přesnost, bezpečnost a budoucnost sítí.</p>
+    <div>
+      <h1>Technologie budoucnosti ve výškách</h1>
+      <p>Profesionální montáže LTE a 5G sítí, inspekce, modernizace a vedení projektů. Přinášíme kvalitu, bezpečnost a preciznost tam, kde ostatní váhají.</p>
+    </div>
   </div>
 
-  <section>
-    <h2>Služby</h2>
-    <ul>
-      <li>Montáže LTE / 5G sektorů a antén</li>
-      <li>Kompletní obsluha stožárů a technologických věží</li>
-      <li>Inspekce pomocí dronů a fotodokumentace</li>
-      <li>Výškové práce dle německých norem</li>
-    </ul>
-  </section>
-
-  <div id="puzzleGame">
-    <p>🧠 Malá logická hádanka:</p>
-    <p>Kolik je 6 × 7?</p>
-    <input type="number" id="puzzleInput" placeholder="Zadej výsledek" />
-    <button onclick="checkAnswer()">Odpovědět</button>
-    <p id="puzzleResult"></p>
-    <p class="hint">💡 Tip: Odpověď zná každý správný geek...</p>
-  </div>
+  <footer>
+    &copy; 2025 SkyTel Montage | Vytvořil Patrik Budinský
+  </footer>
 </body>
 
 </html>
