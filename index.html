@@ -187,13 +187,29 @@
     ];
     let currentTrack = 0;
 
+    let clickCount = 0;
     document.addEventListener('click', () => {
       startMatrix();
-      music.src = tracks[currentTrack].src;
-      music.play().then(() => {
-        credit.textContent = 'Source: FreePD.com';
-        credit.style.opacity = 1;
-      });
+      if (clickCount === 0) {
+        music.src = tracks[currentTrack].src;
+        music.play().then(() => {
+          credit.textContent = 'Source: FreePD.com';
+          credit.style.opacity = 1;
+        });
+      } else if (clickCount < tracks.length) {
+        currentTrack = (currentTrack + 1) % tracks.length;
+        music.src = tracks[currentTrack].src;
+        music.play();
+      }
+      clickCount++;
+    });
+      } else {
+        currentTrack = (currentTrack + 1) % tracks.length;
+        music.src = tracks[currentTrack].src;
+        music.play();
+      }
+      clickCount++;
+    });
     });
 
     credit.addEventListener('click', () => {
@@ -311,6 +327,30 @@
       currentLang = lang;
       clearInterval(jokeInterval);
       startJokeCycle(lang);
+
+      const uiText = {
+        en: {
+          jokePlaceholder: "Loading intergalactic humour...",
+          title: "SkyTelMontage.tech"
+        },
+        cz: {
+          jokePlaceholder: "Načítám meziplanetární humor...",
+          title: "SkyTelMontage.tech"
+        },
+        de: {
+          jokePlaceholder: "Lade intergalaktischen Humor...",
+          title: "SkyTelMontage.tech"
+        },
+        tlh: {
+          jokePlaceholder: "QIb mIw vIghoj...",
+          title: "SkyTelMontage.tech"
+        }
+      };
+
+      const t = uiText[lang] || uiText['en'];
+      document.getElementById("joke").textContent = t.jokePlaceholder;
+      document.getElementById("main-title").textContent = t.title;
+    }
     }
 
     document.getElementById('virusBox').addEventListener('click', () => {
