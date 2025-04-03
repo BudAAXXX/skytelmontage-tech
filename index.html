@@ -29,25 +29,26 @@
     }
 
     .joke {
-      font-size: 1.4rem;
+      font-size: 1.2rem;
       margin: 1rem auto;
       max-width: 80%;
-      color: #ff5;
-      background: rgba(255, 255, 0, 0.05);
+      color: #00ff88;
+      background: rgba(0, 0, 0, 0.7);
       padding: 1rem;
-      border-radius: 10px;
-      border: 1px dashed #ff0;
+      border-radius: 8px;
+      border: 1px solid #00ff88;
     }
 
     .notice, nav {
       display: inline-block;
       padding: 1rem 2rem;
-      border: 2px dashed #00ff88;
-      background: rgba(0, 255, 136, 0.1);
+      border: 1px solid #00ff88;
+      background: rgba(0, 0, 0, 0.6);
       margin-top: 2rem;
       max-width: 600px;
       font-size: 1rem;
-      border-radius: 10px;
+      border-radius: 8px;
+      color: #00ff88;
     }
 
     canvas {
@@ -62,7 +63,7 @@
       height: 120px;
       margin: 40px auto;
       border-radius: 25%;
-      border: 3px dashed #00ff88;
+      border: 2px solid #00ff88;
       animation: spinvirus 2s linear infinite, pulse 2s ease-in-out infinite;
     }
 
@@ -82,28 +83,19 @@
     }
 
     footer {
-      margin-top: 2rem;
+      margin-top: 4rem;
       font-size: 0.6rem;
       color: #00885a;
     }
 
     .lang-switcher button {
       background: transparent;
-      border: 1px dashed #00ff88;
+      border: 1px solid #00ff88;
       color: #00ff88;
       margin: 0.5rem;
       padding: 0.3rem 0.6rem;
       cursor: pointer;
       font-family: 'Orbitron';
-    }
-
-    .copyright {
-      background: rgba(0, 255, 136, 0.05);
-      border-top: 1px dashed #00ff88;
-      padding: 1rem;
-      font-size: 0.7rem;
-      margin-top: 3rem;
-      color: #00ff88;
     }
   </style>
 </head>
@@ -113,7 +105,7 @@
   <p class="joke" id="joke">Loading intergalactic humour...</p>
   <div class="virus-animation"></div>
 
-  <div class="notice">
+  <div class="notice" id="notice-text">
     Website under construction.<br>
     <strong>Click anywhere</strong> to start the music 🎵<br>
     <small>Connecting to the Matrix...</small>
@@ -125,10 +117,9 @@
     <button onclick="setLang('klg')">Klingon 🖖</button>
   </nav>
 
-  <div class="copyright">
-    &copy; 2025 SkyTel Montage™ — All rights reserved.<br>
-    Registered Trademark | Protected content under international copyright law.
-  </div>
+  <footer>
+    &copy; 2025 SkyTel Montage™ — All rights reserved. Registered Trademark | Protected content under international copyright law.
+  </footer>
 
   <audio id="bg-music" preload="auto" loop>
     <source src="bg.mp3" type="audio/mpeg">
@@ -189,8 +180,14 @@
         "Chuck Norris neprogramuje. On přepisuje realitu."
       ],
       klg: [
-        "bIjatlh 'e' yImev! SuvwI'vam Qapchu'." // jediný joke v čisté klingonštině
+        "bIjatlh 'e' yImev! SuvwI'vam Qapchu'."
       ]
+    };
+
+    const notices = {
+      en: "Website under construction.<br><strong>Click anywhere</strong> to start the music 🎵<br><small>Connecting to the Matrix...</small>",
+      cz: "Stránka je ve výstavbě.<br><strong>Klikni kamkoliv</strong> pro spuštění hudby 🎵<br><small>Připojování k Matrixu...</small>",
+      klg: "vebDaq Qutlh.<br><strong>tIqwIj DaQoy</strong> 'ej bom tIQ Dajel 🎵<br><small>Matrix Dapol...</small>"
     };
 
     function showJoke(lang = 'en') {
@@ -202,6 +199,7 @@
     function setLang(lang) {
       document.documentElement.lang = lang === 'cz' ? 'cs' : lang;
       showJoke(lang);
+      document.getElementById('notice-text').innerHTML = notices[lang] || notices['en'];
     }
 
     window.onload = () => showJoke();
