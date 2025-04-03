@@ -24,6 +24,7 @@
       font-size: clamp(24px, 8vw, 60px);
       margin-top: 120px;
       animation: redPulse 2s infinite;
+      white-space: pre;
     }
     @keyframes redPulse {
       0%, 100% { color: #ff0000; text-shadow: 0 0 5px #ff0000; }
@@ -57,20 +58,6 @@
       font-size: 0.8rem;
       color: #ff0000;
       animation: redPulse 2s infinite;
-    }
-    .music-credit {
-      position: fixed;
-      bottom: 2.5rem;
-      right: 1rem;
-      font-size: 0.6rem;
-      color: #111;
-      background: rgba(255, 0, 0, 0.05);
-      padding: 0.3rem 0.6rem;
-      border-radius: 4px;
-      font-style: italic;
-      user-select: none;
-      opacity: 0;
-      transition: opacity 1s ease-in-out;
     }
     .lang-switcher {
       display: flex;
@@ -112,34 +99,30 @@
   </div>
   <p id="joke">Loading intergalactic humour...</p>
   <footer>&copy; 2025 SkyTel Montage™ — All rights reserved.</footer>
-  <div class="music-credit" id="musicCredit">Source: FreePD.com</div>
-  <audio id="bg-music" preload="auto" loop></audio>
   <script>
-    function animateTitle() {
-      const title = "SkyTelMontage.tech";
-      const titleEl = document.getElementById("main-title");
-      let i = 0;
-      function spinLetter(pos, char) {
-        const spins = ["|", "/", "-", "\"];
-        let spinIndex = 0;
-        const interval = setInterval(() => {
-          if (spinIndex < spins.length) {
-            titleEl.textContent = titleEl.textContent.substring(0, pos) + spins[spinIndex] + titleEl.textContent.substring(pos + 1);
-            spinIndex++;
-          } else {
-            clearInterval(interval);
-            titleEl.textContent = titleEl.textContent.substring(0, pos) + char + titleEl.textContent.substring(pos + 1);
-            i++;
-            if (i < title.length) spinLetter(i, title[i]);
-          }
-        }, 100);
-      }
-      titleEl.textContent = "".padEnd(title.length, " ");
-      spinLetter(0, title[0]);
+    const title = "SkyTelMontage.tech";
+    const titleEl = document.getElementById("main-title");
+    let i = 0;
+    function spinLetter(pos, char) {
+      const spins = ["|", "/", "-", "\\"];
+      let spinIndex = 0;
+      const interval = setInterval(() => {
+        if (spinIndex < spins.length) {
+          titleEl.textContent = titleEl.textContent.substring(0, pos) + spins[spinIndex] + titleEl.textContent.substring(pos + 1);
+          spinIndex++;
+        } else {
+          clearInterval(interval);
+          titleEl.textContent = titleEl.textContent.substring(0, pos) + char + titleEl.textContent.substring(pos + 1);
+          i++;
+          if (i < title.length) spinLetter(i, title[i]);
+        }
+      }, 75);
     }
+    titleEl.textContent = "".padEnd(title.length, " ");
+    spinLetter(0, title[0]);
+
     const canvas = document.getElementById("matrix");
     const ctx = canvas.getContext("2d");
-    let matrixInterval;
     const matrixChars = Array(100).fill("0").concat(Array(100).fill("1"), Array(20).fill("BudAA"));
     const fontSize = 16;
     let columns, drops;
@@ -164,55 +147,27 @@
     }
 
     const jokes = {
-  en: [
-    "Why do programmers prefer dark mode? Because light attracts bugs.",
-    "404: Joke not found.",
-    "There’s no place like 127.0.0.1.",
-    "A SQL query walks into a bar, walks up to two tables and asks: 'Can I join you?'",
-    "Why did the telecom engineer get promoted? He had great bandwidth.",
-    "Why was the JavaScript developer sad? Because he didn't know how to 'null' his feelings.",
-    "I would tell you a joke about UDP, but you might not get it.",
-    "A telecom tech never gets lost—he just loops back to base.",
-    "Binary is as easy as 01, 10, 11.",
-    "Why do routers make bad partners? Too many connections."
-  ],
-  cz: [
-    "Proč programátoři milují tmu? Protože světlo přitahuje chyby.",
-    "404: Vtip nenalezen.",
-    "Není nad 127.0.0.1.",
-    "Dotaz SQL vejde do baru, přistoupí ke dvěma tabulkám a říká: 'Můžu se připojit?'",
-    "Proč byl telekomunikační technik povýšen? Měl skvělou šířku pásma.",
-    "Proč byl JavaScriptový vývojář smutný? Protože nevěděl, jak vynulovat své pocity.",
-    "Řekl bych ti vtip o UDP, ale možná ho nedostaneš.",
-    "Telekomunikační technik se nikdy neztratí – jen se vrací na základnu.",
-    "Binárně je to jednoduché: 01, 10, 11.",
-    "Proč nejsou routry dobrými partnery? Mají příliš mnoho spojení."
-  ],
-  de: [
-    "Warum bevorzugen Programmierer Dunkelmodus? Weil Licht Bugs anzieht.",
-    "404: Witz nicht gefunden.",
-    "Es gibt keinen Ort wie 127.0.0.1.",
-    "Ein SQL-Befehl betritt eine Bar, geht zu zwei Tischen und fragt: 'Darf ich mich euch anschließen?'",
-    "Warum wurde der Telekom-Techniker befördert? Er hatte eine tolle Bandbreite.",
-    "Warum war der JavaScript-Entwickler traurig? Weil er seine Gefühle nicht nullen konnte.",
-    "Ich würde dir einen Witz über UDP erzählen, aber du bekommst ihn vielleicht nicht.",
-    "Ein Telekomtechniker verirrt sich nie – er kehrt nur zur Basis zurück.",
-    "Binär ist ganz einfach: 01, 10, 11.",
-    "Warum sind Router schlechte Partner? Zu viele Verbindungen."
-  ],
-  tlh: [
-    "Qapla’! jIyajchu’bogh vItIv.",
-    "QIb mIw vIghoj...",
-    "yIntagh code DaQoy'bej!",
-    "loQ De' pe'bogh — vaj qaja' je!",
-    "Hoch connectionmey 'oH router'e'.",
-    "logh SIQpu'bogh developer — QubHa'!",
-    "127.0.0.1 — juH vIghoS.",
-    "tlhIngan De'wI' Qul pagh wov.",
-    "null feelings? not SuvwI'!",
-    "QInmey wIlo', Qapla' net tu'."
-  ]
-};
+      en: [
+        "Why do programmers prefer dark mode? Because light attracts bugs.",
+        "404: Joke not found.",
+        "There’s no place like 127.0.0.1."
+      ],
+      cz: [
+        "Proč programátoři milují tmu? Protože světlo přitahuje chyby.",
+        "404: Vtip nenalezen.",
+        "Není nad 127.0.0.1."
+      ],
+      de: [
+        "Warum bevorzugen Programmierer Dunkelmodus? Weil Licht Bugs anzieht.",
+        "404: Witz nicht gefunden.",
+        "Es gibt keinen Ort wie 127.0.0.1."
+      ],
+      tlh: [
+        "Qapla’! jIyajchu’bogh vItIv.",
+        "QIb mIw vIghoj...",
+        "127.0.0.1 — juH vIghoS."
+      ]
+    };
 
     let currentLang = 'en';
     let jokeIndex = 0;
@@ -240,32 +195,11 @@
       startJokes();
     }
 
-    const music = document.getElementById('bg-music');
-    const tracks = ['bg.mp3', 'bg2.mp3', 'bg3.mp3'];
-    let trackIndex = 0;
-    let started = false;
-
-    document.addEventListener('click', () => {
-      if (!started) {
-        setupMatrix();
-        matrixInterval = setInterval(drawMatrix, 33);
-        startJokes();
-        music.src = tracks[trackIndex];
-        music.play();
-        document.getElementById('musicCredit').style.opacity = 1;
-        started = true;
-      } else {
-        trackIndex = (trackIndex + 1) % tracks.length;
-        music.src = tracks[trackIndex];
-        music.play();
-      }
-    });
-
     window.onload = () => {
-  setupMatrix();
-  matrixInterval = setInterval(drawMatrix, 33);
-  animateTitle();
-};
+      setupMatrix();
+      setInterval(drawMatrix, 33);
+      startJokes();
+    };
   </script>
 </body>
 </html>
