@@ -108,7 +108,7 @@
   </style>
 </head>
 <body>
-  <div class="glitch-intro" id="glitchIntro"></div>
+  
   <canvas id="matrix"></canvas>
   <h1 id="main-title"></h1>
   <div id="joke">Loading intergalactic humour...</div>
@@ -140,9 +140,7 @@
       const titleText = "SkyTelMontage.tech";
       const titleEl = document.getElementById("main-title");
       titleEl.textContent = "".padEnd(titleText.length, " ");
-      const introEl = document.getElementById("glitchIntro");
-      animateIntroText("SkyTelMontage", introEl, () => {
-        introEl.remove();
+      
         setupMatrix();
         setInterval(drawMatrix, 33);
         startJokes();
