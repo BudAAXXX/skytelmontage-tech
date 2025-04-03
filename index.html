@@ -151,5 +151,79 @@
       });
     }
   </script>
+<div id="datetime" style="position: fixed; top: 10px; right: 10px; color: #00ff88; font-size: 0.9rem; background: rgba(0,0,0,0.6); padding: 0.5rem 1rem; border-radius: 10px; z-index: 999; font-family: 'Orbitron', monospace;"></div>
+
+<div id="chatbot" style="position: fixed; bottom: 4rem; right: 10px; background: rgba(0,0,0,0.8); border: 1px solid #00ff88; border-radius: 10px; padding: 10px; width: 250px; font-size: 0.9rem; color: #00ff88; font-family: 'Orbitron', monospace;">
+  <strong>🤖 Bot:</strong>
+  <div id="bot-output" style="margin: 0.5rem 0;">Ask me something...</div>
+  <input type="text" id="bot-input" placeholder="Type here..." style="width: 100%; padding: 5px; background: black; border: 1px solid #00ff88; color: #00ff88;">
+</div>
+
+<script>
+function updateDateTime() {
+  const dt = new Date();
+  const datetimeEl = document.getElementById("datetime");
+  if (datetimeEl) datetimeEl.textContent = dt.toLocaleString();
+}
+setInterval(updateDateTime, 1000);
+updateDateTime();
+
+document.getElementById("bot-input").addEventListener("keydown", function(e) {
+  if (e.key === "Enter") {
+    const input = e.target.value.toLowerCase();
+    const output = document.getElementById("bot-output");
+    let response = "";
+    const responses = {
+      en: {
+        who: "I'm SkyBot — your tech assistant.",
+        joke: "Why did the router go to therapy? Too many issues.",
+        time: new Date().toLocaleTimeString(),
+        matrix: "Also, have you tried turning reality off and on again?",
+        help: "Just type something like 'joke', 'time', or ask me who I am.",
+        sky: "You must mean SkyTel — the legend of the towers!",
+        default: "I'm still learning. Try asking something else."
+      },
+      cz: {
+        who: "Jsem SkyBot — tvůj technický pomocník.",
+        joke: "Proč šel router na terapii? Měl příliš mnoho problémů.",
+        time: new Date().toLocaleTimeString(),
+        matrix: "Zkusil jsi vypnout a zapnout realitu?",
+        help: "Zkus třeba 'vtip', 'čas', nebo se zeptej kdo jsem.",
+        sky: "Myslíš SkyTel — legendu stožárů!",
+        default: "Ještě se učím. Zkus se zeptat jinak."
+      },
+      de: {
+        who: "Ich bin SkyBot — dein Technik-Assistent.",
+        joke: "Warum ging der Router zur Therapie? Zu viele Probleme.",
+        time: new Date().toLocaleTimeString(),
+        matrix: "Hast du versucht, die Realität aus- und wieder einzuschalten?",
+        help: "Gib etwas wie 'witz', 'zeit' ein oder frag mich, wer ich bin.",
+        sky: "Du meinst bestimmt SkyTel — die Legende der Türme!",
+        default: "Ich lerne noch. Frag mich etwas anderes."
+      },
+      tlh: {
+        who: "jIH SkyBot — Qapchu’meH DuSaQ.",
+        joke: "Hoch router HeghDI’ Qel legh — chay’ law’.",
+        time: new Date().toLocaleTimeString(),
+        matrix: "ra’ghomquv yItogh ‘ej yIqaw.",
+        help: "vItlhutlh 'oHmeH 'oH pong 'joke', 'time' pagh 'who'.",
+        sky: "SkyTel — SuvwI’ naQmey!",
+        default: "jIyajbe’. chaq bIyajchu’."
+      }
+    };
+    const langSet = responses[currentLang] || responses.en;
+    if (input.includes("who")) response = langSet.who;
+    else if (input.includes("joke")) response = langSet.joke;
+    else if (input.includes("time")) response = langSet.time;
+    else if (input.includes("matrix")) response = langSet.matrix;
+    else if (input.includes("help")) response = langSet.help;
+    else if (input.includes("sky") || input.includes("tel")) response = langSet.sky;
+    else response = langSet.default;
+
+    output.textContent = response;
+    e.target.value = "";
+  }
+});
+</script>
 </body>
 </html>
