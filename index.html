@@ -11,11 +11,12 @@
     html, body {
       margin: 0;
       padding: 0;
-      background: black;
+      background: transparent;
       color: #00ff88;
       font-family: 'Orbitron', monospace;
       overflow: hidden;
       text-align: center;
+      height: 100vh;
     }
     canvas {
       position: fixed;
@@ -23,8 +24,8 @@
       left: 0;
       right: 0;
       bottom: 0;
-      width: 100% !important;
-      height: 100% !important;
+      width: 100vw !important;
+      height: 100vh !important;
       z-index: -1;
       display: block;
       pointer-events: none;
@@ -254,5 +255,39 @@
       window.addEventListener('resize', setupMatrix);
     }
   </script>
+<div id="datetime" style="position: fixed; top: 10px; right: 10px; color: #00ff88; font-size: 0.9rem; background: rgba(0,0,0,0.6); padding: 0.5rem 1rem; border-radius: 10px; z-index: 999; font-family: 'Orbitron', monospace;"></div>
+
+<div id="chatbot" style="position: fixed; bottom: 4rem; right: 10px; background: rgba(0,0,0,0.8); border: 1px solid #00ff88; border-radius: 10px; padding: 10px; width: 250px; font-size: 0.9rem; color: #00ff88; font-family: 'Orbitron', monospace;">
+  <strong>🤖 Bot:</strong>
+  <div id="bot-output" style="margin: 0.5rem 0;">Ask me something...</div>
+  <input type="text" id="bot-input" placeholder="Type here..." style="width: 100%; padding: 5px; background: black; border: 1px solid #00ff88; color: #00ff88;">
+</div>
+
+<script>
+function updateDateTime() {
+  const dt = new Date();
+  const datetimeEl = document.getElementById("datetime");
+  datetimeEl.textContent = dt.toLocaleString();
+}
+setInterval(updateDateTime, 1000);
+updateDateTime();
+
+document.getElementById("bot-input").addEventListener("keydown", function(e) {
+  if (e.key === "Enter") {
+    const input = e.target.value.toLowerCase();
+    const output = document.getElementById("bot-output");
+    if (input.includes("who are you")) {
+      output.textContent = "I'm SkyBot — your tech assistant.";
+    } else if (input.includes("joke")) {
+      output.textContent = "Why did the router go to therapy? Too many issues.";
+    } else if (input.includes("time")) {
+      output.textContent = new Date().toLocaleTimeString();
+    } else {
+      output.textContent = "I'm still learning. Try asking something else.";
+    }
+    e.target.value = "";
+  }
+});
+</script>
 </body>
 </html>
