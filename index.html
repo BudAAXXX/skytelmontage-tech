@@ -128,7 +128,14 @@
       border-bottom: 2px solid #0f0;
       z-index: 10000;
     }
-  </style>
+    #main-title {
+    display: block;
+    width: 100%;
+    text-align: center;
+    position: relative;
+    z-index: 10;
+  }
+</style>
 </head>
 <body>
   <div class="ad-banner">
@@ -322,9 +329,13 @@
     }
 
     document.getElementById("joke").addEventListener("click", () => {
-      clearInterval(jokeInterval);
-      startJokeCycle(currentLang);
-    });
+  clearInterval(jokeInterval);
+  startJokeCycle(currentLang);
+});
+
+window.addEventListener('load', () => {
+  setTimeout(() => startJokeCycle(currentLang), 1000);
+});
 
     function setLang(lang) {
       document.documentElement.lang = lang === 'cz' ? 'cs' : lang;
@@ -368,9 +379,8 @@
     });
 
     window.onload = () => {
-      animateTitle();
-      setTimeout(() => startJokeCycle(currentLang), 10000);
-    };
+  animateTitle();
+};
   </script>
 </body>
 </html>
