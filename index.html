@@ -44,7 +44,7 @@
       padding: 1rem;
       border: 1px solid #00ff88;
       border-radius: 10px;
-      transition: opacity 0.3s;
+      transition: opacity 0.8s ease-in-out;
     }
     .lang-switcher button {
       background: none;
@@ -114,19 +114,15 @@
 
     function drawMatrix() {
       ctx.save();
-      if (glitchMode === 1) {
-        ctx.shadowColor = '#0ff';
-        ctx.shadowBlur = 10;
-      } else if (glitchMode === 2) {
-        ctx.transform(1, 0.3, -0.2, 1, 0, 0);
-      }
       ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
       ctx.fillStyle = "#0f0";
       ctx.font = fontSize + "px Orbitron, monospace";
       for (let i = 0; i < drops.length; i++) {
         let char = Math.random() < 0.005 ? "BudAA" : (Math.random() < 0.5 ? "0" : "1");
+        ctx.globalAlpha = 0.8;
         ctx.fillText(char, i * fontSize, drops[i] * fontSize);
+        ctx.globalAlpha = 1;
         drops[i] = drops[i] * fontSize > canvas.height && Math.random() > 0.975 ? 0 : drops[i] + 1;
       }
       ctx.restore();
@@ -209,7 +205,7 @@
 
     window.onload = () => {
       setupMatrix();
-      glitchMode = Math.floor(Math.random() * 3);
+      glitchMode = 0;
       setInterval(drawMatrix, 33);
       startJokes();
       window.addEventListener('resize', () => {
