@@ -4,59 +4,44 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SkyTel Montage – Ve výstavbě</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
       background: black;
       color: #66ffcc;
-      font-family: 'Roboto Mono', monospace;
+      font-family: 'Orbitron', sans-serif;
       overflow: hidden;
-    }
-    #overlay {
-      position: fixed;
-      z-index: 999;
-      background: rgba(0,0,0,0.95);
-      top: 0; left: 0;
-      width: 100vw;
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-    }
-    #overlay input {
-      padding: 10px;
-      font-size: 1.2rem;
-      border: none;
-      outline: none;
-      margin-bottom: 10px;
-    }
-    #overlay button {
-      padding: 8px 20px;
-      font-size: 1rem;
-      background: #66ffcc;
-      color: black;
-      border: none;
-      cursor: pointer;
     }
     .intro-logo {
       position: fixed;
       top: 30%;
       left: 50%;
       transform: translateX(-50%);
-      font-size: 3rem;
+      font-size: 4rem;
       color: #00ffcc;
       animation: flicker 4s ease-in-out;
       z-index: 10;
+      text-shadow: 0 0 10px #00ffcc;
     }
     @keyframes flicker {
-      0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
-        opacity: 1;
-      }
-      20%, 22%, 24%, 55% {
-        opacity: 0;
-      }
+      0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; }
+      20%, 22%, 24%, 55% { opacity: 0; }
+    }
+    .title-assemble {
+      position: fixed;
+      top: 60%;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 2rem;
+      color: #66ffcc;
+      text-shadow: 0 0 10px #00ffcc;
+      z-index: 11;
+      animation: assemble 5s ease-in-out;
+    }
+    @keyframes assemble {
+      from { opacity: 0; letter-spacing: 5em; }
+      to { opacity: 1; letter-spacing: normal; }
     }
     .countdown {
       position: fixed;
@@ -73,102 +58,11 @@
   </style>
 </head>
 <body class="signal-loss">
-  <div id="overlay">
-    <input type="password" id="accessCode" placeholder="Zadej přístupový kód" />
-    <button onclick="validateCode()">Vstoupit</button>
-  </div>
-
-  <div class="intro-logo" id="introLogo">BudAA</div>
+  <div class="intro-logo">BudAA</div>
+  <div class="title-assemble">SkyTel Montage</div>
   <div class="countdown" id="countdown"></div>
 
-  <div class="matrix" style="display:none">
-    <canvas id="matrixCanvas"></canvas>
-    <div class="message">
-      <h1 id="title">Stránka je ve výstavbě...</h1>
-      <p id="subtitle">Možná někde lezu po stožáru. Přijď později 💻🧗‍♂️</p>
-    </div>
-    <div class="lang-switcher">
-      <select onchange="changeLang(this.value)">
-        <option value="cs">Čeština</option>
-        <option value="en">English</option>
-        <option value="de">Deutsch</option>
-        <option value="tlh">Klingon</option>
-      </select>
-    </div>
-    <div class="controls">
-      <button onclick="playMusic('bg2.mp3')">▶️</button>
-      <button onclick="stopMusic()">⏹️</button>
-    </div>
-    <div class="joke-box" id="jokeBox"></div>
-    <div class="trademark">&copy; SkyTel Montage™ – Vytvořil BudAA</div>
-  </div>
-
   <script>
-    const validCode = "Skytel2025";
-    function validateCode() {
-      const input = document.getElementById("accessCode").value;
-      if (input === validCode) {
-        document.getElementById("overlay").style.display = "none";
-        document.querySelector(".matrix").style.display = "block";
-        startMatrix();
-      } else {
-        alert("Neplatný přístupový kód.");
-      }
-    }
-
-    function startMatrix() {
-      const canvas = document.getElementById("matrixCanvas");
-      const ctx = canvas.getContext("2d");
-      canvas.height = window.innerHeight;
-      canvas.width = window.innerWidth;
-      const letters = "01BUDaa";
-      const fontSize = 14;
-      const columns = canvas.width / fontSize;
-      const drops = Array.from({ length: columns }).fill(1);
-      let hue = 0;
-      function draw() {
-        ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = `hsl(${hue}, 100%, 60%)`;
-        ctx.font = fontSize + "px monospace";
-        hue = (hue + 1) % 360;
-        drops.forEach((y, i) => {
-          const text = letters.charAt(Math.floor(Math.random() * letters.length));
-          const x = i * fontSize;
-          ctx.fillText(text, x, y * fontSize);
-          if (y * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
-          drops[i]++;
-        });
-      }
-      setInterval(draw, 33);
-    }
-
-    const langs = {
-      cs: ["Stránka je ve výstavbě...", "Možná někde lezu po stožáru. Přijď později 💻🧗‍♂️"],
-      en: ["This page is under construction...", "I might be climbing a tower right now. Come back later 💻🧗‍♂️"],
-      de: ["Diese Seite befindet sich im Aufbau...", "Vielleicht klettere ich gerade auf einen Mast. Komm später wieder 💻🧗‍♂️"],
-      tlh: ["Dochmey chu' SuvwI' ghoS...", "toQDuj vIlegh, yIchegh! 💻🧗‍♂️"]
-    };
-
-    function changeLang(lang) {
-      document.getElementById("title").innerText = langs[lang][0];
-      document.getElementById("subtitle").innerText = langs[lang][1];
-    }
-
-    function playMusic(file) {
-      stopMusic();
-      const audio = new Audio(file);
-      audio.loop = true;
-      audio.volume = 0.4;
-      audio.play();
-    }
-    function stopMusic() {
-      if (audio) {
-        audio.pause();
-        audio.currentTime = 0;
-      }
-    }
-
     function updateCountdown() {
       const countEl = document.getElementById("countdown");
       const launchDate = new Date("2025-07-01T00:00:00").getTime();
