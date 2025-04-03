@@ -17,7 +17,7 @@
       background: black;
       color: #00ff88;
       font-family: 'Orbitron', sans-serif;
-      overflow: hidden;
+      overflow-x: hidden;
       text-align: center;
       text-shadow: 0 0 10px #00ff88;
     }
@@ -96,6 +96,15 @@
       cursor: pointer;
       font-family: 'Orbitron';
     }
+
+    .copyright {
+      background: rgba(0, 255, 136, 0.05);
+      border-top: 1px dashed #00ff88;
+      padding: 1rem;
+      font-size: 0.7rem;
+      margin-top: 3rem;
+      color: #00ff88;
+    }
   </style>
 </head>
 <body>
@@ -116,9 +125,10 @@
     <button onclick="setLang('klg')">Klingon 🖖</button>
   </nav>
 
-  <footer>
-    &copy; 2025 SkyTel Montage™ | All rights reserved | Trademark Registered
-  </footer>
+  <div class="copyright">
+    &copy; 2025 SkyTel Montage™ — All rights reserved.<br>
+    Registered Trademark | Protected content under international copyright law.
+  </div>
 
   <audio id="bg-music" preload="auto" loop>
     <source src="bg.mp3" type="audio/mpeg">
@@ -129,7 +139,7 @@
     const ctx = canvas.getContext("2d");
     canvas.height = window.innerHeight;
     canvas.width = window.innerWidth;
-    const matrixChars = ["0", "1", "BudAA", "SkyTel", "0101"];
+    const matrixChars = ["0", "1", "0", "1", "0", "1", "BudAA"];
     const fontSize = 16;
     const columns = canvas.width / fontSize;
     const drops = Array(Math.floor(columns)).fill(1);
@@ -140,7 +150,7 @@
       ctx.fillStyle = "#0f0";
       ctx.font = fontSize + "px Orbitron";
       drops.forEach((y, i) => {
-        const char = matrixChars[Math.floor(Math.random() * matrixChars.length)];
+        const char = Math.random() < 0.98 ? matrixChars[Math.floor(Math.random() * 6)] : "BudAA";
         ctx.fillText(char, i * fontSize, y * fontSize);
         drops[i] = y * fontSize > canvas.height && Math.random() > 0.975 ? 0 : y + 1;
       });
@@ -156,18 +166,30 @@
     const jokes = {
       en: [
         "Why do programmers prefer dark mode? Because light attracts bugs.",
-        "A SQL query walks into a bar and sees two tables. It asks: 'Can I join you?'",
-        "There are only 10 kinds of people in this world: those who understand binary and those who don't."
+        "There are 10 types of people in the world: those who understand binary and those who don't.",
+        "I would tell you a joke about UDP... but you might not get it.",
+        "A SQL query walks into a bar, walks up to two tables and asks: 'Can I join you?'",
+        "To understand recursion, you must first understand recursion.",
+        "Why was the JavaScript developer sad? Because he didn't Node how to Express himself.",
+        "What's a programmer's favorite hangout place? The Foo Bar.",
+        "Why did the developer go broke? Because he used up all his cache.",
+        "There’s no place like 127.0.0.1.",
+        "Chuck Norris doesn’t do push-ups. He pushes the Earth down."
       ],
       cz: [
-        "Proč programátoři nosí brýle? Protože nemůžou C#.",
-        "Kolik programátorů je potřeba na výměnu žárovky? Žádný, to je hardwarový problém.",
-        "Chyba 404: Vtip nenalezen. Zkus to znovu."
+        "Proč programátoři milují tmu? Protože světlo přitahuje chyby.",
+        "Existují dva typy lidí: ti, co chápou binární systém, a ti ostatní.",
+        "Řeknu ti vtip o UDP... ale možná ti nepřijde.",
+        "SQL dotaz přijde do baru a řekne: 'Můžu se připojit?'",
+        "Chceš pochopit rekurzi? Nejdřív pochop rekurzi.",
+        "Proč byl JavaScript programátor smutný? Protože nevěděl, jak se Express-it.",
+        "Nejlepší hospoda programátora? FooBar.",
+        "Proč programátor zkrachoval? Protože mu došel cache.",
+        "Není nad domácí síť 127.0.0.1.",
+        "Chuck Norris neprogramuje. On přepisuje realitu."
       ],
       klg: [
-        "bIjatlh 'e' yImev! (Silence! A programmer debugs.)",
-        "Qo'noS debugger never crashes. User does.",
-        "Real warriors don’t code... they command!"
+        "bIjatlh 'e' yImev! SuvwI'vam Qapchu'." // jediný joke v čisté klingonštině
       ]
     };
 
@@ -178,6 +200,7 @@
     }
 
     function setLang(lang) {
+      document.documentElement.lang = lang === 'cz' ? 'cs' : lang;
       showJoke(lang);
     }
 
