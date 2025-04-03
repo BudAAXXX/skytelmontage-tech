@@ -22,10 +22,11 @@
       text-shadow: 0 0 10px #00ff88;
     }
 
-    h1 {
+    #main-title {
       font-size: 4rem;
       margin-top: 10vh;
-      animation: glow 2s infinite ease-in-out;
+      animation: redPulse 2s infinite;
+      letter-spacing: 0.1em;
     }
 
     .joke, .virus-animation, .notice, .lang-switcher {
@@ -83,11 +84,6 @@
       50% { box-shadow: 0 0 20px #ff0, 0 0 40px #0f0; }
     }
 
-    @keyframes glow {
-      0%, 100% { opacity: 0.8; }
-      50% { opacity: 1; text-shadow: 0 0 20px #00ff88; }
-    }
-
     @keyframes redPulse {
       0%, 100% { color: #ff0000; text-shadow: 0 0 5px #ff0000; }
       50% { color: #990000; text-shadow: 0 0 10px #ff0000; }
@@ -107,7 +103,7 @@
       margin-top: 2rem;
       display: flex;
       justify-content: center;
-      gap: 1rem;
+      gap: 0.5rem;
       animation: redPulse 2s infinite;
     }
 
@@ -116,16 +112,31 @@
       border: none;
       color: #ff0000;
       font-weight: bold;
-      padding: 0.4rem 0.8rem;
-      font-size: 1rem;
+      padding: 0.3rem 0.6rem;
+      font-size: 0.9rem;
       cursor: pointer;
       font-family: 'Orbitron';
+      text-shadow: 0 0 5px #ff0000;
+    }
+
+    .music-credit {
+      position: fixed;
+      bottom: 1.2rem;
+      right: 1rem;
+      font-size: 0.45rem;
+      color: #111;
+      background: rgba(255, 0, 0, 0.02);
+      padding: 0.2rem 0.5rem;
+      border-radius: 5px;
+      font-style: italic;
+      pointer-events: none;
+      user-select: none;
     }
   </style>
 </head>
 <body>
   <canvas id="matrix"></canvas>
-  <h1 id="main-title">SkyTelMontage.tech</h1>
+  <h1 id="main-title"></h1>
   <p class="joke" id="joke">Loading intergalactic humour...</p>
   <div class="virus-animation" id="virusBox"></div>
   <div class="notice" id="notice-text">
@@ -142,6 +153,9 @@
   <footer>
     &copy; 2025 SkyTel Montage™ — All rights reserved.
   </footer>
+  <div class="music-credit">
+    🎵 Music: "Free" by Play House (FMA) • CC BY 4.0
+  </div>
   <audio id="bg-music" preload="auto" loop>
     <source src="bg.mp3" type="audio/mpeg">
   </audio>
@@ -216,9 +230,33 @@
       alert(isMobile ? msg.replace('PC', 'phone') : msg);
     });
 
+    // Typewriter spinning letters
+    const title = "SkyTelMontage.tech";
+    const titleEl = document.getElementById("main-title");
+    let typed = "";
+    let index = 0;
+    function animateTitle() {
+      if (index < title.length) {
+        const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        let spinCount = 0;
+        const spinInterval = setInterval(() => {
+          const randomChar = chars[Math.floor(Math.random() * chars.length)];
+          titleEl.innerHTML = typed + randomChar;
+          spinCount++;
+          if (spinCount > 5) {
+            clearInterval(spinInterval);
+            typed += title[index];
+            titleEl.innerHTML = typed;
+            index++;
+            setTimeout(animateTitle, 80);
+          }
+        }, 30);
+      }
+    }
     window.onload = () => {
       setLang('en');
       showJoke();
+      animateTitle();
     }
   </script>
 </body>
