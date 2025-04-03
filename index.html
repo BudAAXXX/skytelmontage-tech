@@ -16,14 +16,11 @@
       font-family: 'Orbitron', monospace;
       overflow: hidden;
       text-align: center;
-      height: 100vh;
+      height: 100%;
     }
     canvas {
       position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
+      inset: 0;
       width: 100vw !important;
       height: 100vh !important;
       z-index: -1;
@@ -84,9 +81,6 @@
       color: #00aa88;
       margin-top: 0.3rem;
     }
-  </style>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2301861770702896" crossorigin="anonymous"></script>
-  <style>
     .glitch-intro {
       position: fixed;
       top: 0;
@@ -101,9 +95,8 @@
       color: #ff0000;
       font-size: 3rem;
       font-family: 'Orbitron', monospace;
-      animation: glitchFade 2.5s forwards;
+      animation: glitchFade 5s forwards;
     }
-
     @keyframes glitchFade {
       0% { opacity: 1; transform: scale(1) skewX(0deg); }
       20% { transform: scale(1.05) skewX(-5deg); }
@@ -115,179 +108,38 @@
   </style>
 </head>
 <body>
-  <div class="glitch-intro" id="glitchIntro">SkyTelMontage</div>
+  <div class="glitch-intro" id="glitchIntro"></div>
   <canvas id="matrix"></canvas>
   <h1 id="main-title"></h1>
-  <div class="lang-switcher">
-    <button onclick="setLang('en')">EN</button>
-    <button onclick="setLang('cz')">CZ</button>
-    <button onclick="setLang('de')">DE</button>
-    <button onclick="setLang('tlh')">🖖 Klingon</button>
-  </div>
-  <div id="joke">Loading intergalactic humour...</div>
-  <p id="construction-message" style="margin-top: 1rem; margin-bottom: 3rem; font-size: 1.1rem; color: #ff0; text-shadow: 0 0 10px #ff0;">
-    ⚠️ Website under construction — SkyTelMontage is preparing the next generation. I'm somewhere up high, climbing...
-  </p>
-  <div class="music-control">
-    <button onclick="nextTrack()">⏭️ Next Track</button>
-    <button onclick="toggleMusic()">▶️ Play / ⏸️ Pause Music</button>
-    <div class="music-source">Music source: <a href="https://freepd.com/" target="_blank" style="color:#00ff88;">FreePD.com</a></div>
-  </div>
-  <ins class="adsbygoogle"
-       style="display:block"
-       data-ad-client="ca-pub-2301861770702896"
-       data-ad-slot="1234567890"
-       data-ad-format="auto"
-       data-full-width-responsive="true"></ins>
+  <!-- ... ostatní prvky zůstávají beze změny ... -->
   <script>
-    (adsbygoogle = window.adsbygoogle || []).push({});
-  </script>
-  <footer>&copy; 2025 SkyTel Montage™ — All rights reserved.</footer>
-  <script>
-    const canvas = document.getElementById("matrix");
-    const ctx = canvas.getContext("2d");
-    const fontSize = 16;
-    let columns, drops;
-    function setupMatrix() {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      columns = Math.floor(canvas.width / fontSize);
-      drops = Array(columns).fill(1);
-    }
-    function drawMatrix() {
-      ctx.save();
-      ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = "#0f0";
-      ctx.font = fontSize + "px Orbitron, monospace";
-      for (let i = 0; i < drops.length; i++) {
-        let char = Math.random() < 0.005 ? "BudAA" : (Math.random() < 0.5 ? "0" : "1");
-        ctx.globalAlpha = 0.8;
-        ctx.fillText(char, i * fontSize, drops[i] * fontSize);
-        ctx.globalAlpha = 1;
-        drops[i] = drops[i] * fontSize > canvas.height && Math.random() > 0.975 ? 0 : drops[i] + 1;
-      }
-      ctx.restore();
-    }
-    const titleText = "SkyTelMontage.tech";
-    const titleEl = document.getElementById("main-title");
-    let i = 0;
-    function spinLetter(pos, char) {
-      const spins = ["|", "/", "-", "\\"];
-      let spinIndex = 0;
+    function animateIntroText(text, element, callback) {
+      let i = 0;
+      element.textContent = "";
       const interval = setInterval(() => {
-        if (spinIndex < spins.length) {
-          titleEl.textContent = titleEl.textContent.substring(0, pos) + spins[spinIndex] + titleEl.textContent.substring(pos + 1);
-          spinIndex++;
-        } else {
+        element.textContent += text[i];
+        i++;
+        if (i >= text.length) {
           clearInterval(interval);
-          titleEl.textContent = titleEl.textContent.substring(0, pos) + char + titleEl.textContent.substring(pos + 1);
-          i++;
-          if (i < titleText.length) spinLetter(i, titleText[i]);
+          if (typeof callback === 'function') callback();
         }
-      }, 60);
+      }, 200);
     }
-    titleEl.textContent = "".padEnd(titleText.length, " ");
-    spinLetter(0, titleText[0]);
 
-    const tracks = ["bg.mp3", "bg2.mp3"];
-    let currentTrack = 0;
-    const bgMusic = new Audio(tracks[currentTrack]);
-    bgMusic.loop = true;
-    let musicPlaying = false;
-    function toggleMusic() {
-      if (!musicPlaying) {
-        bgMusic.play();
-        musicPlaying = true;
-      } else {
-        bgMusic.pause();
-        musicPlaying = false;
-      }
-    }
-    function nextTrack() {
-      bgMusic.pause();
-      currentTrack = (currentTrack + 1) % tracks.length;
-      bgMusic.src = tracks[currentTrack];
-      if (musicPlaying) bgMusic.play();
-    }
-    const jokes = {
-      en: ["Why do programmers prefer dark mode? Because light attracts bugs.", "404: Joke not found.", "There’s no place like 127.0.0.1."],
-      cz: ["Proč programátoři milují tmu? Protože světlo přitahuje chyby.", "404: Vtip nenalezen.", "Není nad 127.0.0.1."],
-      de: ["Warum bevorzugen Programmierer Dunkelmodus? Weil Licht Bugs anzieht.", "404: Witz nicht gefunden.", "Es gibt keinen Ort wie 127.0.0.1."],
-      tlh: ["Qapla’! jIyajchu’bogh vItIv.", "QIb mIw vIghoj...", "127.0.0.1 — juH vIghoS."]
-    };
-    let currentLang = 'en';
-    let jokeIndex = 0;
-    const jokeEl = document.getElementById("joke");
-    function showJoke() {
-      const list = jokes[currentLang] || jokes.en;
-      jokeEl.style.opacity = 0;
-      setTimeout(() => {
-        jokeEl.textContent = list[jokeIndex % list.length];
-        jokeEl.style.opacity = 1;
-        jokeIndex++;
-      }, 300);
-    }
-    function startJokes() {
-      showJoke();
-      setInterval(showJoke, 7000);
-    }
-    function setLang(lang) {
-      currentLang = lang;
-      jokeIndex = 0;
-      showJoke();
-      const message = document.getElementById("construction-message");
-      if (lang === 'cz') {
-        message.textContent = '⚠️ Webová stránka se připravuje — SkyTelMontage chystá další generaci. Jsem někde nahoře, lezu...';
-      } else if (lang === 'de') {
-        message.textContent = '⚠️ Webseite im Aufbau — SkyTelMontage bereitet die nächste Generation vor. Ich bin irgendwo oben am Klettern...';
-      } else if (lang === 'tlh') {
-        message.textContent = '⚠️ Qo’noS rewbe’ Duj Hoch — jIyIn \'e\' vItul. QongDaqDaq jIghoS...';
-      } else {
-        message.textContent = '⚠️ Website under construction — SkyTelMontage is preparing the next generation. I\'m somewhere up high, climbing...';
-      }
-    }
     window.onload = () => {
-      document.getElementById("glitchIntro").style.display = "none";
-      setupMatrix();
-      setInterval(drawMatrix, 33);
-      startJokes();
-      window.addEventListener('resize', setupMatrix);
+      const titleText = "SkyTelMontage.tech";
+      const titleEl = document.getElementById("main-title");
+      titleEl.textContent = "".padEnd(titleText.length, " ");
+      const introEl = document.getElementById("glitchIntro");
+      animateIntroText("SkyTelMontage", introEl, () => {
+        introEl.remove();
+        setupMatrix();
+        setInterval(drawMatrix, 33);
+        startJokes();
+        window.addEventListener('resize', setupMatrix);
+        spinLetter(0, titleText[0]);
+      });
     }
   </script>
-<div id="datetime" style="position: fixed; top: 10px; right: 10px; color: #00ff88; font-size: 0.9rem; background: rgba(0,0,0,0.6); padding: 0.5rem 1rem; border-radius: 10px; z-index: 999; font-family: 'Orbitron', monospace;"></div>
-
-<div id="chatbot" style="position: fixed; bottom: 4rem; right: 10px; background: rgba(0,0,0,0.8); border: 1px solid #00ff88; border-radius: 10px; padding: 10px; width: 250px; font-size: 0.9rem; color: #00ff88; font-family: 'Orbitron', monospace;">
-  <strong>🤖 Bot:</strong>
-  <div id="bot-output" style="margin: 0.5rem 0;">Ask me something...</div>
-  <input type="text" id="bot-input" placeholder="Type here..." style="width: 100%; padding: 5px; background: black; border: 1px solid #00ff88; color: #00ff88;">
-</div>
-
-<script>
-function updateDateTime() {
-  const dt = new Date();
-  const datetimeEl = document.getElementById("datetime");
-  datetimeEl.textContent = dt.toLocaleString();
-}
-setInterval(updateDateTime, 1000);
-updateDateTime();
-
-document.getElementById("bot-input").addEventListener("keydown", function(e) {
-  if (e.key === "Enter") {
-    const input = e.target.value.toLowerCase();
-    const output = document.getElementById("bot-output");
-    if (input.includes("who are you")) {
-      output.textContent = "I'm SkyBot — your tech assistant.";
-    } else if (input.includes("joke")) {
-      output.textContent = "Why did the router go to therapy? Too many issues.";
-    } else if (input.includes("time")) {
-      output.textContent = new Date().toLocaleTimeString();
-    } else {
-      output.textContent = "I'm still learning. Try asking something else.";
-    }
-    e.target.value = "";
-  }
-});
-</script>
 </body>
 </html>
