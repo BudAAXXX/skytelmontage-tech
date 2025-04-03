@@ -55,17 +55,21 @@
       z-index: 10;
     }
     .joke-box {
-      position: fixed;
-      bottom: 50px;
-      right: 10px;
-      background: rgba(0,0,0,0.5);
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(0,0,0,0.6);
       color: #66ffcc;
-      font-size: 0.7rem;
-      padding: 5px 10px;
+      font-size: 0.9rem;
+      padding: 10px 20px;
       border: 1px solid #66ffcc;
-      border-radius: 5px;
-      max-width: 240px;
-      z-index: 10;
+      border-radius: 8px;
+      max-width: 400px;
+      text-align: center;
+      z-index: 9;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
     }
   </style>
 </head>
@@ -107,22 +111,43 @@
     const audio = new Audio("bg2.mp3");
     setTimeout(() => { audio.loop = true; audio.volume = 0.3; audio.play(); }, 6000);
 
-    const jokes = { /* zkráceno pro přehlednost – obsahuje všech 20 vtipů pro každý jazyk */ };
+    const jokes = {
+      cs: ["Vtip 1 CZ", "Vtip 2 CZ", "Vtip 3 CZ"],
+      de: ["Witz 1 DE", "Witz 2 DE", "Witz 3 DE"],
+      en: ["Joke 1 EN", "Joke 2 EN", "Joke 3 EN"],
+      tlh: ["tlh 1", "tlh 2", "tlh 3"]
+    };
+
+    let currentLang = "cs";
+    const title = document.getElementById("mainTitle");
+    const jokeBox = document.getElementById("jokeBox");
 
     function changeLang(lang) {
-      const title = document.getElementById("mainTitle");
-      const jokeBox = document.getElementById("jokeBox");
-      const j = jokes[lang];
-      const rand = j[Math.floor(Math.random() * j.length)];
+      currentLang = lang;
       title.textContent = {
         cs: "Probíhá přestavba systému... V tuto chvíli jsme ve výškách 🧗‍♂️",
         de: "Systemumbau läuft... Wir arbeiten gerade in der Höhe 🧗‍♂️",
         en: "System under reconstruction... Currently working at height 🧗‍♂️",
         tlh: "QumwI' ghoS... QongmeH SuvwI' DungDaq 🧗‍♂️"
       }[lang];
-      jokeBox.textContent = rand;
     }
+
     changeLang("cs");
+
+    setTimeout(() => {
+      jokeBox.style.opacity = 1;
+      showJokes();
+    }, 7000);
+
+    function showJokes() {
+      const langJokes = jokes[currentLang];
+      let index = 0;
+      jokeBox.textContent = langJokes[index];
+      setInterval(() => {
+        index = (index + 1) % langJokes.length;
+        jokeBox.textContent = langJokes[index];
+      }, 10000);
+    }
   </script>
 </body>
 </html>
