@@ -21,7 +21,7 @@
 
     #main-title {
       font-size: clamp(24px, 8vw, 60px);
-      margin-top: 10vh;
+      margin-top: 120px;
       animation: redPulse 2s infinite;
     }
 
@@ -141,6 +141,7 @@
     <button onclick="setLang('en')">EN</button>
     <button onclick="setLang('cz')">CZ</button>
     <button onclick="setLang('de')">DE</button>
+    <button onclick="setLang('tlh')">🖖 Klingon</button>
   </div>
   <p id="joke">Loading intergalactic humour...</p>
   <div class="virus-animation" id="virusBox"></div>
@@ -168,7 +169,14 @@
         drops[i] = y * fontSize > canvas.height && Math.random() > 0.975 ? 0 : y + 1;
       });
     }
-    setInterval(drawMatrix, 33);
+    // Matrix effect starts after click
+    let matrixStarted = false;
+    function startMatrix() {
+      if (!matrixStarted) {
+        setInterval(drawMatrix, 33);
+        matrixStarted = true;
+      }
+    }
 
     const music = document.getElementById('bg-music');
     const credit = document.getElementById('musicCredit');
@@ -180,6 +188,7 @@
     let currentTrack = 0;
 
     document.addEventListener('click', () => {
+      startMatrix();
       music.src = tracks[currentTrack].src;
       music.play().then(() => {
         credit.textContent = 'Source: FreePD.com';
@@ -220,16 +229,52 @@
 
     const jokes = {
       en: [
-        "Why do programmers prefer dark mode? Because light attracts bugs.",
-        "There are only 10 types of people: those who understand binary and those who don't."
+        "Why do Java developers wear glasses? Because they can't C#.",
+        "To understand what recursion is, you must first understand recursion.",
+        "Real programmers count from 0.",
+        "404: Joke not found.",
+        "There’s no place like 127.0.0.1.",
+        "I changed my password to 'incorrect'. So when I forget it, the computer will say, 'Your password is incorrect.'",
+        "Why did the developer go broke? Because he used up all his cache.",
+        "I would tell you a UDP joke, but you might not get it.",
+        "Chuck Norris doesn't need to debug. His code is always right.",
+        "Why did the programmer quit his job? Because he didn't get arrays."
       ],
       cz: [
-        "Proč programátoři milují tmu? Protože světlo přitahuje chyby.",
-        "Existují jen 2 typy lidí: ti co chápou binárně a ti co ne."
+        "Proč Java vývojáři nosí brýle? Protože nevidí #C.",
+        "Abys pochopil rekurzi, musíš nejdřív pochopit rekurzi.",
+        "Skuteční programátoři počítají od nuly.",
+        "404: Vtip nenalezen.",
+        "Není nad 127.0.0.1.",
+        "Změnil jsem si heslo na 'nesprávné'. Když ho zapomenu, počítač mi řekne: 'Vaše heslo je nesprávné.'",
+        "Proč programátor zkrachoval? Protože vyčerpal všechen svůj cache.",
+        "Řekl bych ti UDP vtip, ale možná ho nedostaneš.",
+        "Chuck Norris nemusí ladit. Jeho kód je vždy správně.",
+        "Proč programátor opustil práci? Protože nedostal pole (arrays)."
       ],
       de: [
-        "Warum bevorzugen Programmierer Dunkelmodus? Weil Licht Bugs anzieht.",
-        "Es gibt nur 10 Arten von Menschen: Die, die Binär verstehen, und die anderen."
+        "Warum tragen Java-Entwickler Brillen? Weil sie C# nicht sehen können.",
+        "Um Rekursion zu verstehen, musst du zuerst Rekursion verstehen.",
+        "Echte Programmierer zählen ab 0.",
+        "404: Witz nicht gefunden.",
+        "Es gibt keinen Ort wie 127.0.0.1.",
+        "Ich habe mein Passwort auf 'falsch' geändert. Wenn ich es vergesse, sagt der Computer: 'Ihr Passwort ist falsch.'",
+        "Warum ging der Entwickler pleite? Weil er seinen gesamten Cache verbraucht hat.",
+        "Ich würde dir einen UDP-Witz erzählen, aber du bekommst ihn vielleicht nicht.",
+        "Chuck Norris muss nicht debuggen. Sein Code ist immer richtig.",
+        "Warum kündigte der Programmierer? Weil er keine Arrays bekam."
+      ],
+      tlh: [
+        "Qapla’! jIyajchu’bogh vItIv.",
+        "tlhIngan Hol vIghoj, vaj Quch jIH!",
+        "yIntagh code DaQoy'bej!",
+        "vItlhutlh 'e' vIneH – vaj jIyweS.",
+        "Binary jIyaj: wa' pagh wa' pagh.",
+        "'e' Qaghbe' Qel!",
+        "Dujvam lughbe' law' Hoch lugh.",
+        "HIqmey bIr Qel, Qapla' ghajbogh.",
+        "'ejyo' De'wI' He' Dalo'chugh, He' Qaghbe'.",
+        "QIbHeS 'oH programming'e' – vaj DaqaH Qun!"
       ]
     };
 
@@ -240,11 +285,19 @@
     function startJokeCycle(lang = 'en') {
       const jokeEl = document.getElementById("joke");
       const jokeList = jokes[lang] || jokes['en'];
-      jokeEl.textContent = jokeList[currentJokeIndex];
+      jokeEl.style.opacity = 0;
+        setTimeout(() => {
+          jokeEl.textContent = jokeList[currentJokeIndex];
+          jokeEl.style.opacity = 1;
+        }, 300);
       currentJokeIndex = (currentJokeIndex + 1) % jokeList.length;
       jokeInterval = setInterval(() => {
+        jokeEl.style.opacity = 0;
+      setTimeout(() => {
         jokeEl.textContent = jokeList[currentJokeIndex];
-        currentJokeIndex = (currentJokeIndex + 1) % jokeList.length;
+        jokeEl.style.opacity = 1;
+      }, 300);
+      currentJokeIndex = (currentJokeIndex + 1) % jokeList.length;
       }, 10000);
     }
 
