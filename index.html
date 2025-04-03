@@ -28,7 +28,7 @@
       animation: glow 2s infinite ease-in-out;
     }
 
-    p {
+    .joke {
       font-size: 1.4rem;
       margin: 1rem auto;
       max-width: 80%;
@@ -39,7 +39,7 @@
       border: 1px dashed #ff0;
     }
 
-    .notice {
+    .notice, nav {
       display: inline-block;
       padding: 1rem 2rem;
       border: 2px dashed #00ff88;
@@ -86,14 +86,22 @@
       font-size: 0.6rem;
       color: #00885a;
     }
+
+    .lang-switcher button {
+      background: transparent;
+      border: 1px dashed #00ff88;
+      color: #00ff88;
+      margin: 0.5rem;
+      padding: 0.3rem 0.6rem;
+      cursor: pointer;
+      font-family: 'Orbitron';
+    }
   </style>
 </head>
 <body>
   <canvas id="matrix"></canvas>
-
-  <h1>!! SYSTEM BREACH !!</h1>
-  <p id="joke">Loading joke...</p>
-
+  <h1>SkyTelMontage.tech</h1>
+  <p class="joke" id="joke">Loading intergalactic humour...</p>
   <div class="virus-animation"></div>
 
   <div class="notice">
@@ -102,13 +110,18 @@
     <small>Connecting to the Matrix...</small>
   </div>
 
+  <nav class="lang-switcher">
+    <button onclick="setLang('en')">English</button>
+    <button onclick="setLang('cz')">Čeština</button>
+    <button onclick="setLang('klg')">Klingon 🖖</button>
+  </nav>
+
   <footer>
-    &copy; 2025 | English • Deutsch • 中文 • Klingon 🖖
+    &copy; 2025 SkyTel Montage™ | All rights reserved | Trademark Registered
   </footer>
 
   <audio id="bg-music" preload="auto" loop>
     <source src="bg.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
   </audio>
 
   <script>
@@ -116,8 +129,7 @@
     const ctx = canvas.getContext("2d");
     canvas.height = window.innerHeight;
     canvas.width = window.innerWidth;
-
-    const matrixChars = ["0", "1", "0", "1", "0", "1", "BudAA"];
+    const matrixChars = ["0", "1", "BudAA", "SkyTel", "0101"];
     const fontSize = 16;
     const columns = canvas.width / fontSize;
     const drops = Array(Math.floor(columns)).fill(1);
@@ -128,55 +140,48 @@
       ctx.fillStyle = "#0f0";
       ctx.font = fontSize + "px Orbitron";
       drops.forEach((y, i) => {
-        const char = Math.random() < 0.98
-          ? matrixChars[Math.floor(Math.random() * 6)] // mostly 0/1
-          : "BudAA";
+        const char = matrixChars[Math.floor(Math.random() * matrixChars.length)];
         ctx.fillText(char, i * fontSize, y * fontSize);
         drops[i] = y * fontSize > canvas.height && Math.random() > 0.975 ? 0 : y + 1;
       });
     }
-
     setInterval(drawMatrix, 33);
 
     const music = document.getElementById('bg-music');
     document.addEventListener('click', () => {
       music.volume = 0.7;
       music.play().catch(err => console.warn('Autoplay error:', err));
-      document.body.style.background = "radial-gradient(circle, #000 0%, #002b00 100%)";
-      showJoke();
     });
 
-    let input = '';
-    const konami = '38384040373937396665';
-    document.addEventListener('keydown', (e) => {
-      input += e.keyCode;
-      if (input.includes(konami)) {
-        document.body.style.filter = 'invert(1) hue-rotate(180deg)';
-        alert('You have unlocked the glitch dimension!');
-      }
-      if (input.length > 20) input = input.slice(-20);
-    });
+    const jokes = {
+      en: [
+        "Why do programmers prefer dark mode? Because light attracts bugs.",
+        "A SQL query walks into a bar and sees two tables. It asks: 'Can I join you?'",
+        "There are only 10 kinds of people in this world: those who understand binary and those who don't."
+      ],
+      cz: [
+        "Proč programátoři nosí brýle? Protože nemůžou C#.",
+        "Kolik programátorů je potřeba na výměnu žárovky? Žádný, to je hardwarový problém.",
+        "Chyba 404: Vtip nenalezen. Zkus to znovu."
+      ],
+      klg: [
+        "bIjatlh 'e' yImev! (Silence! A programmer debugs.)",
+        "Qo'noS debugger never crashes. User does.",
+        "Real warriors don’t code... they command!"
+      ]
+    };
 
-    const jokes = [
-      "Warum ging der Programmierer nicht ins Kino? Weil er auf den JavaScript gewartet hat.",
-      "Ein Bit trifft ein anderes Bit. Sagt das eine: 'Na, auch schon wieder gesetzt?'",
-      "Warum mögen Java-Entwickler keinen Kaffee? Sie haben schon genug Exceptions.",
-      "Ein TCP-Paket kommt in eine Bar. 'Hallo, darf ich bestellen?', 'Hallo, darf ich bestellen?', 'Hallo...'",
-      "Chuck Norris counted to infinity. Twice. (Aber nur auf Assembly.)",
-      "Der kürzeste Horrorfilm für ITler: 'Kein Backup vorhanden.'",
-      "Warum weint der Server? Weil er überlastet ist!",
-      "Ich hatte ein Problem. Dann habe ich ein Regex benutzt. Jetzt habe ich zwei Probleme.",
-      "Wenn dein Code funktioniert, ohne dass du weißt warum – mach ein Backup!",
-      "404: Joke not found. Try again."
-    ];
-
-    function showJoke() {
+    function showJoke(lang = 'en') {
       const jokeEl = document.getElementById("joke");
-      const randomJoke = jokes[Math.floor(Math.random() * jokes.length)];
-      jokeEl.textContent = randomJoke;
+      const jokeList = jokes[lang] || jokes['en'];
+      jokeEl.textContent = jokeList[Math.floor(Math.random() * jokeList.length)];
     }
 
-    window.onload = showJoke;
+    function setLang(lang) {
+      showJoke(lang);
+    }
+
+    window.onload = () => showJoke();
   </script>
 </body>
 </html>
