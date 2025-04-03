@@ -197,12 +197,15 @@
           credit.textContent = 'Source: FreePD.com';
           credit.style.opacity = 1;
         });
+        clickCount++;
       } else if (clickCount < tracks.length) {
-        currentTrack = (currentTrack + 1) % tracks.length;
-        music.src = tracks[currentTrack].src;
+        currentTrack++;
+        music.src = tracks[currentTrack % tracks.length].src;
         music.play();
+        credit.textContent = 'Source: FreePD.com';
+        credit.style.opacity = 1;
+        clickCount++;
       }
-      clickCount++;
     });
       } else {
         currentTrack = (currentTrack + 1) % tracks.length;
