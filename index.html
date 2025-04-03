@@ -11,7 +11,7 @@
     html, body {
       margin: 0;
       padding: 0;
-      background: transparent;
+      background: black;
       color: #00ff88;
       font-family: 'Orbitron', monospace;
       overflow: hidden;
@@ -21,8 +21,8 @@
     canvas {
       position: fixed;
       inset: 0;
-      width: 100vw !important;
-      height: 100vh !important;
+      width: 100vw;
+      height: 100vh;
       z-index: -1;
       display: block;
       pointer-events: none;
@@ -31,7 +31,6 @@
       margin-top: 100px;
       font-size: clamp(32px, 8vw, 64px);
       animation: pulseRed 2s infinite;
-      white-space: pre;
     }
     @keyframes pulseRed {
       0%, 100% { color: #ff0000; text-shadow: 0 0 8px #ff0000; }
@@ -45,7 +44,6 @@
       padding: 1rem;
       border: 1px solid #00ff88;
       border-radius: 10px;
-      transition: opacity 0.8s ease-in-out;
     }
     .lang-switcher button {
       background: none;
@@ -66,53 +64,13 @@
       padding: 0.5rem;
       animation: pulseRed 2s infinite;
     }
-    .music-control {
-      margin-bottom: 5rem;
-    }
-    .music-control button {
-      background: #111;
-      color: #0f0;
-      border: 1px solid #0f0;
-      padding: 0.5rem 1rem;
-      cursor: pointer;
-    }
-    .music-source {
-      font-size: 0.7rem;
-      color: #00aa88;
-      margin-top: 0.3rem;
-    }
-    .glitch-intro {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: black;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 10000;
-      color: #ff0000;
-      font-size: 3rem;
-      font-family: 'Orbitron', monospace;
-      animation: glitchFade 5s forwards;
-    }
-    @keyframes glitchFade {
-      0% { opacity: 1; transform: scale(1) skewX(0deg); }
-      20% { transform: scale(1.05) skewX(-5deg); }
-      40% { transform: scale(0.95) skewX(5deg); }
-      60% { transform: scale(1.02) skewX(-3deg); }
-      80% { transform: scale(0.98) skewX(2deg); }
-      100% { opacity: 0; transform: scale(1) skewX(0deg); visibility: hidden; }
-    }
   </style>
 </head>
 <body>
-  
-  <canvas id="matrix"></canvas>
-  <h1 id="main-title"></h1>
-  <div id="joke">Loading intergalactic humour...</div>
-<p id="construction-message" style="margin-top: 1rem; margin-bottom: 3rem; font-size: 1.1rem; color: #ff0; text-shadow: 0 0 10px #ff0;">
+<canvas id="matrix"></canvas>
+<h1>SkyTelMontage.tech</h1>
+<div id="joke">Loading intergalactic humour...</div>
+<p style="margin-top: 1rem; margin-bottom: 3rem; font-size: 1.1rem; color: #ff0;">
   ⚠️ Website under construction — SkyTelMontage is preparing the next generation. I'm somewhere up high, climbing...
 </p>
 <div class="lang-switcher">
@@ -122,105 +80,33 @@
   <button onclick="setLang('tlh')">🖖 Klingon</button>
 </div>
 <footer>&copy; 2025 SkyTel Montage™ — All rights reserved.</footer>
-  <script>
-    function animateIntroText(text, element, callback) {
-      let i = 0;
-      element.textContent = "";
-      const interval = setInterval(() => {
-        element.textContent += text[i];
-        i++;
-        if (i >= text.length) {
-          clearInterval(interval);
-          if (typeof callback === 'function') callback();
-        }
-      }, 200);
-    }
-
-    window.onload = () => {
-      const titleText = "SkyTelMontage.tech";
-      const titleEl = document.getElementById("main-title");
-      titleEl.textContent = "".padEnd(titleText.length, " ");
-      
-        setupMatrix();
-        setInterval(drawMatrix, 33);
-        startJokes();
-        window.addEventListener('resize', setupMatrix);
-        spinLetter(0, titleText[0]);
-      });
-    }
-  </script>
-<div id="datetime" style="position: fixed; top: 10px; right: 10px; color: #00ff88; font-size: 0.9rem; background: rgba(0,0,0,0.6); padding: 0.5rem 1rem; border-radius: 10px; z-index: 999; font-family: 'Orbitron', monospace;"></div>
-
-<div id="chatbot" style="position: fixed; bottom: 4rem; right: 10px; background: rgba(0,0,0,0.8); border: 1px solid #00ff88; border-radius: 10px; padding: 10px; width: 250px; font-size: 0.9rem; color: #00ff88; font-family: 'Orbitron', monospace;">
-  <strong>🤖 Bot:</strong>
-  <div id="bot-output" style="margin: 0.5rem 0;">Ask me something...</div>
-  <input type="text" id="bot-input" placeholder="Type here..." style="width: 100%; padding: 5px; background: black; border: 1px solid #00ff88; color: #00ff88;">
-</div>
-
 <script>
-function updateDateTime() {
-  const dt = new Date();
-  const datetimeEl = document.getElementById("datetime");
-  if (datetimeEl) datetimeEl.textContent = dt.toLocaleString();
-}
-setInterval(updateDateTime, 1000);
-updateDateTime();
+const canvas = document.getElementById("matrix");
+const ctx = canvas.getContext("2d");
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
 
-document.getElementById("bot-input").addEventListener("keydown", function(e) {
-  if (e.key === "Enter") {
-    const input = e.target.value.toLowerCase();
-    const output = document.getElementById("bot-output");
-    let response = "";
-    const responses = {
-      en: {
-        who: "I'm SkyBot — your tech assistant.",
-        joke: "Why did the router go to therapy? Too many issues.",
-        time: new Date().toLocaleTimeString(),
-        matrix: "Also, have you tried turning reality off and on again?",
-        help: "Just type something like 'joke', 'time', or ask me who I am.",
-        sky: "You must mean SkyTel — the legend of the towers!",
-        default: "I'm still learning. Try asking something else."
-      },
-      cz: {
-        who: "Jsem SkyBot — tvůj technický pomocník.",
-        joke: "Proč šel router na terapii? Měl příliš mnoho problémů.",
-        time: new Date().toLocaleTimeString(),
-        matrix: "Zkusil jsi vypnout a zapnout realitu?",
-        help: "Zkus třeba 'vtip', 'čas', nebo se zeptej kdo jsem.",
-        sky: "Myslíš SkyTel — legendu stožárů!",
-        default: "Ještě se učím. Zkus se zeptat jinak."
-      },
-      de: {
-        who: "Ich bin SkyBot — dein Technik-Assistent.",
-        joke: "Warum ging der Router zur Therapie? Zu viele Probleme.",
-        time: new Date().toLocaleTimeString(),
-        matrix: "Hast du versucht, die Realität aus- und wieder einzuschalten?",
-        help: "Gib etwas wie 'witz', 'zeit' ein oder frag mich, wer ich bin.",
-        sky: "Du meinst bestimmt SkyTel — die Legende der Türme!",
-        default: "Ich lerne noch. Frag mich etwas anderes."
-      },
-      tlh: {
-        who: "jIH SkyBot — Qapchu’meH DuSaQ.",
-        joke: "Hoch router HeghDI’ Qel legh — chay’ law’.",
-        time: new Date().toLocaleTimeString(),
-        matrix: "ra’ghomquv yItogh ‘ej yIqaw.",
-        help: "vItlhutlh 'oHmeH 'oH pong 'joke', 'time' pagh 'who'.",
-        sky: "SkyTel — SuvwI’ naQmey!",
-        default: "jIyajbe’. chaq bIyajchu’."
-      }
-    };
-    const langSet = responses[currentLang] || responses.en;
-    if (input.includes("who")) response = langSet.who;
-    else if (input.includes("joke")) response = langSet.joke;
-    else if (input.includes("time")) response = langSet.time;
-    else if (input.includes("matrix")) response = langSet.matrix;
-    else if (input.includes("help")) response = langSet.help;
-    else if (input.includes("sky") || input.includes("tel")) response = langSet.sky;
-    else response = langSet.default;
+const chars = ["0", "1", "BudAA"];
+const fontSize = 16;
+const columns = Math.floor(canvas.width / fontSize);
+const drops = Array(columns).fill(1);
 
-    output.textContent = response;
-    e.target.value = "";
+function drawMatrix() {
+  ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = "#0f0";
+  ctx.font = fontSize + "px Orbitron";
+  for (let i = 0; i < drops.length; i++) {
+    const text = Math.random() < 0.01 ? "BudAA" : chars[Math.floor(Math.random() * 2)];
+    ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+    if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+    drops[i]++;
   }
+}
+setInterval(drawMatrix, 33);
+window.addEventListener('resize', () => {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
 });
 </script>
 </body>
