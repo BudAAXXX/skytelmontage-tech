@@ -13,64 +13,75 @@
       font-family: 'Roboto Mono', monospace;
       overflow: hidden;
     }
-    .matrix {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      background: black;
-      overflow: hidden;
+    #overlay {
+      position: fixed;
+      z-index: 999;
+      background: rgba(0,0,0,0.95);
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
     }
-    canvas {
-      display: block;
-    }
-    .message {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      text-align: center;
-      z-index: 10;
-    }
-    .message h1 {
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-    }
-    .message p {
+    #overlay input {
+      padding: 10px;
       font-size: 1.2rem;
+      border: none;
+      outline: none;
+      margin-bottom: 10px;
     }
-    .lang-switcher {
-      position: fixed;
-      top: 10px;
-      left: 10px;
-      z-index: 20;
-    }
-    .controls {
-      position: fixed;
-      top: 10px;
-      right: 10px;
-      z-index: 20;
-    }
-    .controls button {
-      background: #111;
-      color: #66ffcc;
-      border: 1px solid #66ffcc;
-      padding: 5px 10px;
-      margin-left: 5px;
+    #overlay button {
+      padding: 8px 20px;
+      font-size: 1rem;
+      background: #66ffcc;
+      color: black;
+      border: none;
       cursor: pointer;
     }
-    .trademark {
+    .intro-logo {
       position: fixed;
-      bottom: 10px;
-      width: 100%;
-      text-align: center;
-      color: #009977;
-      font-size: 0.8rem;
+      top: 30%;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 3rem;
+      color: #00ffcc;
+      animation: flicker 4s ease-in-out;
       z-index: 10;
+    }
+    @keyframes flicker {
+      0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+        opacity: 1;
+      }
+      20%, 22%, 24%, 55% {
+        opacity: 0;
+      }
+    }
+    .countdown {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 1rem;
+      z-index: 20;
+      background: rgba(0,0,0,0.7);
+      padding: 6px 12px;
+      border-radius: 5px;
+      border: 1px solid #66ffcc;
     }
   </style>
 </head>
-<body>
-  <div class="matrix">
+<body class="signal-loss">
+  <div id="overlay">
+    <input type="password" id="accessCode" placeholder="Zadej přístupový kód" />
+    <button onclick="validateCode()">Vstoupit</button>
+  </div>
+
+  <div class="intro-logo" id="introLogo">BudAA</div>
+  <div class="countdown" id="countdown"></div>
+
+  <div class="matrix" style="display:none">
     <canvas id="matrixCanvas"></canvas>
     <div class="message">
       <h1 id="title">Stránka je ve výstavbě...</h1>
@@ -88,33 +99,49 @@
       <button onclick="playMusic('bg2.mp3')">▶️</button>
       <button onclick="stopMusic()">⏹️</button>
     </div>
+    <div class="joke-box" id="jokeBox"></div>
     <div class="trademark">&copy; SkyTel Montage™ – Vytvořil BudAA</div>
   </div>
 
   <script>
-    const canvas = document.getElementById("matrixCanvas");
-    const ctx = canvas.getContext("2d");
-    canvas.height = window.innerHeight;
-    canvas.width = window.innerWidth;
-    const letters = "01BUDaa";
-    const fontSize = 14;
-    const columns = canvas.width / fontSize;
-    const drops = Array.from({ length: columns }).fill(1);
-
-    function draw() {
-      ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = "#66ffcc";
-      ctx.font = fontSize + "px monospace";
-      drops.forEach((y, i) => {
-        const text = letters.charAt(Math.floor(Math.random() * letters.length));
-        const x = i * fontSize;
-        ctx.fillText(text, x, y * fontSize);
-        if (y * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
-        drops[i]++;
-      });
+    const validCode = "Skytel2025";
+    function validateCode() {
+      const input = document.getElementById("accessCode").value;
+      if (input === validCode) {
+        document.getElementById("overlay").style.display = "none";
+        document.querySelector(".matrix").style.display = "block";
+        startMatrix();
+      } else {
+        alert("Neplatný přístupový kód.");
+      }
     }
-    setInterval(draw, 33);
+
+    function startMatrix() {
+      const canvas = document.getElementById("matrixCanvas");
+      const ctx = canvas.getContext("2d");
+      canvas.height = window.innerHeight;
+      canvas.width = window.innerWidth;
+      const letters = "01BUDaa";
+      const fontSize = 14;
+      const columns = canvas.width / fontSize;
+      const drops = Array.from({ length: columns }).fill(1);
+      let hue = 0;
+      function draw() {
+        ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = `hsl(${hue}, 100%, 60%)`;
+        ctx.font = fontSize + "px monospace";
+        hue = (hue + 1) % 360;
+        drops.forEach((y, i) => {
+          const text = letters.charAt(Math.floor(Math.random() * letters.length));
+          const x = i * fontSize;
+          ctx.fillText(text, x, y * fontSize);
+          if (y * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+          drops[i]++;
+        });
+      }
+      setInterval(draw, 33);
+    }
 
     const langs = {
       cs: ["Stránka je ve výstavbě...", "Možná někde lezu po stožáru. Přijď později 💻🧗‍♂️"],
@@ -128,10 +155,9 @@
       document.getElementById("subtitle").innerText = langs[lang][1];
     }
 
-    let audio;
     function playMusic(file) {
       stopMusic();
-      audio = new Audio(file);
+      const audio = new Audio(file);
       audio.loop = true;
       audio.volume = 0.4;
       audio.play();
@@ -142,6 +168,26 @@
         audio.currentTime = 0;
       }
     }
+
+    function updateCountdown() {
+      const countEl = document.getElementById("countdown");
+      const launchDate = new Date("2025-07-01T00:00:00").getTime();
+      const now = new Date().getTime();
+      const distance = launchDate - now;
+
+      if (distance < 0) {
+        countEl.innerHTML = "Spuštěno!";
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      countEl.innerHTML = `Start za: ${days}d ${hours}h ${minutes}m ${seconds}s`;
+    }
+    setInterval(updateCountdown, 1000);
   </script>
 </body>
 </html>
