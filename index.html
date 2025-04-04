@@ -13,12 +13,26 @@
       margin: 0;
       padding: 0;
       font-family: 'Orbitron', sans-serif;
-      background: #000;
       color: #fff;
       overflow-x: hidden;
       cursor: none;
+      background: #000 url('https://www.transparenttextures.com/patterns/blueprint.png') repeat;
+      background-size: contain;
     }
-
+    nav {
+      position: fixed;
+      top: 0;
+      right: 0;
+      z-index: 1001;
+      background: rgba(0,0,0,0.6);
+      padding: 10px 20px;
+    }
+    nav a {
+      color: red;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
     .cursor, .trail {
       position: fixed;
       top: 0;
@@ -45,7 +59,6 @@
         transform: scale(0.2);
       }
     }
-
     .intro {
       position: fixed;
       inset: 0;
@@ -55,14 +68,12 @@
       justify-content: center;
       align-items: center;
     }
-
     .intro h1 {
       font-size: 4rem;
       color: red;
       opacity: 1;
       transition: all 1s ease;
     }
-
     .glitch {
       position: relative;
       color: red;
@@ -77,95 +88,48 @@
       opacity: 0.6;
       z-index: -1;
     }
-    .glitch::before {
-      color: #f00;
-      transform: translate(-2px, -2px);
-    }
-    .glitch::after {
-      color: #900;
-      transform: translate(2px, 2px);
-    }
-
-    .gallery {
+    .glitch::before { color: #f00; transform: translate(-2px, -2px); }
+    .glitch::after { color: #900; transform: translate(2px, 2px); }
+    .about {
       min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      padding: 60px;
+      padding: 10vh 10vw;
+      font-size: 1.5rem;
+      line-height: 2;
+      max-width: 1000px;
+      margin: auto;
     }
-    .gallery h2 {
-      font-size: 3rem;
-      margin-bottom: 50px;
+    .about span.budaa {
+      display: inline-block;
+      transition: transform 1s, color 1s;
     }
-    .gallery-grid {
-      display: flex;
-      overflow-x: auto;
-      gap: 30px;
-      scroll-snap-type: x mandatory;
-      padding-bottom: 30px;
-    }
-    .gallery-item {
-      scroll-snap-align: center;
-      flex: 0 0 auto;
-      width: 300px;
-      height: 200px;
-      background: url('https://via.placeholder.com/300x200') no-repeat center/cover;
-      border: 2px solid red;
-      transition: transform 0.3s;
-    }
-    .gallery-item:hover {
-      transform: scale(1.05);
-    }
-
-    .scroll-indicator {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      font-size: 2rem;
-      color: red;
-      font-weight: bold;
-      z-index: 999;
-    }
-
-    footer {
-      text-align: center;
-      padding: 100px 20px;
-    }
-    footer h2 {
-      font-size: 2.5rem;
-      margin-bottom: 30px;
-    }
-    footer a {
-      color: red;
-      margin: 0 15px;
-      text-decoration: none;
-    }
-
-    .outline-text {
-      font-size: 6rem;
-      font-weight: bold;
+    .about.broken span.budaa {
+      transform: translateY(300px) rotate(45deg);
       color: transparent;
-      -webkit-text-stroke: 2px red;
-      text-align: center;
-      margin-top: 80px;
-      margin-bottom: 80px;
-      transition: all 0.6s ease;
+      text-shadow: none;
     }
-    .outline-text:hover {
-      color: red;
-      -webkit-text-stroke: 0;
-    }
+    .gallery, footer, .outline-text { opacity: 0; transition: opacity 1s; }
+    .gallery.visible, footer.visible, .outline-text.visible { opacity: 1; }
   </style>
 </head>
 <body>
+  <nav><a href="#contact">Let’s Talk</a></nav>
   <div class="cursor" id="cursor"></div>
   <div class="scroll-indicator" id="scrollValue">0%</div>
   <div class="intro">
     <h1 class="glitch" data-text="SkyTel Montage">SkyTel Montage</h1>
   </div>
-
-  <section class="gallery">
+  <section class="about" id="about">
+    <p>
+      Jsem <span class="budaa">BudAA</span>, člověk, který se rozhodl prorazit vlastní cestou. Dřel jsem ve výškách,
+      táhnul kabely, riskoval a překonával sám sebe. Každý krok je zapsaný na této stránce jako součást plánu – stavebního výkresu mé budoucnosti.
+      Postupně zjistíš, kdo jsem, co tvořím, a proč mě nehne ani vítr.
+    </p>
+    <p>
+      <span class="budaa">BudAA</span> není jen přezdívka. Je to značka houževnatosti, vizí, co nezmizí, a člověka,
+      který nevzdává boj, ani když je sám.
+    </p>
+  </section>
+  <section class="gallery" id="projects">
     <h2 class="glitch" data-text="Galerie projektů">Galerie projektů</h2>
     <div class="gallery-grid">
       <div class="gallery-item"></div>
@@ -174,8 +138,7 @@
       <div class="gallery-item"></div>
     </div>
   </section>
-
-  <footer>
+  <footer id="contact">
     <h2 class="glitch" data-text="Kontaktuj mě">Kontaktuj mě</h2>
     <p>Pro spolupráci, dotazy nebo nabídky mě najdeš tady:</p>
     <p><a href="mailto:info@skytelmontage.tech">info@skytelmontage.tech</a></p>
@@ -184,11 +147,9 @@
       <a href="https://www.linkedin.com/company/skytelmontage">LinkedIn</a>
       <a href="https://wa.me/420739977089">WhatsApp</a>
     </div>
-    <p>© 2025 SkyTel Montage / BudAA. All rights reserved.</p>
+    <p>© 2025 SkyTel Montage</p>
   </footer>
-
   <div class="outline-text">SkyTel Montage</div>
-
   <script>
     window.addEventListener("load", () => {
       setTimeout(() => {
@@ -197,47 +158,45 @@
         setTimeout(() => intro.remove(), 1000);
       }, 3000);
     });
-
     gsap.registerPlugin(ScrollTrigger);
-
-    gsap.utils.toArray(".gallery-item").forEach((item, i) => {
-      gsap.fromTo(
-        item,
-        { opacity: 0, y: 50, scale: 0.9 },
-        {
-          opacity: 1,
-          y: 0,
-          scale: 1,
-          scrollTrigger: {
-            trigger: item,
-            start: "top 90%",
-            toggleActions: "play none none reverse"
-          },
-          duration: 1,
-          delay: i * 0.15
-        }
-      );
-    });
-
     const cursor = document.getElementById("cursor");
     window.addEventListener("mousemove", e => {
       const x = e.clientX;
       const y = e.clientY;
       cursor.style.transform = `translate(${x}px, ${y}px)`;
-
       const trail = cursor.cloneNode(true);
       trail.classList.add("trail");
       document.body.appendChild(trail);
       trail.style.transform = `translate(${x}px, ${y}px)`;
       setTimeout(() => trail.remove(), 1000);
     });
-
     const scrollValue = document.getElementById("scrollValue");
     window.addEventListener("scroll", () => {
       const scrollTop = window.scrollY;
       const docHeight = document.body.scrollHeight - window.innerHeight;
       const scrollPercent = Math.round((scrollTop / docHeight) * 100);
       scrollValue.textContent = scrollPercent + "%";
+    });
+    ScrollTrigger.create({
+      trigger: ".about",
+      start: "top center",
+      end: "bottom center",
+      toggleClass: {targets: ".about", className: "broken"}
+    });
+    ScrollTrigger.create({
+      trigger: "#projects",
+      start: "top center",
+      onEnter: () => document.querySelector(".gallery").classList.add("visible")
+    });
+    ScrollTrigger.create({
+      trigger: "footer",
+      start: "top center",
+      onEnter: () => document.querySelector("footer").classList.add("visible")
+    });
+    ScrollTrigger.create({
+      trigger: ".outline-text",
+      start: "top bottom",
+      onEnter: () => document.querySelector(".outline-text").classList.add("visible")
     });
   </script>
 </body>
