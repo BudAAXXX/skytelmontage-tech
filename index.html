@@ -1,134 +1,207 @@
 <!DOCTYPE html>
-<html lang="cs">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SkyTel Montage – BudÁÁ</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google-adsense-account" content="ca-pub-2301861770702896">
+  <title>SkyTel Montage</title>
+  <link rel="icon" href="favicon.png" type="image/png">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
   <style>
-    * { box-sizing: border-box; }
     html, body {
       margin: 0;
       padding: 0;
-      font-family: 'Roboto', sans-serif;
-      color: #fff;
-      overflow-x: hidden;
-      cursor: none;
-      background: #000 url('https://www.transparenttextures.com/patterns/blueprint.png') repeat;
-      background-size: contain;
-      scroll-behavior: smooth;
+      background: black;
+      color: #00ff88;
+      font-family: 'Orbitron', monospace;
+      overflow: hidden;
+      text-align: center;
+      height: 100%;
     }
-    nav {
+    canvas {
       position: fixed;
-      top: 0;
-      right: 0;
-      z-index: 1001;
-      background: rgba(0,0,0,0.6);
-      padding: 10px 20px;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -1;
+      display: block;
+      pointer-events: none;
     }
-    nav a {
-      color: red;
-      text-decoration: none;
-      font-weight: bold;
+    h1 {
+      margin-top: 60px;
+      font-size: clamp(32px, 8vw, 64px);
+      color: #ff0000;
+      text-shadow: 0 0 8px #ff0000;
+      animation: titleSpin 2s ease-in-out forwards;
+    }
+    @keyframes titleSpin {
+      0% { transform: rotateX(90deg); opacity: 0; }
+      100% { transform: rotateX(0deg); opacity: 1; }
+    }
+    @keyframes pulseRed {
+      0%, 100% { color: #ff0000; text-shadow: 0 0 8px #ff0000; }
+      50% { color: #aa0000; text-shadow: 0 0 16px #ff0000; }
+    }
+    #joke {
       font-size: 1.2rem;
-      margin-left: 10px;
+      margin: 3rem auto 1rem;
+      max-width: 80%;
+      background: rgba(0,0,0,0.6);
+      padding: 1rem;
+      border: 1px solid #00ff88;
+      border-radius: 10px;
+      transition: all 0.5s ease-in-out;
     }
-    .section {
-      min-height: 100vh;
-      padding: 10vh 5vw;
+    .lang-switcher button {
+      background: none;
+      border: 1px solid #ff0000;
+      color: #ff0000;
+      margin: 0.5rem;
+      padding: 0.4rem 1rem;
+      font-size: 0.9rem;
+      cursor: pointer;
+      animation: pulseRed 2s infinite;
     }
-    .intro {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 4rem;
-      color: red;
+    #controls {
+      margin: 1rem;
     }
-    .about {
-      font-size: 1.5rem;
-      line-height: 2;
-      max-width: 1000px;
-      margin: auto;
+    #controls button {
+      background: black;
+      color: #0f0;
+      border: 1px solid #0f0;
+      margin: 0 5px;
+      cursor: pointer;
+      padding: 5px 10px;
     }
-    .budaa {
-      display: inline-block;
-      color: #0ff;
-      transition: transform 1s, color 1s;
-    }
-    .about.broken .budaa {
-      transform: translateY(300px) rotate(45deg);
-      color: transparent;
-      text-shadow: none;
-    }
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 2rem;
-    }
-    .gallery img {
-      width: 100%;
-      transition: transform 0.5s;
-    }
-    .gallery img:hover {
-      transform: scale(1.05);
+    #clock {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      font-size: 0.9rem;
+      color: #0f0;
     }
     footer {
-      text-align: center;
-      padding: 4rem;
-      color: #ff0;
-    }
-    .outline-text {
-      font-size: 3rem;
-      text-align: center;
-      color: transparent;
-      -webkit-text-stroke: 1px white;
-      margin-top: 50px;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      color: #ff0000;
+      font-size: 0.8rem;
+      padding: 0.5rem;
+      animation: pulseRed 2s infinite;
     }
   </style>
 </head>
 <body>
-  <nav>
-    <a href="#talk">Let’s Talk</a>
-  </nav>
+<canvas id="matrix"></canvas>
+<div id="clock"></div>
+<h1 id="title">SkyTelMontage.tech</h1>
+<div id="joke">Loading intergalactic humour...</div>
+<p style="margin-top: 1rem; font-size: 1.1rem; color: #ff0;">
+  ⚠️ Website under construction — SkyTelMontage is preparing the next generation. I'm somewhere up high, climbing...
+</p>
+<div class="lang-switcher">
+  <button onclick="setLang('en')">EN</button>
+  <button onclick="setLang('cz')">CZ</button>
+  <button onclick="setLang('de')">DE</button>
+  <button onclick="setLang('tlh')">🖖 Klingon</button>
+</div>
+<div id="controls">
+  <button onclick="nextTrack()">▶️ Next Track</button>
+  <button onclick="playMusic()">🎵 Play</button>
+  <button onclick="pauseMusic()">⏸️ Pause</button>
+  <div style="margin-top: 5px; font-size: 0.8rem; color: #00ff88;">Music source: FreePD.com</div>
+</div>
+<footer>&copy; 2025 SkyTel Montage™ — All rights reserved.</footer>
 
-  <section class="section intro">
-    <div class="glitch" data-text="SkyTel Montage">SkyTel Montage</div>
-  </section>
+<audio id="player" loop>
+  <source src="bg.mp3" type="audio/mpeg">
+  <source src="bg2.mp3" type="audio/mpeg">
+  <source src="bg3.mp3" type="audio/mpeg">
+</audio>
 
-  <section class="section about" id="about">
-    <h2>O mně</h2>
-    <p>Jsem <span class="budaa">BudÁÁ</span>, zakladatel SkyTel Montage. Věřím ve spojení techniky a kreativity. Moje práce vychází z reálných zkušeností ve výškách, z boje s dluhy i sám se sebou. Tvořím systém, který pomáhá růst – nejen mně, ale i mým klientům.</p>
-    <p>Při scrollování se mé jméno <span class="budaa">BudÁÁ</span> začne měnit...</p>
-  </section>
+<script>
+const canvas = document.getElementById("matrix");
+const ctx = canvas.getContext("2d");
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
 
-  <section class="section gallery" id="projects">
-    <h2>Galerie projektů</h2>
-    <img src="https://via.placeholder.com/300x200?text=Projekt+1" alt="Projekt 1">
-    <img src="https://via.placeholder.com/300x200?text=Projekt+2" alt="Projekt 2">
-    <img src="https://via.placeholder.com/300x200?text=Projekt+3" alt="Projekt 3">
-  </section>
+const chars = ["0", "1", "BudAA"];
+const fontSize = 16;
+const columns = Math.floor(canvas.width / fontSize);
+const drops = Array(columns).fill(1);
 
-  <section class="section" id="talk">
-    <h2>Kontaktuj mě</h2>
-    <p>info@skytelmontage.tech</p>
-    <p>Instagram | WhatsApp | LinkedIn</p>
-  </section>
+function drawMatrix() {
+  ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = "#0f0";
+  ctx.font = fontSize + "px Orbitron";
+  for (let i = 0; i < drops.length; i++) {
+    const text = Math.random() < 0.01 ? "BudAA" : chars[Math.floor(Math.random() * 2)];
+    ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+    if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+    drops[i]++;
+  }
+}
+setInterval(drawMatrix, 33);
+window.addEventListener('resize', () => {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+});
 
-  <footer>
-    SkyTel Montage 2025
-    <div class="outline-text">SkyTel Montage</div>
-  </footer>
+const jokes = {
+  en: [
+    "Why do programmers prefer dark mode? Because light attracts bugs.",
+    "404: Joke not found.",
+    "There’s no place like 127.0.0.1."
+  ],
+  cz: [
+    "Proč mají programátoři rádi tmu? Protože světlo přitahuje bugy.",
+    "404: Vtip nenalezen.",
+    "Není místo jako 127.0.0.1."
+  ],
+  de: [
+    "Warum mögen Programmierer den Dunkelmodus? Weil Licht Bugs anzieht.",
+    "404: Witz nicht gefunden.",
+    "Es gibt keinen Ort wie 127.0.0.1."
+  ],
+  tlh: [
+    "Qapla’! 404 vItlhutlhbe’."
+  ]
+};
+let currentLang = 'en';
+function setLang(lang) {
+  currentLang = lang;
+  showJoke();
+}
+function showJoke() {
+  const jokeEl = document.getElementById("joke");
+  const pool = jokes[currentLang] || jokes.en;
+  jokeEl.textContent = pool[Math.floor(Math.random() * pool.length)] || "404: Joke not found.";
+}
+setInterval(showJoke, 7000);
 
-  <script>
-    // Scroll-triggered rozpad jména BudAA
-    gsap.registerPlugin(ScrollTrigger);
-    ScrollTrigger.create({
-      trigger: ".about",
-      start: "bottom center",
-      onEnter: () => document.querySelector(".about").classList.add("broken")
-    });
-  </script>
+let trackIndex = 0;
+const tracks = ["bg.mp3", "bg2.mp3", "bg3.mp3"];
+const player = document.getElementById("player");
+function playMusic() {
+  player.src = tracks[trackIndex];
+  player.play();
+}
+function pauseMusic() {
+  player.pause();
+}
+function nextTrack() {
+  trackIndex = (trackIndex + 1) % tracks.length;
+  player.src = tracks[trackIndex];
+  player.play();
+}
+function updateClock() {
+  const now = new Date();
+  document.getElementById("clock").textContent = now.toLocaleString();
+}
+setInterval(updateClock, 1000);
+updateClock();
+showJoke();
+</script>
 </body>
 </html>
