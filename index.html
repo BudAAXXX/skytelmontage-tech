@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SkyTel Montage – BudAA</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet" />
+  <title>SkyTel Montage – BudÁÁ</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
   <style>
@@ -12,12 +12,13 @@
     html, body {
       margin: 0;
       padding: 0;
-      font-family: 'Orbitron', sans-serif;
+      font-family: 'Roboto', sans-serif;
       color: #fff;
       overflow-x: hidden;
       cursor: none;
       background: #000 url('https://www.transparenttextures.com/patterns/blueprint.png') repeat;
       background-size: contain;
+      scroll-behavior: smooth;
     }
     nav {
       position: fixed;
@@ -32,171 +33,101 @@
       text-decoration: none;
       font-weight: bold;
       font-size: 1.2rem;
+      margin-left: 10px;
     }
-    .cursor, .trail {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 60px;
-      height: 60px;
-      background: radial-gradient(circle, rgba(255,0,0,0.15) 0%, rgba(255,0,0,0.03) 70%);
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 9999;
-      transform: translate(-50%, -50%);
-      filter: blur(8px);
-      mix-blend-mode: screen;
-    }
-    .trail {
-      opacity: 0.4;
-      width: 40px;
-      height: 40px;
-      animation: fadeOut 1s forwards;
-    }
-    @keyframes fadeOut {
-      to {
-        opacity: 0;
-        transform: scale(0.2);
-      }
+    .section {
+      min-height: 100vh;
+      padding: 10vh 5vw;
     }
     .intro {
-      position: fixed;
-      inset: 0;
-      background: #000;
-      z-index: 1000;
       display: flex;
       justify-content: center;
       align-items: center;
-    }
-    .intro h1 {
       font-size: 4rem;
       color: red;
-      opacity: 1;
-      transition: all 1s ease;
     }
-    .glitch {
-      position: relative;
-      color: red;
-      text-shadow: 0 0 5px red, 0 0 10px darkred;
-    }
-    .glitch::before,
-    .glitch::after {
-      content: attr(data-text);
-      position: absolute;
-      left: 2px;
-      top: 2px;
-      opacity: 0.6;
-      z-index: -1;
-    }
-    .glitch::before { color: #f00; transform: translate(-2px, -2px); }
-    .glitch::after { color: #900; transform: translate(2px, 2px); }
     .about {
-      min-height: 100vh;
-      padding: 10vh 10vw;
       font-size: 1.5rem;
       line-height: 2;
       max-width: 1000px;
       margin: auto;
     }
-    .about span.budaa {
+    .budaa {
       display: inline-block;
+      color: #0ff;
       transition: transform 1s, color 1s;
     }
-    .about.broken span.budaa {
+    .about.broken .budaa {
       transform: translateY(300px) rotate(45deg);
       color: transparent;
       text-shadow: none;
     }
-    .gallery, footer, .outline-text { opacity: 0; transition: opacity 1s; }
-    .gallery.visible, footer.visible, .outline-text.visible { opacity: 1; }
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+    }
+    .gallery img {
+      width: 100%;
+      transition: transform 0.5s;
+    }
+    .gallery img:hover {
+      transform: scale(1.05);
+    }
+    footer {
+      text-align: center;
+      padding: 4rem;
+      color: #ff0;
+    }
+    .outline-text {
+      font-size: 3rem;
+      text-align: center;
+      color: transparent;
+      -webkit-text-stroke: 1px white;
+      margin-top: 50px;
+    }
   </style>
 </head>
 <body>
-  <nav><a href="#contact">Let’s Talk</a></nav>
-  <div class="cursor" id="cursor"></div>
-  <div class="scroll-indicator" id="scrollValue">0%</div>
-  <div class="intro">
-    <h1 class="glitch" data-text="SkyTel Montage">SkyTel Montage</h1>
-  </div>
-  <section class="about" id="about">
-    <p>
-      Jsem <span class="budaa">BudAA</span>, člověk, který se rozhodl prorazit vlastní cestou. Dřel jsem ve výškách,
-      táhnul kabely, riskoval a překonával sám sebe. Každý krok je zapsaný na této stránce jako součást plánu – stavebního výkresu mé budoucnosti.
-      Postupně zjistíš, kdo jsem, co tvořím, a proč mě nehne ani vítr.
-    </p>
-    <p>
-      <span class="budaa">BudAA</span> není jen přezdívka. Je to značka houževnatosti, vizí, co nezmizí, a člověka,
-      který nevzdává boj, ani když je sám.
-    </p>
+  <nav>
+    <a href="#talk">Let’s Talk</a>
+  </nav>
+
+  <section class="section intro">
+    <div class="glitch" data-text="SkyTel Montage">SkyTel Montage</div>
   </section>
-  <section class="gallery" id="projects">
-    <h2 class="glitch" data-text="Galerie projektů">Galerie projektů</h2>
-    <div class="gallery-grid">
-      <div class="gallery-item"></div>
-      <div class="gallery-item"></div>
-      <div class="gallery-item"></div>
-      <div class="gallery-item"></div>
-    </div>
+
+  <section class="section about" id="about">
+    <h2>O mně</h2>
+    <p>Jsem <span class="budaa">BudÁÁ</span>, zakladatel SkyTel Montage. Věřím ve spojení techniky a kreativity. Moje práce vychází z reálných zkušeností ve výškách, z boje s dluhy i sám se sebou. Tvořím systém, který pomáhá růst – nejen mně, ale i mým klientům.</p>
+    <p>Při scrollování se mé jméno <span class="budaa">BudÁÁ</span> začne měnit...</p>
   </section>
-  <footer id="contact">
-    <h2 class="glitch" data-text="Kontaktuj mě">Kontaktuj mě</h2>
-    <p>Pro spolupráci, dotazy nebo nabídky mě najdeš tady:</p>
-    <p><a href="mailto:info@skytelmontage.tech">info@skytelmontage.tech</a></p>
-    <div>
-      <a href="https://instagram.com/skytelmontage">Instagram</a>
-      <a href="https://www.linkedin.com/company/skytelmontage">LinkedIn</a>
-      <a href="https://wa.me/420739977089">WhatsApp</a>
-    </div>
-    <p>© 2025 SkyTel Montage</p>
+
+  <section class="section gallery" id="projects">
+    <h2>Galerie projektů</h2>
+    <img src="https://via.placeholder.com/300x200?text=Projekt+1" alt="Projekt 1">
+    <img src="https://via.placeholder.com/300x200?text=Projekt+2" alt="Projekt 2">
+    <img src="https://via.placeholder.com/300x200?text=Projekt+3" alt="Projekt 3">
+  </section>
+
+  <section class="section" id="talk">
+    <h2>Kontaktuj mě</h2>
+    <p>info@skytelmontage.tech</p>
+    <p>Instagram | WhatsApp | LinkedIn</p>
+  </section>
+
+  <footer>
+    SkyTel Montage 2025
+    <div class="outline-text">SkyTel Montage</div>
   </footer>
-  <div class="outline-text">SkyTel Montage</div>
+
   <script>
-    window.addEventListener("load", () => {
-      setTimeout(() => {
-        const intro = document.querySelector(".intro");
-        intro.style.opacity = 0;
-        setTimeout(() => intro.remove(), 1000);
-      }, 3000);
-    });
+    // Scroll-triggered rozpad jména BudAA
     gsap.registerPlugin(ScrollTrigger);
-    const cursor = document.getElementById("cursor");
-    window.addEventListener("mousemove", e => {
-      const x = e.clientX;
-      const y = e.clientY;
-      cursor.style.transform = `translate(${x}px, ${y}px)`;
-      const trail = cursor.cloneNode(true);
-      trail.classList.add("trail");
-      document.body.appendChild(trail);
-      trail.style.transform = `translate(${x}px, ${y}px)`;
-      setTimeout(() => trail.remove(), 1000);
-    });
-    const scrollValue = document.getElementById("scrollValue");
-    window.addEventListener("scroll", () => {
-      const scrollTop = window.scrollY;
-      const docHeight = document.body.scrollHeight - window.innerHeight;
-      const scrollPercent = Math.round((scrollTop / docHeight) * 100);
-      scrollValue.textContent = scrollPercent + "%";
-    });
     ScrollTrigger.create({
       trigger: ".about",
-      start: "top center",
-      end: "bottom center",
-      toggleClass: {targets: ".about", className: "broken"}
-    });
-    ScrollTrigger.create({
-      trigger: "#projects",
-      start: "top center",
-      onEnter: () => document.querySelector(".gallery").classList.add("visible")
-    });
-    ScrollTrigger.create({
-      trigger: "footer",
-      start: "top center",
-      onEnter: () => document.querySelector("footer").classList.add("visible")
-    });
-    ScrollTrigger.create({
-      trigger: ".outline-text",
-      start: "top bottom",
-      onEnter: () => document.querySelector(".outline-text").classList.add("visible")
+      start: "bottom center",
+      onEnter: () => document.querySelector(".about").classList.add("broken")
     });
   </script>
 </body>
