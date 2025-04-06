@@ -1,151 +1,121 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>SkyTel Montage</title>
-  <style>
-    body {
-      margin: 0;
-      background: black;
-      color: white;
-      font-family: monospace;
-      overflow: hidden;
-    }
+// SkyTel Montage – Interaktivní web s reálnou fyzikou stožáru a proměnlivou krajinou
+// GitHub-ready, čistý HTML+JS bez build nástrojů
 
-    h1.glitch {
-      font-size: 48px;
-      text-align: center;
-      margin-top: 80px;
-      position: relative;
-      animation: glitch 1s infinite;
-    }
+import { useEffect, useRef, useState } from "react";
+import { motion } from "framer-motion";
+import Matter from "matter-js";
 
-    @keyframes glitch {
-      0% { text-shadow: 2px 0 red; }
-      25% { text-shadow: -2px 0 blue; }
-      50% { text-shadow: 2px 0 green; }
-      75% { text-shadow: -2px 0 yellow; }
-      100% { text-shadow: 2px 0 red; }
-    }
+export default function SkyTelMontage() {
+  const sceneRef = useRef(null);
+  const [engine, setEngine] = useState(null);
+  const [world, setWorld] = useState(null);
+  const [pieces, setPieces] = useState([]);
+  const [fallen, setFallen] = useState(false);
 
-    .tower {
-      position: absolute;
-      bottom: 0;
-      width: 10px;
-      height: 100px;
-      background: #777;
-      transition: transform 0.3s ease, height 0.3s ease;
-      transform-origin: bottom;
-    }
+  useEffect(() => {
+    const Engine = Matter.Engine,
+      Render = Matter.Render,
+      World = Matter.World,
+      Bodies = Matter.Bodies,
+      Runner = Matter.Runner,
+      Body = Matter.Body,
+      Events = Matter.Events;
 
-    .tower:hover {
-      transform: rotate(-90deg);
-      height: 50px;
-    }
+    const engine = Engine.create();
+    const world = engine.world;
+    setEngine(engine);
+    setWorld(world);
 
-    .trademark {
-      position: absolute;
-      top: 10px;
-      right: 20px;
-      font-size: 10px;
-      color: gold;
-      opacity: 0.5;
-    }
-
-    .lang {
-      position: absolute;
-      bottom: 10px;
-      right: 10px;
-    }
-
-    .lang button {
-      background: none;
-      border: none;
-      color: white;
-      margin: 0 5px;
-      cursor: pointer;
-      font-size: 14px;
-    }
-
-    #bigLogo {
-      font-size: 100px;
-      opacity: 0.05;
-      text-align: center;
-      margin-top: 100px;
-    }
-
-    #datetime {
-      position: absolute;
-      bottom: 5px;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 10px;
-      color: grey;
-    }
-
-    #mouse-smoke {
-      position: fixed;
-      pointer-events: none;
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 60%);
-      mix-blend-mode: lighten;
-    }
-  </style>
-</head>
-<body>
-
-  <div class="trademark">™</div>
-  <h1 class="glitch" id="mainText">mSkyTel Montage</h1>
-  <p style="text-align: center;" id="introText">Pořád někde lezu...</p>
-  <div id="bigLogo">SKYTEL</div>
-
-  <div class="lang">
-    <span>Jazyk:</span>
-    <button onclick="setLang('cz')">CZ</button>
-    <button onclick="setLang('de')">DE</button>
-    <button onclick="setLang('en')">EN</button>
-    <button onclick="setLang('kl')">KL</button>
-  </div>
-
-  <div id="datetime"></div>
-  <div id="mouse-smoke"></div>
-
-  <script>
-    const translations = {
-      cz: { intro: 'Pořád někde lezu...' },
-      de: { intro: 'Ich bin ständig irgendwo am Klettern...' },
-      en: { intro: 'Always climbing somewhere...' },
-      kl: { intro: 'reH Hu\' qetwI\' jIH' },
-    };
-
-    function setLang(lang) {
-      document.getElementById('introText').innerText = translations[lang].intro;
-    }
-
-    // Stožáry
-    for (let i = 0; i < 10; i++) {
-      const tower = document.createElement('div');
-      tower.className = 'tower';
-      tower.style.left = `${i * 10 + 5}%`;
-      document.body.appendChild(tower);
-    }
-
-    // Datum a čas
-    setInterval(() => {
-      const now = new Date();
-      document.getElementById('datetime').innerText = now.toLocaleString();
-    }, 1000);
-
-    // Kouřová myš
-    const smoke = document.getElementById('mouse-smoke');
-    document.addEventListener('mousemove', (e) => {
-      smoke.style.left = `${e.pageX - 25}px`;
-      smoke.style.top = `${e.pageY - 25}px`;
+    const render = Render.create({
+      element: sceneRef.current,
+      engine: engine,
+      options: {
+        width: window.innerWidth,
+        height: window.innerHeight,
+        wireframes: false,
+        background: "transparent",
+      },
     });
-  </script>
 
-</body>
-</html>
+    Render.run(render);
+    const runner = Runner.create();
+    Runner.run(runner, engine);
+
+    const ground = Bodies.rectangle(
+      window.innerWidth / 2,
+      window.innerHeight - 50,
+      window.innerWidth,
+      60,
+      { isStatic: true, render: { fillStyle: "#333" } }
+    );
+
+    World.add(world, [ground]);
+
+    // Vytvoření stožáru z kusů
+    const partCount = 10;
+    const partHeight = 30;
+    const partWidth = 20;
+    const parts = Array.from({ length: partCount }).map((_, i) =>
+      Bodies.rectangle(
+        window.innerWidth / 2,
+        window.innerHeight - 60 - i * partHeight,
+        partWidth,
+        partHeight,
+        {
+          isStatic: true,
+          render: { fillStyle: "#777" },
+          label: `part_${i}`,
+        }
+      )
+    );
+
+    setPieces(parts);
+    World.add(world, parts);
+
+    return () => {
+      Render.stop(render);
+      World.clear(world);
+      Engine.clear(engine);
+      render.canvas.remove();
+      render.textures = {};
+    };
+  }, []);
+
+  const dropPiece = () => {
+    if (!engine || !pieces.length) return;
+    const next = pieces[0];
+    Matter.Body.setStatic(next, false);
+    setPieces((prev) => prev.slice(1));
+    if (pieces.length === 1) setFallen(true);
+  };
+
+  return (
+    <div className="relative h-screen w-screen bg-gradient-to-b from-blue-300 to-green-500 overflow-hidden">
+      {/* Obloha a nápis */}
+      <div className="absolute top-4 left-1/2 transform -translate-x-1/2 text-white text-6xl opacity-10 select-none">
+        Sky Tel Montage
+      </div>
+
+      {/* Scéna s fyzikou */}
+      <div ref={sceneRef} className="w-full h-full"></div>
+
+      {/* Ovládací tlačítko */}
+      <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2">
+        <button
+          onClick={dropPiece}
+          className="bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-2 px-4 rounded shadow-xl"
+        >
+          {fallen ? "Spadeno!" : "Odebrat kus stožáru"}
+        </button>
+      </div>
+
+      {/* Vtipy dole */}
+      <div className="absolute bottom-2 w-full text-center text-sm text-white opacity-80">
+        <p>„Proč technik nepadá? Protože je přivázanej ke svý práci.“</p>
+        <p>„BOZP: Buď Opatrný Zvlášť Pod stožárem.“</p>
+      </div>
+    </div>
+  );
+}
+
+// 💡 Poznámka: přidat měnící se pozadí (časovač mění den/noc), více jazyků a zvuky později.
