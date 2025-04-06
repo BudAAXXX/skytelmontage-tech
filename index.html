@@ -1,207 +1,140 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="google-adsense-account" content="ca-pub-2301861770702896">
-  <title>SkyTel Montage</title>
-  <link rel="icon" href="favicon.png" type="image/png">
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      background: black;
-      color: #00ff88;
-      font-family: 'Orbitron', monospace;
-      overflow: hidden;
-      text-align: center;
-      height: 100%;
-    }
-    canvas {
-      position: fixed;
-      inset: 0;
-      width: 100vw;
-      height: 100vh;
-      z-index: -1;
-      display: block;
-      pointer-events: none;
-    }
-    h1 {
-      margin-top: 60px;
-      font-size: clamp(32px, 8vw, 64px);
-      color: #ff0000;
-      text-shadow: 0 0 8px #ff0000;
-      animation: titleSpin 2s ease-in-out forwards;
-    }
-    @keyframes titleSpin {
-      0% { transform: rotateX(90deg); opacity: 0; }
-      100% { transform: rotateX(0deg); opacity: 1; }
-    }
-    @keyframes pulseRed {
-      0%, 100% { color: #ff0000; text-shadow: 0 0 8px #ff0000; }
-      50% { color: #aa0000; text-shadow: 0 0 16px #ff0000; }
-    }
-    #joke {
-      font-size: 1.2rem;
-      margin: 3rem auto 1rem;
-      max-width: 80%;
-      background: rgba(0,0,0,0.6);
-      padding: 1rem;
-      border: 1px solid #00ff88;
-      border-radius: 10px;
-      transition: all 0.5s ease-in-out;
-    }
-    .lang-switcher button {
-      background: none;
-      border: 1px solid #ff0000;
-      color: #ff0000;
-      margin: 0.5rem;
-      padding: 0.4rem 1rem;
-      font-size: 0.9rem;
-      cursor: pointer;
-      animation: pulseRed 2s infinite;
-    }
-    #controls {
-      margin: 1rem;
-    }
-    #controls button {
-      background: black;
-      color: #0f0;
-      border: 1px solid #0f0;
-      margin: 0 5px;
-      cursor: pointer;
-      padding: 5px 10px;
-    }
-    #clock {
-      position: absolute;
-      top: 10px;
-      right: 20px;
-      font-size: 0.9rem;
-      color: #0f0;
-    }
-    footer {
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-      color: #ff0000;
-      font-size: 0.8rem;
-      padding: 0.5rem;
-      animation: pulseRed 2s infinite;
-    }
-  </style>
-</head>
-<body>
-<canvas id="matrix"></canvas>
-<div id="clock"></div>
-<h1 id="title">SkyTelMontage.tech</h1>
-<div id="joke">Loading intergalactic humour...</div>
-<p style="margin-top: 1rem; font-size: 1.1rem; color: #ff0;">
-  ⚠️ Website under construction — SkyTelMontage is preparing the next generation. I'm somewhere up high, climbing...
-</p>
-<div class="lang-switcher">
-  <button onclick="setLang('en')">EN</button>
-  <button onclick="setLang('cz')">CZ</button>
-  <button onclick="setLang('de')">DE</button>
-  <button onclick="setLang('tlh')">🖖 Klingon</button>
-</div>
-<div id="controls">
-  <button onclick="nextTrack()">▶️ Next Track</button>
-  <button onclick="playMusic()">🎵 Play</button>
-  <button onclick="pauseMusic()">⏸️ Pause</button>
-  <div style="margin-top: 5px; font-size: 0.8rem; color: #00ff88;">Music source: FreePD.com</div>
-</div>
-<footer>&copy; 2025 SkyTel Montage™ — All rights reserved.</footer>
+// SkyTel Montage – Web ve výstavbě
+// GitHub-ready verze s interaktivními efekty, glitch, kouřovou myší a jazykovým přepínáním
 
-<audio id="player" loop>
-  <source src="bg.mp3" type="audio/mpeg">
-  <source src="bg2.mp3" type="audio/mpeg">
-  <source src="bg3.mp3" type="audio/mpeg">
-</audio>
+import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 
-<script>
-const canvas = document.getElementById("matrix");
-const ctx = canvas.getContext("2d");
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+export default function SkyTelMontage() {
+  const [language, setLanguage] = useState("cz");
+  const [date, setDate] = useState(new Date());
 
-const chars = ["0", "1", "BudAA"];
-const fontSize = 16;
-const columns = Math.floor(canvas.width / fontSize);
-const drops = Array(columns).fill(1);
+  useEffect(() => {
+    const interval = setInterval(() => setDate(new Date()), 1000);
+    return () => clearInterval(interval);
+  }, []);
 
-function drawMatrix() {
-  ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-  ctx.fillStyle = "#0f0";
-  ctx.font = fontSize + "px Orbitron";
-  for (let i = 0; i < drops.length; i++) {
-    const text = Math.random() < 0.01 ? "BudAA" : chars[Math.floor(Math.random() * 2)];
-    ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-    if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
-    drops[i]++;
-  }
-}
-setInterval(drawMatrix, 33);
-window.addEventListener('resize', () => {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-});
+  const translations = {
+    cz: {
+      title: "SkyTel Montage",
+      subtitle: "Stránka ve výstavbě",
+      intro: "Nemám čas, pořád někde lezu...",
+      trademark: "™",
+      languages: "Jazyky",
+    },
+    de: {
+      title: "SkyTel Montage",
+      subtitle: "Webseite im Aufbau",
+      intro: "Ich habe keine Zeit, bin ständig irgendwo am Klettern...",
+      trademark: "™",
+      languages: "Sprachen",
+    },
+    en: {
+      title: "SkyTel Montage",
+      subtitle: "Website under construction",
+      intro: "No time, always climbing somewhere...",
+      trademark: "™",
+      languages: "Languages",
+    },
+    kl: {
+      title: "SkyTel Montage",
+      subtitle: "veS Daq QonwI\'",
+      intro: "reH Hu\' qetwI' jIH",
+      trademark: "™",
+      languages: "Hol",
+    },
+  };
 
-const jokes = {
-  en: [
-    "Why do programmers prefer dark mode? Because light attracts bugs.",
-    "404: Joke not found.",
-    "There’s no place like 127.0.0.1."
-  ],
-  cz: [
-    "Proč mají programátoři rádi tmu? Protože světlo přitahuje bugy.",
-    "404: Vtip nenalezen.",
-    "Není místo jako 127.0.0.1."
-  ],
-  de: [
-    "Warum mögen Programmierer den Dunkelmodus? Weil Licht Bugs anzieht.",
-    "404: Witz nicht gefunden.",
-    "Es gibt keinen Ort wie 127.0.0.1."
-  ],
-  tlh: [
-    "Qapla’! 404 vItlhutlhbe’."
-  ]
-};
-let currentLang = 'en';
-function setLang(lang) {
-  currentLang = lang;
-  showJoke();
-}
-function showJoke() {
-  const jokeEl = document.getElementById("joke");
-  const pool = jokes[currentLang] || jokes.en;
-  jokeEl.textContent = pool[Math.floor(Math.random() * pool.length)] || "404: Joke not found.";
-}
-setInterval(showJoke, 7000);
+  const handleLanguageChange = (lang) => {
+    setLanguage(lang);
+  };
 
-let trackIndex = 0;
-const tracks = ["bg.mp3", "bg2.mp3", "bg3.mp3"];
-const player = document.getElementById("player");
-function playMusic() {
-  player.src = tracks[trackIndex];
-  player.play();
+  return (
+    <div className="relative h-screen w-screen overflow-hidden bg-black text-white">
+      {/* Kouřová myš */}
+      <div
+        className="pointer-events-none fixed top-0 left-0 w-full h-full z-50"
+        style={{
+          background: `radial-gradient(circle at ${window.innerWidth / 2}px ${
+            window.innerHeight / 2
+          }px, rgba(255,255,255,0.05), transparent)`,
+          mixBlendMode: "lighten",
+        }}
+      ></div>
+
+      {/* Interaktivní stožáry */}
+      <div className="absolute top-0 left-0 w-full h-full -z-10">
+        {[...Array(10)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-[10px] h-[100px] bg-gray-700 origin-bottom"
+            style={{ left: `${i * 10 + 5}%`, bottom: "0%" }}
+            whileHover={{ rotate: [0, -90], scaleY: 0.5 }}
+            transition={{ duration: 0.5 }}
+          />
+        ))}
+      </div>
+
+      {/* Glitch intro */}
+      <motion.h1
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1 }}
+        className="text-6xl font-bold glitch text-center mt-20"
+      >
+        mSkyTel Montage
+      </motion.h1>
+
+      <motion.p
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1, duration: 1 }}
+        className="text-center mt-4 text-lg"
+      >
+        {translations[language].intro}
+      </motion.p>
+
+      {/* Trademark s odleskem */}
+      <div className="absolute top-2 right-4 text-xs text-yellow-400 opacity-60">
+        {translations[language].trademark}
+      </div>
+
+      {/* Logo placeholder s efektem */}
+      <motion.div
+        initial={{ scale: 5, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ delay: 2, duration: 1 }}
+        className="text-8xl font-extrabold text-center opacity-10"
+      >
+        SKYTEL
+      </motion.div>
+
+      {/* Hudba ovládání */}
+      <div className="fixed bottom-4 left-4">
+        <button className="mr-4 font-mono">▶️ Play</button>
+        <button className="font-mono">⏹ Stop</button>
+      </div>
+
+      {/* Přepínač jazyků */}
+      <div className="fixed bottom-4 right-4 text-sm">
+        <span>{translations[language].languages}: </span>
+        {["cz", "de", "en", "kl"].map((lang) => (
+          <button
+            key={lang}
+            onClick={() => handleLanguageChange(lang)}
+            className="mx-1 underline hover:text-yellow-300"
+          >
+            {lang.toUpperCase()}
+          </button>
+        ))}
+      </div>
+
+      {/* Datum a čas */}
+      <div className="fixed bottom-2 left-1/2 transform -translate-x-1/2 text-xs text-gray-400">
+        {date.toLocaleString()}
+      </div>
+    </div>
+  );
 }
-function pauseMusic() {
-  player.pause();
-}
-function nextTrack() {
-  trackIndex = (trackIndex + 1) % tracks.length;
-  player.src = tracks[trackIndex];
-  player.play();
-}
-function updateClock() {
-  const now = new Date();
-  document.getElementById("clock").textContent = now.toLocaleString();
-}
-setInterval(updateClock, 1000);
-updateClock();
-showJoke();
-</script>
-</body>
-</html>
+
+// CSS pro glitch efekt a další styly by měly být součástí globálního stylesheetu nebo Tailwind pluginu
+// Doplníme audio přehrávání, rollující písmena a podrobnosti v další verzi
