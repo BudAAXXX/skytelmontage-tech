@@ -1,121 +1,96 @@
-// SkyTel Montage – Interaktivní web s reálnou fyzikou stožáru a proměnlivou krajinou
-// GitHub-ready, čistý HTML+JS bez build nástrojů
-
-import { useEffect, useRef, useState } from "react";
+// SkyTel Montage – 404 stránka: nalezena, ale nefunkční, pořád někde lezu
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import Matter from "matter-js";
 
-export default function SkyTelMontage() {
-  const sceneRef = useRef(null);
-  const [engine, setEngine] = useState(null);
-  const [world, setWorld] = useState(null);
-  const [pieces, setPieces] = useState([]);
-  const [fallen, setFallen] = useState(false);
+const messages = {
+  cz: "Stránka nalezena, ale nemám čas ji sprovoznit. Pořád někde lezu...",
+  en: "Page found, but I don't have time to set it up. Always climbing...",
+  de: "Seite gefunden, aber keine Zeit sie aufzubauen. Bin ständig am Klettern...",
+  es: "Página encontrada, pero no tengo tiempo para configurarla. Siempre escalando...",
+  fr: "Page trouvée, mais pas le temps de la configurer. Toujours en train de grimper...",
+  it: "Pagina trovata, ma non ho tempo per sistemarla. Sempre in arrampicata...",
+  kl: "velqa' tu'lu', 'ach jImejtaH. reH Hu' jIH."
+};
+
+const langs = Object.keys(messages);
+
+export default function SkyTel404() {
+  const [langIndex, setLangIndex] = useState(0);
 
   useEffect(() => {
-    const Engine = Matter.Engine,
-      Render = Matter.Render,
-      World = Matter.World,
-      Bodies = Matter.Bodies,
-      Runner = Matter.Runner,
-      Body = Matter.Body,
-      Events = Matter.Events;
-
-    const engine = Engine.create();
-    const world = engine.world;
-    setEngine(engine);
-    setWorld(world);
-
-    const render = Render.create({
-      element: sceneRef.current,
-      engine: engine,
-      options: {
-        width: window.innerWidth,
-        height: window.innerHeight,
-        wireframes: false,
-        background: "transparent",
-      },
-    });
-
-    Render.run(render);
-    const runner = Runner.create();
-    Runner.run(runner, engine);
-
-    const ground = Bodies.rectangle(
-      window.innerWidth / 2,
-      window.innerHeight - 50,
-      window.innerWidth,
-      60,
-      { isStatic: true, render: { fillStyle: "#333" } }
-    );
-
-    World.add(world, [ground]);
-
-    // Vytvoření stožáru z kusů
-    const partCount = 10;
-    const partHeight = 30;
-    const partWidth = 20;
-    const parts = Array.from({ length: partCount }).map((_, i) =>
-      Bodies.rectangle(
-        window.innerWidth / 2,
-        window.innerHeight - 60 - i * partHeight,
-        partWidth,
-        partHeight,
-        {
-          isStatic: true,
-          render: { fillStyle: "#777" },
-          label: `part_${i}`,
-        }
-      )
-    );
-
-    setPieces(parts);
-    World.add(world, parts);
-
-    return () => {
-      Render.stop(render);
-      World.clear(world);
-      Engine.clear(engine);
-      render.canvas.remove();
-      render.textures = {};
-    };
+    const interval = setInterval(() => {
+      setLangIndex((prev) => (prev + 1) % langs.length);
+    }, 5000);
+    return () => clearInterval(interval);
   }, []);
 
-  const dropPiece = () => {
-    if (!engine || !pieces.length) return;
-    const next = pieces[0];
-    Matter.Body.setStatic(next, false);
-    setPieces((prev) => prev.slice(1));
-    if (pieces.length === 1) setFallen(true);
-  };
+  const currentLang = langs[langIndex];
 
   return (
-    <div className="relative h-screen w-screen bg-gradient-to-b from-blue-300 to-green-500 overflow-hidden">
-      {/* Obloha a nápis */}
-      <div className="absolute top-4 left-1/2 transform -translate-x-1/2 text-white text-6xl opacity-10 select-none">
-        Sky Tel Montage
+    <div className="relative w-full h-screen bg-black overflow-hidden font-sans">
+      {/* Matrix pozadí */}
+      <div className="absolute top-0 left-0 w-full h-full z-0 animate-pulse">
+        <canvas id="matrix-canvas" className="w-full h-full"></canvas>
       </div>
 
-      {/* Scéna s fyzikou */}
-      <div ref={sceneRef} className="w-full h-full"></div>
-
-      {/* Ovládací tlačítko */}
-      <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2">
-        <button
-          onClick={dropPiece}
-          className="bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-2 px-4 rounded shadow-xl"
+      {/* Text zprávy */}
+      <div className="absolute inset-0 z-10 flex flex-col items-center justify-center text-center px-4">
+        <motion.h1
+          key={currentLang}
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 20 }}
+          transition={{ duration: 1 }}
+          className="text-green-400 text-xl sm:text-3xl md:text-4xl lg:text-5xl"
         >
-          {fallen ? "Spadeno!" : "Odebrat kus stožáru"}
-        </button>
+          {messages[currentLang]}
+        </motion.h1>
       </div>
 
-      {/* Vtipy dole */}
-      <div className="absolute bottom-2 w-full text-center text-sm text-white opacity-80">
-        <p>„Proč technik nepadá? Protože je přivázanej ke svý práci.“</p>
-        <p>„BOZP: Buď Opatrný Zvlášť Pod stožárem.“</p>
+      {/* Trademark */}
+      <div className="absolute bottom-2 right-4 text-xs text-green-600 z-10">
+        SkyTel Montage™
       </div>
+
+      {/* Matrix efekt */}
+      <script>
+        {`
+        const canvas = document.getElementById("matrix-canvas");
+        if (canvas) {
+          const ctx = canvas.getContext("2d");
+          canvas.height = window.innerHeight;
+          canvas.width = window.innerWidth;
+
+          const katakana = "アァイィウヴエェオカガキギクグケゲコゴサザシジスズセゼソゾタダチッヂヅテデトドナニヌネノハバパヒビピフブプヘベペホボポマミムメモヤユヨラリルレロワヲン";
+          const latin = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+          const nums = "0123456789";
+          const alphabet = katakana + latin + nums;
+
+          const fontSize = 14;
+          const columns = canvas.width / fontSize;
+          const drops = Array.from({ length: columns }).fill(1);
+
+          function draw() {
+            ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = "#0f0";
+            ctx.font = `${fontSize}px monospace`;
+            for (let i = 0; i < drops.length; i++) {
+              const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+              ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+              if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                drops[i] = 0;
+              }
+              drops[i]++;
+            }
+          }
+          setInterval(draw, 50);
+        }
+        `}
+      </script>
     </div>
   );
 }
-
-// 💡 Poznámka: přidat měnící se pozadí (časovač mění den/noc), více jazyků a zvuky později.
+    }
+  ]
+}
