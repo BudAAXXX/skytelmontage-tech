@@ -1,140 +1,151 @@
-// SkyTel Montage – Web ve výstavbě
-// GitHub-ready verze s interaktivními efekty, glitch, kouřovou myší a jazykovým přepínáním
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SkyTel Montage</title>
+  <style>
+    body {
+      margin: 0;
+      background: black;
+      color: white;
+      font-family: monospace;
+      overflow: hidden;
+    }
 
-import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+    h1.glitch {
+      font-size: 48px;
+      text-align: center;
+      margin-top: 80px;
+      position: relative;
+      animation: glitch 1s infinite;
+    }
 
-export default function SkyTelMontage() {
-  const [language, setLanguage] = useState("cz");
-  const [date, setDate] = useState(new Date());
+    @keyframes glitch {
+      0% { text-shadow: 2px 0 red; }
+      25% { text-shadow: -2px 0 blue; }
+      50% { text-shadow: 2px 0 green; }
+      75% { text-shadow: -2px 0 yellow; }
+      100% { text-shadow: 2px 0 red; }
+    }
 
-  useEffect(() => {
-    const interval = setInterval(() => setDate(new Date()), 1000);
-    return () => clearInterval(interval);
-  }, []);
+    .tower {
+      position: absolute;
+      bottom: 0;
+      width: 10px;
+      height: 100px;
+      background: #777;
+      transition: transform 0.3s ease, height 0.3s ease;
+      transform-origin: bottom;
+    }
 
-  const translations = {
-    cz: {
-      title: "SkyTel Montage",
-      subtitle: "Stránka ve výstavbě",
-      intro: "Nemám čas, pořád někde lezu...",
-      trademark: "™",
-      languages: "Jazyky",
-    },
-    de: {
-      title: "SkyTel Montage",
-      subtitle: "Webseite im Aufbau",
-      intro: "Ich habe keine Zeit, bin ständig irgendwo am Klettern...",
-      trademark: "™",
-      languages: "Sprachen",
-    },
-    en: {
-      title: "SkyTel Montage",
-      subtitle: "Website under construction",
-      intro: "No time, always climbing somewhere...",
-      trademark: "™",
-      languages: "Languages",
-    },
-    kl: {
-      title: "SkyTel Montage",
-      subtitle: "veS Daq QonwI\'",
-      intro: "reH Hu\' qetwI' jIH",
-      trademark: "™",
-      languages: "Hol",
-    },
-  };
+    .tower:hover {
+      transform: rotate(-90deg);
+      height: 50px;
+    }
 
-  const handleLanguageChange = (lang) => {
-    setLanguage(lang);
-  };
+    .trademark {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      font-size: 10px;
+      color: gold;
+      opacity: 0.5;
+    }
 
-  return (
-    <div className="relative h-screen w-screen overflow-hidden bg-black text-white">
-      {/* Kouřová myš */}
-      <div
-        className="pointer-events-none fixed top-0 left-0 w-full h-full z-50"
-        style={{
-          background: `radial-gradient(circle at ${window.innerWidth / 2}px ${
-            window.innerHeight / 2
-          }px, rgba(255,255,255,0.05), transparent)`,
-          mixBlendMode: "lighten",
-        }}
-      ></div>
+    .lang {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+    }
 
-      {/* Interaktivní stožáry */}
-      <div className="absolute top-0 left-0 w-full h-full -z-10">
-        {[...Array(10)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-[10px] h-[100px] bg-gray-700 origin-bottom"
-            style={{ left: `${i * 10 + 5}%`, bottom: "0%" }}
-            whileHover={{ rotate: [0, -90], scaleY: 0.5 }}
-            transition={{ duration: 0.5 }}
-          />
-        ))}
-      </div>
+    .lang button {
+      background: none;
+      border: none;
+      color: white;
+      margin: 0 5px;
+      cursor: pointer;
+      font-size: 14px;
+    }
 
-      {/* Glitch intro */}
-      <motion.h1
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1 }}
-        className="text-6xl font-bold glitch text-center mt-20"
-      >
-        mSkyTel Montage
-      </motion.h1>
+    #bigLogo {
+      font-size: 100px;
+      opacity: 0.05;
+      text-align: center;
+      margin-top: 100px;
+    }
 
-      <motion.p
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1, duration: 1 }}
-        className="text-center mt-4 text-lg"
-      >
-        {translations[language].intro}
-      </motion.p>
+    #datetime {
+      position: absolute;
+      bottom: 5px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 10px;
+      color: grey;
+    }
 
-      {/* Trademark s odleskem */}
-      <div className="absolute top-2 right-4 text-xs text-yellow-400 opacity-60">
-        {translations[language].trademark}
-      </div>
+    #mouse-smoke {
+      position: fixed;
+      pointer-events: none;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 60%);
+      mix-blend-mode: lighten;
+    }
+  </style>
+</head>
+<body>
 
-      {/* Logo placeholder s efektem */}
-      <motion.div
-        initial={{ scale: 5, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        transition={{ delay: 2, duration: 1 }}
-        className="text-8xl font-extrabold text-center opacity-10"
-      >
-        SKYTEL
-      </motion.div>
+  <div class="trademark">™</div>
+  <h1 class="glitch" id="mainText">mSkyTel Montage</h1>
+  <p style="text-align: center;" id="introText">Pořád někde lezu...</p>
+  <div id="bigLogo">SKYTEL</div>
 
-      {/* Hudba ovládání */}
-      <div className="fixed bottom-4 left-4">
-        <button className="mr-4 font-mono">▶️ Play</button>
-        <button className="font-mono">⏹ Stop</button>
-      </div>
+  <div class="lang">
+    <span>Jazyk:</span>
+    <button onclick="setLang('cz')">CZ</button>
+    <button onclick="setLang('de')">DE</button>
+    <button onclick="setLang('en')">EN</button>
+    <button onclick="setLang('kl')">KL</button>
+  </div>
 
-      {/* Přepínač jazyků */}
-      <div className="fixed bottom-4 right-4 text-sm">
-        <span>{translations[language].languages}: </span>
-        {["cz", "de", "en", "kl"].map((lang) => (
-          <button
-            key={lang}
-            onClick={() => handleLanguageChange(lang)}
-            className="mx-1 underline hover:text-yellow-300"
-          >
-            {lang.toUpperCase()}
-          </button>
-        ))}
-      </div>
+  <div id="datetime"></div>
+  <div id="mouse-smoke"></div>
 
-      {/* Datum a čas */}
-      <div className="fixed bottom-2 left-1/2 transform -translate-x-1/2 text-xs text-gray-400">
-        {date.toLocaleString()}
-      </div>
-    </div>
-  );
-}
+  <script>
+    const translations = {
+      cz: { intro: 'Pořád někde lezu...' },
+      de: { intro: 'Ich bin ständig irgendwo am Klettern...' },
+      en: { intro: 'Always climbing somewhere...' },
+      kl: { intro: 'reH Hu\' qetwI\' jIH' },
+    };
 
-// CSS pro glitch efekt a další styly by měly být součástí globálního stylesheetu nebo Tailwind pluginu
-// Doplníme audio přehrávání, rollující písmena a podrobnosti v další verzi
+    function setLang(lang) {
+      document.getElementById('introText').innerText = translations[lang].intro;
+    }
+
+    // Stožáry
+    for (let i = 0; i < 10; i++) {
+      const tower = document.createElement('div');
+      tower.className = 'tower';
+      tower.style.left = `${i * 10 + 5}%`;
+      document.body.appendChild(tower);
+    }
+
+    // Datum a čas
+    setInterval(() => {
+      const now = new Date();
+      document.getElementById('datetime').innerText = now.toLocaleString();
+    }, 1000);
+
+    // Kouřová myš
+    const smoke = document.getElementById('mouse-smoke');
+    document.addEventListener('mousemove', (e) => {
+      smoke.style.left = `${e.pageX - 25}px`;
+      smoke.style.top = `${e.pageY - 25}px`;
+    });
+  </script>
+
+</body>
+</html>
