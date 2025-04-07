@@ -3,86 +3,183 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SkyTel Montage – Moje výbava</title>
-  <link rel="icon" href="https://cdn.pixabay.com/photo/2022/11/03/12/03/robot-7566801_1280.png" type="image/png">
-  <script src="https://cdn.tailwindcss.com"></script>
+  <title>SkyTel Montage</title>
+  <meta name="description" content="SkyTel Montage – Stránka se pomalu staví. Omlouváme se za dočasné omezení. Děkujeme za trpělivost.">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='20' fill='%2300ffc3'%3E%3Canimate attributeName='r' values='20;25;20' dur='1s' repeatCount='indefinite' /%3E%3C/circle%3E%3Cline x1='50' y1='0' x2='50' y2='100' stroke='%2300ffc3' stroke-width='2'/%3E%3C/svg%3E">
   <style>
-    @tailwind base;
-    @tailwind components;
-    @tailwind utilities;
-
-    @keyframes fade-in {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background: #0d1117;
+      color: #ffffff;
+      font-family: monospace;
+      overflow: hidden;
     }
-    .animate-fade-in {
-      animation: fade-in 1s ease-out both;
-    }
-    .delay-200 { animation-delay: 0.2s; }
-    .delay-500 { animation-delay: 0.5s; }
-    .delay-700 { animation-delay: 0.7s; }
 
-    .video-bg {
-      position: fixed;
+    canvas {
+      position: absolute;
       top: 0;
       left: 0;
-      width: 100vw;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+
+    .container {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
       height: 100vh;
-      object-fit: cover;
-      z-index: -1;
-      filter: grayscale(100%) brightness(0.3);
+      text-align: center;
+      padding: 0 10px;
+      box-sizing: border-box;
+    }
+
+    h1, p {
+      margin: 10px 0;
+      word-break: break-word;
+    }
+
+    .language-options {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .language-options button {
+      padding: 8px 16px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 5px;
+      background: #1f2937;
+      color: white;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .tm-blink {
+      font-size: 0.6em;
+      vertical-align: super;
+      animation: blink 1s step-start 0s infinite;
+    }
+
+    @keyframes blink {
+      50% { opacity: 0; }
+    }
+
+    @media screen and (max-width: 600px) {
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      p {
+        font-size: 1rem;
+      }
+
+      .language-options button {
+        font-size: 0.9rem;
+        padding: 6px 12px;
+      }
     }
   </style>
 </head>
-<body class="bg-black text-white">
+<body>
+  <canvas id="towerCanvas"></canvas>
+  <div class="container">
+    <h1 id="main-text">Stránka se pomalu staví...</h1>
+    <p id="sub-text">Omlouváme se za dočasné omezení. Děkujeme za trpělivost. SkyTel Montage<span class="tm-blink">™</span></p>
+    <div class="language-options">
+      <button onclick="changeLanguage('cs')">Čeština</button>
+      <button onclick="changeLanguage('en')">English</button>
+      <button onclick="changeLanguage('de')">Deutsch</button>
+      <button onclick="changeLanguage('kl')">Klingonština</button>
+      <button onclick="changeLanguage('gw')">Goa'uldština</button>
+    </div>
+  </div>
 
-  <!-- Animované pozadí – volně dostupné video z Pixabay -->
-  <video autoplay muted loop playsinline class="video-bg">
-    <source src="https://cdn.videvo.net/videvo_files/video/free/2014-12/large_watermarked/GlitchRobotPreview.mp4" type="video/mp4">
-    Váš prohlížeč nepodporuje video pozadí.
-  </video>
+  <script>
+    const translations = {
+      cs: {
+        title: "Stránka se pomalu staví...",
+        message: "Omlouváme se za dočasné omezení. Děkujeme za trpělivost. SkyTel Montage<span class='tm-blink'>™</span>"
+      },
+      en: {
+        title: "The page is slowly building...",
+        message: "We apologize for the inconvenience. Thank you for your patience. SkyTel Montage<span class='tm-blink'>™</span>"
+      },
+      de: {
+        title: "Die Seite wird langsam aufgebaut...",
+        message: "Wir entschuldigen uns für die Unannehmlichkeiten. Danke für Ihre Geduld. SkyTel Montage<span class='tm-blink'>™</span>"
+      },
+      kl: {
+        title: "nIvbogh Duj Qav je...",
+        message: "yIloS! Qapla'! SkyTel Montage<span class='tm-blink'>™</span>"
+      },
+      gw: {
+        title: "Kree sha'rel tarum...",
+        message: "Tal shak. SkyTel Montage<span class='tm-blink'>™</span>"
+      }
+    };
 
-  <main class="relative min-h-screen p-6 sm:p-10">
-    <section class="relative z-10 p-10 bg-black bg-opacity-70 backdrop-blur-md text-white rounded-2xl shadow-2xl max-w-7xl mx-auto overflow-hidden">
-      <h2 class="text-4xl sm:text-5xl font-extrabold mb-10 text-center tracking-wide animate-fade-in">Moje výbava & dovednosti</h2>
+    function changeLanguage(lang) {
+      document.getElementById('main-text').textContent = translations[lang].title;
+      document.getElementById('sub-text').innerHTML = translations[lang].message;
+    }
 
-      <p class="text-center text-gray-300 max-w-3xl mx-auto mb-16 text-lg leading-relaxed animate-fade-in delay-200">
-        Používám špičkové vybavení od firem jako Petzl, Beal nebo Singing Rock. Vše je moje osobní vlastnictví, pravidelně kontrolované, připravené pro extrémní výškové zakázky. V kombinaci s dlouholetou praxí a certifikacemi nabízím 100% spolehlivost.
-      </p>
+    const canvas = document.getElementById('towerCanvas');
+    const ctx = canvas.getContext('2d');
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 animate-fade-in delay-500">
-        <!-- VYBAVENI 1 -->
-        <div class="bg-gray-900 bg-opacity-60 p-6 rounded-xl shadow-xl hover:scale-105 transition-transform">
-          <img src="https://cdn.pixabay.com/photo/2016/10/07/12/56/rope-1726786_1280.jpg" alt="Lano Beal" class="rounded-xl mb-4 border border-gray-700 w-full h-auto">
-          <h3 class="text-2xl font-semibold">Beal 11mm, 30m</h3>
-          <p class="text-gray-400">Statické lano</p>
-          <p class="text-sm text-gray-500">EN 1891 | Revize: 03/2025</p>
-        </div>
+    let towerHeight = 0;
+    const maxTowerHeightRatio = 0.6;
+    let scanY = 0;
 
-        <!-- VYBAVENI 2 -->
-        <div class="bg-gray-900 bg-opacity-60 p-6 rounded-xl shadow-xl hover:scale-105 transition-transform">
-          <img src="https://cdn.pixabay.com/photo/2018/03/01/09/01/climbing-3182177_1280.jpg" alt="Postroj Singing Rock" class="rounded-xl mb-4 border border-gray-700 w-full h-auto">
-          <h3 class="text-2xl font-semibold">Singing Rock Expert 3D</h3>
-          <p class="text-gray-400">Postroj s předním a zádním ukotvením</p>
-          <p class="text-sm text-gray-500">EN 361, EN 813 | Stav: Nový</p>
-        </div>
+    function drawTower() {
+      const centerX = canvas.width / 2;
+      const maxTowerHeight = canvas.height * maxTowerHeightRatio;
 
-        <!-- VYBAVENI 3 -->
-        <div class="bg-gray-900 bg-opacity-60 p-6 rounded-xl shadow-xl hover:scale-105 transition-transform">
-          <img src="https://cdn.pixabay.com/photo/2018/04/10/22/41/rope-3311976_1280.jpg" alt="Karabina Petzl" class="rounded-xl mb-4 border border-gray-700 w-full h-auto">
-          <h3 class="text-2xl font-semibold">Petzl OK TRIACT</h3>
-          <p class="text-gray-400">Hliníková karabina</p>
-          <p class="text-sm text-gray-500">EN 12275 | Stav: Kontrolováno</p>
-        </div>
-      </div>
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      <div class="text-center mt-16 animate-fade-in delay-700">
-        <a href="/downloads/Skytel_Vybaveni_2025.pdf" class="inline-block px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white text-lg rounded-full transition">
-          📄 Stáhnout kompletní seznam ve formátu PDF
-        </a>
-      </div>
-    </section>
-  </main>
+      ctx.fillStyle = 'rgba(0, 255, 195, 0.1)';
+      ctx.fillRect(0, scanY, canvas.width, 2);
+      scanY += 2;
+      if (scanY > canvas.height) scanY = 0;
 
+      ctx.beginPath();
+      ctx.moveTo(centerX - 10, canvas.height);
+      ctx.lineTo(centerX - 5, canvas.height - towerHeight);
+      ctx.lineTo(centerX + 5, canvas.height - towerHeight);
+      ctx.lineTo(centerX + 10, canvas.height);
+      ctx.closePath();
+      ctx.fillStyle = '#00ffc3';
+      ctx.fill();
+
+      ctx.strokeStyle = '#00ffc3';
+      for (let i = 0; i < towerHeight; i += 30) {
+        ctx.beginPath();
+        ctx.moveTo(centerX - 5, canvas.height - i);
+        ctx.lineTo(centerX + 5, canvas.height - i);
+        ctx.stroke();
+      }
+
+      if (towerHeight < maxTowerHeight) {
+        towerHeight += 1;
+      }
+      requestAnimationFrame(drawTower);
+    }
+
+    drawTower();
+  </script>
 </body>
 </html>
