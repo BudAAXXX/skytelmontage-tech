@@ -1,85 +1,48 @@
-import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
-
-const messages = {
-  cz: "Stránka nalezena, ale nemám čas ji sprovoznit. Pořád někde lezu...",
-  en: "Page found, but I don't have time to set it up. Always climbing...",
-  de: "Seite gefunden, aber keine Zeit sie aufzubauen. Bin ständig am Klettern...",
-  es: "Página encontrada, pero no tengo tiempo para configurarla. Siempre escalando...",
-  fr: "Page trouvée, mais pas le temps de la configurer. Toujours en train de grimper...",
-  it: "Pagina trovata, ma non ho tempo per sistemarla. Sempre in arrampicata...",
-  kl: "velqa' tu'lu', 'ach jImejtaH. reH Hu' jIH."
-};
-
-const langs = Object.keys(messages);
-
-export default function SkyTel404() {
-  const [langIndex, setLangIndex] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setLangIndex((prev) => (prev + 1) % langs.length);
-    }, 5000);
-    return () => clearInterval(interval);
-  }, []);
-
-  const currentLang = langs[langIndex];
-
-  useEffect(() => {
-    const canvas = document.getElementById("matrix-canvas");
-    if (canvas) {
-      const ctx = canvas.getContext("2d");
-      canvas.height = window.innerHeight;
-      canvas.width = window.innerWidth;
-
-      const katakana = "アァイィウヴエェオカガキギクグケゲコゴサザシジスズセゼソゾタダチッヂヅテデトドナニヌネノハバパヒビピフブプヘベペホボポマミムメモヤユヨラリルレロワヲン";
-      const latin = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-      const nums = "0123456789";
-      const alphabet = katakana + latin + nums;
-
-      const fontSize = 14;
-      const columns = canvas.width / fontSize;
-      const drops = Array.from({ length: columns }).fill(1);
-
-      function draw() {
-        ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = "#0f0";
-        ctx.font = `${fontSize}px monospace`;
-        for (let i = 0; i < drops.length; i++) {
-          const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
-          ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-          if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-            drops[i] = 0;
-          }
-          drops[i]++;
-        }
-      }
-      const interval = setInterval(draw, 50);
-      return () => clearInterval(interval);
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stránka v údržbě</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0e0e0e;
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
     }
-  }, []);
-
-  return (
-    <div className="relative w-full h-screen bg-black overflow-hidden font-sans">
-      <canvas id="matrix-canvas" className="absolute top-0 left-0 w-full h-full z-0"></canvas>
-
-      <div className="absolute inset-0 z-10 flex flex-col items-center justify-center text-center px-4">
-        <motion.h1
-          key={currentLang}
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 20 }}
-          transition={{ duration: 1 }}
-          className="text-green-400 text-xl sm:text-3xl md:text-4xl lg:text-5xl"
-        >
-          {messages[currentLang]}
-        </motion.h1>
-      </div>
-
-      <div className="absolute bottom-2 right-4 text-xs text-green-600 z-10">
-        SkyTel Montage™
-      </div>
-    </div>
-  );
-}
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+    p {
+      font-size: 1.2rem;
+      max-width: 400px;
+    }
+    .spinner {
+      margin-top: 2rem;
+      width: 40px;
+      height: 40px;
+      border: 5px solid #fff;
+      border-top: 5px solid #00ffcc;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <h1>Stránka je mimo provoz</h1>
+  <p>Pracujeme na vylepšení. Brzy bude vše zpět v plné síle. Děkujeme za trpělivost.</p>
+  <div class="spinner"></div>
+</body>
+</html>
