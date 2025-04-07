@@ -3,168 +3,70 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SkyTel Montage – Údržba</title>
+  <title>SkyTel Montage – Moje výbava</title>
+  <link rel="icon" href="/images/logo-blue.png" type="image/png">
+  <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
-
-    html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      background: #0d1117;
-      color: #ffffff;
-      font-family: 'Roboto Mono', monospace;
-      overflow: hidden;
-      cursor: none;
+    @keyframes fade-in {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
-
-    .container {
-      position: relative;
-      z-index: 2;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      text-align: center;
-      padding: 20px;
+    .animate-fade-in {
+      animation: fade-in 1s ease-out both;
     }
-
-    .logo {
-      width: 120px;
-      height: auto;
-      margin-bottom: 20px;
-    }
-
-    h1, p {
-      white-space: nowrap;
-      overflow: hidden;
-      border-right: .15em solid #00ffc3;
-      width: 0;
-      animation: typing 3s steps(40, end) forwards, blink-caret .75s step-end infinite;
-    }
-
-    p {
-      animation-delay: 3.2s;
-    }
-
-    @keyframes typing {
-      from { width: 0 }
-      to { width: 100% }
-    }
-
-    @keyframes blink-caret {
-      from, to { border-color: transparent }
-      50% { border-color: #00ffc3; }
-    }
-
-    .language-options {
-      display: flex;
-      gap: 10px;
-      margin-top: 20px;
-      z-index: 3;
-    }
-
-    .language-options button {
-      padding: 8px 16px;
-      font-size: 1rem;
-      border: none;
-      border-radius: 8px;
-      background: #ffffff10;
-      color: white;
-      cursor: pointer;
-    }
-
-    .spinner {
-      margin-top: 2rem;
-      width: 50px;
-      height: 50px;
-      border: 5px solid #fff;
-      border-top: 5px solid #00ffc3;
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-      z-index: 3;
-    }
-
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-
-    .background-animation {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: url('https://assets.codepen.io/1538474/starfield_background.gif') center center/cover no-repeat;
-      opacity: 0.15;
-      z-index: 1;
-    }
-
-    .smoke {
-      position: absolute;
-      width: 100px;
-      height: 100px;
-      background: radial-gradient(circle, #ffffff20 0%, transparent 80%);
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 10;
-      transform: translate(-50%, -50%);
+    .delay-200 { animation-delay: 0.2s; }
+    .delay-500 { animation-delay: 0.5s; }
+    .delay-700 { animation-delay: 0.7s; }
+    .bg-noise {
+      background-image: url('/images/noise.png');
+      background-size: 300px;
     }
   </style>
 </head>
-<body>
-  <div class="background-animation"></div>
-  <div class="container">
-    <img src="https://i.imgur.com/ZU0qeLd.png" alt="SkyTel Montage logo" class="logo">
-    <h1 id="main-text">Stránka je mimo provoz</h1>
-    <p id="sub-text">Pracujeme na vylepšení. Brzy bude vše zpět v plné síle. Děkujeme za trpělivost.</p>
-    <div class="language-options">
-      <button onclick="changeLanguage('cs')">Čeština</button>
-      <button onclick="changeLanguage('en')">English</button>
-      <button onclick="changeLanguage('de')">Deutsch</button>
-      <button onclick="changeLanguage('fr')">Français</button>
-      <button onclick="changeLanguage('es')">Español</button>
+<body class="bg-black text-white">
+
+<section class="relative p-10 bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white rounded-2xl shadow-2xl max-w-7xl mx-auto overflow-hidden">
+  <div class="absolute top-0 left-0 w-full h-full bg-noise opacity-10 pointer-events-none"></div>
+  <h2 class="text-5xl font-extrabold mb-10 text-center tracking-wide animate-fade-in">Moje výbava & dovednosti</h2>
+
+  <p class="text-center text-gray-300 max-w-3xl mx-auto mb-16 text-lg leading-relaxed animate-fade-in delay-200">
+    Používám špičkové vybavení od firem jako Petzl, Beal nebo Singing Rock. Vše je moje osobní vlastnictví, pravidelně kontrolované, připravené pro extrémní výškové zakázky. V kombinaci s dlouholetou praxí a certifikacemi nabízím 100% spolehlivost.
+  </p>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 animate-fade-in delay-500">
+    <!-- VYBAVENI 1 -->
+    <div class="bg-gray-950 bg-opacity-50 p-6 rounded-xl shadow-xl hover:scale-105 transition-transform">
+      <img src="/images/lano.jpg" alt="Lano Beal" class="rounded-xl mb-4 border border-gray-700">
+      <h3 class="text-2xl font-semibold">Beal 11mm, 30m</h3>
+      <p class="text-gray-400">Statické lano</p>
+      <p class="text-sm text-gray-500">EN 1891 | Revize: 03/2025</p>
     </div>
-    <div class="spinner"></div>
+
+    <!-- VYBAVENI 2 -->
+    <div class="bg-gray-950 bg-opacity-50 p-6 rounded-xl shadow-xl hover:scale-105 transition-transform">
+      <img src="/images/postroj.jpg" alt="Postroj Singing Rock" class="rounded-xl mb-4 border border-gray-700">
+      <h3 class="text-2xl font-semibold">Singing Rock Expert 3D</h3>
+      <p class="text-gray-400">Postroj s předním a zádním ukotvením</p>
+      <p class="text-sm text-gray-500">EN 361, EN 813 | Stav: Nový</p>
+    </div>
+
+    <!-- VYBAVENI 3 -->
+    <div class="bg-gray-950 bg-opacity-50 p-6 rounded-xl shadow-xl hover:scale-105 transition-transform">
+      <img src="/images/karabina.jpg" alt="Karabina Petzl" class="rounded-xl mb-4 border border-gray-700">
+      <h3 class="text-2xl font-semibold">Petzl OK TRIACT</h3>
+      <p class="text-gray-400">Hliníková karabina</p>
+      <p class="text-sm text-gray-500">EN 12275 | Stav: Kontrolováno</p>
+    </div>
+
+    <!-- DALŠÍ VYBAVENÍ -->
   </div>
-  <div class="smoke" id="smoke"></div>
 
-  <script>
-    const translations = {
-      cs: {
-        title: "Stránka je mimo provoz",
-        message: "Pracujeme na vylepšení. Brzy bude vše zpět v plné síle. Děkujeme za trpělivost."
-      },
-      en: {
-        title: "Website under maintenance",
-        message: "We are working on improvements. Everything will be back soon. Thank you for your patience."
-      },
-      de: {
-        title: "Webseite im Wartungsmodus",
-        message: "Wir arbeiten an Verbesserungen. Bald ist alles wieder verfügbar. Danke für Ihre Geduld."
-      },
-      fr: {
-        title: "Site en maintenance",
-        message: "Nous travaillons à des améliorations. Tout sera bientôt de retour. Merci de votre patience."
-      },
-      es: {
-        title: "Sitio en mantenimiento",
-        message: "Estamos trabajando en mejoras. Todo volverá pronto. Gracias por su paciencia."
-      }
-    };
+  <div class="text-center mt-16 animate-fade-in delay-700">
+    <a href="/downloads/Skytel_Vybaveni_2025.pdf" class="inline-block px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white text-lg rounded-full transition">
+      📄 Stáhnout kompletní seznam ve formátu PDF
+    </a>
+  </div>
+</section>
 
-    function changeLanguage(lang) {
-      document.getElementById('main-text').textContent = translations[lang].title;
-      document.getElementById('sub-text').textContent = translations[lang].message;
-    }
-
-    const smoke = document.getElementById('smoke');
-    document.addEventListener('mousemove', (e) => {
-      smoke.style.left = e.pageX + 'px';
-      smoke.style.top = e.pageY + 'px';
-    });
-  </script>
 </body>
 </html>
