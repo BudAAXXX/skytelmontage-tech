@@ -1,74 +1,110 @@
-/* style.css */
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+/* Reset */
+* {
   margin: 0;
-  background-color: #f5f7fa;
-  color: #1c1c1c;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-header {
-  text-align: center;
-  padding: 2rem 1rem 1rem;
-  background-color: #0d1b2a;
-  color: #fff;
+body {
+  background: radial-gradient(circle, #0d1117 0%, #000000 100%);
+  color: #ffffff;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  overflow: hidden;
+}
+
+#intro {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.intro-logo {
+  width: 60%;
+  max-width: 600px;
+  animation: glowIntro 5s ease-in-out;
+}
+
+@keyframes glowIntro {
+  0% { opacity: 0; transform: scale(0.5); filter: blur(10px); }
+  50% { opacity: 1; transform: scale(1.05); filter: blur(0); }
+  100% { opacity: 0; transform: scale(1.1); filter: blur(5px); }
+}
+
+#main-content {
+  width: 100vw;
+  height: 100vh;
   position: relative;
+  z-index: 10;
 }
 
-.lang-switcher {
-  margin-top: 1rem;
+#vizitka {
+  position: absolute;
+  top: 5%;
+  left: 5%;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
+  transition: opacity 1s;
+  opacity: 0;
 }
 
-.lang-btn {
-  background: none;
-  border: 1px solid #ccc;
-  padding: 0.4rem 0.6rem;
-  margin: 0 0.2rem;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: all 0.2s ease-in-out;
+#vizitka h1 {
+  font-size: 2rem;
+  color: #00ffff;
+  margin-bottom: 10px;
+}
+
+#vizitka p {
+  margin: 5px 0;
   font-size: 1rem;
+  line-height: 1.4;
 }
 
-.lang-btn:hover {
-  background-color: #1b263b;
-  color: #fff;
-  border-color: #fff;
+.lang-switch {
+  margin-top: 10px;
 }
 
-main {
-  max-width: 1000px;
-  margin: auto;
-  padding: 2rem 1rem;
+.lang-switch button {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: white;
+  margin: 0 5px;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s, transform 0.2s;
 }
 
-blockquote.motto {
-  font-size: 1.2rem;
-  font-style: italic;
-  margin: 1rem auto;
-  padding: 1rem 1.5rem;
-  border-left: 4px solid #ff5722;
-  background-color: rgba(255, 87, 34, 0.05);
-  max-width: 800px;
-  position: relative;
+.lang-switch button:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.1);
 }
 
-/* 🔥 Flame effect (subtle and elegant) */
-.flame-text {
-  position: relative;
-  z-index: 1;
-  color: #ff5722;
-  animation: flicker 2s infinite;
+.cube-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: auto;
+  height: auto;
+  z-index: 0;
 }
 
-@keyframes flicker {
-  0%, 100% { text-shadow: 0 0 2px #ff7043, 0 0 10px #ff5722, 0 0 20px #e64a19; }
-  50% { text-shadow: 0 0 3px #ff7043, 0 0 12px #ff5722, 0 0 22px #d84315; }
-}
-
-footer {
-  text-align: center;
-  padding: 1rem;
-  background-color: #eaeaea;
-  font-size: 0.9rem;
-  color: #333;
+#cube-image {
+  width: 250px;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 16px;
+  box-shadow: 0 0 30px rgba(0, 255, 255, 0.2);
+  transition: opacity 0.5s ease-in-out;
 }
