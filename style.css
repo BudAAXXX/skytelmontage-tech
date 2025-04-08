@@ -1,0 +1,92 @@
+/* style.css */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f9f9f9;
+  color: #333;
+  line-height: 1.6;
+}
+
+header {
+  background-color: #0d1b2a;
+  color: white;
+  padding: 1rem 2rem;
+  text-align: center;
+}
+
+h1 {
+  margin: 0;
+  font-size: 1.8rem;
+}
+
+main {
+  padding: 2rem;
+  max-width: 1000px;
+  margin: auto;
+}
+
+.produkt {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+}
+
+.produkt h2 {
+  margin-top: 0;
+  color: #0d1b2a;
+}
+
+.otocka {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.otocka img {
+  max-width: 300px
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f9f9f9;
+  color: #333;
+  line-height: 1.6;
+}
+
+header {
+  background-color: #0d1b2a;
+  color: white;
+  padding: 1rem 2rem;
+  text-align: center;
+}
+
+h1 {
+  margin: 0;
+  font-size: 1.8rem;
+}
+
+main {
+  padding: 2rem;
+  max-width: 1000px;
+  margin: auto;
+}
+
+.produkt {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+}
+
+.produkt h2 {
+  margin-top: 0;
+  color: #0d1b2a;
+}
+
+.otocka {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.otocka img {
+  max-width: 300px
