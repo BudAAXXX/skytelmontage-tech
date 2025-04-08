@@ -1,55 +1,38 @@
 <!DOCTYPE html>
-<html lang="cs">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="SkyTel Montage™ – Výšková telekomunikační technika, práce na klíč, projekty, montáže a týmová preciznost. Budujeme signál ve výškách.">
-  <title>SkyTel Montage™</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="icon" href="logo.png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="SkyTel Montage je specialista na výškové a telekomunikační práce v Německu a ČR. Vlastní vybavení, drony, zkušenosti. Kontaktujte nás.">
+  <title>SkyTel Montage</title>
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="script.js"></script>
 </head>
 <body>
-
-  <!-- Intro -->
+  <canvas id="background-canvas"></canvas>
   <div id="intro">
-    <img src="logo-intro.png" alt="SkyTel Logo" class="logo-intro">
+    <img src="logo-intro.png" alt="SkyTel Montage Logo" class="intro-logo"/>
+    <audio id="intro-soundtrack" src="intro.mp3"></audio>
+  </div>
+  <div id="main-content" style="display:none;">
     <h1 id="headline-typing"></h1>
-  </div>
-
-  <!-- Hlavní obsah -->
-  <div id="main-content" style="display: none;">
-
-    <!-- Jazykový přepínač -->
-    <div id="lang-switch">
-      <button onclick="switchLang('cs')">🇨🇿</button>
-      <button onclick="switchLang('en')">🇬🇧</button>
-      <button onclick="switchLang('kl')">🖖</button>
+    <div class="cube">
+      <div class="face front"></div>
+      <div class="face back"></div>
+      <div class="face left"></div>
+      <div class="face right"></div>
+      <div class="face top"></div>
+      <div class="face bottom"></div>
     </div>
-
-    <!-- Vizitka / Popis -->
-    <section class="bio">
-      <p data-lang-cs data-lang-key="headline">
-        SkyTel Montage™ – Výšková telekomunikační technika, práce ve výškách bez kompromisů. Profesionální montáže LTE/BTS na klíč, týmová práce, precizní realizace a bezpečnost. Technik, co leze, maká a nikdy se nevzdává.
-      </p>
-    </section>
-
-    <!-- 3D kostka -->
-    <div class="scene">
-      <div class="cube">
-        <div class="face front"></div>
-        <div class="face back"></div>
-        <div class="face left"></div>
-        <div class="face right"></div>
-        <div class="face top"></div>
-        <div class="face bottom"></div>
-      </div>
+    <div id="game-container">
+      <button onclick="clickGame()">Klikni mě!</button>
+      <div id="score">Skóre: 0</div>
     </div>
-
+    <footer>
+      <p>Kontakt: <a href="mailto:highvoltagedrive@email.com">highvoltagedrive@email.com</a></p>
+      <p>Instagram: <a href="https://instagram.com/highvoltagedriv€" target="_blank">@highvoltagedriv€</a></p>
+      <img src="qr.png" alt="QR kontakt" class="qr" />
+    </footer>
   </div>
-
-  <!-- Mini hra vlevo dole -->
-  <!-- Vkládá se automaticky skriptem -->
-
-  <script src="script.js"></script>
 </body>
 </html>
