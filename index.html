@@ -7,28 +7,35 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <!-- Intro -->
   <div id="intro">
-    <img src="logo-intro.png" alt="Intro Logo" class="intro-logo">
-    <audio autoplay>
-      <source src="intro-sound.mp3" type="audio/mpeg" />
-    </audio>
+    <img src="logo-intro.png" class="intro-logo" alt="SkyTel Montage Logo">
+    <audio id="intro-soundtrack" src="intro-sound.mp3"></audio>
   </div>
 
+  <!-- Obsah -->
   <div id="main-content" style="display:none;">
-    <header>
-      <h1 data-lang-cs="SkyTel Montage" data-lang-en="SkyTel Montage" data-lang-kl="SkyTel Montage"></h1>
-      <p data-lang-cs="Stránka mimo provoz" data-lang-en="Page under maintenance" data-lang-kl="bortaS bIr jablu'DI' reH QaQqu' nay'."></p>
-    </header>
+    
+    <!-- Vizitka -->
+    <section id="vizitka">
+      <h1 data-lang-cs="Patrik Budinský" data-lang-en="Patrik Budinsky" data-lang-kl="paq budInSki">Patrik Budinský</h1>
+      <p data-lang-cs="Výškový specialista & zakladatel SkyTel Montage"
+         data-lang-en="High-altitude specialist & founder of SkyTel Montage"
+         data-lang-kl="pIvchem QulwI' 'ej SkyTel Montage chenmoHwI'">Výškový specialista & zakladatel SkyTel Montage</p>
+      <p>Email: patrik.budinsky@skytelmontage.tech</p>
+      <p>📍 Celá EU, podle potřeby</p>
+      <div class="lang-switch">
+        <button onclick="switchLang('cs')">🇨🇿</button>
+        <button onclick="switchLang('en')">🇬🇧</button>
+        <button onclick="switchLang('kl')">🛸</button>
+      </div>
+    </section>
 
+    <!-- Kostka -->
     <div class="cube-container">
-      <img id="cube-image" src="logo.png" alt="Katalog Vybavení">
+      <img id="cube-image" src="logo.png" alt="Kostka výbavy">
     </div>
 
-    <div class="lang-switch">
-      <button onclick="switchLang('cs')">🇨🇿</button>
-      <button onclick="switchLang('en')">🇬🇧</button>
-      <button onclick="switchLang('kl')">🛸</button>
-    </div>
   </div>
 
   <script src="script.js"></script>
