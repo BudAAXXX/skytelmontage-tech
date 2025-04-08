@@ -1,53 +1,36 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SkyTel Montage</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="script.js" defer></script>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <!-- Offline Message -->
-  <div id="offline-msg">Stránka je dočasně mimo provoz</div>
-
-  <!-- Intro Animation -->
   <div id="intro">
-    <img src="intro-logo.png" alt="SkyTel Montage Intro" id="intro-logo">
-    <audio id="intro-audio" autoplay>
-      <source src="intro-soundtrack.mp3" type="audio/mpeg">
-      Váš prohlížeč nepodporuje přehrávání audia.
+    <img src="logo-intro.png" alt="Intro Logo" class="intro-logo">
+    <audio autoplay>
+      <source src="intro-sound.mp3" type="audio/mpeg" />
     </audio>
   </div>
 
-  <!-- Jazykový přepínač -->
-  <div class="lang-switcher">
-    <button class="lang-btn" onclick="switchLang('cs')">CZ</button>
-    <button class="lang-btn" onclick="switchLang('en')">EN</button>
-    <button class="lang-btn" onclick="switchLang('de')">DE</button>
-    <button class="lang-btn" onclick="switchLang('kl')">🖖</button>
-  </div>
-
-  <!-- Hlavní obsah -->
-  <main id="main-content" style="display:none;">
+  <div id="main-content" style="display:none;">
     <header>
-      <h1 class="flame-text" data-lang-cs="SkyTel Montage - Výškové práce na klíč"
-           data-lang-en="SkyTel Montage - Turnkey Heights Solutions"
-           data-lang-de="SkyTel Montage - Höhenarbeit Komplettlösungen"
-           data-lang-kl="SkyTel Montage - SuvwI' Hoch">SkyTel Montage</h1>
-      <blockquote class="motto flame-text" data-lang-cs="Na vrcholu není místo pro chyby."
-                  data-lang-en="At the top, there's no room for mistakes."
-                  data-lang-de="An der Spitze ist kein Platz für Fehler."
-                  data-lang-kl="Qochbe' Hoch!">Na vrcholu není místo pro chyby.</blockquote>
+      <h1 data-lang-cs="SkyTel Montage" data-lang-en="SkyTel Montage" data-lang-kl="SkyTel Montage"></h1>
+      <p data-lang-cs="Stránka mimo provoz" data-lang-en="Page under maintenance" data-lang-kl="bortaS bIr jablu'DI' reH QaQqu' nay'."></p>
     </header>
 
-    <div id="floating-cube">
-      <img id="cube-image" src="KOTVÍCÍ DESKA PK3.png" alt="Vybavení">
+    <div class="cube-container">
+      <img id="cube-image" src="logo.png" alt="Katalog Vybavení">
     </div>
 
-    <footer>
-      &copy; 2025 SkyTel Montage | Kontakt: patrik.budinsky@skytelmontage.tech
-    </footer>
-  </main>
+    <div class="lang-switch">
+      <button onclick="switchLang('cs')">🇨🇿</button>
+      <button onclick="switchLang('en')">🇬🇧</button>
+      <button onclick="switchLang('kl')">🛸</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
