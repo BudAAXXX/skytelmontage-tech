@@ -3,64 +3,53 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SkyTel Montage | Prezentace</title>
+  <title>Katalog vybavení | SkyTel Montage</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header>
     <h1>SkyTel Montage</h1>
-    <p class="subtitle">Profesionální výškové práce a montáže sítí</p>
+    <p class="subtitle">Profesionální výškové práce a výbava</p>
+    <div class="lang-switcher">
+      <button class="lang-btn" data-lang="cz">🇨🇿</button>
+      <button class="lang-btn" data-lang="en">🇬🇧</button>
+      <button class="lang-btn" data-lang="de">🇩🇪</button>
+    </div>
   </header>
 
   <main>
-    <section class="intro">
-      <h2>O nás</h2>
-      <p>SkyTel Montage je specializovaná firma na komplexní výstavbu a instalaci telekomunikačních sítí. Nabízíme služby v oblasti výškových prací, montáže stožárů, instalace LTE BTS a technologických celků na klíč. Naší prioritou je bezpečnost, kvalita a preciznost každého projektu.</p>
+    <section class="about" style="background: url('assets/bg-blur.jpg') center/cover no-repeat; padding: 2rem; border-radius: 12px; margin: 2rem auto; max-width: 1000px; text-align: center;">
+      <h2>O mně | About Me | Über mich</h2>
+      <blockquote class="motto flame-text">
+        <p class="lang lang-cz">„Nevzdal jsem se, i když všechno říkalo, že bych měl.“</p>
+        <p class="lang lang-en" style="display:none">“I didn’t quit, even when everything told me I should.”</p>
+        <p class="lang lang-de" style="display:none">„Ich habe nicht aufgegeben, obwohl alles sagte, ich sollte.“</p>
+      </blockquote>
+      <p class="lang lang-cz"><strong>🇨🇿</strong> Ahoj! Jsem Patrik – lezu po stožárech, tahám kabely a usmívám se i ve výškách, kde i ptáci zvažují padák. Jsem technik, ale mám srdce umělce. 💪🎨</p>
+      <p class="lang lang-en" style="display:none"><strong>🇬🇧</strong> Hi! I'm Patrik – I climb towers, pull cables and still smile up where even birds consider parachutes. A tech with the soul of an artist. 💪🎨</p>
+      <p class="lang lang-de" style="display:none"><strong>🇩🇪</strong> Hallo! Ich bin Patrik – ich klettere auf Masten, ziehe Kabel und lächle dort, wo selbst Vögel lieber nicht landen. Techniker mit Künstlerherz. 💪🎨</p>
     </section>
 
-    <section class="galerie">
-      <h2>Projektové fotky</h2>
-      <div class="gallery">
-        <img src="https://drive.google.com/uc?export=view&id=1u5LJx6oHc8_4mj2rOogCNRgCkmZLoPGu" alt="Montáž stožáru">
-        <img src="https://drive.google.com/uc?export=view&id=1jeApL319ZtVCkLkCkMIrF0OTr3b8j18l" alt="Výškové práce">
-        <img src="https://drive.google.com/uc?export=view&id=1qj8tG2X7QLfVsSr1n1MfW3yppEYA9WkS" alt="Kompletní LTE BTS">
+    <section class="katalog-vybaveni">
+      <h2>Katalog vybavení</h2>
+      <div class="circular-catalog" id="vybaveni-kruh">
+        <p>Načítám vybavení...</p>
       </div>
-    </section>
-
-    <section class="vybaveni">
-      <h2>Naše vybavení</h2>
-      <ul>
-        <li>Profesionální lezecké vybavení (lanyardy, úvazky, helmy, záchranné systémy)</li>
-        <li>Nářadí pro montáž anténních systémů a kabeláže</li>
-        <li>Dron pro kontrolu a dokumentaci (DJI Mini 4 Pro)</li>
-        <li>Moderní měřicí přístroje a kalibrované nástroje</li>
-      </ul>
-      <div class="gallery">
-        <img src="https://drive.google.com/uc?export=view&id=1gk0lG3RyD7_CvSsfLzSin1MfW3yppEYA" alt="Lezecké vybavení">
-        <img src="https://drive.google.com/uc?export=view&id=1k7JqKTXk1XnSHPmvOMxMwZB7UZbnDXF6" alt="Nářadí a výstroj">
-        <img src="https://drive.google.com/uc?export=view&id=1EV0RrA83UuWuVkn3XTGcqIjqbk-RSc5z" alt="Pracovní detail">
-      </div>
-    </section>
-
-    <section class="kontakt">
-      <h2>Kontakt</h2>
-      <p><strong>E-mail:</strong> <a href="mailto:patrik.budinsky@skytelmontage.tech">patrik.budinsky@skytelmontage.tech</a></p>
-      <p><strong>Telefon:</strong> <a href="tel:+420739977089">+420 739 977 089</a></p>
-      <p><strong>Doména:</strong> <a href="https://skytelmontage.tech">skytelmontage.tech</a></p>
-    </section>
-
-    <section class="languages">
-      <h2>Languages | Jazyky | Sprachen</h2>
-      <ul>
-        <li>🇨🇿 Čeština</li>
-        <li>🇩🇪 Deutsch (bald verfügbar)</li>
-        <li>🇬🇧 English (coming soon)</li>
-      </ul>
     </section>
   </main>
 
   <footer>
-    <p>&copy; 2025 SkyTel Montage | All rights reserved</p>
+    <p>&copy; 2025 SkyTel Montage | Všechna práva vyhrazena</p>
   </footer>
+
+  <script>
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.lang').forEach(el => el.style.display = 'none');
+        document.querySelectorAll('.lang-' + btn.dataset.lang).forEach(el => el.style.display = 'block');
+      });
+    });
+  </script>
+  <script src="scripts/loadVybaveni.js"></script>
 </body>
 </html>
