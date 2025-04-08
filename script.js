@@ -73,10 +73,17 @@ window.addEventListener("load", () => {
 
 // --- Jazykový přepínač ---
 
+const translations = {
+  cs: "SkyTel Montage™ – Výšková telekomunikační technika",
+  en: "SkyTel Montage™ – High-rise telecommunication works",
+  kl: "SkyTel Montage™ – tlhoS ghoS Qeng" // Klingon
+};
+
 function switchLang(lang) {
   document.querySelectorAll("[data-lang-cs]").forEach(el => {
-    if (el.dataset[`lang${lang.toUpperCase()}`]) {
-      el.textContent = el.dataset[`lang${lang.toUpperCase()}`];
+    const key = el.dataset.langKey;
+    if (translations[lang]) {
+      el.textContent = translations[lang];
     }
   });
 }
@@ -94,3 +101,30 @@ function typeHeadline(text, element) {
   }
   typeChar();
 }
+
+// --- Mini Hra: klikací čtverec ---
+
+function spawnMiniGame() {
+  const gameBox = document.createElement("div");
+  gameBox.id = "mini-game";
+  gameBox.style.position = "fixed";
+  gameBox.style.bottom = "20px";
+  gameBox.style.left = "20px";
+  gameBox.style.width = "100px";
+  gameBox.style.height = "100px";
+  gameBox.style.background = "#0ff";
+  gameBox.style.border = "2px solid #fff";
+  gameBox.style.cursor = "pointer";
+  gameBox.title = "Klikni!";
+
+  let score = 0;
+  gameBox.onclick = () => {
+    score++;
+    gameBox.textContent = score;
+    gameBox.style.background = `hsl(${Math.random() * 360}, 80%, 60%)`;
+  };
+
+  document.body.appendChild(gameBox);
+}
+
+spawnMiniGame();
