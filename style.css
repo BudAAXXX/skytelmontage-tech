@@ -1,92 +1,106 @@
 /* style.css */
+
+:root {
+  --primary-color: #0d1b2a;
+  --accent-color: #1b263b;
+  --text-color: #212529;
+  --light-bg: #f8f9fa;
+  --border-color: #dee2e6;
+  --font-sans: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
 body {
   margin: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f9f9f9;
-  color: #333;
+  font-family: var(--font-sans);
+  background-color: var(--light-bg);
+  color: var(--text-color);
   line-height: 1.6;
 }
 
 header {
-  background-color: #0d1b2a;
+  background-color: var(--primary-color);
   color: white;
-  padding: 1rem 2rem;
+  padding: 2rem 1rem;
   text-align: center;
 }
 
-h1 {
+header h1 {
   margin: 0;
-  font-size: 1.8rem;
+  font-size: 2.2rem;
+}
+
+.subtitle {
+  font-size: 1.1rem;
+  color: #adb5bd;
+  margin-top: 0.5rem;
 }
 
 main {
-  padding: 2rem;
-  max-width: 1000px;
-  margin: auto;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
 }
 
-.produkt {
-  background: white;
-  padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+section {
+  margin-bottom: 3rem;
 }
 
-.produkt h2 {
-  margin-top: 0;
-  color: #0d1b2a;
+h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: var(--accent-color);
+  border-bottom: 2px solid var(--border-color);
+  padding-bottom: 0.5rem;
 }
 
-.otocka {
+ul {
+  padding-left: 1.2rem;
+  margin: 1rem 0;
+}
+
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.gallery img {
+  width: 100%;
+  max-width: 350px;
+  height: auto;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  object-fit: cover;
+}
+
+.kontakt p, .languages ul {
+  margin: 0.5rem 0;
+}
+
+footer {
   text-align: center;
-  margin-bottom: 1.5rem;
+  background-color: #e9ecef;
+  padding: 1rem;
+  font-size: 0.9rem;
+  color: #6c757d;
 }
 
-.otocka img {
-  max-width: 300px
+@media (max-width: 768px) {
+  header h1 {
+    font-size: 1.6rem;
+  }
 
-body {
-  margin: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f9f9f9;
-  color: #333;
-  line-height: 1.6;
+  .gallery {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  h2 {
+    font-size: 1.3rem;
+  }
+
+  main {
+    padding: 1rem;
+  }
 }
-
-header {
-  background-color: #0d1b2a;
-  color: white;
-  padding: 1rem 2rem;
-  text-align: center;
-}
-
-h1 {
-  margin: 0;
-  font-size: 1.8rem;
-}
-
-main {
-  padding: 2rem;
-  max-width: 1000px;
-  margin: auto;
-}
-
-.produkt {
-  background: white;
-  padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.05);
-}
-
-.produkt h2 {
-  margin-top: 0;
-  color: #0d1b2a;
-}
-
-.otocka {
-  text-align: center;
-  margin-bottom: 1.5rem;
-}
-
-.otocka img {
-  max-width: 300px
