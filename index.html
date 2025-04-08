@@ -3,16 +3,43 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SkyTel Montage | Vizitka</title>
+  <title>SkyTel Montage | Intro</title>
   <link rel="stylesheet" href="style.css">
   <style>
-    body {
+    body, html {
       margin: 0;
       padding: 0;
-      background: linear-gradient(to bottom right, #111, #333);
-      color: #fff;
-      font-family: 'Segoe UI', sans-serif;
       overflow: hidden;
+      font-family: 'Segoe UI', sans-serif;
+      background: #000;
+    }
+    #intro {
+      position: absolute;
+      width: 100vw;
+      height: 100vh;
+      background: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: fadeOut 3s ease-in-out 5s forwards;
+      z-index: 999;
+    }
+    #intro img {
+      max-width: 80%;
+      max-height: 80%;
+    }
+    @keyframes fadeOut {
+      to { opacity: 0; visibility: hidden; }
+    }
+    #main-content {
+      display: none;
+      background: url("postava-uzly.gif") no-repeat center center fixed;
+      background-size: cover;
+      width: 100vw;
+      height: 100vh;
+    }
+    body.loaded #main-content {
+      display: block;
     }
     .vizitka {
       position: absolute;
@@ -23,11 +50,11 @@
       border-radius: 12px;
       box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
       max-width: 300px;
+      color: #fff;
     }
     .vizitka h1 {
       margin: 0;
       font-size: 24px;
-      color: #f8f8f8;
     }
     .vizitka p {
       margin: 8px 0;
@@ -57,107 +84,69 @@
   </style>
 </head>
 <body>
-  <div class="vizitka">
-    <h1>SkyTel Montage</h1>
-    <p>Profesionální výškové práce</p>
-    <p>Patrik Budinský</p>
-    <p>📍 Česko / Německo</p>
-    <p>📧 patrik.budinsky@skytelmontage.tech</p>
+  <audio id="intro-audio" autoplay>
+    <source src="intro-soundtrack.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <div id="intro">
+    <img src="A_digital_animation_showcases_a_logo_reveal_for_\"S.png" alt="SkyTel Montage Intro">
   </div>
 
-  <div class="kostka">
-    <img id="kostka-img" src="KOTVÍCÍ DESKA PK3.png" alt="vybavení">
+  <div id="main-content">
+    <div class="vizitka">
+      <h1>SkyTel Montage</h1>
+      <p>Profesionální výškové práce</p>
+      <p>Patrik Budinský</p>
+      <p>📍 Česko / Německo</p>
+      <p>📧 patrik.budinsky@skytelmontage.tech</p>
+    </div>
+
+    <div class="kostka">
+      <img id="kostka-img" src="KOTVÍCÍ DESKA PK3.png" alt="vybavení">
+    </div>
   </div>
 
   <script>
     const images = [
-      "KOTVÍCÍ DESKA PK3.png",
-      "Lano.png",
-      "Photoroom-20250408_151658_1.png",
-      "Photoroom-20250408_151658_2.png",
-      "Photoroom-20250408_151658_3.png",
-      "brzda.png",
-      "brzda01.png",
-      "brzda02.png",
-      "grillon(1).png",
-      "grillon.png",
-      "haky.png",
-      "helma.png",
-      "jummar.png",
-      "jummar02.png",
-      "karabina.png",
-      "karabina0.png",
-      "karabina01.png",
-      "karabina02.png",
-      "karabina03.png",
-      "karabina05.png",
-      "karabina06.png",
-      "karabina07.png",
-      "karabina08.png",
-      "karabina09.png",
-      "karabina1.png",
-      "karabina10.png",
-      "karabina11.png",
-      "karabina12.png",
-      "karabina13.png",
-      "karabina14.png",
-      "karabina15.png",
-      "karabina16.png",
-      "karabina17.png",
-      "karabina18.png",
-      "karabina19.png",
-      "karabina20.png",
-      "karabina21.png",
-      "karabina22.png",
-      "karabina23.png",
-      "karabina24.png",
-      "karabina25.png",
-      "karabina26.png",
-      "karabina27.png",
-      "karabina28.png",
-      "karabina29.png",
-      "kladka01.png",
-      "kladka02.png",
-      "kladka04.png",
-      "kladka05.png",
-      "kladka_brzda.png",
-      "kotvevnik.png",
-      "lano01.png",
-      "lano03.png",
-      "lano200m.png",
-      "logo.png",
-      "obrtlik.png",
-      "ocelka01.png",
-      "ocelka02.png",
-      "ocelka03.png",
-      "oecelka04.png",
-      "rig.png",
-      "sada.png",
-      "sada01.png",
-      "sedacka.png",
-      "sedacka02.png",
-      "sedak.png",
-      "smyce.png",
-      "smyce01.png",
-      "vak.png",
-      "vak03.png",
-      "vak05.png",
+      "KOTVÍCÍ DESKA PK3.png","Lano.png","Photoroom-20250408_151658_1.png",
+      "Photoroom-20250408_151658_2.png","Photoroom-20250408_151658_3.png",
+      "brzda.png","brzda01.png","brzda02.png","grillon(1).png","grillon.png",
+      "haky.png","helma.png","jummar.png","jummar02.png","karabina.png",
+      "karabina0.png","karabina01.png","karabina02.png","karabina03.png",
+      "karabina05.png","karabina06.png","karabina07.png","karabina08.png",
+      "karabina09.png","karabina1.png","karabina10.png","karabina11.png",
+      "karabina12.png","karabina13.png","karabina14.png","karabina15.png",
+      "karabina16.png","karabina17.png","karabina18.png","karabina19.png",
+      "karabina20.png","karabina21.png","karabina22.png","karabina23.png",
+      "karabina24.png","karabina25.png","karabina26.png","karabina27.png",
+      "karabina28.png","karabina29.png","kladka01.png","kladka02.png",
+      "kladka04.png","kladka05.png","kladka_brzda.png","kotvevnik.png",
+      "lano01.png","lano03.png","lano200m.png","logo.png","obrtlik.png",
+      "ocelka01.png","ocelka02.png","ocelka03.png","oecelka04.png","rig.png",
+      "sada.png","sada01.png","sedacka.png","sedacka02.png","sedak.png",
+      "smyce.png","smyce01.png","vak.png","vak03.png","vak05.png",
       "zachycovac.png"
     ];
 
+    const shuffledImages = images.sort(() => Math.random() - 0.5);
     let current = 0;
     const kostkaImg = document.getElementById('kostka-img');
 
     function nextImage() {
-      current = (current + 1) % images.length;
+      current = (current + 1) % shuffledImages.length;
       kostkaImg.style.opacity = 0;
       setTimeout(() => {
-        kostkaImg.src = images[current];
+        kostkaImg.src = shuffledImages[current];
         kostkaImg.style.opacity = 1;
       }, 300);
     }
 
     setInterval(nextImage, 10000);
+
+    setTimeout(() => {
+      document.body.classList.add('loaded');
+    }, 5200);
   </script>
 </body>
 </html>
