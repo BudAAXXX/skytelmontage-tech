@@ -3,76 +3,161 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Katalog vybavení | SkyTel Montage</title>
+  <title>SkyTel Montage | Vizitka</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to bottom right, #111, #333);
+      color: #fff;
+      font-family: 'Segoe UI', sans-serif;
+      overflow: hidden;
+    }
+    .vizitka {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+      max-width: 300px;
+    }
+    .vizitka h1 {
+      margin: 0;
+      font-size: 24px;
+      color: #f8f8f8;
+    }
+    .vizitka p {
+      margin: 8px 0;
+      font-size: 14px;
+      color: #ccc;
+    }
+    .kostka {
+      width: 150px;
+      height: 150px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform-style: preserve-3d;
+      animation: rotateCube 10s linear infinite;
+    }
+    .kostka img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      transition: opacity 0.5s ease-in-out;
+      position: absolute;
+    }
+    @keyframes rotateCube {
+      0% { transform: translate(-50%, -50%) rotateY(0deg); }
+      100% { transform: translate(-50%, -50%) rotateY(360deg); }
+    }
+  </style>
 </head>
 <body>
-  <header>
+  <div class="vizitka">
     <h1>SkyTel Montage</h1>
-    <p class="subtitle">Profesionální výškové práce a výbava</p>
-    <div class="lang-switcher">
-      <button class="lang-btn" data-lang="cz">🇨🇿</button>
-      <button class="lang-btn" data-lang="en">🇬🇧</button>
-      <button class="lang-btn" data-lang="de">🇩🇪</button>
-    </div>
-  </header>
+    <p>Profesionální výškové práce</p>
+    <p>Patrik Budinský</p>
+    <p>📍 Česko / Německo</p>
+    <p>📧 patrik.budinsky@skytelmontage.tech</p>
+  </div>
 
-  <main>
-    <blockquote class="motto flame-text">
-      <p class="lang lang-cz">„Nevzdal jsem se, i když všechno říkalo, že bych měl.“</p>
-      <p class="lang lang-en" style="display:none">“I didn’t quit, even when everything told me I should.”</p>
-      <p class="lang lang-de" style="display:none">„Ich habe nicht aufgegeben, obwohl alles sagte, ich sollte.“</p>
-    </blockquote>
-
-    <p class="lang lang-cz"><strong>🇨🇿</strong> Ahoj! Jsem Patrik – lezu po stožárech, tahám kabely a usmívám se i ve výškách, kde i ptáci zvažují padák. Jsem technik, ale mám srdce umělce. 💪🎨</p>
-    <p class="lang lang-en" style="display:none"><strong>🇬🇧</strong> Hi! I'm Patrik – I climb towers, pull cables and still smile up where even birds consider parachutes. A tech with the soul of an artist. 💪🎨</p>
-    <p class="lang lang-de" style="display:none"><strong>🇩🇪</strong> Hallo! Ich bin Patrik – ich klettere auf Masten, ziehe Kabel und lächle dort, wo selbst Vögel lieber nicht landen. Techniker mit Künstlerherz. 💪🎨</p>
-
-    <section class="katalog-vybaveni">
-      <h2>Katalog vybavení</h2>
-      <div class="circular-catalog" id="vybaveni-kruh">
-        <p>Načítám vybavení...</p>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <p>&copy; 2025 SkyTel Montage | Všechna práva vyhrazena</p>
-  </footer>
+  <div class="kostka">
+    <img id="kostka-img" src="KOTVÍCÍ DESKA PK3.png" alt="vybavení">
+  </div>
 
   <script>
-    document.querySelectorAll('.lang-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('.lang').forEach(el => el.style.display = 'none');
-        document.querySelectorAll('.lang-' + btn.dataset.lang).forEach(el => el.style.display = 'block');
-      });
-    });
-  </script>
-  <script>
-    // Načíst JSON a vytvořit katalog ve tvaru kruhu
-    fetch('vybaveni_gallery_github.json')
-      .then(response => response.json())
-      .then(data => {
-        const kruh = document.getElementById('vybaveni-kruh');
-        kruh.innerHTML = '';
+    const images = [
+      "KOTVÍCÍ DESKA PK3.png",
+      "Lano.png",
+      "Photoroom-20250408_151658_1.png",
+      "Photoroom-20250408_151658_2.png",
+      "Photoroom-20250408_151658_3.png",
+      "brzda.png",
+      "brzda01.png",
+      "brzda02.png",
+      "grillon(1).png",
+      "grillon.png",
+      "haky.png",
+      "helma.png",
+      "jummar.png",
+      "jummar02.png",
+      "karabina.png",
+      "karabina0.png",
+      "karabina01.png",
+      "karabina02.png",
+      "karabina03.png",
+      "karabina05.png",
+      "karabina06.png",
+      "karabina07.png",
+      "karabina08.png",
+      "karabina09.png",
+      "karabina1.png",
+      "karabina10.png",
+      "karabina11.png",
+      "karabina12.png",
+      "karabina13.png",
+      "karabina14.png",
+      "karabina15.png",
+      "karabina16.png",
+      "karabina17.png",
+      "karabina18.png",
+      "karabina19.png",
+      "karabina20.png",
+      "karabina21.png",
+      "karabina22.png",
+      "karabina23.png",
+      "karabina24.png",
+      "karabina25.png",
+      "karabina26.png",
+      "karabina27.png",
+      "karabina28.png",
+      "karabina29.png",
+      "kladka01.png",
+      "kladka02.png",
+      "kladka04.png",
+      "kladka05.png",
+      "kladka_brzda.png",
+      "kotvevnik.png",
+      "lano01.png",
+      "lano03.png",
+      "lano200m.png",
+      "logo.png",
+      "obrtlik.png",
+      "ocelka01.png",
+      "ocelka02.png",
+      "ocelka03.png",
+      "oecelka04.png",
+      "rig.png",
+      "sada.png",
+      "sada01.png",
+      "sedacka.png",
+      "sedacka02.png",
+      "sedak.png",
+      "smyce.png",
+      "smyce01.png",
+      "vak.png",
+      "vak03.png",
+      "vak05.png",
+      "zachycovac.png"
+    ];
 
-        const count = data.length;
-        const radius = 150;
+    let current = 0;
+    const kostkaImg = document.getElementById('kostka-img');
 
-        data.forEach((item, index) => {
-          const angle = (index / count) * 2 * Math.PI;
-          const x = radius * Math.cos(angle);
-          const y = radius * Math.sin(angle);
+    function nextImage() {
+      current = (current + 1) % images.length;
+      kostkaImg.style.opacity = 0;
+      setTimeout(() => {
+        kostkaImg.src = images[current];
+        kostkaImg.style.opacity = 1;
+      }, 300);
+    }
 
-          const div = document.createElement('div');
-          div.className = 'catalog-item';
-          div.style.position = 'absolute';
-          div.style.transform = `translate(${x}px, ${y}px)`;
-          div.innerHTML = `<img src="${item.id}" alt="${item.title}" title="${item.title}">`;
-
-          kruh.appendChild(div);
-        });
-      });
+    setInterval(nextImage, 10000);
   </script>
 </body>
 </html>
