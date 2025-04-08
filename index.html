@@ -18,17 +18,15 @@
   </header>
 
   <main>
-    <section class="about" style="background: url('assets/bg-blur.jpg') center/cover no-repeat; padding: 2rem; border-radius: 12px; margin: 2rem auto; max-width: 1000px; text-align: center;">
-      <h2>O mně | About Me | Über mich</h2>
-      <blockquote class="motto flame-text">
-        <p class="lang lang-cz">„Nevzdal jsem se, i když všechno říkalo, že bych měl.“</p>
-        <p class="lang lang-en" style="display:none">“I didn’t quit, even when everything told me I should.”</p>
-        <p class="lang lang-de" style="display:none">„Ich habe nicht aufgegeben, obwohl alles sagte, ich sollte.“</p>
-      </blockquote>
-      <p class="lang lang-cz"><strong>🇨🇿</strong> Ahoj! Jsem Patrik – lezu po stožárech, tahám kabely a usmívám se i ve výškách, kde i ptáci zvažují padák. Jsem technik, ale mám srdce umělce. 💪🎨</p>
-      <p class="lang lang-en" style="display:none"><strong>🇬🇧</strong> Hi! I'm Patrik – I climb towers, pull cables and still smile up where even birds consider parachutes. A tech with the soul of an artist. 💪🎨</p>
-      <p class="lang lang-de" style="display:none"><strong>🇩🇪</strong> Hallo! Ich bin Patrik – ich klettere auf Masten, ziehe Kabel und lächle dort, wo selbst Vögel lieber nicht landen. Techniker mit Künstlerherz. 💪🎨</p>
-    </section>
+    <blockquote class="motto flame-text">
+      <p class="lang lang-cz">„Nevzdal jsem se, i když všechno říkalo, že bych měl.“</p>
+      <p class="lang lang-en" style="display:none">“I didn’t quit, even when everything told me I should.”</p>
+      <p class="lang lang-de" style="display:none">„Ich habe nicht aufgegeben, obwohl alles sagte, ich sollte.“</p>
+    </blockquote>
+
+    <p class="lang lang-cz"><strong>🇨🇿</strong> Ahoj! Jsem Patrik – lezu po stožárech, tahám kabely a usmívám se i ve výškách, kde i ptáci zvažují padák. Jsem technik, ale mám srdce umělce. 💪🎨</p>
+    <p class="lang lang-en" style="display:none"><strong>🇬🇧</strong> Hi! I'm Patrik – I climb towers, pull cables and still smile up where even birds consider parachutes. A tech with the soul of an artist. 💪🎨</p>
+    <p class="lang lang-de" style="display:none"><strong>🇩🇪</strong> Hallo! Ich bin Patrik – ich klettere auf Masten, ziehe Kabel und lächle dort, wo selbst Vögel lieber nicht landen. Techniker mit Künstlerherz. 💪🎨</p>
 
     <section class="katalog-vybaveni">
       <h2>Katalog vybavení</h2>
@@ -50,6 +48,31 @@
       });
     });
   </script>
-  <script src="scripts/loadVybaveni.js"></script>
+  <script>
+    // Načíst JSON a vytvořit katalog ve tvaru kruhu
+    fetch('vybaveni_gallery_github.json')
+      .then(response => response.json())
+      .then(data => {
+        const kruh = document.getElementById('vybaveni-kruh');
+        kruh.innerHTML = '';
+
+        const count = data.length;
+        const radius = 150;
+
+        data.forEach((item, index) => {
+          const angle = (index / count) * 2 * Math.PI;
+          const x = radius * Math.cos(angle);
+          const y = radius * Math.sin(angle);
+
+          const div = document.createElement('div');
+          div.className = 'catalog-item';
+          div.style.position = 'absolute';
+          div.style.transform = `translate(${x}px, ${y}px)`;
+          div.innerHTML = `<img src="${item.id}" alt="${item.title}" title="${item.title}">`;
+
+          kruh.appendChild(div);
+        });
+      });
+  </script>
 </body>
 </html>
