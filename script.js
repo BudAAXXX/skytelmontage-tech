@@ -33,7 +33,6 @@ function nextImage() {
 
 setInterval(nextImage, 10000);
 
-// Přepnutí jazyka podle tlačítka
 function switchLang(lang) {
   document.querySelectorAll("[data-lang-cs]").forEach(el => {
     if (el.dataset[`lang${lang.toUpperCase()}`]) {
@@ -42,10 +41,42 @@ function switchLang(lang) {
   });
 }
 
-// Skrytí intra po 5 sekundách
 window.addEventListener("load", () => {
+  const intro = document.getElementById("intro");
+  const mainContent = document.getElementById("main-content");
+  const audio = document.getElementById("intro-soundtrack");
+  if (audio) audio.play();
   setTimeout(() => {
-    document.getElementById("intro").style.display = "none";
-    document.getElementById("main-content").style.display = "block";
+    if (intro) intro.style.display = "none";
+    if (mainContent) mainContent.style.display = "block";
   }, 5000);
+});
+
+let angle = 0;
+let posX = 50;
+let posY = 50;
+let speedX = (Math.random() - 0.5) * 1.5;
+let speedY = (Math.random() - 0.5) * 1.5;
+
+function animateCube() {
+  angle += 0.5;
+  posX += speedX;
+  posY += speedY;
+
+  if (posX < 0 || posX > 100) speedX = -speedX;
+  if (posY < 0 || posY > 100) speedY = -speedY;
+
+  const cube = document.querySelector(".cube-container");
+  if (cube) {
+    cube.style.transform = `translate(-50%, -50%) translate(${posX}vw, ${posY}vh) rotateY(${angle}deg) rotateX(${angle / 2}deg) scale(4)`;
+  }
+  requestAnimationFrame(animateCube);
+}
+
+animateCube();
+
+// Vizitka zobrazení
+window.addEventListener("DOMContentLoaded", () => {
+  const card = document.getElementById("vizitka");
+  if (card) card.style.opacity = 1;
 });
