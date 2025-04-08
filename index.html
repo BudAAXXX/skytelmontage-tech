@@ -3,39 +3,36 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SkyTel Montage</title>
+  <title>SkyTel Montage – Kostka</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <!-- Intro -->
   <div id="intro">
-    <img src="logo-intro.png" class="intro-logo" alt="SkyTel Montage Logo">
+    <img src="logo-intro.png" class="intro-logo" alt="SkyTel Montage Logo" />
     <audio id="intro-soundtrack" src="intro-sound.mp3"></audio>
   </div>
 
-  <!-- Obsah -->
+  <!-- Hlavní obsah -->
   <div id="main-content" style="display:none;">
-    
-    <!-- Vizitka -->
-    <section id="vizitka">
-      <h1 data-lang-cs="Patrik Budinský" data-lang-en="Patrik Budinsky" data-lang-kl="paq budInSki">Patrik Budinský</h1>
-      <p data-lang-cs="Výškový specialista & zakladatel SkyTel Montage"
-         data-lang-en="High-altitude specialist & founder of SkyTel Montage"
-         data-lang-kl="pIvchem QulwI' 'ej SkyTel Montage chenmoHwI'">Výškový specialista & zakladatel SkyTel Montage</p>
-      <p>Email: patrik.budinsky@skytelmontage.tech</p>
-      <p>📍 Celá EU, podle potřeby</p>
-      <div class="lang-switch">
-        <button onclick="switchLang('cs')">🇨🇿</button>
-        <button onclick="switchLang('en')">🇬🇧</button>
-        <button onclick="switchLang('kl')">🛸</button>
-      </div>
-    </section>
-
-    <!-- Kostka -->
-    <div class="cube-container">
-      <img id="cube-image" src="logo.png" alt="Kostka výbavy">
+    <!-- Jazykový přepínač -->
+    <div class="lang-switch">
+      <button onclick="switchLang('cs')">🇨🇿</button>
+      <button onclick="switchLang('en')">🇬🇧</button>
+      <button onclick="switchLang('kl')">🛸</button>
     </div>
 
+    <!-- 3D Kostka -->
+    <div class="scene">
+      <div class="cube">
+        <div class="face front"></div>
+        <div class="face back"></div>
+        <div class="face left"></div>
+        <div class="face right"></div>
+        <div class="face top"></div>
+        <div class="face bottom"></div>
+      </div>
+    </div>
   </div>
 
   <script src="script.js"></script>
