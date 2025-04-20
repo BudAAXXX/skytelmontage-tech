@@ -122,10 +122,10 @@
 </head>
 <body>
   <div id="video-intro" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;">
-    <video autoplay muted loop style="width: 100%; height: 100%; object-fit: cover; position: absolute;">
-      <source src="assets/intro1.mp4" type="video/mp4">
-    </video>
-  </div>
+  <video id="bg-video" autoplay muted loop style="width: 100%; height: 100%; object-fit: cover; position: absolute;">
+    <source src="assets/intro1.mp4" type="video/mp4">
+  </video>
+</div>
 
   <div style="position: absolute; top: 10px; right: 10px; display: flex; gap: 10px;">
     <img src="https://flagcdn.com/w20/cz.png" alt="CZ" title="Čeština" style="cursor:pointer" onclick="setLang('cs')">
@@ -208,6 +208,84 @@
       lightbox.style.display = 'none';
       lightboxImg.src = '';
     });
-  </script>
+  const translations = {
+  cs: {
+    about: 'O nás',
+    about_text: 'Specializujeme se na výškové práce, montáže stožárů, tahání a svařování optiky, instalaci antén a telekomunikační integrace. Pracujeme napříč Německem i Českem – rychle, precizně, bez řečí.',
+    jokes: [...jokes_cs]
+  },
+  en: {
+    about: 'About Us',
+    about_text: 'We specialize in high-altitude work, tower installations, fiber optic pulling and welding, antenna installations, and telecom integrations. We operate across Germany and the Czech Republic — fast, precise, no nonsense.',
+    jokes: [
+      "Heights are only scary once – on the way down.",
+      "Climber complains: 'My rope says it’s tired of me.'",
+      "Admin sleeps only with 127.0.0.1 – no one else listens.",
+      "IT guy didn’t get lost, he recursively returned to root.",
+      "If an IT guy says 'just a minute', go brew Turkish coffee.",
+      "A safety knot is like a relationship – weak ones fall.",
+      "Equipment doesn’t change, just the time between inspections.",
+      "Programmer doesn’t bathe – he has clean code.",
+      "Rebooting is like restarting life – without therapy.",
+      "The only relationship an IT guy maintains is Wi-Fi."
+    ]
+  },
+  de: {
+    about: 'Über uns',
+    about_text: 'Wir sind spezialisiert auf Höhenarbeit, Mastmontagen, Verlegung und Schweißung von Glasfasern, Antenneninstallationen und Telekommunikationsintegration. Wir arbeiten in ganz Deutschland und Tschechien – schnell, präzise, ohne Schnickschnack.',
+    jokes: [
+      "Höhen sind nur einmal schlimm – beim Runterfallen.",
+      "Kletterer beschwert sich: 'Mein Seil hat genug von mir.'",
+      "Admin schläft nur mit 127.0.0.1 – niemand sonst hört zu.",
+      "IT-Typ hat sich nicht verirrt, er ist rekursiv zum Root zurück.",
+      "Wenn ein ITler 'eine Minute' sagt – mach dir türkischen Kaffee.",
+      "Ein Sicherungsknoten ist wie eine Beziehung – wenn schwach, stürzt du ab.",
+      "Ausrüstung ändert sich nicht, nur der Abstand zwischen den Prüfungen.",
+      "Programmierer duscht nicht – hat sauberen Code.",
+      "Neustart ist wie ein Lebensneuanfang – nur ohne Therapie.",
+      "Die einzige Beziehung des ITlers ist mit WLAN."
+    ]
+  },
+  tlh: {
+    about: 'wIbuS',
+    about_text: 'wIHeghbe’ – SuvwI’ poS Hoch – chuSmeH Qeng – quvmo’!',
+    jokes: [
+      "vaj Qong 127.0.0.1 neH – latlh Qoybe’",
+      "rut vav HochHom vItlhutlh – QIbDaq HochDaq He’",
+      "roD yItlhutlh ‘ach Qochbe’ – Qulpu’ code.",
+      "tlhIngan DevwI’ Qulchu’ – Wifi!"]
+  }
+};
+
+function setLang(lang) {
+  document.querySelector('[data-key="about"]').textContent = translations[lang].about;
+  document.querySelector('[data-key="about_text"]').textContent = translations[lang].about_text;
+  jokes_cs.length = 0;
+  jokes_cs.push(...translations[lang].jokes);
+  showRandomJoke();
+}
+setTimeout(() => {
+  const videoContainer = document.getElementById('video-intro');
+  videoContainer.innerHTML = '<canvas id="matrix" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></canvas>';
+
+  const canvas = document.getElementById("matrix");
+  const ctx = canvas.getContext("2d");
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  const letters = Array(256).join("1").split("");
+  const draw = () => {
+    ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "#0F0";
+    letters.forEach((y_pos, index) => {
+      const text = String.fromCharCode(3e4 + Math.random() * 33);
+      const x_pos = index * 10;
+      ctx.fillText(text, x_pos, y_pos);
+      letters[index] = y_pos > 758 + Math.random() * 1e4 ? 0 : y_pos + 10;
+    });
+  };
+  setInterval(draw, 33);
+}, 60000);
+</script>
 </body>
 </html>
