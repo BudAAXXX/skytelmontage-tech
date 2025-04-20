@@ -235,6 +235,22 @@
       }
       setInterval(draw, 33);
     }, 27000);
-  </script>
+    const matrixToggle = document.createElement('style');
+  matrixToggle.innerHTML = `
+    #video-background {
+      opacity: 1;
+      transition: opacity 1s ease;
+    }
+    .video-fadeout {
+      opacity: 0;
+    }
+  `;
+  document.head.appendChild(matrixToggle);
+
+  setTimeout(() => {
+    const videoBg = document.getElementById('video-background');
+    if (videoBg) videoBg.classList.add('video-fadeout');
+  }, 27000);
+</script>
 </body>
 </html>
