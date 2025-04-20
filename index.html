@@ -1,55 +1,231 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-  <meta charset="UTF-8">
+    <meta name="description" content="Výšky nejsou překážkou, ale cestou. BudAA Telekomunikace – extrémní výškové instalace, integrace a montáže bez kompromisů.">
+    <meta name="keywords" content="SkyTel Montage, výškové práce, telekomunikace, BudAA, integrace, stožáry, optika, montáž">
+    <meta name="author" content="BudAA Telekomunikace">
+    <style>
+      *:not(video):not(script) {
+        animation: pulse 3s infinite;
+      }
+      @keyframes pulse {
+        0% { opacity: 1; }
+        50% { opacity: 0.7; }
+        100% { opacity: 1; }
+      }
+    </style>
+<meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SkyTel Montage</title>
-  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: #eee;
+      background-color: #111;
+      overflow-x: hidden;
+    }
+    header, footer {
+      background: #222;
+      padding: 1em;
+      color: #fff;
+    }
+    .logo {
+      font-weight: bold;
+      font-size: 1.2em;
+    }
+    nav ul {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      gap: 1em;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+    }
+    main {
+      padding: 2em;
+    }
+    #lang-select {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: #111;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 5px;
+    }
+    .matrix {
+      background: rgba(0, 0, 0, 0.9);
+      padding: 1em;
+      border-radius: 1em;
+      margin-top: 1em;
+      color: #00ff00;
+      font-family: monospace;
+      white-space: pre-wrap;
+    }
+    .rain-effect {
+      background: repeating-linear-gradient(
+        to bottom,
+        rgba(255,255,255,0.1) 0px,
+        rgba(255,255,255,0.1) 1px,
+        transparent 1px,
+        transparent 2px
+      );
+      animation: rain 0.5s linear infinite;
+    }
+    @keyframes rain {
+      0% { background-position: 0 0; }
+      100% { background-position: 0 100%; }
+    }
+    .project-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 10px;
+      margin-top: 20px;
+    }
+    .project-gallery img {
+      width: 100%;
+      border-radius: 8px;
+      border: 2px solid #333;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+    .project-gallery img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 15px #00ffcc;
+    }
+    .lightbox {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+    .lightbox img {
+      max-width: 90%;
+      max-height: 90%;
+      border: 4px solid #fff;
+      border-radius: 10px;
+    }
+    #joke-box {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: rgba(0, 0, 0, 0.7);
+      color: #fff;
+      padding: 1em;
+      border-radius: 10px;
+      font-size: 0.9em;
+      width: 250px;
+      z-index: 10000;
+      animation: flyIn 1s ease forwards;
+    }
+    @keyframes flyIn {
+      from { transform: translateY(-200px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+  </style>
 </head>
 <body>
-  <video autoplay muted loop id="bg-video">
+  <video autoplay muted loop id="bg-video" style="position:fixed; top:0; left:0; min-width:100%; min-height:100%; z-index:-1; object-fit:cover;">
     <source src="assets/background.mp4" type="video/mp4">
-    Tvůj prohlížeč nepodporuje přehrávání videa.
   </video>
+
+  <select id="lang-select">
+    <option value="cs">Česky</option>
+    <option value="en">English</option>
+    <option value="de">Deutsch</option>
+    <option value="tlh">Klingon</option>
+  </select>
 
   <header>
     <div class="logo">SkyTel Montage</div>
     <nav>
       <ul>
-        <li><a href="#about">O nás</a></li>
-        <li><a href="#equipment">Vybavení</a></li>
-        <li><a href="#certs">Certifikace</a></li>
-        <li><a href="#projects">Projekty</a></li>
+        <li><a href="#about" data-key="about">O nás</a></li>
+        <li><a href="#equipment" data-key="equipment">Vybavení</a></li>
+        <li><a href="#certs" data-key="certs">Certifikace</a></li>
+        <li><a href="#projects" data-key="projects">Projekty</a></li>
       </ul>
     </nav>
   </header>
 
   <main>
     <section id="about">
-      <h1>O nás</h1>
-      <p>SkyTel Montage je profesionální tým pro výškové a telekomunikační práce. Nabízíme zkušenosti, preciznost a spolehlivost na každém projektu.</p>
-    </section>
-
-    <section id="equipment">
-      <h1>Vybavení</h1>
-      <p>Moderní a pravidelně revidované vybavení, připravené na každou výzvu. Od lan až po měřicí techniku.</p>
-    </section>
-
-    <section id="certs">
-      <h1>Certifikace</h1>
-      <p>Máme platná školení a certifikace pro práci ve výškách i nad volnou hloubkou z lana (L2 Singing Rock). Disponujeme také znalostmi a zkušenostmi na úrovni IRATA. K tomu máme různé druhy pracovnělékařských prohlídek (Gxx), zdravovědu a další odborná školení.</p>
-    </section>
-
-    <section id="projects">
-      <h1>Projekty</h1>
-      <p>Podíleli jsme se na projektech pro hlavní operátory v Německu – Deutsche Telekom, Vodafone a Telefonica. Pracovali jsme ve všech spolkových zemích Německa a podíleli jsme se na široké škále projektů s různými technologiemi a specifiky každého regionu.</p>
+      <h1 data-key="about">O nás</h1>
+      <p data-key="about_text">
+        Jmenuju se Patrik Budinský. Dělám věci, na který jiní nemají buď odvahu, nebo výšku v nohách. Když visím na laně mezi nebem a anténou, připadám si víc doma než v obýváku – protože ten stejně nikdy pořádně nevyluxuju.
+      </p>
+      <p>
+        Začal jsem jako obyčejnej elektrikář, kterýmu bylo jedno, jestli ho kopne 220 nebo šéf. Teď stavím vysílače, tahám kabely, svařuju optiku a dělám integrace, zatímco jiní si stěžujou na Wi-Fi v kavárně. 
+      </p>
+      <p>
+        Neprodávám rohlíky v Lidlu, ale řeším problémy ve výškách, které se neřeší smajlíkem. Mám za sebou víc kilometrů po stožárech než průměrnej člověk nachodí po zemi. A přestože občas brečím ve výšce, není to strachem – jen se mi do očí odráží slunce z antény.
+      </p>
     </section>
   </main>
 
+  <div class="lightbox" id="lightbox">
+    <img src="" alt="Zvětšený obrázek">
+  </div>
+
+  <div id="joke-box"></div>
+
   <footer>
-    <p>&copy; 2025 SkyTel Montage<span style="font-size: 0.75em; display: block;">® Registrovaná značka. Minimalistický web vytvořil Patrik Budinský.</span></p>
+    <p>&copy; 2025 SkyTel Montage</p>
+    <p>Kontakt: <a href="mailto:patrik.budinsky@skytelmontage.tech" style="color:#00ffcc">patrik.budinsky@skytelmontage.tech</a></p>
+    <p>Sleduj mě:<br>
+      <a href="https://www.instagram.com/highvoltagedrive" target="_blank"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg" alt="Instagram" style="width:16px; vertical-align:middle; margin-right:5px;"></a>
+      <a href="https://www.youtube.com/@highvoltagedrive" target="_blank"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/youtube.svg" alt="YouTube" style="width:16px; vertical-align:middle; margin-right:5px;"></a>
+      <a href="https://www.tiktok.com/@highvoltagedrive" target="_blank"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/tiktok.svg" alt="TikTok" style="width:16px; vertical-align:middle; margin-right:5px;"></a>
+      <a href="https://twitter.com/highvoltagedrv" target="_blank"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/twitter.svg" alt="Twitter" style="width:16px; vertical-align:middle; margin-right:5px;"></a>
+    </p>
   </footer>
 
-  <script src="script.js"></script>
+  <script>
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = lightbox.querySelector('img');
+    const galleryImgs = document.querySelectorAll('.project-gallery img');
+    const jokeBox = document.getElementById('joke-box');
+
+    const jokes_cs = [
+      "Z výšek je to blbý jen jednou – dolů.",
+      "Lezec si stěžuje: 'Lano mi říká, že mě má dost.'",
+      "Admin spí jen se 127.0.0.1 – protože nikdo jiný ho neposlouchá.",
+      "ITák se neztratil, jen se rekurzivně vrátil do rootu.",
+      "Když ITák řekne, že 'to trvá chvíli', běž si uvařit kafe. V Turecku.",
+      "Jistící uzel je jako vztah – pokud není pevný, spadneš.",
+      "Vybavení se nemění, jen se zkracuje doba mezi revizemi.",
+      "Programátor se nemyje – má čistý kód.",
+      "Reboot je jako restart života, ale bez terapie.",
+      "Jediný vztah, který ITák udržuje, je spojení s Wi-Fi."
+    ];
+
+    function showRandomJoke() {
+      const random = jokes_cs[Math.floor(Math.random() * jokes_cs.length)];
+      jokeBox.textContent = random;
+    }
+
+    showRandomJoke();
+    setInterval(showRandomJoke, 15000);
+
+    galleryImgs.forEach(img => {
+      img.addEventListener('click', () => {
+        lightbox.style.display = 'flex';
+        lightboxImg.src = img.src;
+      });
+    });
+
+    lightbox.addEventListener('click', () => {
+      lightbox.style.display = 'none';
+      lightboxImg.src = '';
+    });
+  </script>
 </body>
 </html>
