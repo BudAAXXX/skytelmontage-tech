@@ -1,57 +1,10 @@
-body {
-  margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background: #000;
-  color: #fff;
-  overflow: hidden;
-}
-canvas#background-canvas {
+/* Video pozadí */
+#bg-video {
   position: fixed;
-  width: 100vw;
-  height: 100vh;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
   z-index: -1;
-}
-.intro-logo {
-  width: 50vw;
-  margin: 20vh auto;
-  display: block;
-}
-.cube {
-  width: 200px;
-  height: 200px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform-style: preserve-3d;
-  animation: float 20s infinite linear;
-}
-.face {
-  position: absolute;
-  width: 200px;
-  height: 200px;
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-}
-.face.front { transform: translateZ(100px); }
-.face.back { transform: rotateY(180deg) translateZ(100px); }
-.face.left { transform: rotateY(-90deg) translateZ(100px); }
-.face.right { transform: rotateY(90deg) translateZ(100px); }
-.face.top { transform: rotateX(90deg) translateZ(100px); }
-.face.bottom { transform: rotateX(-90deg) translateZ(100px); }
-
-@keyframes float {
-  0% { transform: translate(-50%, -50%) rotateX(0deg) rotateY(0deg); }
-  100% { transform: translate(-50%, -50%) rotateX(360deg) rotateY(360deg); }
-}
-
-footer {
-  position: fixed;
-  bottom: 10px;
-  left: 10px;
-  font-size: 0.8rem;
-}
-.qr {
-  height: 80px;
-  margin-top: 5px;
+  object-fit: cover;
 }
