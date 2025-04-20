@@ -8,9 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SkyTel Montage</title>
     <style>
-      *:not(video):not(script) {
-        animation: pulse 3s infinite;
-      }
+      
       @keyframes pulse {
         0% { opacity: 1; }
         50% { opacity: 0.7; }
@@ -123,35 +121,42 @@
 <body>
   <div id="video-intro" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;">
   <video id="bg-video" autoplay muted loop style="width: 100%; height: 100%; object-fit: cover; position: absolute;">
-    <source src="assets/intro1.mp4" type="video/mp4">
+    <source src="assets/background.mp4" type="video/mp4">
   </video>
 </div>
 
-  <div style="position: absolute; top: 10px; right: 10px; display: flex; gap: 10px;">
-    <img src="https://flagcdn.com/w20/cz.png" alt="CZ" title="Čeština" style="cursor:pointer" onclick="setLang('cs')">
-    <img src="https://flagcdn.com/w20/gb.png" alt="EN" title="English" style="cursor:pointer" onclick="setLang('en')">
-    <img src="https://flagcdn.com/w20/de.png" alt="DE" title="Deutsch" style="cursor:pointer" onclick="setLang('de')">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/4/46/Klingon.svg" alt="Klingon" title="Klingon" style="cursor:pointer; width:20px;" onclick="setLang('tlh')">
-  </div>
+  <div id="language-switcher" style="position: absolute; top: 10px; right: 10px; display: flex; gap: 10px;">
+  <img src="https://flagcdn.com/w20/cz.png" alt="CZ" title="Čeština" style="cursor:pointer" onclick="setLang('cs')">
+  <img src="https://flagcdn.com/w20/gb.png" alt="EN" title="English" style="cursor:pointer" onclick="setLang('en')">
+  <img src="https://flagcdn.com/w20/de.png" alt="DE" title="Deutsch" style="cursor:pointer" onclick="setLang('de')">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/4/46/Klingon.svg" alt="Klingon" title="Klingon" style="cursor:pointer; width:20px;" onclick="setLang('tlh')">
+</div>
 
   <header>
-    <div class="logo">SkyTel Montage</div>
-    <nav>
-      <ul>
-        <li><a href="#about" data-key="about">O nás</a></li>
-        <li><a href="#equipment" data-key="equipment">Vybavení</a></li>
-        <li><a href="#certs" data-key="certs">Certifikace</a></li>
-        <li><a href="#projects" data-key="projects">Projekty</a></li>
-      </ul>
-    </nav>
-  </header>
+  <div class="logo">
+    <a href="https://www.instagram.com/highvoltagedrive" target="_blank" style="color: #00ffcc; text-decoration: none;">
+      SkyTel Montage – sleduj automaticky nahoře!
+    </a>
+  </div>
+  <nav>
+    <ul>
+      <li><a href="#about" data-key="about">O nás</a></li>
+      <li><a href="#equipment" data-key="equipment">Vybavení</a></li>
+      <li><a href="#certs" data-key="certs">Certifikace</a></li>
+      <li><a href="#projects" data-key="projects">Projekty</a></li>
+    </ul>
+  </nav>
+</header>
 
   <main>
-    <section id="about">
-      <h1 data-key="about">O nás</h1>
+  <section>
+    <h2 data-key="about">O nás</h2>
+    <div id="about" style="padding-top: 2em;">
       <p data-key="about_text">Specializujeme se na výškové práce, montáže stožárů, tahání a svařování optiky, instalaci antén a telekomunikační integrace. Pracujeme napříč Německem i Českem – rychle, precizně, bez řečí.</p>
-    </section>
-  </main>
+    </div>
+  </section>
+<div id="cube-container" style="position: fixed; bottom: 20px; left: 20px; width: 100px; height: 100px; perspective: 600px; z-index: 10000;"></div>
+$1
 
   <div class="lightbox" id="lightbox">
     <img src="" alt="Zvětšený obrázek">
@@ -159,16 +164,17 @@
 
   <div id="joke-box"></div>
 
-  <footer>
-    <p>&copy; 2025 SkyTel Montage</p>
-    <p>Kontakt: <a href="mailto:patrik.budinsky@skytelmontage.tech" style="color:#00ffcc">patrik.budinsky@skytelmontage.tech</a></p>
-    <p>Sleduj mě:<br>
-      <a href="https://www.instagram.com/highvoltagedrive" target="_blank"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg" alt="Instagram" style="width:16px; vertical-align:middle; margin-right:5px;"></a>
-      <a href="https://www.youtube.com/@highvoltagedrive" target="_blank"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/youtube.svg" alt="YouTube" style="width:16px; vertical-align:middle; margin-right:5px;"></a>
-      <a href="https://www.tiktok.com/@highvoltagedrive" target="_blank"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/tiktok.svg" alt="TikTok" style="width:16px; vertical-align:middle; margin-right:5px;"></a>
-      <a href="https://twitter.com/highvoltagedrv" target="_blank"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/twitter.svg" alt="Twitter" style="width:16px; vertical-align:middle; margin-right:5px;"></a>
-    </p>
-  </footer>
+  <footer style="font-size: 0.75em; text-align: center;">
+  <p>Kontakt: <a href="mailto:patrik.budinsky@skytelmontage.tech" style="color:#00ffcc">patrik.budinsky@skytelmontage.tech</a></p>
+  <p style="color:#444; font-size: 0.7em;">Powered by BudAA</p>
+  <p>Sleduj mě:<br>
+    <a href="https://www.instagram.com/highvoltagedrive" target="_blank"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg" alt="Instagram" style="width:16px; vertical-align:middle; margin-right:5px;"></a>
+    <a href="https://www.youtube.com/@highvoltagedrive" target="_blank"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/youtube.svg" alt="YouTube" style="width:16px; vertical-align:middle; margin-right:5px;"></a>
+    <a href="https://www.tiktok.com/@highvoltagedrive" target="_blank"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/tiktok.svg" alt="TikTok" style="width:16px; vertical-align:middle; margin-right:5px;"></a>
+    <a href="https://twitter.com/highvoltagedrv" target="_blank"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/twitter.svg" alt="Twitter" style="width:16px; vertical-align:middle; margin-right:5px;"></a>
+  </p>
+  <p style="margin-top: 10px; color: #666;">© SkyTel Montage & BudAA Telekomunikace</p>
+</footer>
 
   <script>
     const lightbox = document.getElementById('lightbox');
@@ -276,7 +282,7 @@ setTimeout(() => {
   const draw = () => {
     ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = "#0F0";
+    ctx.fillStyle = `hsl(${Math.random() * 360}, 100%, 50%)`;
     letters.forEach((y_pos, index) => {
       const text = String.fromCharCode(3e4 + Math.random() * 33);
       const x_pos = index * 10;
@@ -286,6 +292,64 @@ setTimeout(() => {
   };
   setInterval(draw, 33);
 }, 60000);
-</script>
+const cubeContainer = document.getElementById("cube-container");
+const cube = document.createElement("div");
+cube.style.width = "100px";
+cube.style.height = "100px";
+cube.style.position = "relative";
+cube.style.transformStyle = "preserve-3d";
+cube.style.animation = "spin 10s infinite linear";
+cubeContainer.appendChild(cube);
+
+const faces = 6;
+let currentFace = 0;
+const imageFiles = [
+  "Lano.png",
+  "Photoroom-20250408_151658_1.png",
+  "Photoroom-20250408_151658_2.png",
+  "Photoroom-20250408_151658_3.png",
+  "brzda.png", "brzda01.png", "brzda02.png",
+  "grillon(1).png", "grillon.png",
+  "haky.png", "helma.png", "jummar.png", "jummar02.png",
+  "karabina.png", "karabina0.png", "karabina01.png", "karabina02.png", "karabina03.png", "karabina05.png",
+  "karabina06.png", "karabina07.png", "karabina08.png", "karabina09.png", "karabina1.png", "karabina10.png",
+  "karabina11.png", "karabina12.png", "karabina13.png", "karabina14.png", "karabina15.png", "karabina16.png",
+  "karabina17.png", "karabina18.png", "karabina19.png", "karabina20.png", "karabina21.png", "karabina22.png",
+  "karabina23.png", "karabina24.png", "karabina25.png", "karabina26.png", "karabina27.png", "karabina28.png",
+  "karabina29.png", "kladka01.png", "kladka02.png", "kladka04.png", "kladka05.png", "kladka_brzda.png",
+  "kotvevnik.png", "lano01.png", "lano03.png", "lano200m.png",
+  "obrtlik.png", "ocelka01.png", "ocelka02.png", "ocelka03.png", "oecelka04.png",
+  "rig.png", "sada.png", "sada01.png", "sedacka.png", "sedacka02.png", "sedak.png",
+  "smyce.png", "smyce01.png", "vak.png", "vak03.png", "vak05.png", "zachycovac.png"
+];
+
+for (let i = 0; i < faces; i++) {
+  const face = document.createElement("img");
+  face.src = `main/${imageFiles[i % imageFiles.length]}`;
+  face.style.width = "100px";
+  face.style.height = "100px";
+  face.style.position = "absolute";
+  face.style.backfaceVisibility = "hidden";
+  const angle = i * 90;
+  face.style.transform = `rotateY(${angle}deg) translateZ(50px)`;
+  cube.appendChild(face);
+}
+
+setInterval(() => {
+  currentFace = (currentFace + 1) % imageFiles.length;
+  const images = cube.querySelectorAll("img");
+  images.forEach((img, i) => {
+    img.src = `main/${imageFiles[(currentFace + i) % imageFiles.length]}`;
+  });
+}, 3000);
+
+const style = document.createElement('style');
+style.innerHTML = `@keyframes spin {
+  from { transform: rotateX(0deg) rotateY(0deg); }
+  to { transform: rotateX(360deg) rotateY(360deg); }
+}`;
+document.head.appendChild(style);
+
+$1
 </body>
 </html>
