@@ -1,81 +1,115 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-  <meta name="description" content="Výškové a telekomunikační práce bez kompromisů – montáže, optika, stožáry.">
-  <meta name="keywords" content="SkyTel Montage, výškové práce, telekomunikace, integrace, stožáry, optika, montáž">
-  <meta name="author" content="BudAA">
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="description" content="Výškové a telekomunikační práce bez kompromisů – montáže, optika, stožáry.">
+  <meta name="keywords" content="SkyTel Montage, výškové práce, telekomunikace, stožáry, optika, montáž, BudAA">
+  <meta name="author" content="BudAA">
   <title>SkyTel Montage</title>
   <link rel="stylesheet" href="style.css">
   <style>
-    .hidden { display: none; }
-    #matrix-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: black;
-      z-index: 0;
-      display: none;
+    * {
+      box-sizing: border-box;
     }
-    canvas#matrix {
-      position: absolute;
+    html, body {
+      margin: 0;
+      padding: 0;
       width: 100%;
       height: 100%;
-      display: block;
+      overflow-x: hidden;
+      font-family: Arial, sans-serif;
+      background-color: #000;
+      color: #fff;
+    }
+    header, footer {
+      text-align: center;
+      padding: 1rem;
+      background-color: #111;
+    }
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #00ffff;
+      animation: blink 2s linear infinite;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.6; }
+    }
+    nav ul {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1em;
+      list-style: none;
+      padding: 0;
+    }
+    nav a {
+      color: #00ffff;
+      text-decoration: none;
+    }
+    #cube-container {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 50px;
     }
     #cube {
-      width: 200px;
-      height: 200px;
+      width: 120px;
+      height: 120px;
       position: relative;
-      margin: 50px auto;
       transform-style: preserve-3d;
-      animation: rotateCube 20s infinite linear;
+      animation: rotateCube 10s infinite linear;
     }
     .face {
       position: absolute;
-      width: 200px;
-      height: 200px;
+      width: 120px;
+      height: 120px;
       backface-visibility: hidden;
-    }
-    @keyframes rotateCube {
-      from { transform: rotateX(0deg) rotateY(0deg); }
-      to { transform: rotateX(360deg) rotateY(360deg); }
     }
     .face img {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
+    @keyframes rotateCube {
+      0% { transform: rotateX(0deg) rotateY(0deg); }
+      100% { transform: rotateX(360deg) rotateY(360deg); }
+    }
+    footer p {
+      margin: 0.3rem 0;
+      font-size: 0.8em;
+    }
+    #joke-box {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background-color: rgba(0, 0, 0, 0.7);
+      color: #fff;
+      padding: 10px;
+      border-radius: 8px;
+      font-size: 0.9em;
+      max-width: 250px;
+      z-index: 999;
+    }
+    @media (max-width: 600px) {
+      nav ul {
+        flex-direction: column;
+        gap: 0.5em;
+      }
+      .logo {
+        font-size: 1.2em;
+      }
+    }
   </style>
 </head>
 <body>
-  <div id="video-intro">
-    <video id="bg-video" autoplay muted loop>
-      <source src="assets/background.mp4" type="video/mp4">
-    </video>
-  </div>
-
-  <div id="matrix-overlay">
-    <canvas id="matrix"></canvas>
-  </div>
-
-  <div id="language-switcher" style="position: absolute; top: 10px; right: 10px; display: flex; gap: 10px;">
-    <img src="https://flagcdn.com/w20/cz.png" alt="CZ" title="Čeština" style="cursor:pointer" onclick="setLang('cs')">
-    <img src="https://flagcdn.com/w20/gb.png" alt="EN" title="English" style="cursor:pointer" onclick="setLang('en')">
-    <img src="https://flagcdn.com/w20/de.png" alt="DE" title="Deutsch" style="cursor:pointer" onclick="setLang('de')">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/4/46/Klingon.svg" alt="Klingon" title="Klingon" style="cursor:pointer; width:20px;" onclick="setLang('tlh')">
-  </div>
-
   <header>
-    <div class="logo">
-      <a href="https://www.instagram.com/highvoltagedrive" target="_blank" style="color: black; text-decoration: none; animation: slotText 1.5s steps(10) infinite alternate;">SkyTel Montage</a>
-    </div>
+    <div class="logo">SkyTel Montage</div>
     <nav>
       <ul>
-        <li><a href="#about" data-key="about">O nás</a></li>
         <li><a href="#equipment" data-key="equipment">Vybavení</a></li>
         <li><a href="#certs" data-key="certs">Certifikace</a></li>
         <li><a href="#projects" data-key="projects">Projekty</a></li>
@@ -84,41 +118,75 @@
   </header>
 
   <main>
-    <section id="about" style="padding-top: 2em;">
-      <h2 data-key="about">O nás</h2>
-      <p data-key="about_text">Specializujeme se na výškové práce, montáže stožárů, tahání a svařování optiky, instalaci antén a telekomunikační integrace. Pracujeme napříč Německem i Českem – rychle, precizně, bez řečí.</p>
-    </section>
-    <section id="equipment"></section>
-    <section id="certs"></section>
-    <section id="projects"></section>
+    <div id="cube-container">
+      <div id="cube">
+        <div class="face" style="transform: rotateY(0deg) translateZ(60px)"><img src="main/Lano.png"></div>
+        <div class="face" style="transform: rotateY(90deg) translateZ(60px)"><img src="main/Photoroom-20250408_151658_1.png"></div>
+        <div class="face" style="transform: rotateY(180deg) translateZ(60px)"><img src="main/Photoroom-20250408_151658_2.png"></div>
+        <div class="face" style="transform: rotateY(-90deg) translateZ(60px)"><img src="main/Photoroom-20250408_151658_3.png"></div>
+        <div class="face" style="transform: rotateX(90deg) translateZ(60px)"><img src="main/brzda.png"></div>
+        <div class="face" style="transform: rotateX(-90deg) translateZ(60px)"><img src="main/brzda01.png"></div>
+      </div>
+    </div>
   </main>
 
-  <div id="cube-container">
-    <div id="cube"></div>
-  </div>
-  <div id="joke-box"></div>
-
   <footer>
-    <p style="color: #888; font-size: 0.7em;">Kontakt: <a href="mailto:patrik.budinsky@skytelmontage.tech" style="color:#00ffcc">patrik.budinsky@skytelmontage.tech</a></p>
-    <p style="color: #888; font-size: 0.7em;">Powered by BudAA</p>
-    <p>Sleduj mě:<br>
-      <a href="https://www.instagram.com/highvoltagedrive" target="_blank"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg" alt="Instagram" style="width:16px; vertical-align:middle; margin-right:5px;"></a>
-      <a href="https://www.youtube.com/@highvoltagedrive" target="_blank"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/youtube.svg" alt="YouTube" style="width:16px; vertical-align:middle; margin-right:5px;"></a>
-      <a href="https://www.tiktok.com/@highvoltagedrive" target="_blank"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/tiktok.svg" alt="TikTok" style="width:16px; vertical-align:middle; margin-right:5px;"></a>
-      <a href="https://twitter.com/highvoltagedrv" target="_blank"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/twitter.svg" alt="Twitter" style="width:16px; vertical-align:middle; margin-right:5px;"></a>
+    <p>Kontakt: <a href="mailto:patrik.budinsky@skytelmontage.tech" style="color:#00ffff">patrik.budinsky@skytelmontage.tech</a></p>
+    <p>Powered by BudAA</p>
+    <p>Sleduj mě:
+      <a href="https://www.instagram.com/highvoltagedrive" target="_blank">📸</a>
+      <a href="https://www.youtube.com/@highvoltagedrive" target="_blank">📺</a>
+      <a href="https://www.tiktok.com/@highvoltagedrive" target="_blank">🎵</a>
+      <a href="https://twitter.com/highvoltagedrv" target="_blank">🐦</a>
     </p>
-    <p style="color: #444; font-size: 0.6em;">© SkyTel Montage</p>
+    <div id="language-switcher" style="display: flex; justify-content: center; gap: 15px; margin-top: 10px; font-size: 1.5em;">
+      <span role="img" aria-label="Čeština" style="cursor:pointer" onclick="setLang('cs')">🇨🇿</span>
+      <span role="img" aria-label="Angličtina" style="cursor:pointer" onclick="setLang('en')">🇬🇧</span>
+      <span role="img" aria-label="Němčina" style="cursor:pointer" onclick="setLang('de')">🇩🇪</span>
+      <span role="img" aria-label="Klingonština" style="cursor:pointer" onclick="setLang('tlh')">🖖</span>
+    </div>
   </footer>
 
-  <script>
-    setTimeout(() => {
-      document.getElementById('bg-video').style.display = 'none';
-      document.getElementById('matrix-overlay').style.display = 'block';
-      startMatrix();
-    }, 60000);
+  <div id="joke-box"></div>
 
-    function startMatrix() {
-      const canvas = document.getElementById("matrix");
+  <script>
+    function setLang(lang) {
+      fetch(`lang/${lang}.json`)
+        .then(res => res.json())
+        .then(data => {
+          document.querySelectorAll('[data-key]').forEach(el => {
+            const key = el.getAttribute('data-key');
+            if (data[key]) el.textContent = data[key];
+          });
+          if (data.jokes) jokes = data.jokes;
+          document.querySelectorAll('[data-key]').forEach(el => {
+            const key = el.getAttribute('data-key');
+            if (data[key]) el.textContent = data[key];
+          });
+        });
+    }
+
+    let jokes = [];
+
+    function showJoke() {
+      const box = document.getElementById('joke-box');
+      const random = jokes[Math.floor(Math.random() * jokes.length)];
+      box.textContent = random;
+    }
+    setInterval(showJoke, 10000);
+    showJoke();
+
+    setTimeout(() => {
+      const canvas = document.createElement('canvas');
+      canvas.id = 'matrix';
+      canvas.style.position = 'fixed';
+      canvas.style.top = 0;
+      canvas.style.left = 0;
+      canvas.style.width = '100%';
+      canvas.style.height = '100%';
+      canvas.style.zIndex = -1;
+      document.body.appendChild(canvas);
+
       const ctx = canvas.getContext("2d");
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
@@ -146,22 +214,7 @@
         }
       }
       setInterval(draw, 33);
-    }
-
-    const cube = document.getElementById("cube");
-    const imageNames = [
-      "Lano.png", "Photoroom-20250408_151658_1.png", "Photoroom-20250408_151658_2.png",
-      "Photoroom-20250408_151658_3.png", "brzda.png", "brzda01.png"
-    ];
-
-    for (let i = 0; i < 6; i++) {
-      const face = document.createElement("div");
-      face.className = "face";
-      const img = document.createElement("img");
-      img.src = `main/${imageNames[i % imageNames.length]}`;
-      face.appendChild(img);
-      cube.appendChild(face);
-    }
+    }, 27000);
   </script>
 </body>
 </html>
