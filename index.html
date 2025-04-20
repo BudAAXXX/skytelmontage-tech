@@ -1,355 +1,167 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-    <meta name="description" content="Výškové a telekomunikační práce bez kompromisů – montáže, optika, stožáry. BudAA Telekomunikace – kde výška není problém, ale standard.">
-    <meta name="keywords" content="SkyTel Montage, výškové práce, telekomunikace, BudAA, integrace, stožáry, optika, montáž">
-    <meta name="author" content="BudAA Telekomunikace">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SkyTel Montage</title>
-    <style>
-      
-      @keyframes pulse {
-        0% { opacity: 1; }
-        50% { opacity: 0.7; }
-        100% { opacity: 1; }
-      }
-      body {
-        margin: 0;
-        font-family: Arial, sans-serif;
-        color: #eee;
-        background-color: #111;
-        overflow-x: hidden;
-      }
-      header, footer {
-        background: #222;
-        padding: 1em;
-        color: #fff;
-      }
-      .logo {
-        font-weight: bold;
-        font-size: 1.2em;
-      }
-      nav ul {
-        list-style: none;
-        padding: 0;
-        display: flex;
-        gap: 1em;
-      }
-      nav a {
-        color: white;
-        text-decoration: none;
-      }
-      main {
-        padding: 2em;
-      }
-      .matrix {
-        background: rgba(0, 0, 0, 0.9);
-        padding: 1em;
-        border-radius: 1em;
-        margin-top: 1em;
-        color: #00ff00;
-        font-family: monospace;
-        white-space: pre-wrap;
-      }
-      .rain-effect {
-        background: repeating-linear-gradient(
-          to bottom,
-          rgba(255,255,255,0.1) 0px,
-          rgba(255,255,255,0.1) 1px,
-          transparent 1px,
-          transparent 2px
-        );
-        animation: rain 0.5s linear infinite;
-      }
-      @keyframes rain {
-        0% { background-position: 0 0; }
-        100% { background-position: 0 100%; }
-      }
-      .project-gallery {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 10px;
-        margin-top: 20px;
-      }
-      .project-gallery img {
-        width: 100%;
-        border-radius: 8px;
-        border: 2px solid #333;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        cursor: pointer;
-      }
-      .project-gallery img:hover {
-        transform: scale(1.05);
-        box-shadow: 0 0 15px #00ffcc;
-      }
-      .lightbox {
-        display: none;
-        position: fixed;
-        top: 0; left: 0;
-        width: 100%; height: 100%;
-        background: rgba(0, 0, 0, 0.8);
-        justify-content: center;
-        align-items: center;
-        z-index: 9999;
-      }
-      .lightbox img {
-        max-width: 90%;
-        max-height: 90%;
-        border: 4px solid #fff;
-        border-radius: 10px;
-      }
-      #joke-box {
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        background-color: rgba(0, 0, 0, 0.7);
-        color: #fff;
-        padding: 1em;
-        border-radius: 10px;
-        font-size: 0.9em;
-        width: 250px;
-        z-index: 10000;
-        animation: flyIn 1s ease forwards;
-      }
-      @keyframes flyIn {
-        from { transform: translateY(-200px); opacity: 0; }
-        to { transform: translateY(0); opacity: 1; }
-      }
-    </style>
+  <meta name="description" content="Výškové a telekomunikační práce bez kompromisů – montáže, optika, stožáry.">
+  <meta name="keywords" content="SkyTel Montage, výškové práce, telekomunikace, integrace, stožáry, optika, montáž">
+  <meta name="author" content="BudAA">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SkyTel Montage</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .hidden { display: none; }
+    #matrix-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: black;
+      z-index: 0;
+      display: none;
+    }
+    canvas#matrix {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+    #cube {
+      width: 200px;
+      height: 200px;
+      position: relative;
+      margin: 50px auto;
+      transform-style: preserve-3d;
+      animation: rotateCube 20s infinite linear;
+    }
+    .face {
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      backface-visibility: hidden;
+    }
+    @keyframes rotateCube {
+      from { transform: rotateX(0deg) rotateY(0deg); }
+      to { transform: rotateX(360deg) rotateY(360deg); }
+    }
+    .face img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  </style>
 </head>
 <body>
-  <div id="video-intro" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;">
-  <video id="bg-video" autoplay muted loop style="width: 100%; height: 100%; object-fit: cover; position: absolute;">
-    <source src="assets/background.mp4" type="video/mp4">
-  </video>
-</div>
+  <div id="video-intro">
+    <video id="bg-video" autoplay muted loop>
+      <source src="assets/background.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <div id="matrix-overlay">
+    <canvas id="matrix"></canvas>
+  </div>
 
   <div id="language-switcher" style="position: absolute; top: 10px; right: 10px; display: flex; gap: 10px;">
-  <img src="https://flagcdn.com/w20/cz.png" alt="CZ" title="Čeština" style="cursor:pointer" onclick="setLang('cs')">
-  <img src="https://flagcdn.com/w20/gb.png" alt="EN" title="English" style="cursor:pointer" onclick="setLang('en')">
-  <img src="https://flagcdn.com/w20/de.png" alt="DE" title="Deutsch" style="cursor:pointer" onclick="setLang('de')">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/4/46/Klingon.svg" alt="Klingon" title="Klingon" style="cursor:pointer; width:20px;" onclick="setLang('tlh')">
-</div>
+    <img src="https://flagcdn.com/w20/cz.png" alt="CZ" title="Čeština" style="cursor:pointer" onclick="setLang('cs')">
+    <img src="https://flagcdn.com/w20/gb.png" alt="EN" title="English" style="cursor:pointer" onclick="setLang('en')">
+    <img src="https://flagcdn.com/w20/de.png" alt="DE" title="Deutsch" style="cursor:pointer" onclick="setLang('de')">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/4/46/Klingon.svg" alt="Klingon" title="Klingon" style="cursor:pointer; width:20px;" onclick="setLang('tlh')">
+  </div>
 
   <header>
-  <div class="logo">
-    <a href="https://www.instagram.com/highvoltagedrive" target="_blank" style="color: #00ffcc; text-decoration: none;">
-      SkyTel Montage – sleduj automaticky nahoře!
-    </a>
-  </div>
-  <nav>
-    <ul>
-      <li><a href="#about" data-key="about">O nás</a></li>
-      <li><a href="#equipment" data-key="equipment">Vybavení</a></li>
-      <li><a href="#certs" data-key="certs">Certifikace</a></li>
-      <li><a href="#projects" data-key="projects">Projekty</a></li>
-    </ul>
-  </nav>
-</header>
+    <div class="logo">
+      <a href="https://www.instagram.com/highvoltagedrive" target="_blank" style="color: black; text-decoration: none; animation: slotText 1.5s steps(10) infinite alternate;">SkyTel Montage</a>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#about" data-key="about">O nás</a></li>
+        <li><a href="#equipment" data-key="equipment">Vybavení</a></li>
+        <li><a href="#certs" data-key="certs">Certifikace</a></li>
+        <li><a href="#projects" data-key="projects">Projekty</a></li>
+      </ul>
+    </nav>
+  </header>
 
   <main>
-  <section>
-    <h2 data-key="about">O nás</h2>
-    <div id="about" style="padding-top: 2em;">
+    <section id="about" style="padding-top: 2em;">
+      <h2 data-key="about">O nás</h2>
       <p data-key="about_text">Specializujeme se na výškové práce, montáže stožárů, tahání a svařování optiky, instalaci antén a telekomunikační integrace. Pracujeme napříč Německem i Českem – rychle, precizně, bez řečí.</p>
-    </div>
-  </section>
-<div id="cube-container" style="position: fixed; bottom: 20px; left: 20px; width: 100px; height: 100px; perspective: 600px; z-index: 10000;"></div>
-$1
+    </section>
+    <section id="equipment"></section>
+    <section id="certs"></section>
+    <section id="projects"></section>
+  </main>
 
-  <div class="lightbox" id="lightbox">
-    <img src="" alt="Zvětšený obrázek">
+  <div id="cube-container">
+    <div id="cube"></div>
   </div>
-
   <div id="joke-box"></div>
 
-  <footer style="font-size: 0.75em; text-align: center;">
-  <p>Kontakt: <a href="mailto:patrik.budinsky@skytelmontage.tech" style="color:#00ffcc">patrik.budinsky@skytelmontage.tech</a></p>
-  <p style="color:#444; font-size: 0.7em;">Powered by BudAA</p>
-  <p>Sleduj mě:<br>
-    <a href="https://www.instagram.com/highvoltagedrive" target="_blank"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg" alt="Instagram" style="width:16px; vertical-align:middle; margin-right:5px;"></a>
-    <a href="https://www.youtube.com/@highvoltagedrive" target="_blank"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/youtube.svg" alt="YouTube" style="width:16px; vertical-align:middle; margin-right:5px;"></a>
-    <a href="https://www.tiktok.com/@highvoltagedrive" target="_blank"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/tiktok.svg" alt="TikTok" style="width:16px; vertical-align:middle; margin-right:5px;"></a>
-    <a href="https://twitter.com/highvoltagedrv" target="_blank"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/twitter.svg" alt="Twitter" style="width:16px; vertical-align:middle; margin-right:5px;"></a>
-  </p>
-  <p style="margin-top: 10px; color: #666;">© SkyTel Montage & BudAA Telekomunikace</p>
-</footer>
+  <footer>
+    <p style="color: #888; font-size: 0.7em;">Kontakt: <a href="mailto:patrik.budinsky@skytelmontage.tech" style="color:#00ffcc">patrik.budinsky@skytelmontage.tech</a></p>
+    <p style="color: #888; font-size: 0.7em;">Powered by BudAA</p>
+    <p>Sleduj mě:<br>
+      <a href="https://www.instagram.com/highvoltagedrive" target="_blank"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg" alt="Instagram" style="width:16px; vertical-align:middle; margin-right:5px;"></a>
+      <a href="https://www.youtube.com/@highvoltagedrive" target="_blank"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/youtube.svg" alt="YouTube" style="width:16px; vertical-align:middle; margin-right:5px;"></a>
+      <a href="https://www.tiktok.com/@highvoltagedrive" target="_blank"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/tiktok.svg" alt="TikTok" style="width:16px; vertical-align:middle; margin-right:5px;"></a>
+      <a href="https://twitter.com/highvoltagedrv" target="_blank"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/twitter.svg" alt="Twitter" style="width:16px; vertical-align:middle; margin-right:5px;"></a>
+    </p>
+    <p style="color: #444; font-size: 0.6em;">© SkyTel Montage</p>
+  </footer>
 
   <script>
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImg = lightbox.querySelector('img');
-    const galleryImgs = document.querySelectorAll('.project-gallery img');
-    const jokeBox = document.getElementById('joke-box');
+    setTimeout(() => {
+      document.getElementById('bg-video').style.display = 'none';
+      document.getElementById('matrix-overlay').style.display = 'block';
+      startMatrix();
+    }, 60000);
 
-    const jokes_cs = [
-      "Z výšek je to blbý jen jednou – dolů.",
-      "Lezec si stěžuje: 'Lano mi říká, že mě má dost.'",
-      "Admin spí jen se 127.0.0.1 – protože nikdo jiný ho neposlouchá.",
-      "ITák se neztratil, jen se rekurzivně vrátil do rootu.",
-      "Když ITák řekne, že 'to trvá chvíli', běž si uvařit kafe. V Turecku.",
-      "Jistící uzel je jako vztah – pokud není pevný, spadneš.",
-      "Vybavení se nemění, jen se zkracuje doba mezi revizemi.",
-      "Programátor se nemyje – má čistý kód.",
-      "Reboot je jako restart života, ale bez terapie.",
-      "Jediný vztah, který ITák udržuje, je spojení s Wi-Fi."
-    ];
+    function startMatrix() {
+      const canvas = document.getElementById("matrix");
+      const ctx = canvas.getContext("2d");
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
 
-    function showRandomJoke() {
-      const random = jokes_cs[Math.floor(Math.random() * jokes_cs.length)];
-      jokeBox.textContent = random;
+      const letters = Array(256).join("01").split("");
+      const fontSize = 12;
+      const columns = canvas.width / fontSize;
+      const drops = Array(Math.floor(columns)).fill(1);
+
+      function draw() {
+        ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        ctx.fillStyle = "hsl(" + Math.floor(Math.random() * 360) + ", 100%, 50%)";
+        ctx.font = fontSize + "px monospace";
+
+        for (let i = 0; i < drops.length; i++) {
+          const text = letters[Math.floor(Math.random() * letters.length)];
+          ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+          if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+            drops[i] = 0;
+          }
+          drops[i]++;
+        }
+      }
+      setInterval(draw, 33);
     }
 
-    showRandomJoke();
-    setInterval(showRandomJoke, 15000);
+    const cube = document.getElementById("cube");
+    const imageNames = [
+      "Lano.png", "Photoroom-20250408_151658_1.png", "Photoroom-20250408_151658_2.png",
+      "Photoroom-20250408_151658_3.png", "brzda.png", "brzda01.png"
+    ];
 
-    galleryImgs.forEach(img => {
-      img.addEventListener('click', () => {
-        lightbox.style.display = 'flex';
-        lightboxImg.src = img.src;
-      });
-    });
-
-    lightbox.addEventListener('click', () => {
-      lightbox.style.display = 'none';
-      lightboxImg.src = '';
-    });
-  const translations = {
-  cs: {
-    about: 'O nás',
-    about_text: 'Specializujeme se na výškové práce, montáže stožárů, tahání a svařování optiky, instalaci antén a telekomunikační integrace. Pracujeme napříč Německem i Českem – rychle, precizně, bez řečí.',
-    jokes: [...jokes_cs]
-  },
-  en: {
-    about: 'About Us',
-    about_text: 'We specialize in high-altitude work, tower installations, fiber optic pulling and welding, antenna installations, and telecom integrations. We operate across Germany and the Czech Republic — fast, precise, no nonsense.',
-    jokes: [
-      "Heights are only scary once – on the way down.",
-      "Climber complains: 'My rope says it’s tired of me.'",
-      "Admin sleeps only with 127.0.0.1 – no one else listens.",
-      "IT guy didn’t get lost, he recursively returned to root.",
-      "If an IT guy says 'just a minute', go brew Turkish coffee.",
-      "A safety knot is like a relationship – weak ones fall.",
-      "Equipment doesn’t change, just the time between inspections.",
-      "Programmer doesn’t bathe – he has clean code.",
-      "Rebooting is like restarting life – without therapy.",
-      "The only relationship an IT guy maintains is Wi-Fi."
-    ]
-  },
-  de: {
-    about: 'Über uns',
-    about_text: 'Wir sind spezialisiert auf Höhenarbeit, Mastmontagen, Verlegung und Schweißung von Glasfasern, Antenneninstallationen und Telekommunikationsintegration. Wir arbeiten in ganz Deutschland und Tschechien – schnell, präzise, ohne Schnickschnack.',
-    jokes: [
-      "Höhen sind nur einmal schlimm – beim Runterfallen.",
-      "Kletterer beschwert sich: 'Mein Seil hat genug von mir.'",
-      "Admin schläft nur mit 127.0.0.1 – niemand sonst hört zu.",
-      "IT-Typ hat sich nicht verirrt, er ist rekursiv zum Root zurück.",
-      "Wenn ein ITler 'eine Minute' sagt – mach dir türkischen Kaffee.",
-      "Ein Sicherungsknoten ist wie eine Beziehung – wenn schwach, stürzt du ab.",
-      "Ausrüstung ändert sich nicht, nur der Abstand zwischen den Prüfungen.",
-      "Programmierer duscht nicht – hat sauberen Code.",
-      "Neustart ist wie ein Lebensneuanfang – nur ohne Therapie.",
-      "Die einzige Beziehung des ITlers ist mit WLAN."
-    ]
-  },
-  tlh: {
-    about: 'wIbuS',
-    about_text: 'wIHeghbe’ – SuvwI’ poS Hoch – chuSmeH Qeng – quvmo’!',
-    jokes: [
-      "vaj Qong 127.0.0.1 neH – latlh Qoybe’",
-      "rut vav HochHom vItlhutlh – QIbDaq HochDaq He’",
-      "roD yItlhutlh ‘ach Qochbe’ – Qulpu’ code.",
-      "tlhIngan DevwI’ Qulchu’ – Wifi!"]
-  }
-};
-
-function setLang(lang) {
-  document.querySelector('[data-key="about"]').textContent = translations[lang].about;
-  document.querySelector('[data-key="about_text"]').textContent = translations[lang].about_text;
-  jokes_cs.length = 0;
-  jokes_cs.push(...translations[lang].jokes);
-  showRandomJoke();
-}
-setTimeout(() => {
-  const videoContainer = document.getElementById('video-intro');
-  videoContainer.innerHTML = '<canvas id="matrix" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></canvas>';
-
-  const canvas = document.getElementById("matrix");
-  const ctx = canvas.getContext("2d");
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-  const letters = Array(256).join("1").split("");
-  const draw = () => {
-    ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = `hsl(${Math.random() * 360}, 100%, 50%)`;
-    letters.forEach((y_pos, index) => {
-      const text = String.fromCharCode(3e4 + Math.random() * 33);
-      const x_pos = index * 10;
-      ctx.fillText(text, x_pos, y_pos);
-      letters[index] = y_pos > 758 + Math.random() * 1e4 ? 0 : y_pos + 10;
-    });
-  };
-  setInterval(draw, 33);
-}, 60000);
-const cubeContainer = document.getElementById("cube-container");
-const cube = document.createElement("div");
-cube.style.width = "100px";
-cube.style.height = "100px";
-cube.style.position = "relative";
-cube.style.transformStyle = "preserve-3d";
-cube.style.animation = "spin 10s infinite linear";
-cubeContainer.appendChild(cube);
-
-const faces = 6;
-let currentFace = 0;
-const imageFiles = [
-  "Lano.png",
-  "Photoroom-20250408_151658_1.png",
-  "Photoroom-20250408_151658_2.png",
-  "Photoroom-20250408_151658_3.png",
-  "brzda.png", "brzda01.png", "brzda02.png",
-  "grillon(1).png", "grillon.png",
-  "haky.png", "helma.png", "jummar.png", "jummar02.png",
-  "karabina.png", "karabina0.png", "karabina01.png", "karabina02.png", "karabina03.png", "karabina05.png",
-  "karabina06.png", "karabina07.png", "karabina08.png", "karabina09.png", "karabina1.png", "karabina10.png",
-  "karabina11.png", "karabina12.png", "karabina13.png", "karabina14.png", "karabina15.png", "karabina16.png",
-  "karabina17.png", "karabina18.png", "karabina19.png", "karabina20.png", "karabina21.png", "karabina22.png",
-  "karabina23.png", "karabina24.png", "karabina25.png", "karabina26.png", "karabina27.png", "karabina28.png",
-  "karabina29.png", "kladka01.png", "kladka02.png", "kladka04.png", "kladka05.png", "kladka_brzda.png",
-  "kotvevnik.png", "lano01.png", "lano03.png", "lano200m.png",
-  "obrtlik.png", "ocelka01.png", "ocelka02.png", "ocelka03.png", "oecelka04.png",
-  "rig.png", "sada.png", "sada01.png", "sedacka.png", "sedacka02.png", "sedak.png",
-  "smyce.png", "smyce01.png", "vak.png", "vak03.png", "vak05.png", "zachycovac.png"
-];
-
-for (let i = 0; i < faces; i++) {
-  const face = document.createElement("img");
-  face.src = `main/${imageFiles[i % imageFiles.length]}`;
-  face.style.width = "100px";
-  face.style.height = "100px";
-  face.style.position = "absolute";
-  face.style.backfaceVisibility = "hidden";
-  const angle = i * 90;
-  face.style.transform = `rotateY(${angle}deg) translateZ(50px)`;
-  cube.appendChild(face);
-}
-
-setInterval(() => {
-  currentFace = (currentFace + 1) % imageFiles.length;
-  const images = cube.querySelectorAll("img");
-  images.forEach((img, i) => {
-    img.src = `main/${imageFiles[(currentFace + i) % imageFiles.length]}`;
-  });
-}, 3000);
-
-const style = document.createElement('style');
-style.innerHTML = `@keyframes spin {
-  from { transform: rotateX(0deg) rotateY(0deg); }
-  to { transform: rotateX(360deg) rotateY(360deg); }
-}`;
-document.head.appendChild(style);
-
-$1
+    for (let i = 0; i < 6; i++) {
+      const face = document.createElement("div");
+      face.className = "face";
+      const img = document.createElement("img");
+      img.src = `main/${imageNames[i % imageNames.length]}`;
+      face.appendChild(img);
+      cube.appendChild(face);
+    }
+  </script>
 </body>
 </html>
