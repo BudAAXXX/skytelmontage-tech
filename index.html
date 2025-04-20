@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-    <meta name="description" content="Výšky nejsou překážkou, ale cestou. BudAA Telekomunikace – extrémní výškové instalace, integrace a montáže bez kompromisů.">
+    <meta name="description" content="Výškové a telekomunikační práce bez kompromisů – montáže, optika, stožáry. BudAA Telekomunikace – kde výška není problém, ale standard."
     <meta name="keywords" content="SkyTel Montage, výškové práce, telekomunikace, BudAA, integrace, stožáry, optika, montáž">
     <meta name="author" content="BudAA Telekomunikace">
     <style>
@@ -133,16 +133,18 @@
   </style>
 </head>
 <body>
-  <video autoplay muted loop id="bg-video" style="position:fixed; top:0; left:0; min-width:100%; min-height:100%; z-index:-1; object-fit:cover;">
-    <source src="assets/background.mp4" type="video/mp4">
+  <div id="video-intro" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;">
+  <video autoplay muted loop style="width: 100%; height: 100%; object-fit: cover; position: absolute;">
+    <source src="assets/intro1.mp4" type="video/mp4">
   </video>
+</div>
 
-  <select id="lang-select">
-    <option value="cs">Česky</option>
-    <option value="en">English</option>
-    <option value="de">Deutsch</option>
-    <option value="tlh">Klingon</option>
-  </select>
+  <div style="position: absolute; top: 10px; right: 10px; display: flex; gap: 10px;">
+  <img src="https://flagcdn.com/w20/cz.png" alt="CZ" title="Čeština" style="cursor:pointer" onclick="setLang('cs')">
+  <img src="https://flagcdn.com/w20/gb.png" alt="EN" title="English" style="cursor:pointer" onclick="setLang('en')">
+  <img src="https://flagcdn.com/w20/de.png" alt="DE" title="Deutsch" style="cursor:pointer" onclick="setLang('de')">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/4/46/Klingon.svg" alt="Klingon" title="Klingon" style="cursor:pointer; width:20px;" onclick="setLang('tlh')">
+</div>
 
   <header>
     <div class="logo">SkyTel Montage</div>
@@ -159,15 +161,7 @@
   <main>
     <section id="about">
       <h1 data-key="about">O nás</h1>
-      <p data-key="about_text">
-        Jmenuju se Patrik Budinský. Dělám věci, na který jiní nemají buď odvahu, nebo výšku v nohách. Když visím na laně mezi nebem a anténou, připadám si víc doma než v obýváku – protože ten stejně nikdy pořádně nevyluxuju.
-      </p>
-      <p>
-        Začal jsem jako obyčejnej elektrikář, kterýmu bylo jedno, jestli ho kopne 220 nebo šéf. Teď stavím vysílače, tahám kabely, svařuju optiku a dělám integrace, zatímco jiní si stěžujou na Wi-Fi v kavárně. 
-      </p>
-      <p>
-        Neprodávám rohlíky v Lidlu, ale řeším problémy ve výškách, které se neřeší smajlíkem. Mám za sebou víc kilometrů po stožárech než průměrnej člověk nachodí po zemi. A přestože občas brečím ve výšce, není to strachem – jen se mi do očí odráží slunce z antény.
-      </p>
+      <p data-key="about_text">Specializujeme se na výškové práce, montáže stožárů, tahání a svařování optiky, instalaci antén a telekomunikační integrace. Pracujeme napříč Německem i Českem – rychle, precizně, bez řečí.</p>
     </section>
   </main>
 
@@ -226,6 +220,12 @@
       lightbox.style.display = 'none';
       lightboxImg.src = '';
     });
+  
+
+    
+      bgVideo.play();
+    }, 20000); // 20 sekund na video
+
   </script>
 </body>
 </html>
