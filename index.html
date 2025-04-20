@@ -13,26 +13,34 @@
       box-sizing: border-box;
     }
     html, body {
-      margin: 0;
-      padding: 0;
-      width: 100%;
-      height: 100%;
-      overflow-x: hidden;
-      font-family: Arial, sans-serif;
-      background-color: #000;
-      color: #fff;
-    }
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  font-family: 'Courier New', monospace;
+  background-color: #1a1a1a;
+  color: #d0f0c0;
+  background-image: url('assets/camo-bg.jpg');
+  background-size: cover;
+  background-attachment: fixed;
+}
     header, footer {
-      text-align: center;
-      padding: 1rem;
-      background-color: #111;
-    }
+  text-align: center;
+  padding: 1rem;
+  background-color: #2a2a2a;
+  border-top: 2px solid #556b2f;
+  border-bottom: 2px solid #556b2f;
+  color: #aaffaa;
+}
     .logo {
-      font-size: 1.5rem;
-      font-weight: bold;
-      color: #00ffff;
-      animation: blink 2s linear infinite;
-    }
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #98fb98;
+  font-family: 'Courier New', monospace;
+  animation: blink 1.5s linear infinite;
+  text-shadow: 0 0 5px #3cb371;
+}
     @keyframes blink {
       0%, 100% { opacity: 1; }
       50% { opacity: 0.6; }
@@ -46,9 +54,12 @@
       padding: 0;
     }
     nav a {
-      color: #00ffff;
-      text-decoration: none;
-    }
+  color: #aaffaa;
+  text-decoration: none;
+  font-weight: bold;
+  letter-spacing: 1px;
+  font-family: 'Courier New', monospace;
+}
     #cube-container {
       perspective: 800px;
       width: 100%;
@@ -84,17 +95,20 @@
       font-size: 0.8em;
     }
     #joke-box {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      background-color: rgba(0, 0, 0, 0.7);
-      color: #fff;
-      padding: 10px;
-      border-radius: 8px;
-      font-size: 0.9em;
-      max-width: 250px;
-      z-index: 999;
-    }
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: rgba(42, 42, 42, 0.85);
+  color: #98fb98;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 0.9em;
+  max-width: 250px;
+  z-index: 999;
+  border: 1px solid #556b2f;
+  font-family: 'Courier New', monospace;
+  box-shadow: 0 0 10px rgba(0, 128, 0, 0.5);
+}
     @media (max-width: 600px) {
       nav ul {
         flex-direction: column;
