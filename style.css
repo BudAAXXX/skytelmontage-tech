@@ -1,101 +1,52 @@
-/* Reset */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+.hidden {
+  display: none;
 }
 
-/* Pozadí – video fullscreen */
-#bg-video {
+#matrix-overlay {
   position: fixed;
-  right: 0;
-  bottom: 0;
-  min-width: 100%;
-  min-height: 100%;
-  z-index: -1;
-  object-fit: cover;
-}
-
-/* Základní font a barvy */
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  color: #fff;
-  background-color: rgba(0, 0, 0, 0.7); /* fallback při načítání videa */
-  line-height: 1.6;
-}
-
-/* Header */
-header {
-  position: sticky;
   top: 0;
-  background: rgba(0, 0, 0, 0.6);
-  padding: 10px 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  z-index: 10;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: black;
+  z-index: 0;
+  display: none;
 }
 
-.logo {
-  font-weight: bold;
-  font-size: 1.5rem;
+canvas#matrix {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 
-nav ul {
-  list-style: none;
-  display: flex;
-  gap: 20px;
+#cube {
+  width: 200px;
+  height: 200px;
+  position: relative;
+  margin: 50px auto;
+  transform-style: preserve-3d;
+  animation: rotateCube 20s infinite linear;
 }
 
-nav a {
-  color: #fff;
-  text-decoration: none;
-  transition: color 0.3s;
+.face {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  backface-visibility: hidden;
 }
 
-nav a:hover {
-  color: #00bcd4;
-}
-
-/* Sekce */
-main {
-  padding: 80px 20px;
-  max-width: 1000px;
-  margin: auto;
-  background: rgba(0, 0, 0, 0.5);
-  border-radius: 16px;
-}
-
-section {
-  margin-bottom: 60px;
-}
-
-section h1 {
-  font-size: 2rem;
-  margin-bottom: 10px;
-  border-bottom: 2px solid #00bcd4;
-  display: inline-block;
-}
-
-footer {
-  text-align: center;
-  padding: 20px;
-  background: rgba(0, 0, 0, 0.6);
-  font-size: 0.9rem;
-}
-
-/* Responsivita */
-@media (max-width: 600px) {
-  nav ul {
-    flex-direction: column;
-    gap: 10px;
+@keyframes rotateCube {
+  from {
+    transform: rotateX(0deg) rotateY(0deg);
   }
-
-  main {
-    padding: 40px 10px;
+  to {
+    transform: rotateX(360deg) rotateY(360deg);
   }
+}
 
-  section h1 {
-    font-size: 1.5rem;
-  }
+.face img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
