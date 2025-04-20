@@ -1,11 +1,38 @@
-setTimeout(() => {
-  document.getElementById('bg-video').style.display = 'none';
-  document.getElementById('matrix-overlay').style.display = 'block';
-  startMatrix();
-}, 60000);
+function setLang(lang) {
+  fetch(`lang/${lang}.json`)
+    .then(res => res.json())
+    .then(data => {
+      document.querySelectorAll('[data-key]').forEach(el => {
+        const key = el.getAttribute('data-key');
+        if (data[key]) el.textContent = data[key];
+      });
+      if (data.jokes) jokes = data.jokes;
+    });
+}
 
-function startMatrix() {
-  const canvas = document.getElementById("matrix");
+let jokes = [];
+
+function showJoke() {
+  const box = document.getElementById('joke-box');
+  if (jokes.length > 0) {
+    const random = jokes[Math.floor(Math.random() * jokes.length)];
+    box.textContent = random;
+  }
+}
+setInterval(showJoke, 10000);
+showJoke();
+
+setTimeout(() => {
+  const canvas = document.createElement('canvas');
+  canvas.id = 'matrix';
+  canvas.style.position = 'fixed';
+  canvas.style.top = 0;
+  canvas.style.left = 0;
+  canvas.style.width = '100%';
+  canvas.style.height = '100%';
+  canvas.style.zIndex = -1;
+  document.body.appendChild(canvas);
+
   const ctx = canvas.getContext("2d");
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
@@ -32,20 +59,6 @@ function startMatrix() {
       drops[i]++;
     }
   }
+
   setInterval(draw, 33);
-}
-
-const cube = document.getElementById("cube");
-const imageNames = [
-  "Lano.png", "Photoroom-20250408_151658_1.png", "Photoroom-20250408_151658_2.png",
-  "Photoroom-20250408_151658_3.png", "brzda.png", "brzda01.png"
-];
-
-for (let i = 0; i < 6; i++) {
-  const face = document.createElement("div");
-  face.className = "face";
-  const img = document.createElement("img");
-  img.src = `main/${imageNames[i % imageNames.length]}`;
-  face.appendChild(img);
-  cube.appendChild(face);
-}
+}, 27000);
