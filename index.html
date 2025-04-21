@@ -1,86 +1,209 @@
 <!DOCTYPE html>
-<html lang="cs" data-lang="cs">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <meta name="description" content="Výškové a telekomunikační práce bez kompromisů – montáže, optika, stožáry.">
-  <meta name="keywords" content="SkyTel Montage, výškové práce, telekomunikace, stožáry, optika, montáž, BudAA">
-  <meta name="author" content="BudAA">
-  <title>SkyTel Montage | Výškové & Telekomunikační práce</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SkyTel Montage</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/png" href="logo.png" />
 </head>
 <body>
-  <video autoplay muted loop playsinline id="video-background">
-    <source src="assets/background.mp4" type="video/mp4">
+  <video autoplay muted playsinline id="bg-video" class="video-bg">
+    <source src="assets/background/video.mp4" type="video/mp4" />
+    Your browser does not support HTML5 video.
   </video>
 
+  <div id="overlay"></div>
+  <div id="floating-cube"></div>
+
   <header>
-    <div class="logo">SkyTel Montage</div>
+    <img src="logo.png" alt="SkyTel Logo" class="logo" />
     <nav>
-      <ul>
-        <li><a href="#equipment">Vybavení / Equipment / Ausrüstung</a></li>
-        <li><a href="#certs">Certifikace / Certifications / Zertifizierungen</a></li>
-        <li><a href="#projects">Projekty / Projects / Projekte</a></li>
-      </ul>
+      <button onclick="setLang('cs')">🇨🇿</button>
+      <button onclick="setLang('en')">🇬🇧</button>
+      <button onclick="setLang('kl')">🖖 Klingon</button>
     </nav>
   </header>
-
   <main>
-    <section id="equipment">
-      <div lang="cs">
-        <h2>Vybavení</h2>
-        <p>Kompletní sada certifikovaných prostředků pro práci ve výškách a montáže.</p>
-      </div>
-      <div lang="en">
-        <h2>Equipment</h2>
-        <p>Complete set of certified gear for high-altitude work and installations.</p>
-      </div>
-      <div lang="de">
-        <h2>Ausrüstung</h2>
-        <p>Komplettes Set zertifizierter Ausrüstung für Höhenarbeiten und Montagen.</p>
-      </div>
+    <section class="intro">
+      <h1 id="headline">Welcome to SkyTel Montage</h1>
+      <p id="joke"></p>
+      <p id="notice"></p>
+      <p>Contact: patrik.budinsky@skytelmontage.tech</p>
     </section>
-
-    <section id="certs">
-      <div lang="cs">
-        <h2>Certifikace</h2>
-        <p>IRATA, Singing Rock, G41, G25, G37 – vše potřebné pro profesionální práci v Německu i ČR.</p>
-      </div>
-      <div lang="en">
-        <h2>Certifications</h2>
-        <p>IRATA, Singing Rock, G41, G25, G37 – everything required for professional work in Germany and the Czech Republic.</p>
-      </div>
-      <div lang="de">
-        <h2>Zertifizierungen</h2>
-        <p>IRATA, Singing Rock, G41, G25, G37 – alles Notwendige für professionelle Arbeit in Deutschland und Tschechien.</p>
-      </div>
+    <section class="gallery">
+      <h2>All Equipment</h2>
+      <div id="dynamic-grid" class="grid"></div>
     </section>
-
-    <section id="projects">
-      <div lang="cs">
-        <h2>Projekty</h2>
-        <p>Realizace pro Telekom, O2, Vodafone, privátní věže a infrastrukturní sítě.</p>
-      </div>
-      <div lang="en">
-        <h2>Projects</h2>
-        <p>Implementations for Telekom, O2, Vodafone, private towers, and infrastructure networks.</p>
-      </div>
-      <div lang="de">
-        <h2>Projekte</h2>
-        <p>Umsetzungen für Telekom, O2, Vodafone, private Türme und Infrastrukturnetze.</p>
-      </div>
+    <section class="slideshow">
+      <h2>Live Showcase</h2>
+      <img id="slideshow-img" src="karabina01.png" alt="Slideshow" class="slideshow-img" />
     </section>
   </main>
-
   <footer>
-    <p>Kontakt: <a href="mailto:patrik.budinsky@skytelmontage.tech">patrik.budinsky@skytelmontage.tech</a></p>
-    <div id="language-switcher">
-      <span onclick="switchLang('cs')">🇨🇿</span>
-      <span onclick="switchLang('en')">🇬🇧</span>
-      <span onclick="switchLang('de')">🇩🇪</span>
-    </div>
+    <p>Powered by BudAA ® | Trademark Registered</p>
   </footer>
+  <script src="script.js"></script>
+  <script>
+    const jokes = [
+      "Why did the developer go broke? Because he used up all his cache.",
+      "Freeclimbers don't fall, they just choose faster descents.",
+      "404: Joke not found. Maybe it went climbing?",
+      "Git commit -m 'climbed a rock, forgot the rope'",
+      "IT guy went climbing. Now he's stuck on the cloud."
+    ];
+    document.getElementById('joke').textContent = jokes[Math.floor(Math.random() * jokes.length)];
 
-  <script src="scripts.js"></script>
+    function setLang(lang) {
+      fetch(`lang/${lang}.json`)
+        .then(res => res.json())
+        .then(data => {
+          document.getElementById('headline').textContent = data.headline;
+          document.getElementById('notice').textContent = data.notice;
+        });
+    }
+
+    setTimeout(() => {
+      document.getElementById('overlay').classList.add('rainbow-matrix');
+    }, 27000);
+
+    // Floating cube logic
+    const cube = document.getElementById('floating-cube');
+    const images = [
+      'karabina01.png', 'helma.png', 'grillon.png', 'sedacka.png',
+      'brzda.png', 'kladka01.png', 'lano01.png', 'vak.png'
+    ];
+
+    function randomPosition() {
+      return Math.floor(Math.random() * 90) + '%';
+    }
+
+    function randomImage() {
+      return images[Math.floor(Math.random() * images.length)];
+    }
+
+    function animateCube() {
+      cube.style.top = randomPosition();
+      cube.style.left = randomPosition();
+      cube.style.backgroundImage = `url('${randomImage()}')`;
+    }
+
+    setInterval(animateCube, 4000);
+    animateCube();
+
+    // Dynamic gallery load
+    fetch('vybaveni_gallery_github.json')
+      .then(res => res.json())
+      .then(data => {
+        const grid = document.getElementById('dynamic-grid');
+        data.forEach(item => {
+          const img = document.createElement('img');
+          img.src = item.image;
+          img.alt = item.name;
+          grid.appendChild(img);
+        });
+      });
+
+    // Slideshow logic
+    const slideshowImgs = ['karabina01.png', 'grillon.png', 'sedacka.png', 'vak03.png'];
+    let slideIndex = 0;
+    setInterval(() => {
+      document.getElementById('slideshow-img').src = slideshowImgs[slideIndex];
+      slideIndex = (slideIndex + 1) % slideshowImgs.length;
+    }, 5000);
+
+    // Výchozí jazyk
+    setLang('en');
+  </script>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #eee;
+      background: #000;
+    }
+    .video-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      z-index: -2;
+    }
+    #overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.7);
+      z-index: -1;
+    }
+    #floating-cube {
+      position: fixed;
+      width: 100px;
+      height: 100px;
+      background-size: cover;
+      background-position: center;
+      border: 2px solid #5aff5a;
+      border-radius: 10px;
+      z-index: 10;
+      transition: top 1s ease, left 1s ease, background-image 0.5s ease-in-out;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+    }
+    .logo {
+      height: 60px;
+    }
+    nav button {
+      background: transparent;
+      border: 1px solid #888;
+      color: #eee;
+      margin-left: 10px;
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+    main {
+      padding: 40px;
+    }
+    .intro {
+      margin-bottom: 60px;
+    }
+    .gallery .grid, #dynamic-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 15px;
+    }
+    .gallery img, #dynamic-grid img, .slideshow-img {
+      width: 100%;
+      border: 2px solid #444;
+      border-radius: 8px;
+      background: #111;
+    }
+    .slideshow {
+      margin-top: 60px;
+      text-align: center;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 0.8rem;
+      color: #aaa;
+    }
+    .rainbow-matrix {
+      background: linear-gradient(135deg, #000, #0f0, #00f, #f0f, #fff);
+      animation: rainbowMatrix 10s infinite alternate;
+    }
+    @keyframes rainbowMatrix {
+      0% { filter: hue-rotate(0deg); }
+      100% { filter: hue-rotate(360deg); }
+    }
+  </style>
 </body>
 </html>
