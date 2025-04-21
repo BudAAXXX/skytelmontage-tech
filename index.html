@@ -1,256 +1,149 @@
 <!DOCTYPE html>
-<html lang="cs">
+<html lang="cs" data-lang="cs">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="description" content="Výškové a telekomunikační práce bez kompromisů – montáže, optika, stožáry.">
   <meta name="keywords" content="SkyTel Montage, výškové práce, telekomunikace, stožáry, optika, montáž, BudAA">
   <meta name="author" content="BudAA">
-  <title>SkyTel Montage</title>
-  <link rel="stylesheet" href="style.css">
+  <title>SkyTel Montage | Výškové & Telekomunikační práce</title>
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     html, body {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100%;
-  overflow-x: hidden;
-  font-family: 'Courier New', monospace;
-  background-color: #1a1a1a;
-  color: #d0f0c0;
-  background-image: url('assets/camo-bg.jpg');
-  background-size: cover;
-  background-attachment: fixed;
-}
+      width: 100%; height: 100%;
+      font-family: 'Courier New', monospace;
+      color: #f0f0f0;
+    }
+    [lang] { display: none; }
+    html[data-lang="cs"] [lang="cs"],
+    html[data-lang="en"] [lang="en"],
+    html[data-lang="de"] [lang="de"] {
+      display: block;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      z-index: -2;
+      background: black;
+    }
+    #video-background {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      z-index: -1;
+    }
     header, footer {
-  text-align: center;
-  padding: 1rem;
-  background-color: #2a2a2a;
-  border-top: 2px solid #556b2f;
-  border-bottom: 2px solid #556b2f;
-  color: #aaffaa;
-}
-    .logo {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #98fb98;
-  font-family: 'Courier New', monospace;
-  animation: blink 1.5s linear infinite;
-  text-shadow: 0 0 5px #3cb371;
-}
-    @keyframes blink {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.6; }
+      background-color: rgba(0,0,0,0.6);
+      text-align: center;
+      padding: 1rem;
     }
     nav ul {
       display: flex;
-      flex-wrap: wrap;
       justify-content: center;
-      gap: 1em;
       list-style: none;
-      padding: 0;
+      gap: 2rem;
     }
     nav a {
-  color: #aaffaa;
-  text-decoration: none;
-  font-weight: bold;
-  letter-spacing: 1px;
-  font-family: 'Courier New', monospace;
-}
-    #cube-container {
-      perspective: 800px;
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-top: 50px;
+      color: #aaffaa;
+      text-decoration: none;
+      font-weight: bold;
     }
-    #cube {
-      width: 120px;
-      height: 120px;
-      position: relative;
-      transform-style: preserve-3d;
-      animation: rotateCube 10s infinite linear;
+    section {
+      padding: 2rem;
+      background-color: rgba(0, 0, 0, 0.5);
     }
-    .face {
-      position: absolute;
-      width: 120px;
-      height: 120px;
-      backface-visibility: hidden;
-    }
-    .face img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-    @keyframes rotateCube {
-      0% { transform: rotateX(0deg) rotateY(0deg); }
-      100% { transform: rotateX(360deg) rotateY(360deg); }
-    }
-    footer p {
-      margin: 0.3rem 0;
-      font-size: 0.8em;
-    }
-    #joke-box {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background-color: rgba(42, 42, 42, 0.85);
-  color: #98fb98;
-  padding: 10px;
-  border-radius: 8px;
-  font-size: 0.9em;
-  max-width: 250px;
-  z-index: 999;
-  border: 1px solid #556b2f;
-  font-family: 'Courier New', monospace;
-  box-shadow: 0 0 10px rgba(0, 128, 0, 0.5);
-}
-    @media (max-width: 600px) {
-      nav ul {
-        flex-direction: column;
-        gap: 0.5em;
-      }
-      .logo {
-        font-size: 1.2em;
-      }
+    h2 { color: #98fb98; }
+    p { max-width: 800px; margin: 0 auto; }
+    #language-switcher span {
+      cursor: pointer;
+      font-size: 1.5rem;
     }
   </style>
 </head>
 <body>
-  <div id="video-background" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; overflow: hidden;">
-    <video autoplay muted loop playsinline style="width: 100vw; height: 100vh; object-fit: cover;">
-      <source src="assets/background.mp4" type="video/mp4">
-    </video>
-  </div>
+  <video autoplay muted loop playsinline id="video-background">
+    <source src="assets/background.mp4" type="video/mp4">
+  </video>
+
   <header>
     <div class="logo">SkyTel Montage</div>
     <nav>
       <ul>
-        <li><a href="#equipment" data-key="equipment">Vybavení</a></li>
-        <li><a href="#certs" data-key="certs">Certifikace</a></li>
-        <li><a href="#projects" data-key="projects">Projekty</a></li>
+        <li><a href="#equipment">Vybavení / Equipment / Ausrüstung</a></li>
+        <li><a href="#certs">Certifikace / Certifications / Zertifizierungen</a></li>
+        <li><a href="#projects">Projekty / Projects / Projekte</a></li>
       </ul>
     </nav>
   </header>
 
   <main>
-    <div id="cube-container">
-      <div id="cube">
-        <div class="face" style="transform: rotateY(0deg) translateZ(60px)"><img src="main/Lano.png"></div>
-        <div class="face" style="transform: rotateY(90deg) translateZ(60px)"><img src="main/Photoroom-20250408_151658_1.png"></div>
-        <div class="face" style="transform: rotateY(180deg) translateZ(60px)"><img src="main/Photoroom-20250408_151658_2.png"></div>
-        <div class="face" style="transform: rotateY(-90deg) translateZ(60px)"><img src="main/Photoroom-20250408_151658_3.png"></div>
-        <div class="face" style="transform: rotateX(90deg) translateZ(60px)"><img src="main/brzda.png"></div>
-        <div class="face" style="transform: rotateX(-90deg) translateZ(60px)"><img src="main/brzda01.png"></div>
+    <section id="equipment">
+      <div lang="cs">
+        <h2>Vybavení</h2>
+        <p>Kompletní sada certifikovaných prostředků pro práci ve výškách a montáže.</p>
       </div>
-    </div>
+      <div lang="en">
+        <h2>Equipment</h2>
+        <p>Complete set of certified gear for high-altitude work and installations.</p>
+      </div>
+      <div lang="de">
+        <h2>Ausrüstung</h2>
+        <p>Komplettes Set zertifizierter Ausrüstung für Höhenarbeiten und Montagen.</p>
+      </div>
+    </section>
+
+    <section id="certs">
+      <div lang="cs">
+        <h2>Certifikace</h2>
+        <p>IRATA, Singing Rock, G41, G25, G37 – vše potřebné pro profesionální práci v Německu i ČR.</p>
+      </div>
+      <div lang="en">
+        <h2>Certifications</h2>
+        <p>IRATA, Singing Rock, G41, G25, G37 – everything required for professional work in Germany and the Czech Republic.</p>
+      </div>
+      <div lang="de">
+        <h2>Zertifizierungen</h2>
+        <p>IRATA, Singing Rock, G41, G25, G37 – alles Notwendige für professionelle Arbeit in Deutschland und Tschechien.</p>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div lang="cs">
+        <h2>Projekty</h2>
+        <p>Realizace pro Telekom, O2, Vodafone, privátní věže a infrastrukturní sítě.</p>
+      </div>
+      <div lang="en">
+        <h2>Projects</h2>
+        <p>Implementations for Telekom, O2, Vodafone, private towers, and infrastructure networks.</p>
+      </div>
+      <div lang="de">
+        <h2>Projekte</h2>
+        <p>Umsetzungen für Telekom, O2, Vodafone, private Türme und Infrastrukturnetze.</p>
+      </div>
+    </section>
   </main>
 
   <footer>
-    <p>Kontakt: <a href="mailto:patrik.budinsky@skytelmontage.tech" style="color:#00ffff">patrik.budinsky@skytelmontage.tech</a></p>
-    <p>Powered by BudAA</p>
-    <p>Sleduj mě:
-      <a href="https://www.instagram.com/highvoltagedrive" target="_blank">📸</a>
-      <a href="https://www.youtube.com/@highvoltagedrive" target="_blank">📺</a>
-      <a href="https://www.tiktok.com/@highvoltagedrive" target="_blank">🎵</a>
-      <a href="https://twitter.com/highvoltagedrv" target="_blank">🐦</a>
-    </p>
-    <div id="language-switcher" style="display: flex; justify-content: center; gap: 15px; margin-top: 10px; font-size: 1.5em;">
-      <span role="img" aria-label="Čeština" style="cursor:pointer" onclick="setLang('cs')">🇨🇿</span>
-      <span role="img" aria-label="Angličtina" style="cursor:pointer" onclick="setLang('en')">🇬🇧</span>
-      <span role="img" aria-label="Němčina" style="cursor:pointer" onclick="setLang('de')">🇩🇪</span>
-      <span role="img" aria-label="Klingonština" style="cursor:pointer" onclick="setLang('tlh')">🖖</span>
+    <p>Kontakt: <a href="mailto:patrik.budinsky@skytelmontage.tech">patrik.budinsky@skytelmontage.tech</a></p>
+    <div id="language-switcher" style="display: flex; justify-content: center; gap: 15px;">
+      <span onclick="switchLang('cs')">🇨🇿</span>
+      <span onclick="switchLang('en')">🇬🇧</span>
+      <span onclick="switchLang('de')">🇩🇪</span>
     </div>
   </footer>
 
-  <div id="joke-box"></div>
-
   <script>
-    function setLang(lang) {
-      fetch(`lang/${lang}.json`)
-        .then(res => res.json())
-        .then(data => {
-          document.querySelectorAll('[data-key]').forEach(el => {
-            const key = el.getAttribute('data-key');
-            if (data[key]) el.textContent = data[key];
-          });
-          if (data.jokes) jokes = data.jokes;
-          document.querySelectorAll('[data-key]').forEach(el => {
-            const key = el.getAttribute('data-key');
-            if (data[key]) el.textContent = data[key];
-          });
-        });
+    function switchLang(lang) {
+      document.documentElement.setAttribute('data-lang', lang);
+      localStorage.setItem('lang', lang);
     }
-
-    let jokes = [];
-
-    function showJoke() {
-      const box = document.getElementById('joke-box');
-      const random = jokes[Math.floor(Math.random() * jokes.length)];
-      box.textContent = random;
-    }
-    setInterval(showJoke, 10000);
-    showJoke();
-
-    setTimeout(() => {
-      const canvas = document.createElement('canvas');
-      canvas.id = 'matrix';
-      canvas.style.position = 'fixed';
-      canvas.style.top = 0;
-      canvas.style.left = 0;
-      canvas.style.width = '100%';
-      canvas.style.height = '100%';
-      canvas.style.zIndex = -1;
-      document.body.appendChild(canvas);
-
-      const ctx = canvas.getContext("2d");
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-
-      const letters = Array(256).join("01").split("");
-      const fontSize = 12;
-      const columns = canvas.width / fontSize;
-      const drops = Array(Math.floor(columns)).fill(1);
-
-      function draw() {
-        ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-        ctx.fillStyle = "hsl(" + Math.floor(Math.random() * 360) + ", 100%, 50%)";
-        ctx.font = fontSize + "px monospace";
-
-        for (let i = 0; i < drops.length; i++) {
-          const text = letters[Math.floor(Math.random() * letters.length)];
-          ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-
-          if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-            drops[i] = 0;
-          }
-          drops[i]++;
-        }
-      }
-      setInterval(draw, 33);
-    }, 27000);
-    const matrixToggle = document.createElement('style');
-  matrixToggle.innerHTML = `
-    #video-background {
-      opacity: 1;
-      transition: opacity 1s ease;
-    }
-    .video-fadeout {
-      opacity: 0;
-    }
-  `;
-  document.head.appendChild(matrixToggle);
-
-  setTimeout(() => {
-    const videoBg = document.getElementById('video-background');
-    if (videoBg) videoBg.classList.add('video-fadeout');
-  }, 27000);
-</script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const savedLang = localStorage.getItem('lang') || 'cs';
+      switchLang(savedLang);
+    });
+  </script>
 </body>
 </html>
