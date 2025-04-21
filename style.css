@@ -1,9 +1,14 @@
+* {
+  box-sizing: border-box;
+}
+
 body, html {
   margin: 0;
   padding: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: #eee;
   background: #000;
+  overflow-x: hidden;
 }
 
 .video-bg {
@@ -26,16 +31,26 @@ body, html {
   z-index: -1;
 }
 
+#overlay.matrix {
+  background: linear-gradient(135deg, #000, #0f0, #00f, #f0f, #fff);
+  animation: rainbowMatrix 10s infinite alternate;
+}
+
+@keyframes rainbowMatrix {
+  0% { filter: hue-rotate(0deg); }
+  100% { filter: hue-rotate(360deg); }
+}
+
 #floating-cube {
   position: fixed;
-  width: 100px;
-  height: 100px;
+  width: 80px;
+  height: 80px;
   background-size: cover;
   background-position: center;
   border: 2px solid #5aff5a;
   border-radius: 10px;
   z-index: 10;
-  transition: top 1s ease, left 1s ease, background-image 0.5s ease-in-out;
+  transition: all 1s ease;
 }
 
 header {
@@ -43,45 +58,47 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: 20px;
+  flex-wrap: wrap;
 }
 
 .logo {
-  height: 60px;
+  height: 50px;
 }
 
 nav button {
   background: transparent;
   border: 1px solid #888;
   color: #eee;
-  margin-left: 10px;
-  padding: 5px 10px;
+  margin: 5px;
+  padding: 6px 12px;
   cursor: pointer;
+  border-radius: 5px;
 }
 
 main {
-  padding: 40px;
+  padding: 20px;
+  margin-top: 40px;
 }
 
 .intro {
-  margin-bottom: 60px;
+  max-width: 800px;
+  margin: 0 auto 60px auto;
+  text-align: center;
 }
 
-.gallery .grid, #dynamic-grid {
+.gallery .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
   gap: 15px;
+  max-width: 1000px;
+  margin: auto;
 }
 
-.gallery img, #dynamic-grid img, .slideshow-img {
+.gallery img {
   width: 100%;
   border: 2px solid #444;
   border-radius: 8px;
   background: #111;
-}
-
-.slideshow {
-  margin-top: 60px;
-  text-align: center;
 }
 
 footer {
@@ -91,12 +108,23 @@ footer {
   color: #aaa;
 }
 
-.rainbow-matrix {
-  background: linear-gradient(135deg, #000, #0f0, #00f, #f0f, #fff);
-  animation: rainbowMatrix 10s infinite alternate;
-}
+@media screen and (max-width: 600px) {
+  .logo {
+    height: 40px;
+  }
 
-@keyframes rainbowMatrix {
-  0% { filter: hue-rotate(0deg); }
-  100% { filter: hue-rotate(360deg); }
+  nav {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  main {
+    padding: 10px;
+  }
+
+  #floating-cube {
+    width: 60px;
+    height: 60px;
+  }
 }
