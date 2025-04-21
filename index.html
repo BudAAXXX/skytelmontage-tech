@@ -6,12 +6,23 @@
   <title>SkyTel Montage</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="icon" type="image/png" href="logo.png" />
+  <style>
+    #overlay.matrix {
+      background: linear-gradient(135deg, #000, #0f0, #00f, #f0f, #fff);
+      animation: rainbowMatrix 10s infinite alternate;
+    }
+    @keyframes rainbowMatrix {
+      0% { filter: hue-rotate(0deg); }
+      100% { filter: hue-rotate(360deg); }
+    }
+  </style>
 </head>
 <body>
   <video autoplay muted loop playsinline id="bg-video" class="video-bg">
-    <source src="assets/background/background.mp4" type="video/mp4" />
+    <source src="assets/background.mp4" type="video/mp4" />
     Your browser does not support HTML5 video.
   </video>
+  <div id="fallback-bg"></div>
 
   <div id="overlay"></div>
   <div id="floating-cube"></div>
@@ -26,22 +37,94 @@
   </header>
   <main>
     <section class="intro">
-      <h1 id="headline">Welcome to SkyTel Montage</h1>
+      <h1 id="headline"></h1>
       <p id="joke"></p>
       <p id="notice"></p>
-      <p>Contact: patrik.budinsky@skytelmontage.tech</p>
+      <p id="contactHeader"></p>
+      <p>
+        📧 <span id="contactEmail">patrik.budinsky@skytelmontage.tech</span><br/>
+        📸 <a href="https://instagram.com/highvoltagedrivE" target="_blank" id="contactInstagram">Instagram @highvoltagedrivЄ</a><br/>
+        ▶️ <a href="https://youtube.com/@mtikto" target="_blank" id="contactYouTube">YouTube @mtikto</a>
+      </p>
     </section>
     <section class="gallery">
-      <h2>All Equipment</h2>
-      <div id="dynamic-grid" class="grid"></div>
-    </section>
-    <section class="slideshow">
-      <h2>Live Showcase</h2>
-      <img id="slideshow-img" src="karabina01.png" alt="Slideshow" class="slideshow-img" />
+      <h2 id="equipmentTitle"></h2>
+      <div class="grid">
+        <img src="sada.png" alt="Sada" />
+        <img src="rig.png" alt="Rig" />
+        <img src="karabina.png" alt="Karabina" />
+        <img src="karabina1.png" alt="Karabina 1" />
+        <img src="karabina2.png" alt="Karabina 2" />
+        <img src="karabina3.png" alt="Karabina 3" />
+        <img src="karabina4.png" alt="Karabina 4" />
+        <img src="karabina5.png" alt="Karabina 5" />
+        <img src="karabina6.png" alt="Karabina 6" />
+      </div>
     </section>
   </main>
   <footer>
-    <p>Powered by BudAA ® | Trademark Registered</p>
+    <p id="footerText"></p>
   </footer>
-  <script src="script.js"></script>
-</body
+
+  <script>
+    const translations = {
+      cs: {
+        headline: "Vítej ve SkyTel Montage",
+        notice: "Tento web byl vytvořen za 20 sekund pomocí AI. Je ve výstavbě a nezobrazuje finální podobu. Omlouváme se za komplikace.",
+        contactHeader: "Kontakt:",
+        contactEmail: "patrik.budinsky@skytelmontage.tech",
+        contactInstagram: "Instagram @highvoltagedrivЄ",
+        contactYouTube: "YouTube @mtikto",
+        equipmentTitle: "Vybavení",
+        footerText: "Powered by BudAA ® | Registrovaná ochranná známka",
+        jokes: [
+          "Proč vývojář zbankrotoval? Protože použil všechen svůj cache.",
+          "Lezec nespadl, jen zvolil rychlejší sestup.",
+          "404: Vtip nenalezen. Možná zrovna šplhá?",
+          "Git commit -m 'vylezl na věž, zapomněl lano'"
+        ]
+      },
+      en: {
+        headline: "Welcome to SkyTel Montage",
+        notice: "This website was created in 20 seconds using AI. It is under construction and does not represent the final version. We apologize for any inconvenience.",
+        contactHeader: "Contact:",
+        contactEmail: "patrik.budinsky@skytelmontage.tech",
+        contactInstagram: "Instagram @highvoltagedrivЄ",
+        contactYouTube: "YouTube @mtikto",
+        equipmentTitle: "All Equipment",
+        footerText: "Powered by BudAA ® | Trademark Registered",
+        jokes: [
+          "Why did the developer go broke? Because he used up all his cache.",
+          "Freeclimbers don't fall, they just choose faster descents.",
+          "404: Joke not found. Maybe it went climbing?",
+          "Git commit -m 'climbed a tower, forgot the rope'"
+        ]
+      }
+    };
+
+    function detectLang() {
+      const lang = navigator.language.slice(0, 2);
+      return translations[lang] ? lang : 'en';
+    }
+
+    function setLang(lang) {
+      const t = translations[lang];
+      document.getElementById('headline').textContent = t.headline;
+      document.getElementById('notice').textContent = t.notice;
+      document.getElementById('contactHeader').textContent = t.contactHeader;
+      document.getElementById('contactEmail').textContent = t.contactEmail;
+      document.getElementById('contactInstagram').textContent = t.contactInstagram;
+      document.getElementById('contactYouTube').textContent = t.contactYouTube;
+      document.getElementById('equipmentTitle').textContent = t.equipmentTitle;
+      document.getElementById('footerText').textContent = t.footerText;
+      document.getElementById('joke').textContent = t.jokes[Math.floor(Math.random() * t.jokes.length)];
+    }
+
+    setLang(detectLang());
+
+    setTimeout(() => {
+      document.getElementById('overlay').classList.add('matrix');
+    }, 27000);
+  </script>
+</body>
+</html>
