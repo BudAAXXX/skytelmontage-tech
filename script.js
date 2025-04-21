@@ -1,69 +1,58 @@
-const jokes = [
-  "Why did the developer go broke? Because he used up all his cache.",
-  "Freeclimbers don't fall, they just choose faster descents.",
-  "404: Joke not found. Maybe it went climbing?",
-  "Git commit -m 'climbed a rock, forgot the rope'",
-  "IT guy went climbing. Now he's stuck on the cloud."
-];
-document.getElementById('joke').textContent = jokes[Math.floor(Math.random() * jokes.length)];
+const translations = {
+  cs: {
+    headline: "Vítej ve SkyTel Montage",
+    notice: "Tento web byl vytvořen za 20 sekund pomocí AI. Je ve výstavbě a nezobrazuje finální podobu. Omlouváme se za komplikace.",
+    contactHeader: "Kontakt:",
+    contactEmail: "patrik.budinsky@skytelmontage.tech",
+    contactInstagram: "Instagram @highvoltagedrivЄ",
+    contactYouTube: "YouTube @mtikto",
+    equipmentTitle: "Vybavení",
+    footerText: "Powered by BudAA ® | Registrovaná ochranná známka",
+    jokes: [
+      "Proč vývojář zbankrotoval? Protože použil všechen svůj cache.",
+      "Lezec nespadl, jen zvolil rychlejší sestup.",
+      "404: Vtip nenalezen. Možná zrovna šplhá?",
+      "Git commit -m 'vylezl na věž, zapomněl lano'"
+    ]
+  },
+  en: {
+    headline: "Welcome to SkyTel Montage",
+    notice: "This website was created in 20 seconds using AI. It is under construction and does not represent the final version. We apologize for any inconvenience.",
+    contactHeader: "Contact:",
+    contactEmail: "patrik.budinsky@skytelmontage.tech",
+    contactInstagram: "Instagram @highvoltagedrivЄ",
+    contactYouTube: "YouTube @mtikto",
+    equipmentTitle: "All Equipment",
+    footerText: "Powered by BudAA ® | Trademark Registered",
+    jokes: [
+      "Why did the developer go broke? Because he used up all his cache.",
+      "Freeclimbers don't fall, they just choose faster descents.",
+      "404: Joke not found. Maybe it went climbing?",
+      "Git commit -m 'climbed a tower, forgot the rope'"
+    ]
+  }
+};
+
+function detectLang() {
+  const lang = navigator.language.slice(0, 2);
+  return translations[lang] ? lang : 'en';
+}
 
 function setLang(lang) {
-  fetch(`lang/${lang}.json`)
-    .then(res => res.json())
-    .then(data => {
-      document.getElementById('headline').textContent = data.headline;
-      document.getElementById('notice').textContent = data.notice;
-    });
+  const t = translations[lang];
+  document.getElementById('headline').textContent = t.headline;
+  document.getElementById('notice').textContent = t.notice;
+  document.getElementById('contactHeader').textContent = t.contactHeader;
+  document.getElementById('contactEmail').textContent = t.contactEmail;
+  document.getElementById('contactInstagram').textContent = t.contactInstagram;
+  document.getElementById('contactYouTube').textContent = t.contactYouTube;
+  document.getElementById('equipmentTitle').textContent = t.equipmentTitle;
+  document.getElementById('footerText').textContent = t.footerText;
+  document.getElementById('joke').textContent = t.jokes[Math.floor(Math.random() * t.jokes.length)];
 }
+
+setLang(detectLang());
 
 setTimeout(() => {
-  document.getElementById('overlay').classList.add('rainbow-matrix');
+  document.getElementById('overlay').classList.add('matrix');
 }, 27000);
-
-// Floating cube logic
-const cube = document.getElementById('floating-cube');
-const images = [
-  'karabina01.png', 'helma.png', 'grillon.png', 'sedacka.png',
-  'brzda.png', 'kladka01.png', 'lano01.png', 'vak.png'
-];
-
-function randomPosition() {
-  return Math.floor(Math.random() * 90) + '%';
-}
-
-function randomImage() {
-  return images[Math.floor(Math.random() * images.length)];
-}
-
-function animateCube() {
-  cube.style.top = randomPosition();
-  cube.style.left = randomPosition();
-  cube.style.backgroundImage = `url('${randomImage()}')`;
-}
-
-setInterval(animateCube, 4000);
-animateCube();
-
-// Dynamic gallery load
-fetch('vybaveni_gallery_github.json')
-  .then(res => res.json())
-  .then(data => {
-    const grid = document.getElementById('dynamic-grid');
-    data.forEach(item => {
-      const img = document.createElement('img');
-      img.src = item.image;
-      img.alt = item.name;
-      grid.appendChild(img);
-    });
-  });
-
-// Slideshow logic
-const slideshowImgs = ['karabina01.png', 'grillon.png', 'sedacka.png', 'vak03.png'];
-let slideIndex = 0;
-setInterval(() => {
-  document.getElementById('slideshow-img').src = slideshowImgs[slideIndex];
-  slideIndex = (slideIndex + 1) % slideshowImgs.length;
-}, 5000);
-
-// Výchozí jazyk
-setLang('en');
