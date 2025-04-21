@@ -1,26 +1,69 @@
-function switchLang(lang) {
-  const html = document.documentElement;
+const jokes = [
+  "Why did the developer go broke? Because he used up all his cache.",
+  "Freeclimbers don't fall, they just choose faster descents.",
+  "404: Joke not found. Maybe it went climbing?",
+  "Git commit -m 'climbed a rock, forgot the rope'",
+  "IT guy went climbing. Now he's stuck on the cloud."
+];
+document.getElementById('joke').textContent = jokes[Math.floor(Math.random() * jokes.length)];
 
-  // Animace opacity
-  html.style.transition = "opacity 0.3s ease";
-  html.style.opacity = 0;
-
-  setTimeout(() => {
-    html.setAttribute('data-lang', lang);
-    localStorage.setItem('lang', lang);
-    html.style.opacity = 1;
-  }, 300);
+function setLang(lang) {
+  fetch(`lang/${lang}.json`)
+    .then(res => res.json())
+    .then(data => {
+      document.getElementById('headline').textContent = data.headline;
+      document.getElementById('notice').textContent = data.notice;
+    });
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  // Pokud je jazyk uložen, použij ho
-  let lang = localStorage.getItem('lang');
+setTimeout(() => {
+  document.getElementById('overlay').classList.add('rainbow-matrix');
+}, 27000);
 
-  // Pokud není uložen, použij jazyk prohlížeče
-  if (!lang) {
-    const browserLang = navigator.language.slice(0, 2);
-    lang = ['cs', 'en', 'de'].includes(browserLang) ? browserLang : 'cs';
-  }
+// Floating cube logic
+const cube = document.getElementById('floating-cube');
+const images = [
+  'karabina01.png', 'helma.png', 'grillon.png', 'sedacka.png',
+  'brzda.png', 'kladka01.png', 'lano01.png', 'vak.png'
+];
 
-  switchLang(lang);
-});
+function randomPosition() {
+  return Math.floor(Math.random() * 90) + '%';
+}
+
+function randomImage() {
+  return images[Math.floor(Math.random() * images.length)];
+}
+
+function animateCube() {
+  cube.style.top = randomPosition();
+  cube.style.left = randomPosition();
+  cube.style.backgroundImage = `url('${randomImage()}')`;
+}
+
+setInterval(animateCube, 4000);
+animateCube();
+
+// Dynamic gallery load
+fetch('vybaveni_gallery_github.json')
+  .then(res => res.json())
+  .then(data => {
+    const grid = document.getElementById('dynamic-grid');
+    data.forEach(item => {
+      const img = document.createElement('img');
+      img.src = item.image;
+      img.alt = item.name;
+      grid.appendChild(img);
+    });
+  });
+
+// Slideshow logic
+const slideshowImgs = ['karabina01.png', 'grillon.png', 'sedacka.png', 'vak03.png'];
+let slideIndex = 0;
+setInterval(() => {
+  document.getElementById('slideshow-img').src = slideshowImgs[slideIndex];
+  slideIndex = (slideIndex + 1) % slideshowImgs.length;
+}, 5000);
+
+// Výchozí jazyk
+setLang('en');
