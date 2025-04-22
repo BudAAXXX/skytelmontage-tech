@@ -1,130 +1,269 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SkyTel Montage</title>
-  <link rel="stylesheet" href="style.css" />
-  <link rel="icon" type="image/png" href="logo.png" />
   <style>
-    #overlay.matrix {
-      background: linear-gradient(135deg, #000, #0f0, #00f, #f0f, #fff);
-      animation: rainbowMatrix 10s infinite alternate;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: white;
     }
-    @keyframes rainbowMatrix {
-      0% { filter: hue-rotate(0deg); }
-      100% { filter: hue-rotate(360deg); }
+    html, body {
+      height: 100%;
+      overflow: hidden;
+      background: black;
+    }
+    .background-video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      z-index: -1;
+      filter: brightness(0.5) contrast(1.2) saturate(1.5);
+    }
+    .content {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100vh;
+      padding: 2rem;
+      backdrop-filter: blur(5px);
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      font-size: 2rem;
+      font-weight: bold;
+      text-shadow: 0 0 10px #00f2ff;
+      animation: glow 1.5s infinite alternate;
+    }
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #00f2ff; }
+      to { text-shadow: 0 0 20px #00ffea, 0 0 30px #00bfff; }
+    }
+    .socials {
+      display: flex;
+      gap: 1rem;
+    }
+    .socials a {
+      text-decoration: none;
+      font-size: 1.2rem;
+    }
+    .languages {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+    }
+    .languages button {
+      background: rgba(0, 0, 0, 0.5);
+      border: 1px solid white;
+      margin-left: 5px;
+      padding: 5px 10px;
+      color: white;
+      cursor: pointer;
+    }
+    #moving-box {
+      position: absolute;
+      width: 120px;
+      height: 120px;
+      overflow: hidden;
+      border-radius: 12px;
+      border: 2px solid #00ffee;
+    }
+    #moving-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+    #joke-box {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0, 0, 0, 0.5);
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 1.2rem;
+      max-width: 80%;
+      text-align: center;
+      opacity: 0.8;
+    }
+    footer {
+      font-size: 0.9rem;
+      text-align: center;
+      margin-top: auto;
     }
   </style>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const images = [
+        'Lano.png', 'brzda.png', 'grillon(1).png', 'haky.png', 'jummar.png', 'karabina0.png'
+        // přidej další názvy souborů pokud chceš
+      ];
+
+      const jokes = {
+        it: [
+          'Proč programátor nemůže být hladový? Protože má plný buffer.',
+          'Kolik programátorů je potřeba na výměnu žárovky? Žádný, to je hardwarový problém.',
+          'Já bych s vámi diskutoval, ale mám NULL pointer.',
+          'Programátor šel do obchodu: Koupil mléko. Pokud mají vejce, koupí deset. Vrátil se s deseti mléky.',
+          'Debugging: Je to jako být detektivem ve filmu, kde jsi zároveň vrahem.',
+          'CSS není bug – to je featura v Matrixu.',
+          '404: Smysl života nenalezen.',
+          'To není chyba, to je upgrade reality.',
+          'SQL injection: nejlevnější způsob, jak hacknout databázi.',
+          'Git commit -m "Nechápu co jsem právě udělal"',
+          'Smazal jsem prod databázi. Ups. Máš zálohu? Ne.',
+          'Funkce funguje. Náhodou. Tak se jí radši nedotýkej.',
+          '„Funguje to na mém počítači.“ – klasická výmluva.',
+          'Frameworky: protože čistý kód je moc těžký.',
+          'Testování v produkci je nová černá.',
+          'Unit testy? Ne, my to ladíme pocitově.',
+          'Programátorův sen – nekonečný while(true).',
+          'Sudo rm -rf životní rozhodnutí.',
+          'Jsem programátor, ne mág. I když občas kouzlím.',
+          'Kód je poezie. Chaotická, matoucí poezie.'
+        ],
+        climber: [
+          'Horolezec nikdy nepadá. Jen rychle mění výšku.',
+          'Co dělá horolezec o víkendu? Visí.',
+          'Šel jsem na skálu s lanem… a přišel dolů bez něj. Skvělý víkend.',
+          'Horolezecký humor je nad věcí – doslova.',
+          'Nezáleží na tom, jak vysoko jsi – důležité je, jestli visíš hlavou dolů.',
+          'Horolezci se nehádají. Oni jen křičí z výšky.',
+          'Když to nejde silou, přivaž si další lano.',
+          'Miluji viset s přáteli – doslova.',
+          'Horolezectví: legální způsob jak utéct do výšek.',
+          'S každým pádem přichází nový respekt.',
+          'Karabina je moje bezpečnostní síť.',
+          'Můj vztah je jako horolezení – visí na vlásku.',
+          'Na skále nejsou WiFi – ale signál života je tam silnější.',
+          'Lezení – sport, kde máš šanci přemýšlet, co se pokazí.',
+          'Všichni chceme dosáhnout vrcholu. Horolezci to berou doslova.',
+          'Pochopíš život, až visíš hlavou dolů v převisu.',
+          'Pořád se držíš? To jsi ještě nezačal lézt.',
+          'Horolezec nepřestává, dokud se nezachytí.',
+          'Šrouby, matice, lana – a z toho je adrenalin.',
+          'Tady nahoře to má jinou perspektivu. I na život.'
+        ],
+        dark: [
+          'Temný humor je jako jídlo – ne každý ho má.',
+          'Moje empatie spadla do null pointeru.',
+          'Zeptej se mě na vtip… až budeš chtít brečet a smát se zároveň.',
+          'Smrt je jen způsob, jak si vesmír udělá garbage collection.',
+          'Já nejsem cynický. Jen používám černé brýle na realitu.',
+          'Život je bug – smrt je fix.',
+          'Někdo má noční můry, já mám denní – to je pokrok.',
+          'Kamarád se mě ptal, jak přežít. Řekl jsem: aktualizuj software.',
+          'Ironie života: když programátor potřebuje support group.',
+          'Černý humor – temná energie duše.',
+          'Nejsi mrtvý. Jen offline.',
+          'Během update systému jsme ztratili tvoji vůli žít.',
+          'Pohřeb? To je jen restart bez BIOSu.',
+          'Život je výjimka z pravidel.',
+          'Smrt – poslední verze člověka.',
+          'Po tmě je všechno logičtější.',
+          'Všichni jedeme na baterky – jen někdo rychleji vyhoří.',
+          'Chci být výjimka – try again.',
+          'Byl tak temný, že i černá ho považovala za inspiraci.',
+          'Užívám si život… jako debugger crash.'
+        ]
+      };
+
+      const jokeBox = document.createElement('div');
+      jokeBox.id = 'joke-box';
+      document.body.appendChild(jokeBox);
+
+      function randomJoke() {
+        const all = [...jokes.it, ...jokes.climber, ...jokes.dark];
+        return all[Math.floor(Math.random() * all.length)];
+      }
+
+      setInterval(() => {
+        jokeBox.textContent = randomJoke();
+      }, 5000);
+
+      const box = document.createElement('div');
+      box.id = 'moving-box';
+      const img = document.createElement('img');
+      box.appendChild(img);
+      document.body.appendChild(box);
+
+      let x = 100, y = 100, dx = 2, dy = 2;
+      let index = 0;
+
+      function animate() {
+        const rect = box.getBoundingClientRect();
+        if (x + rect.width >= window.innerWidth || x <= 0) {
+          dx *= -1;
+          index = (index + 1) % images.length;
+          img.src = images[index];
+        }
+        if (y + rect.height >= window.innerHeight || y <= 0) {
+          dy *= -1;
+          index = (index + 1) % images.length;
+          img.src = images[index];
+        }
+        x += dx;
+        y += dy;
+        box.style.left = x + 'px';
+        box.style.top = y + 'px';
+        requestAnimationFrame(animate);
+      }
+
+      img.src = images[index];
+      animate();
+    });
+  </script>
 </head>
 <body>
-  <video autoplay muted loop playsinline id="bg-video" class="video-bg">
-    <source src="assets/background.mp4" type="video/mp4" />
-    Your browser does not support HTML5 video.
+  <video class="background-video" autoplay muted loop>
+    <source src="assets/background.mp4" type="video/mp4">
+    Your browser does not support the video tag.
   </video>
-  <div id="fallback-bg"></div>
 
-  <div id="overlay"></div>
-  <div id="floating-cube"></div>
+  <div class="languages">
+    <button data-lang="en">EN</button>
+    <button data-lang="cz">CZ</button>
+    <button data-lang="de">DE</button>
+    <button data-lang="kli">KLI</button>
+  </div>
 
-  <header>
-    <img src="logo.png" alt="SkyTel Logo" class="logo" />
-    <nav>
-      <button onclick="setLang('cs')">🇨🇿</button>
-      <button onclick="setLang('en')">🇬🇧</button>
-      <button onclick="setLang('kl')">🖖 Klingon</button>
-    </nav>
-  </header>
-  <main>
-    <section class="intro">
-      <h1 id="headline"></h1>
-      <p id="joke"></p>
-      <p id="notice"></p>
-      <p id="contactHeader"></p>
-      <p>
-        📧 <span id="contactEmail">patrik.budinsky@skytelmontage.tech</span><br/>
-        📸 <a href="https://instagram.com/highvoltagedrivE" target="_blank" id="contactInstagram">Instagram @highvoltagedrivЄ</a><br/>
-        ▶️ <a href="https://youtube.com/@mtikto" target="_blank" id="contactYouTube">YouTube @mtikto</a>
-      </p>
-    </section>
-    <section class="gallery">
-      <h2 id="equipmentTitle"></h2>
-      <div class="grid">
-        <img src="sada.png" alt="Sada" />
-        <img src="rig.png" alt="Rig" />
-        <img src="karabina.png" alt="Karabina" />
-        <img src="karabina01.png" alt="Karabina 1" />
-        <img src="karabina02.png" alt="Karabina 2" />
-        <img src="karabina03.png" alt="Karabina 3" />
-        <img src="karabina04.png" alt="Karabina 4" />
-        <img src="karabina05.png" alt="Karabina 5" />
-        <img src="karabina06.png" alt="Karabina 6" />
+  <div class="content">
+    <header>
+      <div class="logo">
+        <img src="logo.png" alt="SkyTel Montage Logo" height="50">
+        ⚡ SkyTel Montage ⚡
       </div>
-    </section>
-  </main>
-  <footer>
-    <p id="footerText"></p>
-  </footer>
+      <div class="socials">
+        <a href="https://instagram.com/HIGH_VOLTAGE_DRIVE" target="_blank">
+          <img src="/mnt/data/high_voltage_drive_qr(1).png" alt="Instagram QR" height="40">
+        </a>
+        <a href="#">Facebook</a>
+        <a href="#">LinkedIn</a>
+        <a href="#">GitHub</a>
+      </div>
+    </header>
 
-  <script>
-    const translations = {
-      cs: {
-        headline: "Vítej ve SkyTel Montage",
-        notice: "Tento web byl vytvořen za 20 sekund pomocí AI. Je ve výstavbě a nezobrazuje finální podobu. Omlouváme se za komplikace.",
-        contactHeader: "Kontakt:",
-        contactEmail: "patrik.budinsky@skytelmontage.tech",
-        contactInstagram: "Instagram @highvoltagedrivЄ",
-        contactYouTube: "YouTube @mtikto",
-        equipmentTitle: "Vybavení",
-        footerText: "Powered by BudAA ® | Registrovaná ochranná známka",
-        jokes: [
-          "Proč vývojář zbankrotoval? Protože použil všechen svůj cache.",
-          "Lezec nespadl, jen zvolil rychlejší sestup.",
-          "404: Vtip nenalezen. Možná zrovna šplhá?",
-          "Git commit -m 'vylezl na věž, zapomněl lano'"
-        ]
-      },
-      en: {
-        headline: "Welcome to SkyTel Montage",
-        notice: "This website was created in 20 seconds using AI. It is under construction and does not represent the final version. We apologize for any inconvenience.",
-        contactHeader: "Contact:",
-        contactEmail: "patrik.budinsky@skytelmontage.tech",
-        contactInstagram: "Instagram @highvoltagedrivЄ",
-        contactYouTube: "YouTube @mtikto",
-        equipmentTitle: "All Equipment",
-        footerText: "Powered by BudAA ® | Trademark Registered",
-        jokes: [
-          "Why did the developer go broke? Because he used up all his cache.",
-          "Freeclimbers don't fall, they just choose faster descents.",
-          "404: Joke not found. Maybe it went climbing?",
-          "Git commit -m 'climbed a tower, forgot the rope'"
-        ]
-      }
-    };
+    <main>
+      <h1>Vítej v montáži SkyTel</h1>
+      <p>Tento web byl vytvořen za 23s s pomocí AI. Nepředstavuje finální podobu webu. Díky za pochopení.</p>
+    </main>
 
-    function detectLang() {
-      const lang = navigator.language.slice(0, 2);
-      return translations[lang] ? lang : 'en';
-    }
-
-    function setLang(lang) {
-      const t = translations[lang];
-      document.getElementById('headline').textContent = t.headline;
-      document.getElementById('notice').textContent = t.notice;
-      document.getElementById('contactHeader').textContent = t.contactHeader;
-      document.getElementById('contactEmail').textContent = t.contactEmail;
-      document.getElementById('contactInstagram').textContent = t.contactInstagram;
-      document.getElementById('contactYouTube').textContent = t.contactYouTube;
-      document.getElementById('equipmentTitle').textContent = t.equipmentTitle;
-      document.getElementById('footerText').textContent = t.footerText;
-      document.getElementById('joke').textContent = t.jokes[Math.floor(Math.random() * t.jokes.length)];
-    }
-
-    setLang(detectLang());
-
-    setTimeout(() => {
-      document.getElementById('overlay').classList.add('matrix');
-    }, 27000);
-  </script>
+    <footer>
+      <p>Powered by SkyTel Montage | Glitchy, Geeky, Gorgeous ✨</p>
+    </footer>
+  </div>
 </body>
 </html>
