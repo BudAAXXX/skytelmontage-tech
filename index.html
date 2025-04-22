@@ -1,182 +1,138 @@
-<!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SkyTel Montage</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="script.js" defer></script>
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const lang = navigator.language || navigator.userLanguage;
-      const langShort = lang.slice(0, 2).toLowerCase();
-      const buttons = document.querySelectorAll(".languages button");
-      buttons.forEach(btn => {
-        if (btn.dataset.lang === langShort) {
-          btn.style.border = "2px solid #00ffee";
-        }
-      });
+body, html {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  font-family: 'Segoe UI', sans-serif;
+  background: black;
+  color: white;
+}
 
-      // Intro logo fade + hide
-      const intro = document.getElementById('intro');
-      setTimeout(() => {
-        intro.style.opacity = '0';
-        intro.style.pointerEvents = 'none';
-        setTimeout(() => {
-          intro.remove();
-          const video = document.querySelector('.background-video');
-          video.muted = false;
-          video.play().catch(e => console.warn('Video autoplay blocked:', e));
-        }, 1000);
-      }, 3000);
+.background-video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  z-index: -1;
+  filter: brightness(0.4);
+}
 
-      // Fullscreen on click for image box (mobile/desktop)
-      document.body.addEventListener('click', function (e) {
-        if (e.target.closest('#moving-box')) {
-          const img = e.target.closest('#moving-box').querySelector('img');
-          const full = document.createElement('div');
-          full.style.position = 'fixed';
-          full.style.top = '0';
-          full.style.left = '0';
-          full.style.width = '100vw';
-          full.style.height = '100vh';
-          full.style.background = 'rgba(0,0,0,0.95)';
-          full.style.display = 'flex';
-          full.style.justifyContent = 'center';
-          full.style.alignItems = 'center';
-          full.style.zIndex = '9999';
-          full.innerHTML = `<img src="${img.src}" style="max-width:90vw; max-height:90vh; border-radius:12px; box-shadow:0 0 30px #0ff;" alt="fullscreen">`;
-          full.addEventListener('click', () => full.remove());
-          document.body.appendChild(full);
-        }
-      });
-    });
-  </script>
-  <style>
-    #motto {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 1.8rem;
-      font-weight: bold;
-      margin-top: 2rem;
-      text-align: center;
-      white-space: pre;
-      animation: typing 6s steps(60, end);
-      overflow: hidden;
-      border-right: 2px solid white;
-      max-width: 90%;
-      margin-left: auto;
-      margin-right: auto;
-    }
+#intro {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  transition: opacity 1s ease;
+}
 
-    #intro {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: black;
-      z-index: 1000;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      transition: opacity 1s ease;
-    }
+#intro img {
+  max-width: 300px;
+  animation: fadein 2s ease-in-out;
+}
 
-    #intro img {
-      max-width: 300px;
-      filter: drop-shadow(0 0 20px #0ff);
-      animation: fadein 2s ease-in-out;
-    }
+@keyframes fadein {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
 
-    @keyframes fadein {
-      from { opacity: 0; transform: scale(0.9); }
-      to { opacity: 1; transform: scale(1); }
-    }
+.languages {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  z-index: 10;
+}
 
-    @keyframes typing {
-      from { width: 0 }
-      to { width: 100% }
-    }
+.languages button {
+  margin: 0 2px;
+  padding: 5px 10px;
+  background: rgba(0,0,0,0.5);
+  border: 1px solid white;
+  color: white;
+  cursor: pointer;
+}
 
-    #joke-box {
-      position: fixed;
-      bottom: 100px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: rgba(0,0,0,0.5);
-      padding: 10px 20px;
-      border-radius: 8px;
-      font-size: 1.2rem;
-      max-width: 90%;
-      text-align: center;
-      opacity: 0.8;
-      z-index: 6;
-    }
+.logo {
+  font-size: 2rem;
+  text-shadow: 0 0 5px cyan;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
 
-    @media only screen and (max-width: 768px) {
-      #motto {
-        font-size: 1.2rem;
-      }
-      .logo {
-        font-size: 1.4rem;
-      }
-      .socials a {
-        font-size: 0.9rem;
-      }
-      .languages button {
-        padding: 3px 6px;
-        font-size: 0.8rem;
-      }
-      #joke-box {
-        font-size: 1rem;
-        bottom: 120px;
-      }
-    }
-  </style>
-</head>
-<body>
-  <div id="intro">
-    <img src="logo-intro.png" alt="Intro Logo">
-  </div>
+.socials {
+  display: flex;
+  gap: 10px;
+}
 
-  <video class="background-video" muted autoplay loop playsinline>
-    <source src="assets/background.mp4" type="video/mp4">
-    Your browser does not support the video tag.
-  </video>
+.content {
+  position: relative;
+  z-index: 2;
+  padding: 2rem;
+}
 
-  <div class="languages">
-    <button data-lang="en">EN</button>
-    <button data-lang="cz">CZ</button>
-    <button data-lang="de">DE</button>
-    <button data-lang="kli">KLI</button>
-  </div>
+#motto {
+  text-align: center;
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-top: 3rem;
+  min-height: 2.5rem;
+}
 
-  <div class="content">
-    <header>
-      <div class="logo">
-        <img src="logo.png" alt="SkyTel Montage Logo" height="50">
-        ⚡ SkyTel Montage ⚡
-      </div>
-      <div class="socials">
-        <a href="https://instagram.com/HIGH_VOLTAGE_DRIVE" target="_blank">
-          <img src="/mnt/data/high_voltage_drive_qr(1).png" alt="Instagram QR" height="40">
-        </a>
-        <a href="#">Facebook</a>
-        <a href="#">LinkedIn</a>
-        <a href="#">GitHub</a>
-      </div>
-    </header>
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  font-size: 0.9rem;
+  padding-bottom: 1rem;
+}
 
-    <main>
-      <div id="motto">„Nepřekonáváš věž – překonáváš sám sebe.“</div>
-    </main>
+#joke-box {
+  position: fixed;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0,0,0,0.5);
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-size: 1.2rem;
+  text-align: center;
+  max-width: 80%;
+  z-index: 5;
+}
 
-    <footer>
-      <p>Tento web byl vytvořen za 23s s pomocí AI. Nepředstavuje finální podobu webu. Díky za pochopení.</p>
-      <p>Powered by SkyTel Montage | Glitchy, Geeky, Gorgeous ✨</p>
-    </footer>
-  </div>
-</body>
-</html>
+#moving-box {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  z-index: 10;
+  opacity: 0.8;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+#moving-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+@media (max-width: 768px) {
+  #motto {
+    font-size: 1.2rem;
+  }
+  #joke-box {
+    font-size: 1rem;
+    bottom: 100px;
+  }
+  .logo {
+    font-size: 1.4rem;
+  }
+}
