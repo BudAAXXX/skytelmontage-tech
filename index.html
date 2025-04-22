@@ -6,9 +6,100 @@
   <title>SkyTel Montage</title>
   <link rel="stylesheet" href="style.css">
   <script src="script.js" defer></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const lang = navigator.language || navigator.userLanguage;
+      const langShort = lang.slice(0, 2).toLowerCase();
+      const buttons = document.querySelectorAll(".languages button");
+      buttons.forEach(btn => {
+        if (btn.dataset.lang === langShort) {
+          btn.style.border = "2px solid #00ffee";
+        }
+      });
+
+      // Intro logo fade + hide
+      const intro = document.getElementById('intro');
+      setTimeout(() => {
+        intro.style.opacity = '0';
+        intro.style.pointerEvents = 'none';
+        setTimeout(() => {
+          intro.remove();
+          document.querySelector('.background-video').play();
+        }, 1000);
+      }, 3000);
+    });
+  </script>
+  <style>
+    #motto {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.8rem;
+      font-weight: bold;
+      margin-top: 2rem;
+      text-align: center;
+      white-space: pre;
+      animation: typing 6s steps(60, end);
+      overflow: hidden;
+      border-right: 2px solid white;
+      max-width: 90%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    #intro {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: black;
+      z-index: 1000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: opacity 1s ease;
+    }
+
+    #intro img {
+      max-width: 300px;
+      filter: drop-shadow(0 0 20px #0ff);
+      animation: fadein 2s ease-in-out;
+    }
+
+    @keyframes fadein {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+
+    @media only screen and (max-width: 768px) {
+      #motto {
+        font-size: 1.2rem;
+      }
+      .logo {
+        font-size: 1.4rem;
+      }
+      .socials a {
+        font-size: 0.9rem;
+      }
+      .languages button {
+        padding: 3px 6px;
+        font-size: 0.8rem;
+      }
+    }
+  </style>
 </head>
 <body>
-  <video class="background-video" autoplay muted loop>
+  <div id="intro">
+    <img src="logo-intro.png" alt="Intro Logo">
+  </div>
+
+  <video class="background-video" muted loop playsinline>
     <source src="assets/background.mp4" type="video/mp4">
     Your browser does not support the video tag.
   </video>
@@ -37,11 +128,11 @@
     </header>
 
     <main>
-      <h1>„Skála neodpouští, ale učí. Život je boj – a výška ho jen zvýrazňuje.“</h1>
-      <p>Tento web byl vytvořen za 23s s pomocí AI. Nepředstavuje finální podobu webu. Díky za pochopení.</p>
+      <div id="motto">„Nepřekonáváš věž – překonáváš sám sebe.“</div>
     </main>
 
     <footer>
+      <p>Tento web byl vytvořen za 23s s pomocí AI. Nepředstavuje finální podobu webu. Díky za pochopení.</p>
       <p>Powered by SkyTel Montage | Glitchy, Geeky, Gorgeous ✨</p>
     </footer>
   </div>
