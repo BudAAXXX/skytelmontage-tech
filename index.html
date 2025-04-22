@@ -17,41 +17,47 @@
       50% { filter: drop-shadow(0 0 5px red); }
       100% { filter: drop-shadow(0 0 0 red); }
     }
+    @keyframes glowBlue {
+      from { text-shadow: 0 0 5px #001f4d; }
+      to { text-shadow: 0 0 20px #0047ab; }
+    }
+    @keyframes floatText {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+      100% { transform: translateY(0); }
+    }
   </style>
 </head>
 <body>
-  <!-- INTRO LOGO -->
+  <!-- INTRO -->
   <div id="intro">
     <img src="logo-intro.png" alt="Intro Logo" />
   </div>
 
-  <!-- VIDEO NA POZADÍ -->
-  <video class="background-video" autoplay muted loop playsinline>
+  <!-- VIDEO POZADÍ -->
+  <video class="background-video" autoplay muted playsinline loop>
     <source src="assets/background.mp4" type="video/mp4" />
     Your browser does not support the video tag.
   </video>
 
-  <!-- PŘEPÍNAČE JAZYKŮ -->
+  <!-- JAZYKOVÝ PŘEPÍNAČ -->
   <div class="languages">
-    <button data-lang="en">EN</button>
-    <button data-lang="cz">CZ</button>
-    <button data-lang="de">DE</button>
-    <button data-lang="kli">KLI</button>
+    <button data-lang="en" title="English"><img src="flags/en.png" alt="EN" /></button>
+    <button data-lang="cz" title="Čeština"><img src="flags/cz.png" alt="CZ" /></button>
+    <button data-lang="de" title="Deutsch"><img src="flags/de.png" alt="DE" /></button>
+    <button data-lang="kli" title="Klingon"><img src="flags/klingon.png" alt="KLI" /></button>
   </div>
 
   <div class="content">
     <header>
       <div class="logo">
         <img src="logo.png" alt="SkyTel Montage Logo" height="50" />
-        <span data-i18n="logoText">⚡ SkyTel Montage ⚡</span>
+        <span id="rolling-text" style="color: #001f4d; animation: glowBlue 2s infinite alternate;"></span>
       </div>
       <div class="socials">
         <a href="https://instagram.com/HIGH_VOLTAGE_DRIVE" target="_blank">
-          <img src="instagram.png" alt="Instagram QR" height="40" />
+          <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" height="40" />
         </a>
-        <a href="#" data-i18n="facebook">Facebook</a>
-        <a href="#" data-i18n="linkedin">LinkedIn</a>
-        <a href="#" data-i18n="github">GitHub</a>
       </div>
     </header>
 
@@ -59,7 +65,10 @@
       <div id="motto"></div>
     </main>
 
-    <div id="joke-box"></div>
+    <!-- VTIPY -->
+    <div id="joke-box">
+      <div class="joke-inner"></div>
+    </div>
 
     <footer>
       <p data-i18n="disclaimer"></p>
