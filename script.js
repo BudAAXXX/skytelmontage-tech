@@ -1,63 +1,158 @@
-document.addEventListener("DOMContentLoaded", function () {
-  const lang = navigator.language || navigator.userLanguage;
-  const langShort = lang.slice(0, 2).toLowerCase();
-  const buttons = document.querySelectorAll(".languages button");
-  buttons.forEach(btn => {
-    if (btn.dataset.lang === langShort) {
-      btn.style.border = "2px solid #00ffee";
-    }
-  });
-
-  // Intro logo fade out
-  const intro = document.getElementById('intro');
+document.addEventListener("DOMContentLoaded", () => {
+  // INTRO
+  const intro = document.getElementById("intro");
+  const video = document.querySelector(".background-video");
   setTimeout(() => {
-    intro.style.opacity = '0';
-    intro.style.pointerEvents = 'none';
+    intro.style.opacity = "0";
+    intro.style.pointerEvents = "none";
     setTimeout(() => {
       intro.remove();
-      const video = document.querySelector('.background-video');
-      video.muted = false;
-      video.play().catch(e => console.warn('Video autoplay blocked:', e));
+      video.play().catch(() => {});
     }, 1000);
   }, 3000);
 
-  // Fullscreen image view
-  document.body.addEventListener('click', function (e) {
-    if (e.target.closest('#moving-box')) {
-      const img = e.target.closest('#moving-box').querySelector('img');
-      const full = document.createElement('div');
-      full.style.position = 'fixed';
-      full.style.top = '0';
-      full.style.left = '0';
-      full.style.width = '100vw';
-      full.style.height = '100vh';
-      full.style.background = 'rgba(0,0,0,0.95)';
-      full.style.display = 'flex';
-      full.style.justifyContent = 'center';
-      full.style.alignItems = 'center';
-      full.style.zIndex = '9999';
-      full.innerHTML = `<img src="${img.src}" style="max-width:90vw; max-height:90vh; border-radius:12px; box-shadow:0 0 30px #0ff;" alt="fullscreen">`;
-      full.addEventListener('click', () => full.remove());
-      document.body.appendChild(full);
+  // MOTTO
+  const mottoText = "Nepřekonáváš věž – překonáváš sám sebe.";
+  const mottoEl = document.getElementById("motto");
+  let i = 0;
+  function typeMotto() {
+    if (i < mottoText.length) {
+      mottoEl.textContent += mottoText.charAt(i);
+      i++;
+      setTimeout(typeMotto, 75);
     }
-  });
+  }
+  typeMotto();
 
-  // Joke box
-  const jokes = {
-    it: ['404 error: Joke not found 🤖', 'Programátor vstoupí do baru... a nic nepije, protože je to bug.'],
-    climber: ['Lano je lepší než vztah – vždycky tě podrží.', 'Visím, tedy jsem.'],
-    dark: ['Život je beta verze.', 'Offline = mrtvý, online = šťastný?']
+  // PŘEKLADY
+  const translations = {
+    en: {
+      logoText: "⚡ SkyTel Montage ⚡",
+      facebook: "Facebook",
+      linkedin: "LinkedIn",
+      github: "GitHub",
+      disclaimer: "This website was created in 23s with the help of AI. It does not represent the final version. Thank you for understanding.",
+      powered: "Powered by SkyTel Montage | Glitchy, Geeky, Gorgeous ✨",
+      jokes: [
+        "404 error: Joke not found 🤖",
+        "It's not a bug, it's a feature!",
+        "I climb, therefore I am.",
+        "Life is in beta.",
+        "Offline = dead, online = alive?"
+      ]
+    },
+    cz: {
+      logoText: "⚡ SkyTel Montage ⚡",
+      facebook: "Facebook",
+      linkedin: "LinkedIn",
+      github: "GitHub",
+      disclaimer: "Tento web byl vytvořen za 23s s pomocí AI. Nepředstavuje finální podobu webu. Díky za pochopení.",
+      powered: "Powered by SkyTel Montage | Glitchy, Geeky, Gorgeous ✨",
+      jokes: [
+        "404 error: Vtip nenalezen 🤖",
+        "To není bug, to je featura!",
+        "Visím, tedy jsem.",
+        "Život je beta verze.",
+        "Offline = mrtvý, online = šťastný?"
+      ]
+    },
+    de: {
+      logoText: "⚡ SkyTel Montage ⚡",
+      facebook: "Facebook",
+      linkedin: "LinkedIn",
+      github: "GitHub",
+      disclaimer: "Diese Website wurde in 23s mit Hilfe von KI erstellt. Sie stellt nicht die endgültige Version dar. Danke für Ihr Verständnis.",
+      powered: "Powered by SkyTel Montage | Glitchy, Geeky, Gorgeous ✨",
+      jokes: [
+        "404 Fehler: Witz nicht gefunden 🤖",
+        "Das ist kein Bug, das ist ein Feature!",
+        "Ich hänge, also bin ich.",
+        "Das Leben ist eine Beta-Version.",
+        "Offline = tot, online = lebendig?"
+      ]
+    },
+    kli: {
+      logoText: "⚡ SkyTel Montage ⚡",
+      facebook: "QIn vIghro'",
+      linkedin: "nIvbogh Qun",
+      github: "ghItHub",
+      disclaimer: "23 lupmey lo'lu'taHvIS QIn vIchenmoHpu'. vItlhutlhlaHbe' Qav pat.",
+      powered: "Duybogh SkyTel Montage | Glitchy, Geeky, Gorgeous ✨",
+      jokes: [
+        "404 Qagh: HIvje' pagh tu'lu' 🤖",
+        "Qagh'a'? Qubmey vIneH!",
+        "jIyIt, vaj jIyIn.",
+        "yIn 'oH beta DuQ.",
+        "Offline = Hegh, Online = yIn?"
+      ]
+    }
   };
-  const jokeBox = document.createElement('div');
-  jokeBox.id = 'joke-box';
-  document.body.appendChild(jokeBox);
 
-  function randomJoke() {
-    const all = [...jokes.it, ...jokes.climber, ...jokes.dark];
-    return all[Math.floor(Math.random() * all.length)];
+  // APLIKACE PŘEKLADU
+  let jokeInterval;
+  function applyTranslations(lang) {
+    const dict = translations[lang] || translations.en;
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (dict[key]) el.textContent = dict[key];
+    });
+
+    const jokeBox = document.getElementById("joke-box");
+    if (jokeInterval) clearInterval(jokeInterval);
+    jokeBox.textContent = dict.jokes[Math.floor(Math.random() * dict.jokes.length)];
+    jokeInterval = setInterval(() => {
+      jokeBox.textContent = dict.jokes[Math.floor(Math.random() * dict.jokes.length)];
+    }, 5000);
   }
 
-  setInterval(() => {
-    jokeBox.textContent = randomJoke();
-  }, 5000);
+  document.querySelectorAll(".languages button").forEach(btn => {
+    btn.addEventListener("click", () => {
+      applyTranslations(btn.dataset.lang);
+    });
+  });
+
+  const browserLang = (navigator.language || navigator.userLanguage).slice(0, 2).toLowerCase();
+  applyTranslations(browserLang);
+
+  // KOSTKA
+  const imageList = [
+    "Lano.png", "brzda.png", "grillon(1).png", "haky.png", "jummar.png",
+    "karabina0.png", "karabina01.png", "karabina02.png", "karabina08.png", "karabina13.png",
+    "karabina15.png", "karabina17.png", "karabina18.png", "karabina19.png", "karabina20.png",
+    "karabina26.png", "karabina28.png", "karabina29.png", "kladka01.png", "kladka02.png",
+    "kladka04.png", "kotvevnik.png", "logo.png", "obrtlik.png", "ocelka01.png",
+    "ocelka02.png", "ocelka03.png", "oecelka04.png", "rig.png", "sada.png",
+    "sedacka.png", "sedak.png", "smyce01.png", "vak.png", "vak03.png", "vak05.png"
+  ];
+
+  const box = document.createElement("div");
+  box.id = "moving-box";
+  const boxImg = document.createElement("img");
+  box.appendChild(boxImg);
+  document.body.appendChild(box);
+
+  let x = 50, y = 50, dx = 2, dy = 2, imgIndex = 0;
+  boxImg.src = `main/${imageList[imgIndex]}`;
+  boxImg.alt = "Pohyblivá fotka";
+
+  function animateBox() {
+    const rect = box.getBoundingClientRect();
+    if (x + rect.width >= window.innerWidth || x <= 0) {
+      dx *= -1;
+      imgIndex = (imgIndex + 1) % imageList.length;
+      boxImg.src = `main/${imageList[imgIndex]}`;
+    }
+    if (y + rect.height >= window.innerHeight || y <= 0) {
+      dy *= -1;
+      imgIndex = (imgIndex + 1) % imageList.length;
+      boxImg.src = `main/${imageList[imgIndex]}`;
+    }
+    x += dx;
+    y += dy;
+    box.style.left = `${x}px`;
+    box.style.top = `${y}px`;
+    requestAnimationFrame(animateBox);
+  }
+
+  animateBox();
 });
