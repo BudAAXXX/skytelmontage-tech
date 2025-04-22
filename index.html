@@ -24,9 +24,32 @@
         intro.style.pointerEvents = 'none';
         setTimeout(() => {
           intro.remove();
-          document.querySelector('.background-video').play();
+          const video = document.querySelector('.background-video');
+          video.muted = false;
+          video.play().catch(e => console.warn('Video autoplay blocked:', e));
         }, 1000);
       }, 3000);
+
+      // Fullscreen on click for image box (mobile/desktop)
+      document.body.addEventListener('click', function (e) {
+        if (e.target.closest('#moving-box')) {
+          const img = e.target.closest('#moving-box').querySelector('img');
+          const full = document.createElement('div');
+          full.style.position = 'fixed';
+          full.style.top = '0';
+          full.style.left = '0';
+          full.style.width = '100vw';
+          full.style.height = '100vh';
+          full.style.background = 'rgba(0,0,0,0.95)';
+          full.style.display = 'flex';
+          full.style.justifyContent = 'center';
+          full.style.alignItems = 'center';
+          full.style.zIndex = '9999';
+          full.innerHTML = `<img src="${img.src}" style="max-width:90vw; max-height:90vh; border-radius:12px; box-shadow:0 0 30px #0ff;" alt="fullscreen">`;
+          full.addEventListener('click', () => full.remove());
+          document.body.appendChild(full);
+        }
+      });
     });
   </script>
   <style>
@@ -77,6 +100,21 @@
       to { width: 100% }
     }
 
+    #joke-box {
+      position: fixed;
+      bottom: 100px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0,0,0,0.5);
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 1.2rem;
+      max-width: 90%;
+      text-align: center;
+      opacity: 0.8;
+      z-index: 6;
+    }
+
     @media only screen and (max-width: 768px) {
       #motto {
         font-size: 1.2rem;
@@ -91,6 +129,10 @@
         padding: 3px 6px;
         font-size: 0.8rem;
       }
+      #joke-box {
+        font-size: 1rem;
+        bottom: 120px;
+      }
     }
   </style>
 </head>
@@ -99,7 +141,7 @@
     <img src="logo-intro.png" alt="Intro Logo">
   </div>
 
-  <video class="background-video" muted loop playsinline>
+  <video class="background-video" muted autoplay loop playsinline>
     <source src="assets/background.mp4" type="video/mp4">
     Your browser does not support the video tag.
   </video>
