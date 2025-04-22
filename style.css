@@ -1,14 +1,12 @@
-/* ZÁKLAD */
 body, html {
   margin: 0;
   padding: 0;
-  overflow: hidden;
   font-family: 'Segoe UI', sans-serif;
   background: black;
   color: white;
+  overflow: hidden;
 }
 
-/* VIDEO NA POZADÍ */
 .background-video {
   position: fixed;
   top: 0;
@@ -20,7 +18,6 @@ body, html {
   filter: brightness(0.4);
 }
 
-/* INTRO FULLSCREEN */
 #intro {
   position: fixed;
   top: 0;
@@ -29,19 +26,16 @@ body, html {
   height: 100vh;
   background: black;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   z-index: 9999;
   transition: opacity 1s ease;
 }
 
 #intro img {
-  width: 50vw;
-  max-width: 700px;
-  height: auto;
-  object-fit: contain;
+  width: 60vw;
+  max-width: 800px;
   animation: fadein 2s ease-in-out;
-  border: none;
 }
 
 @keyframes fadein {
@@ -49,30 +43,26 @@ body, html {
   to { opacity: 1; transform: scale(1); }
 }
 
-/* JAZYKY */
 .languages {
   position: fixed;
   top: 10px;
   right: 10px;
-  z-index: 100;
+  z-index: 10;
 }
 
 .languages button {
-  margin: 0 3px;
-  padding: 6px 10px;
-  background: rgba(0,0,0,0.5);
-  border: 1px solid white;
-  color: white;
+  background: transparent;
+  border: none;
   cursor: pointer;
-  font-size: 0.9rem;
-  transition: background 0.3s;
 }
 
-.languages button:hover {
-  background: rgba(255,255,255,0.2);
+.languages img {
+  width: 30px;
+  height: auto;
+  margin: 0 3px;
+  filter: drop-shadow(0 0 2px white);
 }
 
-/* HLAVIČKA */
 .logo {
   font-size: 2rem;
   text-shadow: 0 0 6px cyan;
@@ -81,20 +71,17 @@ body, html {
   gap: 12px;
 }
 
-.socials {
-  display: flex;
-  gap: 12px;
-  margin-top: 10px;
+.socials img {
+  height: 40px;
+  filter: drop-shadow(0 0 5px #fff);
 }
 
-/* OBSAH */
 .content {
   position: relative;
   z-index: 2;
   padding: 2rem;
 }
 
-/* MOTTO */
 #motto {
   text-align: center;
   font-size: 1.8rem;
@@ -103,10 +90,47 @@ body, html {
   min-height: 2.5rem;
 }
 
-/* VTIPY */
 #joke-box {
   position: fixed;
   bottom: 90px;
   left: 50%;
-  transform: translateX(-50%);
-  background: rgba(0,0,0,0.
+  transform: translateX(-50%) rotateX(10deg) rotateY(5deg);
+  perspective: 1000px;
+  z-index: 10;
+}
+
+.joke-inner {
+  background: rgba(0, 0, 50, 0.4);
+  padding: 12px 24px;
+  border-radius: 12px;
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #00ccff;
+  text-shadow: 0 0 8px #00ccff, 0 0 16px #00ccff, 0 0 24px #0088ff;
+  animation: floatText 3s ease-in-out infinite;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  font-size: 0.9rem;
+  padding-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+  #motto {
+    font-size: 1.3rem;
+  }
+  .logo {
+    font-size: 1.5rem;
+  }
+  .languages img {
+    width: 24px;
+  }
+  .joke-inner {
+    font-size: 1rem;
+    padding: 10px 16px;
+  }
+}
