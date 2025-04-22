@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // Intro fade + autoplay video
   const intro = document.getElementById("intro");
   const video = document.querySelector(".background-video");
   setTimeout(() => {
@@ -11,20 +10,26 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 500);
   }, 1000);
 
-  // Rolující název
   const rollingText = "SkyTel Montage";
   const rollingTarget = document.getElementById("rolling-text");
   let i = 0;
-  function typeRolling() {
+  (function typeRolling() {
     if (i < rollingText.length) {
-      rollingTarget.textContent += rollingText.charAt(i);
-      i++;
-      setTimeout(typeRolling, 150);
+      rollingTarget.textContent += rollingText[i++];
+      setTimeout(typeRolling, 100);
     }
-  }
-  typeRolling();
+  })();
 
-  // Překlady a vtipy
+  const mottoText = "Nepřekonáváš věž – překonáváš sám sebe.";
+  const mottoEl = document.getElementById("motto");
+  let m = 0;
+  setTimeout(function typeMotto() {
+    if (m < mottoText.length) {
+      mottoEl.textContent += mottoText[m++];
+      setTimeout(typeMotto, 70);
+    }
+  }, 1500);
+
   const translations = {
     cz: {
       disclaimer: "Tento web byl vytvořen za 23s s pomocí AI. Nepředstavuje finální podobu webu.",
@@ -74,23 +79,59 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function applyTranslations(lang) {
     const t = translations[lang] || translations.en;
-    document.querySelectorAll('[data-i18n]').forEach(el => {
-      const key = el.getAttribute('data-i18n');
+    document.querySelectorAll("[data-i18n]").forEach(el => {
+      const key = el.getAttribute("data-i18n");
       if (t[key]) el.textContent = t[key];
     });
-
-    const jokeBox = document.querySelector(".joke-inner");
-    if (!jokeBox) return;
+    const jokeInner = document.querySelector(".joke-inner");
+    if (!jokeInner) return;
+    jokeInner.textContent = t.jokes[Math.random() * t.jokes.length | 0];
     setInterval(() => {
-      const randomJoke = t.jokes[Math.floor(Math.random() * t.jokes.length)];
-      jokeBox.textContent = randomJoke;
+      jokeInner.textContent = t.jokes[Math.random() * t.jokes.length | 0];
     }, 5000);
   }
 
-  document.querySelectorAll(".languages button").forEach(btn => {
-    btn.addEventListener("click", () => applyTranslations(btn.dataset.lang));
-  });
+  document.querySelectorAll(".languages button").forEach(btn =>
+    btn.addEventListener("click", () => applyTranslations(btn.dataset.lang))
+  );
+  applyTranslations((navigator.language || navigator.userLanguage).slice(0,2));
 
-  const browserLang = (navigator.language || navigator.userLanguage).slice(0, 2);
-  applyTranslations(browserLang);
+  const images = [
+    "Lano.png","brzda.png","grillon(1).png","haky.png","jummar.png",
+    "karabina0.png","karabina01.png","karabina02.png","karabina08.png",
+    "karabina13.png","karabina15.png","karabina17.png","karabina18.png",
+    "karabina19.png","karabina20.png","karabina26.png","karabina28.png",
+    "karabina29.png","kladka01.png","kladka02.png","kladka04.png",
+    "kotvevnik.png","logo.png","obrtlik.png","ocelka01.png","ocelka02.png",
+    "ocelka03.png","oecelka04.png","rig.png","sada.png","sedacka.png",
+    "sedak.png","smyce01.png","vak.png","vak03.png","vak05.png"
+  ];
+
+  const box = document.getElementById("moving-box"),
+        imgEl = document.getElementById("moving-image");
+  let x = 50, y = 50,
+      isMob = window.innerWidth < 768,
+      dx = isMob ? 1 : 2, dy = isMob ? 1 : 2,
+      idx = Math.random() * images.length | 0;
+  imgEl.src = `main/${images[idx]}`;
+
+  (function anim(){
+    const vw = visualViewport?.width || window.innerWidth,
+          vh = visualViewport?.height || window.innerHeight,
+          r = box.getBoundingClientRect();
+
+    if (x + r.width >= vw || x <= 0) {
+      dx *= -1; idx = (idx + 1) % images.length;
+      imgEl.src = `main/${images[idx]}`;
+    }
+    if (y + r.height >= vh || y <= 0) {
+      dy *= -1; idx = (idx + 1) % images.length;
+      imgEl.src = `main/${images[idx]}`;
+    }
+
+    x += dx; y += dy;
+    box.style.left = `${x}px`;
+    box.style.top = `${y}px`;
+    requestAnimationFrame(anim);
+  })();
 });
