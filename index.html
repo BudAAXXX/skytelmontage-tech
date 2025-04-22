@@ -1,138 +1,71 @@
-body, html {
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  font-family: 'Segoe UI', sans-serif;
-  background: black;
-  color: white;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Telekomunikační práce na území EU s plnou certifikací a zkušenostmi přes 8 let.">
+  <title>SkyTel Montage</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="favicon-red.png" type="image/png" />
+  <script src="script.js" defer></script>
+  <style>
+    link[rel='icon'] {
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0% { filter: drop-shadow(0 0 0 red); }
+      50% { filter: drop-shadow(0 0 5px red); }
+      100% { filter: drop-shadow(0 0 0 red); }
+    }
+  </style>
+</head>
+<body>
+  <!-- INTRO LOGO -->
+  <div id="intro">
+    <img src="logo-intro.png" alt="Intro Logo" />
+  </div>
 
-.background-video {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  object-fit: cover;
-  z-index: -1;
-  filter: brightness(0.4);
-}
+  <!-- VIDEO NA POZADÍ -->
+  <video class="background-video" autoplay muted loop playsinline>
+    <source src="assets/background.mp4" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
 
-#intro {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: black;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 10000;
-  transition: opacity 1s ease;
-}
+  <!-- PŘEPÍNAČE JAZYKŮ -->
+  <div class="languages">
+    <button data-lang="en">EN</button>
+    <button data-lang="cz">CZ</button>
+    <button data-lang="de">DE</button>
+    <button data-lang="kli">KLI</button>
+  </div>
 
-#intro img {
-  max-width: 300px;
-  animation: fadein 2s ease-in-out;
-}
+  <div class="content">
+    <header>
+      <div class="logo">
+        <img src="logo.png" alt="SkyTel Montage Logo" height="50" />
+        <span data-i18n="logoText">⚡ SkyTel Montage ⚡</span>
+      </div>
+      <div class="socials">
+        <a href="https://instagram.com/HIGH_VOLTAGE_DRIVE" target="_blank">
+          <img src="instagram.png" alt="Instagram QR" height="40" />
+        </a>
+        <a href="#" data-i18n="facebook">Facebook</a>
+        <a href="#" data-i18n="linkedin">LinkedIn</a>
+        <a href="#" data-i18n="github">GitHub</a>
+      </div>
+    </header>
 
-@keyframes fadein {
-  from { opacity: 0; transform: scale(0.95); }
-  to { opacity: 1; transform: scale(1); }
-}
+    <main>
+      <div id="motto"></div>
+    </main>
 
-.languages {
-  position: fixed;
-  top: 10px;
-  right: 10px;
-  z-index: 10;
-}
+    <div id="joke-box"></div>
 
-.languages button {
-  margin: 0 2px;
-  padding: 5px 10px;
-  background: rgba(0,0,0,0.5);
-  border: 1px solid white;
-  color: white;
-  cursor: pointer;
-}
-
-.logo {
-  font-size: 2rem;
-  text-shadow: 0 0 5px cyan;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.socials {
-  display: flex;
-  gap: 10px;
-}
-
-.content {
-  position: relative;
-  z-index: 2;
-  padding: 2rem;
-}
-
-#motto {
-  text-align: center;
-  font-size: 1.8rem;
-  font-weight: bold;
-  margin-top: 3rem;
-  min-height: 2.5rem;
-}
-
-footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  text-align: center;
-  font-size: 0.9rem;
-  padding-bottom: 1rem;
-}
-
-#joke-box {
-  position: fixed;
-  bottom: 80px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(0,0,0,0.5);
-  padding: 10px 20px;
-  border-radius: 10px;
-  font-size: 1.2rem;
-  text-align: center;
-  max-width: 80%;
-  z-index: 5;
-}
-
-#moving-box {
-  position: absolute;
-  width: 100px;
-  height: 100px;
-  z-index: 10;
-  opacity: 0.8;
-  border-radius: 8px;
-  overflow: hidden;
-}
-
-#moving-box img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-
-@media (max-width: 768px) {
-  #motto {
-    font-size: 1.2rem;
-  }
-  #joke-box {
-    font-size: 1rem;
-    bottom: 100px;
-  }
-  .logo {
-    font-size: 1.4rem;
-  }
-}
+    <footer>
+      <p data-i18n="disclaimer"></p>
+      <p data-i18n="powered"></p>
+      <p>📧 patrik.budinsky@skytelmontage.tech | 📞 +420 739 977 089</p>
+    </footer>
+  </div>
+</body>
+</html>
