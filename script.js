@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // INTRO
+  // Intro fade + autoplay video
   const intro = document.getElementById("intro");
   const video = document.querySelector(".background-video");
   setTimeout(() => {
@@ -8,151 +8,89 @@ document.addEventListener("DOMContentLoaded", () => {
     setTimeout(() => {
       intro.remove();
       video.play().catch(() => {});
-    }, 1000);
-  }, 3000);
+    }, 500);
+  }, 1000);
 
-  // MOTTO
-  const mottoText = "Nepřekonáváš věž – překonáváš sám sebe.";
-  const mottoEl = document.getElementById("motto");
+  // Rolující název
+  const rollingText = "SkyTel Montage";
+  const rollingTarget = document.getElementById("rolling-text");
   let i = 0;
-  function typeMotto() {
-    if (i < mottoText.length) {
-      mottoEl.textContent += mottoText.charAt(i);
+  function typeRolling() {
+    if (i < rollingText.length) {
+      rollingTarget.textContent += rollingText.charAt(i);
       i++;
-      setTimeout(typeMotto, 75);
+      setTimeout(typeRolling, 150);
     }
   }
-  typeMotto();
+  typeRolling();
 
-  // PŘEKLADY
+  // Překlady a vtipy
   const translations = {
-    en: {
-      logoText: "⚡ SkyTel Montage ⚡",
-      facebook: "Facebook",
-      linkedin: "LinkedIn",
-      github: "GitHub",
-      disclaimer: "This website was created in 23s with the help of AI. It does not represent the final version. Thank you for understanding.",
-      powered: "Powered by SkyTel Montage | Glitchy, Geeky, Gorgeous ✨",
-      jokes: [
-        "404 error: Joke not found 🤖",
-        "It's not a bug, it's a feature!",
-        "I climb, therefore I am.",
-        "Life is in beta.",
-        "Offline = dead, online = alive?"
-      ]
-    },
     cz: {
-      logoText: "⚡ SkyTel Montage ⚡",
-      facebook: "Facebook",
-      linkedin: "LinkedIn",
-      github: "GitHub",
-      disclaimer: "Tento web byl vytvořen za 23s s pomocí AI. Nepředstavuje finální podobu webu. Díky za pochopení.",
+      disclaimer: "Tento web byl vytvořen za 23s s pomocí AI. Nepředstavuje finální podobu webu.",
       powered: "Powered by SkyTel Montage | Glitchy, Geeky, Gorgeous ✨",
       jokes: [
-        "404 error: Vtip nenalezen 🤖",
         "To není bug, to je featura!",
         "Visím, tedy jsem.",
-        "Život je beta verze.",
-        "Offline = mrtvý, online = šťastný?"
+        "Kód bez komentáře je jako stěna bez chytů.",
+        "Chyba mezi židlí a klávesnicí.",
+        "Debugování je jako hledání černé smyčky v noci."
+      ]
+    },
+    en: {
+      disclaimer: "This website was created in 23s with the help of AI. Not the final version.",
+      powered: "Powered by SkyTel Montage | Glitchy, Geeky, Gorgeous ✨",
+      jokes: [
+        "It's not a bug, it's a feature!",
+        "I hang, therefore I am.",
+        "Coding without comments is climbing without gear.",
+        "Error between chair and keyboard.",
+        "Debugging is like searching for a ghost in a cave."
       ]
     },
     de: {
-      logoText: "⚡ SkyTel Montage ⚡",
-      facebook: "Facebook",
-      linkedin: "LinkedIn",
-      github: "GitHub",
-      disclaimer: "Diese Website wurde in 23s mit Hilfe von KI erstellt. Sie stellt nicht die endgültige Version dar. Danke für Ihr Verständnis.",
+      disclaimer: "Diese Website wurde in 23 Sekunden mit KI erstellt. Nicht die finale Version.",
       powered: "Powered by SkyTel Montage | Glitchy, Geeky, Gorgeous ✨",
       jokes: [
-        "404 Fehler: Witz nicht gefunden 🤖",
         "Das ist kein Bug, das ist ein Feature!",
         "Ich hänge, also bin ich.",
-        "Das Leben ist eine Beta-Version.",
-        "Offline = tot, online = lebendig?"
+        "Ohne Kommentare ist Code wie ein Seil ohne Knoten.",
+        "Fehler sitzt vor dem Monitor.",
+        "Debuggen ist wie Geisterjagd im Dunkeln."
       ]
     },
     kli: {
-      logoText: "⚡ SkyTel Montage ⚡",
-      facebook: "QIn vIghro'",
-      linkedin: "nIvbogh Qun",
-      github: "ghItHub",
-      disclaimer: "23 lupmey lo'lu'taHvIS QIn vIchenmoHpu'. vItlhutlhlaHbe' Qav pat.",
+      disclaimer: "QIn vIchenmoHta' 23 lupmey lo'lu'taHvIS. not Qav pat.",
       powered: "Duybogh SkyTel Montage | Glitchy, Geeky, Gorgeous ✨",
       jokes: [
-        "404 Qagh: HIvje' pagh tu'lu' 🤖",
         "Qagh'a'? Qubmey vIneH!",
         "jIyIt, vaj jIyIn.",
-        "yIn 'oH beta DuQ.",
-        "Offline = Hegh, Online = yIn?"
+        "QInwIjDaq chut neH",
+        "cha'DIch nuqneH vIlo'laHbe'",
+        "'ay' rurbogh QIDwI'."
       ]
     }
   };
 
-  // APLIKACE PŘEKLADU
-  let jokeInterval;
   function applyTranslations(lang) {
-    const dict = translations[lang] || translations.en;
+    const t = translations[lang] || translations.en;
     document.querySelectorAll('[data-i18n]').forEach(el => {
       const key = el.getAttribute('data-i18n');
-      if (dict[key]) el.textContent = dict[key];
+      if (t[key]) el.textContent = t[key];
     });
 
-    const jokeBox = document.getElementById("joke-box");
-    if (jokeInterval) clearInterval(jokeInterval);
-    jokeBox.textContent = dict.jokes[Math.floor(Math.random() * dict.jokes.length)];
-    jokeInterval = setInterval(() => {
-      jokeBox.textContent = dict.jokes[Math.floor(Math.random() * dict.jokes.length)];
+    const jokeBox = document.querySelector(".joke-inner");
+    if (!jokeBox) return;
+    setInterval(() => {
+      const randomJoke = t.jokes[Math.floor(Math.random() * t.jokes.length)];
+      jokeBox.textContent = randomJoke;
     }, 5000);
   }
 
   document.querySelectorAll(".languages button").forEach(btn => {
-    btn.addEventListener("click", () => {
-      applyTranslations(btn.dataset.lang);
-    });
+    btn.addEventListener("click", () => applyTranslations(btn.dataset.lang));
   });
 
-  const browserLang = (navigator.language || navigator.userLanguage).slice(0, 2).toLowerCase();
+  const browserLang = (navigator.language || navigator.userLanguage).slice(0, 2);
   applyTranslations(browserLang);
-
-  // KOSTKA
-  const imageList = [
-    "Lano.png", "brzda.png", "grillon(1).png", "haky.png", "jummar.png",
-    "karabina0.png", "karabina01.png", "karabina02.png", "karabina08.png", "karabina13.png",
-    "karabina15.png", "karabina17.png", "karabina18.png", "karabina19.png", "karabina20.png",
-    "karabina26.png", "karabina28.png", "karabina29.png", "kladka01.png", "kladka02.png",
-    "kladka04.png", "kotvevnik.png", "logo.png", "obrtlik.png", "ocelka01.png",
-    "ocelka02.png", "ocelka03.png", "oecelka04.png", "rig.png", "sada.png",
-    "sedacka.png", "sedak.png", "smyce01.png", "vak.png", "vak03.png", "vak05.png"
-  ];
-
-  const box = document.createElement("div");
-  box.id = "moving-box";
-  const boxImg = document.createElement("img");
-  box.appendChild(boxImg);
-  document.body.appendChild(box);
-
-  let x = 50, y = 50, dx = 2, dy = 2, imgIndex = 0;
-  boxImg.src = `main/${imageList[imgIndex]}`;
-  boxImg.alt = "Pohyblivá fotka";
-
-  function animateBox() {
-    const rect = box.getBoundingClientRect();
-    if (x + rect.width >= window.innerWidth || x <= 0) {
-      dx *= -1;
-      imgIndex = (imgIndex + 1) % imageList.length;
-      boxImg.src = `main/${imageList[imgIndex]}`;
-    }
-    if (y + rect.height >= window.innerHeight || y <= 0) {
-      dy *= -1;
-      imgIndex = (imgIndex + 1) % imageList.length;
-      boxImg.src = `main/${imageList[imgIndex]}`;
-    }
-    x += dx;
-    y += dy;
-    box.style.left = `${x}px`;
-    box.style.top = `${y}px`;
-    requestAnimationFrame(animateBox);
-  }
-
-  animateBox();
 });
