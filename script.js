@@ -1,39 +1,55 @@
-document.addEventListener('DOMContentLoaded', function () {
-  const imagePath = 'main/';
-  const imageCount = 40; // nastav podle reálného počtu PNG souborů
-  const imageList = [];
+document.addEventListener("DOMContentLoaded", function () {
+  const lang = navigator.language || navigator.userLanguage;
+  const langShort = lang.slice(0, 2).toLowerCase();
+  const buttons = document.querySelectorAll(".languages button");
+  buttons.forEach(btn => {
+    if (btn.dataset.lang === langShort) {
+      btn.style.border = "2px solid #00ffee";
+    }
+  });
 
-  for (let i = 0; i < imageCount; i++) {
-    imageList.push(`${imagePath}karabina${i}.png`);
-  }
+  // Intro logo fade out
+  const intro = document.getElementById('intro');
+  setTimeout(() => {
+    intro.style.opacity = '0';
+    intro.style.pointerEvents = 'none';
+    setTimeout(() => {
+      intro.remove();
+      const video = document.querySelector('.background-video');
+      video.muted = false;
+      video.play().catch(e => console.warn('Video autoplay blocked:', e));
+    }, 1000);
+  }, 3000);
 
-  // Přidej další specifické názvy, pokud existují jiné obrázky než karabiny
-  const extraImages = [
-    'Lano.png', 'brzda.png', 'grillon(1).png', 'haky.png', 'jummar.png',
-    'sedacka.png', 'vak.png', 'ocelka01.png', 'rig.png'
-  ];
-  imageList.push(...extraImages.map(img => `${imagePath}${img}`));
+  // Fullscreen image view
+  document.body.addEventListener('click', function (e) {
+    if (e.target.closest('#moving-box')) {
+      const img = e.target.closest('#moving-box').querySelector('img');
+      const full = document.createElement('div');
+      full.style.position = 'fixed';
+      full.style.top = '0';
+      full.style.left = '0';
+      full.style.width = '100vw';
+      full.style.height = '100vh';
+      full.style.background = 'rgba(0,0,0,0.95)';
+      full.style.display = 'flex';
+      full.style.justifyContent = 'center';
+      full.style.alignItems = 'center';
+      full.style.zIndex = '9999';
+      full.innerHTML = `<img src="${img.src}" style="max-width:90vw; max-height:90vh; border-radius:12px; box-shadow:0 0 30px #0ff;" alt="fullscreen">`;
+      full.addEventListener('click', () => full.remove());
+      document.body.appendChild(full);
+    }
+  });
 
+  // Joke box
   const jokes = {
-    it: [/* IT vtipy */],
-    climber: [/* lezecké vtipy */],
-    dark: [/* černý humor */]
+    it: ['404 error: Joke not found 🤖', 'Programátor vstoupí do baru... a nic nepije, protože je to bug.'],
+    climber: ['Lano je lepší než vztah – vždycky tě podrží.', 'Visím, tedy jsem.'],
+    dark: ['Život je beta verze.', 'Offline = mrtvý, online = šťastný?']
   };
-
   const jokeBox = document.createElement('div');
   jokeBox.id = 'joke-box';
-  jokeBox.style.position = 'fixed';
-  jokeBox.style.bottom = '80px';
-  jokeBox.style.left = '50%';
-  jokeBox.style.transform = 'translateX(-50%)';
-  jokeBox.style.background = 'rgba(0,0,0,0.5)';
-  jokeBox.style.padding = '10px 20px';
-  jokeBox.style.borderRadius = '8px';
-  jokeBox.style.fontSize = '1.2rem';
-  jokeBox.style.maxWidth = '80%';
-  jokeBox.style.textAlign = 'center';
-  jokeBox.style.opacity = '0.8';
-  jokeBox.style.zIndex = '6';
   document.body.appendChild(jokeBox);
 
   function randomJoke() {
@@ -44,46 +60,4 @@ document.addEventListener('DOMContentLoaded', function () {
   setInterval(() => {
     jokeBox.textContent = randomJoke();
   }, 5000);
-
-  const box = document.createElement('div');
-  box.id = 'moving-box';
-  box.style.position = 'absolute';
-  box.style.width = '100px';
-  box.style.height = '100px';
-  box.style.border = '2px solid #00ffee';
-  box.style.borderRadius = '10px';
-  box.style.overflow = 'hidden';
-  box.style.zIndex = '5';
-  box.style.opacity = '0.9';
-  const img = document.createElement('img');
-  img.style.width = '100%';
-  img.style.height = '100%';
-  img.style.objectFit = 'contain';
-  box.appendChild(img);
-  document.body.appendChild(box);
-
-  let x = 100, y = 100, dx = 2, dy = 2;
-  let index = 0;
-  img.src = imageList[index];
-
-  function animate() {
-    const rect = box.getBoundingClientRect();
-    if (x + rect.width >= window.innerWidth || x <= 0) {
-      dx *= -1;
-      index = (index + 1) % imageList.length;
-      img.src = imageList[index];
-    }
-    if (y + rect.height >= window.innerHeight || y <= 0) {
-      dy *= -1;
-      index = (index + 1) % imageList.length;
-      img.src = imageList[index];
-    }
-    x += dx;
-    y += dy;
-    box.style.left = x + 'px';
-    box.style.top = y + 'px';
-    requestAnimationFrame(animate);
-  }
-
-  animate();
 });
