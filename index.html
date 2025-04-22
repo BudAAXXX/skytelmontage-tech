@@ -7,52 +7,30 @@
   <title>SkyTel Montage</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="icon" href="favicon-red.png" type="image/png" />
-  <script src="script.js" defer></script>
-  <style>
-    link[rel='icon'] {
-      animation: pulse 2s infinite;
-    }
-    @keyframes pulse {
-      0% { filter: drop-shadow(0 0 0 red); }
-      50% { filter: drop-shadow(0 0 5px red); }
-      100% { filter: drop-shadow(0 0 0 red); }
-    }
-    @keyframes glowBlue {
-      from { text-shadow: 0 0 5px #001f4d; }
-      to { text-shadow: 0 0 20px #0047ab; }
-    }
-    @keyframes floatText {
-      0% { transform: translateY(0); }
-      50% { transform: translateY(-6px); }
-      100% { transform: translateY(0); }
-    }
-  </style>
+  <script defer src="script.js"></script>
 </head>
 <body>
-  <!-- INTRO -->
   <div id="intro">
     <img src="logo-intro.png" alt="Intro Logo" />
   </div>
 
-  <!-- VIDEO POZADÍ -->
   <video class="background-video" autoplay muted playsinline loop>
     <source src="assets/background.mp4" type="video/mp4" />
     Your browser does not support the video tag.
   </video>
 
-  <!-- JAZYKOVÝ PŘEPÍNAČ -->
   <div class="languages">
-    <button data-lang="en" title="English"><img src="flags/en.png" alt="EN" /></button>
-    <button data-lang="cz" title="Čeština"><img src="flags/cz.png" alt="CZ" /></button>
-    <button data-lang="de" title="Deutsch"><img src="flags/de.png" alt="DE" /></button>
-    <button data-lang="kli" title="Klingon"><img src="flags/klingon.png" alt="KLI" /></button>
+    <button data-lang="en"><img src="flags/en.png" alt="EN" /></button>
+    <button data-lang="cz"><img src="flags/cz.png" alt="CZ" /></button>
+    <button data-lang="de"><img src="flags/de.png" alt="DE" /></button>
+    <button data-lang="kli"><img src="flags/klingon.png" alt="KLI" /></button>
   </div>
 
   <div class="content">
-    <header>
+    <header class="centered">
       <div class="logo">
         <img src="logo.png" alt="SkyTel Montage Logo" height="50" />
-        <span id="rolling-text" style="color: #001f4d; animation: glowBlue 2s infinite alternate;"></span>
+        <span id="rolling-text"></span>
       </div>
       <div class="socials">
         <a href="https://instagram.com/HIGH_VOLTAGE_DRIVE" target="_blank">
@@ -61,20 +39,23 @@
       </div>
     </header>
 
-    <main>
+    <main class="centered">
       <div id="motto"></div>
     </main>
 
-    <!-- VTIPY -->
     <div id="joke-box">
       <div class="joke-inner"></div>
     </div>
 
-    <footer>
+    <footer class="centered">
       <p data-i18n="disclaimer"></p>
       <p data-i18n="powered"></p>
-      <p>📧 patrik.budinsky@skytelmontage.tech | 📞 +420 739 977 089</p>
+      <p class="fade-in">📧 patrik.budinsky@skytelmontage.tech | 📞 +420 739 977 089</p>
     </footer>
+  </div>
+
+  <div id="moving-box">
+    <img id="moving-image" src="main/Lano.png" alt="Vybavení" />
   </div>
 </body>
 </html>
