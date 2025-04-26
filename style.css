@@ -63,7 +63,7 @@ body, html {
   filter: drop-shadow(0 0 2px white);
 }
 
-/* Blue flame effect */
+/* Pulsující modrý efekt */
 .logo span, #motto {
   text-shadow: 0 0 5px #0047ab, 0 0 10px #0066ff, 0 0 20px #0047ab, 0 0 30px #00aaff;
   animation: flame 3s infinite alternate;
@@ -135,6 +135,12 @@ body, html {
   animation: floatText 3s ease-in-out infinite;
 }
 
+@keyframes floatText {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+  100% { transform: translateY(0); }
+}
+
 #moving-box {
   position: absolute;
   width: 80px;
@@ -172,32 +178,6 @@ footer {
   animation-delay: 3s;
 }
 
-@keyframes floatText {
-  0% { transform: translateY(0); }
-  50% { transform: translateY(-6px); }
-  100% { transform: translateY(0); }
-}
-
 @keyframes fadeInSlow {
   to { opacity: 1; }
-}
-
-@media (max-width: 768px) {
-  #motto {
-    font-size: 1.3rem;
-  }
-  .logo {
-    font-size: 1.5rem;
-  }
-  .languages img {
-    width: 24px;
-  }
-  .joke-inner {
-    font-size: 1rem;
-    padding: 10px 16px;
-  }
-  #moving-box {
-    width: 60px;
-    height: 60px;
-  }
 }
