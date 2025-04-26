@@ -43,4 +43,161 @@ body, html {
   to { opacity: 1; transform: scale(1); }
 }
 
-/* a pak jsi tam měl všechny styly: languages, jokes, moving box, motto, logo... (a ty byly správně) */
+.languages {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  z-index: 10;
+}
+
+.languages button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.languages img {
+  width: 30px;
+  height: auto;
+  margin: 0 3px;
+  filter: drop-shadow(0 0 2px white);
+}
+
+/* Blue flame effect */
+.logo span, #motto {
+  text-shadow: 0 0 5px #0047ab, 0 0 10px #0066ff, 0 0 20px #0047ab, 0 0 30px #00aaff;
+  animation: flame 3s infinite alternate;
+}
+
+@keyframes flame {
+  0% { text-shadow: 0 0 5px #0047ab, 0 0 10px #0066ff, 0 0 20px #0047ab, 0 0 30px #00aaff; }
+  50% { text-shadow: 0 0 10px #0066ff, 0 0 15px #0099ff, 0 0 25px #0066ff, 0 0 40px #00ccff; }
+  100% { text-shadow: 0 0 5px #0047ab, 0 0 10px #0066ff, 0 0 20px #0047ab, 0 0 30px #00aaff; }
+}
+
+.logo {
+  font-size: 2rem;
+  text-shadow: 0 0 6px cyan;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.socials {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.socials img {
+  height: 40px;
+  filter: drop-shadow(0 0 5px #fff);
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+}
+
+#motto {
+  font-size: 1.8rem;
+  font-weight: bold;
+  min-height: 2.5rem;
+  margin-bottom: 3rem;
+}
+
+#joke-box {
+  position: fixed;
+  bottom: 90px;
+  left: 50%;
+  transform: translateX(-50%) rotateX(10deg) rotateY(5deg);
+  perspective: 1000px;
+  z-index: 10;
+}
+
+.joke-inner {
+  background: rgba(0, 0, 50, 0.4);
+  padding: 12px 24px;
+  border-radius: 12px;
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #00ccff;
+  text-shadow: 0 0 8px #00ccff, 0 0 16px #00ccff, 0 0 24px #0088ff;
+  animation: floatText 3s ease-in-out infinite;
+}
+
+#moving-box {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  z-index: 20;
+  border-radius: 8px;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+#moving-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  animation: floatBox 6s ease-in-out infinite alternate;
+}
+
+@keyframes floatBox {
+  0% { transform: scale(1) rotate(0deg); }
+  100% { transform: scale(1.05) rotate(360deg); }
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  font-size: 0.9rem;
+  padding-bottom: 1rem;
+}
+
+.fade-in {
+  opacity: 0;
+  animation: fadeInSlow 2s ease-out forwards;
+  animation-delay: 3s;
+}
+
+@keyframes floatText {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes fadeInSlow {
+  to { opacity: 1; }
+}
+
+@media (max-width: 768px) {
+  #motto {
+    font-size: 1.3rem;
+  }
+  .logo {
+    font-size: 1.5rem;
+  }
+  .languages img {
+    width: 24px;
+  }
+  .joke-inner {
+    font-size: 1rem;
+    padding: 10px 16px;
+  }
+  #moving-box {
+    width: 60px;
+    height: 60px;
+  }
+}
