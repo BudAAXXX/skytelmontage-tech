@@ -11,10 +11,10 @@
 </head>
 <body>
   <div id="intro">
-    <img src="logo-intro.png" alt="Intro Logo" />
+    <img src="main/logo-intro.png" alt="Intro Logo" />
   </div>
 
-  <video class="background-video" autoplay muted playsinline loop>
+  <video class="background-video" autoplay muted playsinline loop id="bgVideo">
     <source src="assets/background.mp4" type="video/mp4" />
     Your browser does not support the video tag.
   </video>
@@ -29,8 +29,8 @@
   <div class="content">
     <header class="centered">
       <div class="logo">
-        <img src="logo.png" alt="SkyTel Montage Logo" height="50" />
-        <span id="rolling-text"></span>
+        <img src="main/logo.png" alt="SkyTel Montage Logo" height="50" />
+        <span id="rolling-text" data-i18n="company"></span>
       </div>
       <div class="socials">
         <a href="https://instagram.com/HIGH_VOLTAGE_DRIVE" target="_blank">
@@ -40,7 +40,7 @@
     </header>
 
     <main class="centered">
-      <div id="motto"></div>
+      <div id="motto" data-i18n="motto"></div>
     </main>
 
     <div id="joke-box">
@@ -58,4 +58,4 @@
     <img id="moving-image" src="main/Lano.png" alt="Vybavení" />
   </div>
 </body>
-</html>    
+</html>
