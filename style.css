@@ -63,7 +63,6 @@ body, html {
   filter: drop-shadow(0 0 2px white);
 }
 
-/* Pulsující modrý efekt */
 .logo span, #motto {
   text-shadow: 0 0 5px #0047ab, 0 0 10px #0066ff, 0 0 20px #0047ab, 0 0 30px #00aaff;
   animation: flame 3s infinite alternate;
@@ -77,7 +76,6 @@ body, html {
 
 .logo {
   font-size: 2rem;
-  text-shadow: 0 0 6px cyan;
   display: flex;
   align-items: center;
   gap: 12px;
