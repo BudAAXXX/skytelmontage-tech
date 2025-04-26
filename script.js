@@ -1,38 +1,26 @@
 document.addEventListener("DOMContentLoaded", () => {
   const intro = document.getElementById("intro");
-  const video = document.querySelector(".background-video");
-  setTimeout(() => {
-    intro.style.opacity = "0";
-    intro.style.pointerEvents = "none";
-    setTimeout(() => {
-      intro.remove();
-      video.play().catch(() => {});
-    }, 500);
-  }, 1000);
+  const video = document.getElementById("bgVideo");
+  const box = document.getElementById("moving-box");
+  const imgEl = document.getElementById("moving-image");
 
-  const rollingText = "SkyTel Montage";
-  const rollingTarget = document.getElementById("rolling-text");
-  let i = 0;
-  (function typeRolling() {
-    if (i < rollingText.length) {
-      rollingTarget.textContent += rollingText[i++];
-      setTimeout(typeRolling, 100);
-    }
-  })();
-
-  const mottoText = "Nepřekonáváš věž – překonáváš sám sebe.";
-  const mottoEl = document.getElementById("motto");
-  let m = 0;
-  setTimeout(function typeMotto() {
-    if (m < mottoText.length) {
-      mottoEl.textContent += mottoText[m++];
-      setTimeout(typeMotto, 70);
-    }
-  }, 1500);
+  const images = [
+    "Lano.png", "brzda.png", "grillon(1).png", "haky.png", "jummar.png",
+    "karabina0.png", "karabina01.png", "karabina02.png", "karabina08.png",
+    "karabina13.png", "karabina15.png", "karabina17.png", "karabina18.png",
+    "karabina19.png", "karabina20.png", "karabina26.png", "karabina28.png",
+    "karabina29.png", "kladka01.png", "kladka02.png", "kladka04.png",
+    "kotvevnik.png", "obrtlik.png", "ocelka01.png", "ocelka02.png",
+    "ocelka03.png", "oecelka04.png", "rig.png", "sada.png",
+    "sedacka.png", "sedak.png", "smyce01.png", "vak.png",
+    "vak03.png", "vak05.png"
+  ];
 
   const translations = {
     cz: {
-      disclaimer: "Tento web byl vytvořen za 23s s pomocí AI. Nepředstavuje finální podobu webu.",
+      company: "SkyTel Montage",
+      motto: "Nepřekonáváš věž – překonáváš sám sebe.",
+      disclaimer: "Tento web byl vytvořen za 23s pomocí AI. Nepředstavuje finální podobu webu.",
       powered: "Powered by SkyTel Montage | Glitchy, Geeky, Gorgeous ✨",
       jokes: [
         "To není bug, to je featura!",
@@ -43,7 +31,9 @@ document.addEventListener("DOMContentLoaded", () => {
       ]
     },
     en: {
-      disclaimer: "This website was created in 23s with the help of AI. Not the final version.",
+      company: "SkyTel Montage",
+      motto: "You don't overcome the tower – you overcome yourself.",
+      disclaimer: "This website was created in 23s with AI. Not the final version.",
       powered: "Powered by SkyTel Montage | Glitchy, Geeky, Gorgeous ✨",
       jokes: [
         "It's not a bug, it's a feature!",
@@ -54,6 +44,8 @@ document.addEventListener("DOMContentLoaded", () => {
       ]
     },
     de: {
+      company: "SkyTel Montage",
+      motto: "Du überwindest nicht den Turm – du überwindest dich selbst.",
       disclaimer: "Diese Website wurde in 23 Sekunden mit KI erstellt. Nicht die finale Version.",
       powered: "Powered by SkyTel Montage | Glitchy, Geeky, Gorgeous ✨",
       jokes: [
@@ -65,8 +57,10 @@ document.addEventListener("DOMContentLoaded", () => {
       ]
     },
     kli: {
-      disclaimer: "QIn vIchenmoHta' 23 lupmey lo'lu'taHvIS. not Qav pat.",
-      powered: "Duybogh SkyTel Montage | Glitchy, Geeky, Gorgeous ✨",
+      company: "SkyTel Montage",
+      motto: "notlh veS Hutlh 'oH vaj SuvwI' qeylIS.",
+      disclaimer: "23 tupmey lo'taH QInmey vIchenmoHpu'.",
+      powered: "SkyTel Montage Duy | Glitchy, Geeky, Gorgeous ✨",
       jokes: [
         "Qagh'a'? Qubmey vIneH!",
         "jIyIt, vaj jIyIn.",
@@ -84,54 +78,34 @@ document.addEventListener("DOMContentLoaded", () => {
       if (t[key]) el.textContent = t[key];
     });
     const jokeInner = document.querySelector(".joke-inner");
-    if (!jokeInner) return;
-    jokeInner.textContent = t.jokes[Math.random() * t.jokes.length | 0];
-    setInterval(() => {
-      jokeInner.textContent = t.jokes[Math.random() * t.jokes.length | 0];
-    }, 5000);
+    if (jokeInner) {
+      jokeInner.textContent = t.jokes[Math.floor(Math.random() * t.jokes.length)];
+      setInterval(() => {
+        jokeInner.textContent = t.jokes[Math.floor(Math.random() * t.jokes.length)];
+      }, 5000);
+    }
   }
 
-  document.querySelectorAll(".languages button").forEach(btn =>
-    btn.addEventListener("click", () => applyTranslations(btn.dataset.lang))
-  );
-  applyTranslations((navigator.language || navigator.userLanguage).slice(0,2));
+  document.querySelectorAll(".languages button").forEach(btn => {
+    btn.addEventListener("click", () => applyTranslations(btn.dataset.lang));
+  });
 
-  const images = [
-    "Lano.png","brzda.png","grillon(1).png","haky.png","jummar.png",
-    "karabina0.png","karabina01.png","karabina02.png","karabina08.png",
-    "karabina13.png","karabina15.png","karabina17.png","karabina18.png",
-    "karabina19.png","karabina20.png","karabina26.png","karabina28.png",
-    "karabina29.png","kladka01.png","kladka02.png","kladka04.png",
-    "kotvevnik.png","logo.png","obrtlik.png","ocelka01.png","ocelka02.png",
-    "ocelka03.png","oecelka04.png","rig.png","sada.png","sedacka.png",
-    "sedak.png","smyce01.png","vak.png","vak03.png","vak05.png"
-  ];
+  applyTranslations((navigator.language || navigator.userLanguage).slice(0, 2));
 
-  const box = document.getElementById("moving-box"),
-        imgEl = document.getElementById("moving-image");
-  let x = 50, y = 50,
-      isMob = window.innerWidth < 768,
-      dx = isMob ? 1 : 2, dy = isMob ? 1 : 2,
-      idx = Math.random() * images.length | 0;
-  imgEl.src = main/${images[idx]};
-
-  (function anim(){
-    const vw = visualViewport?.width || window.innerWidth,
-          vh = visualViewport?.height || window.innerHeight,
-          r = box.getBoundingClientRect();
-
-    if (x + r.width >= vw || x <= 0) {
-      dx *= -1; idx = (idx + 1) % images.length;
-      imgEl.src = main/${images[idx]};
+  const rollingTarget = document.getElementById("rolling-text");
+  const rollingText = translations.en.company;
+  let i = 0;
+  (function typeRolling() {
+    if (i < rollingText.length) {
+      rollingTarget.textContent += rollingText[i++];
+      setTimeout(typeRolling, 100);
     }
-    if (y + r.height >= vh || y <= 0) {
-      dy *= -1; idx = (idx + 1) % images.length;
-      imgEl.src = main/${images[idx]};
-    }
-
-    x += dx; y += dy;
-    box.style.left = ${x}px;
-    box.style.top = ${y}px;
-    requestAnimationFrame(anim);
   })();
-});
+
+  const mottoEl = document.getElementById("motto");
+  const mottoText = translations.en.motto;
+  let m = 0;
+  setTimeout(function typeMotto() {
+    if (m < mottoText.length) {
+      mottoEl.textContent += mottoText[m++];
+      setTimeout(typeMotto, 70);
