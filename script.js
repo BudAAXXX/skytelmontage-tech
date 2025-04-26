@@ -13,8 +13,9 @@ document.addEventListener("DOMContentLoaded", () => {
     "karabina19.png", "karabina20.png", "karabina26.png", "karabina28.png",
     "karabina29.png", "kladka01.png", "kladka02.png", "kladka04.png",
     "kotvevnik.png", "obrtlik.png", "ocelka01.png", "ocelka02.png",
-    "ocelka03.png", "oecelka04.png", "rig.png", "sada.png", "sedacka.png",
-    "sedak.png", "smyce01.png", "vak.png", "vak03.png", "vak05.png"
+    "ocelka03.png", "oecelka04.png", "rig.png", "sada.png",
+    "sedacka.png", "sedak.png", "smyce01.png", "vak.png",
+    "vak03.png", "vak05.png"
   ];
 
   const translations = {
@@ -80,19 +81,20 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  applyTranslations("cz"); // default jazyk
+  applyTranslations("cz"); // výchozí jazyk
 
-  // Intro fade-out po pár sekundách
   setTimeout(() => {
     intro.style.opacity = "0";
     intro.style.pointerEvents = "none";
     setTimeout(() => {
       intro.remove();
-      video.play().catch(() => {});
+      if (video) {
+        video.muted = true;
+        video.play().catch(err => console.error('Video nepřehráno: ', err));
+      }
     }, 3000);
   }, 2000);
 
-  // Pohybující box
   let x = 100, y = 100;
   let dx = window.innerWidth < 768 ? 1 : 2;
   let dy = window.innerWidth < 768 ? 1 : 2;
@@ -115,7 +117,6 @@ document.addEventListener("DOMContentLoaded", () => {
     y += dy;
     box.style.left = `${x}px`;
     box.style.top = `${y}px`;
-
     requestAnimationFrame(animateMovingBox);
   })();
 });
