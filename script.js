@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   const intro = document.getElementById("intro");
   const video = document.getElementById("bgVideo");
+  const matrix = document.getElementById("matrix");
   const mottoEl = document.getElementById("motto");
   const jokeInner = document.querySelector(".joke-inner");
   const box = document.getElementById("moving-box");
@@ -81,7 +82,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  applyTranslations("cz"); // Výchozí jazyk = Čeština
+  applyTranslations("cz"); // Výchozí jazyk
 
   setTimeout(() => {
     intro.style.opacity = "0";
@@ -95,11 +96,52 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 3000);
   }, 2000);
 
-  let x = 100, y = 100;
-  let dx = 4; // rychlejší pohyb
-  let dy = 3; // rychlejší pohyb
+  // Matrix efekt po 30 sekundách
+  setTimeout(() => {
+    video.pause();
+    matrix.style.opacity = "1";
+    startMatrix();
+  }, 30000);
 
-  (function animateMovingBox() {
+  function startMatrix() {
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+    const columns = Math.floor(width / 15);
+    const drops = Array(columns).fill(1);
+
+    const ctx = createMatrixCanvas();
+    setInterval(() => {
+      ctx.fillStyle = "rgba(0, 0, 0, 0.1)";
+      ctx.fillRect(0, 0, width, height);
+
+      ctx.fillStyle = `hsl(${Math.random() * 360}, 100%, 70%)`;
+      ctx.font = "15px monospace";
+
+      for (let i = 0; i < drops.length; i++) {
+        const char = Math.random() < 0.003 ? "W+A" : (Math.random() > 0.5 ? "0" : "1");
+        ctx.fillText(char, i * 15, drops[i] * 15);
+
+        if (drops[i] * 15 > height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+        drops[i]++;
+      }
+    }, 70);
+  }
+
+  function createMatrixCanvas() {
+    const canvas = document.createElement("canvas");
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    matrix.appendChild(canvas);
+    return canvas.getContext("2d");
+  }
+
+  // Pohyb boxu vybavení (optimalizovaný)
+  let x = 100, y = 100;
+  let dx = 2.5, dy = 2;
+
+  function animateMovingBox() {
     const vw = window.innerWidth;
     const vh = window.innerHeight;
     const r = box.getBoundingClientRect();
@@ -117,6 +159,9 @@ document.addEventListener("DOMContentLoaded", () => {
     y += dy;
     box.style.left = `${x}px`;
     box.style.top = `${y}px`;
+
     requestAnimationFrame(animateMovingBox);
-  })();
+  }
+
+  requestAnimationFrame(animateMovingBox);
 });
