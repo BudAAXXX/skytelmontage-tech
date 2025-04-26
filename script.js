@@ -1,6 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
   const intro = document.getElementById("intro");
   const video = document.getElementById("bgVideo");
+  const rollingTarget = document.getElementById("rolling-text");
+  const mottoEl = document.getElementById("motto");
   const box = document.getElementById("moving-box");
   const imgEl = document.getElementById("moving-image");
 
@@ -92,7 +94,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   applyTranslations((navigator.language || navigator.userLanguage).slice(0, 2));
 
-  const rollingTarget = document.getElementById("rolling-text");
+  // Rolling Text pro název
   const rollingText = translations.en.company;
   let i = 0;
   (function typeRolling() {
@@ -102,10 +104,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   })();
 
-  const mottoEl = document.getElementById("motto");
+  // Motto
   const mottoText = translations.en.motto;
   let m = 0;
   setTimeout(function typeMotto() {
-    if (m < mottoText.length) {
-      mottoEl.textContent += mottoText[m++];
-      setTimeout(typeMotto, 70);
+    if (m < mot
