@@ -27,6 +27,8 @@ document.addEventListener("DOMContentLoaded", () => {
     return `main/${images[idx]}`;
   }
 
+  imgEl.src = getNextImage();
+
   function startMovingBox() {
     let x = 50, y = 50;
     let dx = window.innerWidth < 768 ? 1 : 2;
@@ -55,18 +57,13 @@ document.addEventListener("DOMContentLoaded", () => {
     animate();
   }
 
-  imgEl.src = getNextImage();
-
-  // Tady řídíme animaci intro + video
   setTimeout(() => {
+    intro.style.opacity = "0";
+    intro.style.pointerEvents = "none";
     setTimeout(() => {
-      intro.style.opacity = "0";
-      setTimeout(() => {
-        intro.remove();
-        video.style.opacity = "1";
-        video.play().catch(() => {});
-        startMovingBox();
-      }, 1000); // Po fadeout intru
-    }, 1000); // Po dokončení fadeIn obrázku logo-intro.png
-  }, 2000); // FadeIn intro obrázku trvá 2s
+      intro.remove();
+      video.play().catch(() => {});
+      startMovingBox();
+    }, 500);
+  }, 1000);
 });
