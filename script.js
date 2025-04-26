@@ -113,7 +113,7 @@ document.addEventListener("DOMContentLoaded", () => {
       isMob = window.innerWidth < 768,
       dx = isMob ? 1 : 2, dy = isMob ? 1 : 2,
       idx = Math.random() * images.length | 0;
-  imgEl.src = `main/${images[idx]}`;
+  imgEl.src = main/${images[idx]};
 
   (function anim(){
     const vw = visualViewport?.width || window.innerWidth,
@@ -122,16 +122,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (x + r.width >= vw || x <= 0) {
       dx *= -1; idx = (idx + 1) % images.length;
-      imgEl.src = `main/${images[idx]}`;
+      imgEl.src = main/${images[idx]};
     }
     if (y + r.height >= vh || y <= 0) {
       dy *= -1; idx = (idx + 1) % images.length;
-      imgEl.src = `main/${images[idx]}`;
+      imgEl.src = main/${images[idx]};
     }
 
     x += dx; y += dy;
-    box.style.left = `${x}px`;
-    box.style.top = `${y}px`;
+    box.style.left = ${x}px;
+    box.style.top = ${y}px;
     requestAnimationFrame(anim);
   })();
 });
