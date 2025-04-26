@@ -64,10 +64,10 @@ document.addEventListener("DOMContentLoaded", () => {
   function applyTranslations(lang) {
     const t = translations[lang] || translations.cz;
     mottoEl.textContent = t.motto;
-    updateJoke(t.jokes);
+    updateJokes(t.jokes);
   }
 
-  function updateJoke(jokes) {
+  function updateJokes(jokes) {
     if (!jokeInner) return;
     jokeInner.textContent = jokes[Math.floor(Math.random() * jokes.length)];
     setInterval(() => {
@@ -81,7 +81,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  applyTranslations("cz"); // výchozí jazyk
+  applyTranslations("cz"); // Výchozí jazyk = Čeština
 
   setTimeout(() => {
     intro.style.opacity = "0";
@@ -96,8 +96,8 @@ document.addEventListener("DOMContentLoaded", () => {
   }, 2000);
 
   let x = 100, y = 100;
-  let dx = window.innerWidth < 768 ? 1 : 2;
-  let dy = window.innerWidth < 768 ? 1 : 2;
+  let dx = 4; // rychlejší pohyb
+  let dy = 3; // rychlejší pohyb
 
   (function animateMovingBox() {
     const vw = window.innerWidth;
