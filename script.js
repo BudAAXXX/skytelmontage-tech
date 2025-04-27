@@ -22,42 +22,110 @@ document.addEventListener("DOMContentLoaded", () => {
   const translations = {
     cz: {
       motto: "Nepřekonáváš věž – překonáváš sám sebe.",
+      poweredBy: "Powered by BudAA s AI za jednu hodinku",
+      note: "Tato stránka slouží jako online vizitka a kontakt pro SkyTel Montage. Kompletní webová prezentace je v přípravě.",
       jokes: [
         "To není bug, to je featura!",
         "Visím, tedy jsem.",
         "Kód bez komentáře je jako stěna bez chytů.",
         "Chyba mezi židlí a klávesnicí.",
-        "Debugování je jako hledání černé smyčky v noci."
+        "Debugování je hledání v temnotě.",
+        "Výška? Jen další bug v matrixu!",
+        "Fixnul jsem to páskou. Lezeckou i programovací.",
+        "Chytíš se držáku nebo se chytíš za hlavu?",
+        "Skript padl? Spadni s grácií!",
+        "Záloha je tvoje jištění – i v IT!",
+        "Síť bez signálu = stěna bez chytů.",
+        "Výškový routering – aneb tanec na střeše.",
+        "Vysílač bez napětí = ajťák bez kávy.",
+        "Připojka? Lano nebo ethernet?",
+        "Slaňování? Update firmware!",
+        "Chybová hláška: přehřívání lanovodů!",
+        "Backend? Frontend? Radši Boulderend.",
+        "Deploy? Zašroubuj a běž.",
+        "Server spadl? Doufej, že jsi nezapomněl lano.",
+        "ISP = Internet Spletený Pavučinou."
       ]
     },
     en: {
       motto: "You don't overcome the tower – you overcome yourself.",
+      poweredBy: "Powered by BudAA with AI in just one hour",
+      note: "This page serves as an online business card and contact for SkyTel Montage. Full website is under construction.",
       jokes: [
         "It's not a bug, it's a feature!",
         "I hang, therefore I am.",
         "Coding without comments is like climbing without gear.",
         "Error between chair and keyboard.",
-        "Debugging is like searching for a ghost in a cave."
+        "Debugging is ghost hunting in the dark.",
+        "Height? Just another bug in the system!",
+        "I fixed it with duct tape. Climbing and coding.",
+        "Grip the wall or grip your head?",
+        "Script crashed? Fall with style!",
+        "Backup is your belay system – even in IT!",
+        "Network down = wall with no grips.",
+        "Roof-top routing – dance with antennas!",
+        "Transmitter offline = programmer without coffee.",
+        "Connection? Rope or Ethernet?",
+        "Rappelling? Updating firmware!",
+        "Warning: Overheating ropes detected!",
+        "Backend? Frontend? Better go Boulderend.",
+        "Deploy? Bolt and go.",
+        "Server crash? Hope you tied your knot!",
+        "ISP = Intertwined Spider Protocol."
       ]
     },
     de: {
       motto: "Du überwindest nicht den Turm – du überwindest dich selbst.",
+      poweredBy: "Powered by BudAA mit KI in nur einer Stunde",
+      note: "Diese Seite dient als Online-Visitenkarte und Kontakt f\u00fcr SkyTel Montage. Eine vollständige Website ist in Vorbereitung.",
       jokes: [
         "Das ist kein Bug, das ist ein Feature!",
         "Ich hänge, also bin ich.",
-        "Code ohne Kommentare ist wie ein Seil ohne Knoten.",
+        "Code ohne Kommentare ist wie Klettern ohne Seil.",
         "Fehler sitzt vor dem Monitor.",
-        "Debugging ist wie Geisterjagd im Dunkeln."
+        "Debugging ist Geisterjagd im Dunkeln.",
+        "Höhe? Nur ein weiterer Fehler im System!",
+        "Mit Klebeband repariert. Beim Klettern und Coden.",
+        "Greife den Griff oder deinen Kopf!",
+        "Skript abgestürzt? Mit Stil fallen!",
+        "Backup ist dein Sicherungssystem – auch in der IT!",
+        "Netzwerk offline = Wand ohne Griffe.",
+        "Dachrouting – Tanz mit Antennen!",
+        "Sender tot = Programmierer ohne Kaffee.",
+        "Anschluss? Seil oder Ethernet?",
+        "Abseilen? Firmware aktualisieren!",
+        "Warnung: Überhitzte Seile entdeckt!",
+        "Backend? Frontend? Lieber Bouldern.",
+        "Deploy? Schrauben und los!",
+        "Server abgestürzt? Knoten vergessen?",
+        "ISP = Ineinander Spinnen Protokoll."
       ]
     },
     kli: {
       motto: "notlh veS Hutlh 'oH vaj SuvwI' qeylIS.",
+      poweredBy: "BudAA AI wa’ repDaq Qul",
+      note: "De'vamDaq SkyTel Montage QIn 'oH. wIteb De'vam wovbe'bogh 'e' ghoS.",
       jokes: [
         "Qagh'a'? Qubmey vIneH!",
         "jIyIt, vaj jIyIn.",
-        "QInwIjDaq chut neH",
-        "cha'DIch nuqneH vIlo'laHbe'",
-        "'ay' rurbogh QIDwI'."
+        "QInwIjDaq chut neH.",
+        "cha'DIch nuqneH vIlo'laHbe'.",
+        "'ay' rurbogh QIDwI'.",
+        "Hoch? pe'vIl vIQaw'.",
+        "ghItlhwIj lugh? qet pa'!",
+        "wIj puH HIq SIQ.",
+        "SeHlaw HIvje'! jIyIn.",
+        "DopwIj vIbuS 'ej baH!",
+        "HaSta Qaw' – SIQmoH.",
+        "naQmey DaSam, Hovmey HIq.",
+        "Qaw' vItlhutlh – tugh!",
+        "pa' vIghro' vISam – chaq?",
+        "vIghro' HochDu'vaD Qong!",
+        "qetmeH 'oH neH.",
+        "vISaHbe' – pa' vIlaw'.",
+        "ghojmoHwI' qon – vItlhutlh.",
+        "Qupbogh SeHlaw bIghHa'.",
+        "mach Qongbogh neH!"
       ]
     }
   };
@@ -65,6 +133,8 @@ document.addEventListener("DOMContentLoaded", () => {
   function applyTranslations(lang) {
     const t = translations[lang] || translations.cz;
     mottoEl.textContent = t.motto;
+    document.getElementById('powered-by').textContent = t.poweredBy;
+    document.getElementById('note').textContent = t.note;
     updateJokes(t.jokes);
   }
 
@@ -92,8 +162,10 @@ document.addEventListener("DOMContentLoaded", () => {
       if (video) {
         video.muted = true;
         video.play().catch(err => console.error('Video nepřehráno: ', err));
+        document.getElementById('company-name').classList.add('fade-in');
+        document.getElementById('motto').classList.add('fade-in');
       }
-    }, 3000);
+    }, 2000);
   }, 2000);
 
   // Matrix efekt po 30 sekundách
@@ -137,7 +209,7 @@ document.addEventListener("DOMContentLoaded", () => {
     return canvas.getContext("2d");
   }
 
-  // Pohyb boxu vybavení (optimalizovaný)
+  // Pohyb boxu vybavení
   let x = 100, y = 100;
   let dx = 2.5, dy = 2;
 
