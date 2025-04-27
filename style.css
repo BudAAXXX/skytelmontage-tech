@@ -21,6 +21,27 @@ html, body {
   z-index: -1;
 }
 
+/* Responsivní úpravy pro mobilní zařízení */
+@media (max-width: 768px) {
+  #bgVideo {
+    top: 0;
+    height: 100vh;  /* Na mobilech video vyplní obrazovku */
+  }
+
+  #intro img {
+    width: 90%;  /* Zmenšíme logo na mobilech */
+  }
+
+  .languages {
+    font-size: 1.5rem;  /* Zmenšíme velikost emotikonů pro mobil */
+  }
+
+  #moving-box {
+    width: 150px;  /* Menší pohybující se box */
+    height: 150px;
+  }
+}
+
 /* Intro */
 #intro {
   position: fixed;
