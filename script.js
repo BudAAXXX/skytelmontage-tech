@@ -22,8 +22,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const translations = {
     cz: {
       motto: "Nepřekonáváš věž – překonáváš sám sebe.",
-      poweredBy: "Vytvořil BudAA za jednu hodinu s AI.",
-      note: "Tato stránka neslouží jako finální prezentace. Slouží jako vizitka a kontakt.",
+      poweredBy: "Vytvořeno BudAA za 1 hodinu s pomocí AI.",
+      note: "Stránka slouží jako kontaktní vizitka, nikoliv finální verze.",
       jokes: [
         "To není bug, to je feature!",
         "Visím, tedy jsem.",
@@ -31,101 +31,61 @@ document.addEventListener("DOMContentLoaded", () => {
         "Chyba mezi židlí a klávesnicí.",
         "Debugování je jako hledání černé smyčky v noci.",
         "Backup? To udělám příště.",
-        "Bez chyb není pokroku.",
-        "Síť je dole? Zase pondělí.",
+        "Síť je dole? Pondělí potvrzeno.",
         "Neptej se proč, ale funguje to.",
-        "Kompiluji, tedy žiji.",
-        "Vždycky to byla cache!",
-        "Ovládám kabely jako šaman.",
         "Bez lana není výšek!",
-        "Smyčky? Kód i horolezení!",
-        "Baterka je nový Bůh.",
-        "Když spadneš, je pozdě šetřit karabiny.",
-        "Čím delší smyčka, tím kratší pád.",
-        "Kódujeme jako šplháme: krok za krokem.",
-        "Výška je relativní – pád je absolutní.",
-        "Pevné připojení? Ano, a taky k zemi!"
+        "Každý pád začíná ignorací smyce."
       ]
     },
     en: {
       motto: "You don't overcome the tower – you overcome yourself.",
-      poweredBy: "Created by BudAA with AI in one hour.",
-      note: "This website is a contact and presentation card, not the final version.",
+      poweredBy: "Created by BudAA within 1 hour with AI support.",
+      note: "This page serves as a contact card, not a final website.",
       jokes: [
         "It's not a bug, it's a feature!",
         "I hang, therefore I am.",
         "Coding without comments is like climbing without gear.",
         "Error between chair and keyboard.",
-        "Debugging is like searching for a black loop at night.",
-        "Backup? Maybe later.",
-        "Without bugs, no progress.",
-        "Network down? It's Monday.",
+        "Debugging is like searching for a ghost loop at night.",
+        "Backup? Maybe someday.",
+        "Network down? Must be Monday.",
         "Don't ask why, but it works.",
-        "Compiling... I exist.",
-        "Always blame the cache!",
-        "Cables are my magic ropes.",
         "Without a rope, no climbing!",
-        "Loops? In code and in climbing!",
-        "Flashlight is the new God.",
-        "Save your carabiners before it's too late.",
-        "Longer sling, shorter fall.",
-        "We code like we climb: step by step.",
-        "Height is relative, falling is absolute.",
-        "Strong connection? Yes, both WiFi and life-line!"
+        "Every fall starts with neglect."
       ]
     },
     de: {
       motto: "Du überwindest nicht den Turm – du überwindest dich selbst.",
-      poweredBy: "Erstellt von BudAA mit KI in einer Stunde.",
-      note: "Diese Website dient als Visitenkarte und Kontaktseite, nicht als endgültige Version.",
+      poweredBy: "Erstellt von BudAA in einer Stunde mithilfe von KI.",
+      note: "Diese Seite dient als Kontaktkarte, nicht als finale Version.",
       jokes: [
         "Das ist kein Bug, das ist ein Feature!",
         "Ich hänge, also bin ich.",
-        "Code ohne Kommentare ist wie Klettern ohne Ausrüstung.",
-        "Fehler sitzt vor dem Monitor.",
-        "Debugging ist wie Geisterjagd im Dunkeln.",
-        "Backup? Später vielleicht.",
-        "Ohne Fehler kein Fortschritt.",
-        "Netzwerk ausgefallen? Montag eben.",
-        "Warum funktioniert das? Keine Ahnung.",
-        "Kompiliere... existiere.",
-        "Immer ist der Cache schuld!",
-        "Seile sind mein Zauber.",
+        "Code ohne Kommentare ist wie Klettern ohne Seil.",
+        "Fehler sitzt vor dem Bildschirm.",
+        "Debugging ist wie Geisterjagd in der Nacht.",
+        "Backup? Vielleicht später.",
+        "Netzwerk weg? Montag eben.",
+        "Warum funktioniert es? Keine Ahnung.",
         "Ohne Seil kein Klettern!",
-        "Schlingen? Im Code und am Gurt.",
-        "Taschenlampe ist der neue Gott.",
-        "Karabiner sparen? Keine gute Idee.",
-        "Je länger die Schlinge, desto kürzer der Fall.",
-        "Wir codieren wie wir klettern: Schritt für Schritt.",
-        "Höhe ist relativ, Fallen ist absolut.",
-        "Starke Verbindung? WLAN und Seil!"
+        "Jeder Sturz beginnt mit Ignoranz."
       ]
     },
     kli: {
       motto: "notlh veS Hutlh 'oH vaj SuvwI' qeylIS.",
-      poweredBy: "Qel BudAA lo'taH wa' rep.",
-      note: "nuqneH - 'oH jangbe' vay'.",
+      poweredBy: "BudAA ghItlh lo' 1 rep je QIn.",
+      note: "QInmey DIlmeH pagh pong - QIn neH!",
       jokes: [
         "Qagh'a'? Qubmey vIneH!",
         "jIyIt, vaj jIyIn.",
-        "QInwIjDaq chut neH",
-        "cha'DIch nuqneH vIlo'laHbe'",
-        "'ay' rurbogh QIDwI'.",
-        "yIQaw'! pe'vIl wIlo'!",
-        "Qel neH wIj val.",
-        "cha'logh QongtaHvIS QIH.",
-        "HIQ vIlo'chugh, Qapbej!",
-        "SuS vIlo'chugh, maghoS.",
-        "lojmItmey tIpoSmoH!",
-        "Sevbe'ghach!",
-        "QumpInmey vItoy'!",
-        "mInDu' vIleghlaHbe'.",
-        "romuluSngan vImuv!",
-        "Dochmey pe'!",
-        "ghorgh HoS!",
-        "maHIvtaH!",
-        "SuS vIlaHbe'.",
-        "He' vI'ogh!"
+        "QInwIjDaq chut neH.",
+        "Qapla' vIneH.",
+        "ghorgh SuvwI' vIloS?",
+        "veS 'oHbej!",
+        "HoHlu'meH Qapbe' pong.",
+        "pe'vIl vIlo'!",
+        "SuSbe' 'ach nIvbogh.",
+        "Qapchu'!"
       ]
     }
   };
@@ -142,7 +102,7 @@ document.addEventListener("DOMContentLoaded", () => {
     jokeInner.textContent = jokes[Math.floor(Math.random() * jokes.length)];
     setInterval(() => {
       jokeInner.textContent = jokes[Math.floor(Math.random() * jokes.length)];
-    }, 7000);
+    }, 5000);
   }
 
   document.querySelectorAll(".languages button").forEach(btn => {
@@ -162,12 +122,12 @@ document.addEventListener("DOMContentLoaded", () => {
       intro.remove();
       if (bgVideo) {
         bgVideo.muted = true;
-        bgVideo.play().catch(err => console.error('Video nepřehráno: ', err));
+        bgVideo.play().catch(err => console.error('Video nepřehráno:', err));
       }
     }, 2000);
   }, 2000);
 
-  // Matrix efekt po 30s
+  // Matrix efekt po 30 sekundách
   setTimeout(() => {
     matrix.style.opacity = "1";
     startMatrix();
@@ -181,7 +141,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const ctx = createMatrixCanvas();
 
     setInterval(() => {
-      ctx.fillStyle = "rgba(0, 0, 0, 0.1)";
+      ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
       ctx.fillRect(0, 0, width, height);
       ctx.fillStyle = "#00ff00";
       ctx.font = "15px monospace";
@@ -203,8 +163,9 @@ document.addEventListener("DOMContentLoaded", () => {
     return canvas.getContext("2d");
   }
 
-  // Pohyb vybavení
-  let x = 100, y = 100, dx = 2, dy = 2;
+  // Pohyb boxu s vybavením
+  let x = 100, y = 100, dx = 2.5, dy = 2;
+
   function animateMovingBox() {
     const vw = window.innerWidth;
     const vh = window.innerHeight;
