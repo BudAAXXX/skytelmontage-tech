@@ -1,27 +1,25 @@
-/* Reset */
 html, body {
   margin: 0;
   padding: 0;
   width: 100%;
   height: 100%;
   font-family: 'Segoe UI', sans-serif;
-  background: black;
+  background: black; /* fallback barva když by video nejelo */
   color: white;
   overflow-x: hidden;
 }
 
-/* Video */
 #bgVideo {
   position: fixed;
   top: 0;
   left: 0;
-  min-width: 100%;
-  min-height: 100%;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
   z-index: -1;
 }
 
-/* Intro */
+/* Intro - logo */
 #intro {
   position: fixed;
   top: 0;
@@ -48,19 +46,26 @@ html, body {
   to { opacity: 1; transform: scale(1); }
 }
 
-/* Obsah */
+/* Všechny sekce budou průhledné nad videem */
+.content,
+footer,
+#joke-box {
+  background: transparent;
+}
+
+/* Texty */
 .content {
   position: relative;
   z-index: 2;
-  text-align: center;
   padding: 2rem;
+  text-align: center;
 }
 
 .centered {
   text-align: center;
 }
 
-/* Company Name */
+/* Nadpis firmy */
 #company-name {
   font-size: 3rem;
   text-shadow: 0 0 5px #00f, 0 0 10px #0ff;
@@ -72,7 +77,7 @@ html, body {
   text-shadow: 0 0 5px #0ff;
 }
 
-/* Joke Box */
+/* Joke box */
 #joke-box {
   margin-top: 2rem;
 }
@@ -86,6 +91,7 @@ html, body {
   animation: floatText 3s ease-in-out infinite;
 }
 
+/* Plovoucí text vtipu */
 @keyframes floatText {
   0% { transform: translateY(0); }
   50% { transform: translateY(-5px); }
@@ -127,13 +133,19 @@ footer {
   z-index: 20;
 }
 
+.languages button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
 .languages img {
   width: 36px;
   height: 24px;
   filter: drop-shadow(0 0 5px black);
 }
 
-/* Pohybující se box */
+/* Pohyb boxu vybavení */
 #moving-box {
   position: absolute;
   width: 200px;
@@ -159,7 +171,7 @@ footer {
   z-index: 1;
 }
 
-/* Fade-in text */
+/* Fade-in pro texty */
 .fade-in {
   animation: fadeInMove 2s ease forwards;
   opacity: 0;
