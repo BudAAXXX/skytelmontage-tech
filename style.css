@@ -8,21 +8,17 @@ html, body {
   background: black;
   color: white;
   overflow-x: hidden;
-  overflow-y: auto;
 }
 
-/* Video jako pozadí */
+/* Video */
 #bgVideo {
   position: fixed;
   top: 0;
   left: 0;
   min-width: 100%;
   min-height: 100%;
-  width: auto;
-  height: auto;
-  z-index: -1;
   object-fit: cover;
-  object-position: center;
+  z-index: -1;
 }
 
 /* Intro */
@@ -60,11 +56,14 @@ html, body {
   padding: 2rem;
 }
 
-/* Název firmy */
+.centered {
+  text-align: center;
+}
+
+/* Company Name */
 #company-name {
   font-size: 3rem;
   text-shadow: 0 0 5px #00f, 0 0 10px #0ff;
-  margin-bottom: 1rem;
 }
 
 /* Motto */
@@ -83,12 +82,10 @@ html, body {
   padding: 12px 24px;
   border-radius: 12px;
   font-size: 1.2rem;
-  display: inline-block;
   color: #00ccff;
   animation: floatText 3s ease-in-out infinite;
 }
 
-/* Animace joke boxu */
 @keyframes floatText {
   0% { transform: translateY(0); }
   50% { transform: translateY(-5px); }
@@ -111,8 +108,8 @@ footer {
 }
 
 #instagram-link img {
-  width: 40px;
-  height: 40px;
+  width: 50px;
+  height: 50px;
   transition: transform 0.3s ease;
 }
 
@@ -120,22 +117,7 @@ footer {
   transform: scale(1.2);
 }
 
-/* Pohyb boxu */
-#moving-box {
-  position: absolute;
-  width: 240px;
-  height: 240px;
-  pointer-events: none;
-  z-index: 10;
-}
-
-#moving-box img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-
-/* Jazykový přepínač */
+/* Jazykové přepínače */
 .languages {
   position: fixed;
   right: 10px;
@@ -145,15 +127,25 @@ footer {
   z-index: 20;
 }
 
-.languages button {
-  background: none;
-  border: none;
-  cursor: pointer;
+.languages img {
+  width: 36px;
+  height: 24px;
+  filter: drop-shadow(0 0 5px black);
 }
 
-.languages img {
-  width: 30px;
-  height: 20px;
+/* Pohybující se box */
+#moving-box {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  z-index: 10;
+  pointer-events: none;
+}
+
+#moving-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 /* Matrix efekt */
@@ -167,7 +159,7 @@ footer {
   z-index: 1;
 }
 
-/* Fade-in efekt pro texty */
+/* Fade-in text */
 .fade-in {
   animation: fadeInMove 2s ease forwards;
   opacity: 0;
@@ -178,31 +170,5 @@ footer {
   to {
     opacity: 1;
     transform: translateY(0);
-  }
-}
-
-/* MEDIA QUERIES - mobilní optimalizace */
-@media (max-width: 768px) {
-  #company-name {
-    font-size: 2rem;
-  }
-  
-  #motto {
-    font-size: 1.2rem;
-  }
-
-  #moving-box {
-    width: 160px;
-    height: 160px;
-  }
-
-  .languages img {
-    width: 24px;
-    height: 16px;
-  }
-
-  #instagram-link img {
-    width: 30px;
-    height: 30px;
   }
 }
