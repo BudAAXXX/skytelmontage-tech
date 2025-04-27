@@ -1,28 +1,31 @@
-/* Reset základního stylu */
+/* Reset */
 html, body {
   margin: 0;
   padding: 0;
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
+  width: 100%;
+  height: 100%;
   font-family: 'Segoe UI', sans-serif;
   background: black;
   color: white;
-  position: relative;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
-/* Video na pozadí */
+/* Video jako pozadí */
 #bgVideo {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  z-index: -1;
   object-fit: cover;
-  z-index: -2;
+  object-position: center;
 }
 
-/* Intro logo */
+/* Intro */
 #intro {
   position: fixed;
   top: 0;
@@ -38,91 +41,92 @@ html, body {
 }
 
 #intro img {
-  width: 60vw;
-  max-width: 800px;
+  max-width: 70%;
+  max-height: 70%;
   animation: fadein 2s ease-in-out;
 }
 
-/* Intro fade-in */
+/* Fade-in animace */
 @keyframes fadein {
   from { opacity: 0; transform: scale(0.9); }
   to { opacity: 1; transform: scale(1); }
 }
 
-/* Matrix efekt */
-#matrix {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-  opacity: 0;
-}
-
-/* Centrování obsahu */
-.centered {
-  text-align: center;
-  z-index: 2;
+/* Obsah */
+.content {
   position: relative;
+  z-index: 2;
+  text-align: center;
   padding: 2rem;
 }
 
-/* Hlavní název + motto */
-#company-name, #motto {
-  text-shadow: 0 0 5px #0047ab, 0 0 10px #0066ff, 0 0 20px #0047ab, 0 0 30px #00aaff;
-}
-
+/* Název firmy */
 #company-name {
   font-size: 3rem;
-  animation: flame 3s infinite alternate;
+  text-shadow: 0 0 5px #00f, 0 0 10px #0ff;
+  margin-bottom: 1rem;
 }
 
+/* Motto */
 #motto {
-  margin-top: 1rem;
   font-size: 1.5rem;
-  animation: flame 3s infinite alternate;
+  text-shadow: 0 0 5px #0ff;
 }
 
-/* Animace pro text */
-@keyframes flame {
-  0% { text-shadow: 0 0 5px #0047ab, 0 0 10px #0066ff, 0 0 20px #0047ab, 0 0 30px #00aaff; }
-  50% { text-shadow: 0 0 10px #0099ff, 0 0 25px #00ccff, 0 0 40px #00ccff; }
-  100% { text-shadow: 0 0 5px #0047ab, 0 0 10px #0066ff, 0 0 20px #0047ab, 0 0 30px #00aaff; }
-}
-
-/* Joke box */
+/* Joke Box */
 #joke-box {
-  position: fixed;
-  bottom: 140px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 10;
+  margin-top: 2rem;
 }
 
 .joke-inner {
-  background: rgba(0, 0, 50, 0.4);
+  background: rgba(0, 0, 50, 0.5);
   padding: 12px 24px;
   border-radius: 12px;
   font-size: 1.2rem;
+  display: inline-block;
   color: #00ccff;
   animation: floatText 3s ease-in-out infinite;
 }
 
-/* Pohyb vtipu */
+/* Animace joke boxu */
 @keyframes floatText {
   0% { transform: translateY(0); }
-  50% { transform: translateY(-6px); }
+  50% { transform: translateY(-5px); }
   100% { transform: translateY(0); }
 }
 
-/* Pohybující se box */
+/* Footer */
+footer {
+  margin-top: 3rem;
+  font-size: 0.9rem;
+  color: #ccc;
+}
+
+/* Instagram ikona */
+#instagram-link {
+  position: fixed;
+  bottom: 70px;
+  right: 10px;
+  z-index: 20;
+}
+
+#instagram-link img {
+  width: 40px;
+  height: 40px;
+  transition: transform 0.3s ease;
+}
+
+#instagram-link img:hover {
+  transform: scale(1.2);
+}
+
+/* Pohyb boxu */
 #moving-box {
   position: absolute;
-  width: 480px;
-  height: 480px;
-  z-index: 20;
+  width: 240px;
+  height: 240px;
   pointer-events: none;
+  z-index: 10;
 }
 
 #moving-box img {
@@ -131,18 +135,7 @@ html, body {
   object-fit: contain;
 }
 
-/* Footer */
-footer {
-  position: fixed;
-  bottom: 10px;
-  width: 100%;
-  text-align: center;
-  font-size: 0.9rem;
-  color: #ccc;
-  z-index: 5;
-}
-
-/* Jazykové přepínače */
+/* Jazykový přepínač */
 .languages {
   position: fixed;
   right: 10px;
@@ -163,6 +156,17 @@ footer {
   height: 20px;
 }
 
+/* Matrix efekt */
+#matrix {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  z-index: 1;
+}
+
 /* Fade-in efekt pro texty */
 .fade-in {
   animation: fadeInMove 2s ease forwards;
@@ -174,5 +178,31 @@ footer {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+/* MEDIA QUERIES - mobilní optimalizace */
+@media (max-width: 768px) {
+  #company-name {
+    font-size: 2rem;
+  }
+  
+  #motto {
+    font-size: 1.2rem;
+  }
+
+  #moving-box {
+    width: 160px;
+    height: 160px;
+  }
+
+  .languages img {
+    width: 24px;
+    height: 16px;
+  }
+
+  #instagram-link img {
+    width: 30px;
+    height: 30px;
   }
 }
