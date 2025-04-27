@@ -87,4 +87,44 @@ document.addEventListener("DOMContentLoaded", () => {
       ctx.font = "15px monospace";
 
       for (let i = 0; i < drops.length; i++) {
-        const text = Math.random() > 0.5 ? "0" :
+        const text = Math.random() > 0.5 ? "0" : "1";
+        ctx.fillText(text, i * 15, drops[i] * 15);
+        if (drops[i] * 15 > height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      }
+    }, 70);
+  }
+
+  function createMatrixCanvas() {
+    const canvas = document.createElement("canvas");
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    matrix.appendChild(canvas);
+    return canvas.getContext("2d");
+  }
+
+  let x = 100, y = 100, dx = 2.5, dy = 2;
+  function animateMovingBox() {
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+    const r = box.getBoundingClientRect();
+
+    if (x + r.width >= vw || x <= 0) {
+      dx *= -1;
+      imgEl.src = getRandomImage(); // Nový náhodný obrázek
+    }
+    if (y + r.height >= vh || y <= 0) {
+      dy *= -1;
+      imgEl.src = getRandomImage(); // Nový náhodný obrázek
+    }
+
+    x += dx;
+    y += dy;
+    box.style.left = `${x}px`;
+    box.style.top = `${y}px`;
+
+    requestAnimationFrame(animateMovingBox);
+  }
+
+  requestAnimationFrame(animateMovingBox);
+});
