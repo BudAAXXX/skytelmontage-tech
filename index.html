@@ -3,71 +3,73 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="SkyTel Montage - 8 let zkušeností v telekomunikacích po celém Německu. Team leader pro Deutsche Telekom (TDG), Vodafone (VDF) a Telefonica Germany (O2).">
-  <meta property="og:title" content="SkyTel Montage | Telekomunikace Německo | Deutsche Telekom, Vodafone, O2">
-  <meta property="og:description" content="8 let zkušeností v telekomunikacích, team leader, práce po celém Německu. Deutsche Telekom, Vodafone, Telefonica Germany.">
+  <meta name="description" content="SkyTel Montage - 8 let zkušeností v telekomunikacích v Německu. Specialista pro Deutsche Telekom, Vodafone, Telefonica Germany.">
+  <meta property="og:title" content="SkyTel Montage | Telekomunikace Německo">
+  <meta property="og:description" content="8 let praxe v Německu, team leader, specialist pro operátory Deutsche Telekom, Vodafone, Telefonica Germany.">
   <meta property="og:image" content="logo.png">
   <meta property="og:url" content="https://SkyTelMontage.tech">
   <meta property="og:type" content="website">
-  <title>SkyTel Montage | Telekomunikace Německo | Deutsche Telekom, Vodafone, O2</title>
+  <title>SkyTel Montage</title>
   <link rel="stylesheet" href="style.css">
-  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="icon" href="favicon.png" type="image/png">
   <script defer src="script.js"></script>
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "SkyTel Montage",
-    "url": "https://SkyTelMontage.tech",
-    "logo": "https://SkyTelMontage.tech/logo.png",
-    "description": "Telekomunikační práce v Německu - 8 let zkušeností, 2 roky team leader. Specialista pro Deutsche Telekom, Vodafone a Telefonica Germany.",
-    "contactPoint": {
-      "@type": "ContactPoint",
-      "email": "patrik.budinsky@skytelmontage.tech",
-      "contactType": "customer support",
-      "telephone": "+420739977089"
-    }
-  }
-  </script>
 </head>
 <body>
-  <div id="intro">
-    <img src="logo-intro.png" alt="Intro Logo" loading="lazy">
+
+<!-- Video na pozadí -->
+<video id="bgVideo" autoplay muted loop playsinline>
+  <source src="video123.mp4" type="video/mp4">
+  Your browser does not support HTML5 video.
+</video>
+
+<!-- Intro -->
+<div id="intro">
+  <img src="logo-intro.png" alt="SkyTel Montage" loading="lazy">
+</div>
+
+<!-- Obsah -->
+<div class="content">
+
+  <header class="centered fade-in">
+    <h1 id="company-name">SkyTel Montage</h1>
+    <p id="motto" data-i18n="motto"></p>
+  </header>
+
+  <div id="joke-box" class="fade-in">
+    <div class="joke-inner"></div>
   </div>
 
-  <video autoplay muted loop playsinline id="bgVideo">
-    <source src="video123.mp4" type="video/mp4">
-    Váš prohlížeč nepodporuje HTML5 video.
-  </video>
+  <footer class="centered fade-in">
+    <p>📧 patrik.budinsky@skytelmontage.tech | 📞 +420 739 977 089</p>
+    <p id="powered-by"></p>
+    <p id="note"></p>
+    <p><a href="privacy.html">Zásady ochrany osobních údajů</a> | <a href="impressum.html">Impressum</a></p>
+  </footer>
 
-  <div id="matrix"></div>
+</div>
 
-  <div class="content">
-    <header class="centered">
-      <h1 id="company-name">SkyTel Montage</h1>
-      <p id="motto" data-i18n="motto"></p>
-    </header>
+<!-- Instagram ikona -->
+<div id="instagram-link">
+  <a href="https://www.instagram.com/stories/highlights/18312041011227550/" target="_blank" rel="noopener noreferrer">
+    <img src="instagram-icon.png" alt="Instagram" loading="lazy">
+  </a>
+</div>
 
-    <div id="joke-box">
-      <div class="joke-inner"></div>
-    </div>
+<!-- Pohybující se box s vybavením -->
+<div id="moving-box">
+  <img id="moving-image" src="Lano.png" alt="Vybavení" loading="lazy">
+</div>
 
-    <footer class="centered">
-      <p id="contact-info">📧 patrik.budinsky@skytelmontage.tech | 📞 +420 739 977 089</p>
-      <p id="powered-by" data-i18n="poweredBy"></p>
-      <p id="note" data-i18n="note"></p>
-    </footer>
-  </div>
+<!-- Přepínač jazyků -->
+<div class="languages">
+  <button data-lang="cz"><img src="flags/cz.png" alt="CZ" loading="lazy"></button>
+  <button data-lang="en"><img src="flags/en.png" alt="EN" loading="lazy"></button>
+  <button data-lang="de"><img src="flags/de.png" alt="DE" loading="lazy"></button>
+  <button data-lang="kli"><img src="flags/kli.png" alt="KLI" loading="lazy"></button>
+</div>
 
-  <div id="moving-box">
-    <img id="moving-image" src="Lano.png" alt="Vybavení" loading="lazy">
-  </div>
+<!-- Matrix efekt -->
+<div id="matrix"></div>
 
-  <div class="languages">
-    <button data-lang="cz"><img src="flags/cz.png" alt="CZ" loading="lazy"></button>
-    <button data-lang="en"><img src="flags/en.png" alt="EN" loading="lazy"></button>
-    <button data-lang="de"><img src="flags/de.png" alt="DE" loading="lazy"></button>
-    <button data-lang="kli"><img src="flags/kli.png" alt="KLI" loading="lazy"></button>
-  </div>
 </body>
 </html>
