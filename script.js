@@ -7,18 +7,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const box = document.getElementById("moving-box");
   const imgEl = document.getElementById("moving-image");
 
-  const images = [
-    "Lano.png", "brzda.png", "grillon(1).png", "haky.png", "jummar.png",
-    "karabina0.png", "karabina01.png", "karabina02.png", "karabina08.png",
-    "karabina13.png", "karabina15.png", "karabina17.png", "karabina18.png",
-    "karabina19.png", "karabina20.png", "karabina26.png", "karabina28.png",
-    "karabina29.png", "kladka01.png", "kladka02.png", "kladka04.png",
-    "kotvevnik.png", "obrtlik.png", "ocelka01.png", "ocelka02.png",
-    "ocelka03.png", "oecelka04.png", "rig.png", "sada.png",
-    "sedacka.png", "sedak.png", "smyce01.png", "vak.png",
-    "vak03.png", "vak05.png"
-  ];
-
   const translations = {
     cz: {
       motto: "Nepřekonáváš věž – překonáváš sám sebe.",
@@ -27,14 +15,9 @@ document.addEventListener("DOMContentLoaded", () => {
       jokes: [
         "To není bug, to je feature!",
         "Visím, tedy jsem.",
-        "Kód bez komentáře je jako stěna bez chytů.",
         "Chyba mezi židlí a klávesnicí.",
-        "Debugování je jako hledání černé smyčky v noci.",
-        "Backup? To udělám příště.",
-        "Síť je dole? Pondělí potvrzeno.",
-        "Neptej se proč, ale funguje to.",
-        "Bez lana není výšek!",
-        "Každý pád začíná ignorací smyce."
+        "Bez lana není lezení.",
+        "Backup? Možná příště."
       ]
     },
     en: {
@@ -44,48 +27,9 @@ document.addEventListener("DOMContentLoaded", () => {
       jokes: [
         "It's not a bug, it's a feature!",
         "I hang, therefore I am.",
-        "Coding without comments is like climbing without gear.",
         "Error between chair and keyboard.",
-        "Debugging is like searching for a ghost loop at night.",
-        "Backup? Maybe someday.",
-        "Network down? Must be Monday.",
-        "Don't ask why, but it works.",
-        "Without a rope, no climbing!",
-        "Every fall starts with neglect."
-      ]
-    },
-    de: {
-      motto: "Du überwindest nicht den Turm – du überwindest dich selbst.",
-      poweredBy: "Erstellt von BudAA in einer Stunde mithilfe von KI.",
-      note: "Diese Seite dient als Kontaktkarte, nicht als finale Version.",
-      jokes: [
-        "Das ist kein Bug, das ist ein Feature!",
-        "Ich hänge, also bin ich.",
-        "Code ohne Kommentare ist wie Klettern ohne Seil.",
-        "Fehler sitzt vor dem Bildschirm.",
-        "Debugging ist wie Geisterjagd in der Nacht.",
-        "Backup? Vielleicht später.",
-        "Netzwerk weg? Montag eben.",
-        "Warum funktioniert es? Keine Ahnung.",
-        "Ohne Seil kein Klettern!",
-        "Jeder Sturz beginnt mit Ignoranz."
-      ]
-    },
-    kli: {
-      motto: "notlh veS Hutlh 'oH vaj SuvwI' qeylIS.",
-      poweredBy: "BudAA ghItlh lo' 1 rep je QIn.",
-      note: "QInmey DIlmeH pagh pong - QIn neH!",
-      jokes: [
-        "Qagh'a'? Qubmey vIneH!",
-        "jIyIt, vaj jIyIn.",
-        "QInwIjDaq chut neH.",
-        "Qapla' vIneH.",
-        "ghorgh SuvwI' vIloS?",
-        "veS 'oHbej!",
-        "HoHlu'meH Qapbe' pong.",
-        "pe'vIl vIlo'!",
-        "SuSbe' 'ach nIvbogh.",
-        "Qapchu'!"
+        "Without rope, no climbing!",
+        "Backup? Maybe next time."
       ]
     }
   };
@@ -111,23 +55,19 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Default language
   applyTranslations("cz");
 
-  // Intro zmizení
   setTimeout(() => {
     intro.style.opacity = "0";
     intro.style.pointerEvents = "none";
     setTimeout(() => {
       intro.remove();
       if (bgVideo) {
-        bgVideo.muted = true;
-        bgVideo.play().catch(err => console.error('Video nepřehráno:', err));
+        bgVideo.play().catch(err => console.error('Video error:', err));
       }
     }, 2000);
   }, 2000);
 
-  // Matrix efekt po 30 sekundách
   setTimeout(() => {
     matrix.style.opacity = "1";
     startMatrix();
@@ -163,9 +103,7 @@ document.addEventListener("DOMContentLoaded", () => {
     return canvas.getContext("2d");
   }
 
-  // Pohyb boxu s vybavením
   let x = 100, y = 100, dx = 2.5, dy = 2;
-
   function animateMovingBox() {
     const vw = window.innerWidth;
     const vh = window.innerHeight;
@@ -173,11 +111,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (x + r.width >= vw || x <= 0) {
       dx *= -1;
-      imgEl.src = images[Math.floor(Math.random() * images.length)];
+      imgEl.src = "Lano.png";
     }
     if (y + r.height >= vh || y <= 0) {
       dy *= -1;
-      imgEl.src = images[Math.floor(Math.random() * images.length)];
+      imgEl.src = "Lano.png";
     }
 
     x += dx;
