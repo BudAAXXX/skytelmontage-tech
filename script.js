@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   const intro = document.getElementById("intro");
-  const video = document.getElementById("bgVideo");
+  const bgVideo = document.getElementById("bgVideo");
   const matrix = document.getElementById("matrix");
   const mottoEl = document.getElementById("motto");
   const jokeInner = document.querySelector(".joke-inner");
@@ -22,110 +22,110 @@ document.addEventListener("DOMContentLoaded", () => {
   const translations = {
     cz: {
       motto: "Nepřekonáváš věž – překonáváš sám sebe.",
-      poweredBy: "Powered by BudAA s AI za jednu hodinku",
-      note: "Tato stránka slouží jako online vizitka a kontakt pro SkyTel Montage. Kompletní webová prezentace je v přípravě.",
+      poweredBy: "Vytvořil BudAA za jednu hodinu s AI.",
+      note: "Tato stránka neslouží jako finální prezentace. Slouží jako vizitka a kontakt.",
       jokes: [
-        "To není bug, to je featura!",
+        "To není bug, to je feature!",
         "Visím, tedy jsem.",
         "Kód bez komentáře je jako stěna bez chytů.",
         "Chyba mezi židlí a klávesnicí.",
-        "Debugování je hledání v temnotě.",
-        "Výška? Jen další bug v matrixu!",
-        "Fixnul jsem to páskou. Lezeckou i programovací.",
-        "Chytíš se držáku nebo se chytíš za hlavu?",
-        "Skript padl? Spadni s grácií!",
-        "Záloha je tvoje jištění – i v IT!",
-        "Síť bez signálu = stěna bez chytů.",
-        "Výškový routering – aneb tanec na střeše.",
-        "Vysílač bez napětí = ajťák bez kávy.",
-        "Připojka? Lano nebo ethernet?",
-        "Slaňování? Update firmware!",
-        "Chybová hláška: přehřívání lanovodů!",
-        "Backend? Frontend? Radši Boulderend.",
-        "Deploy? Zašroubuj a běž.",
-        "Server spadl? Doufej, že jsi nezapomněl lano.",
-        "ISP = Internet Spletený Pavučinou."
+        "Debugování je jako hledání černé smyčky v noci.",
+        "Backup? To udělám příště.",
+        "Bez chyb není pokroku.",
+        "Síť je dole? Zase pondělí.",
+        "Neptej se proč, ale funguje to.",
+        "Kompiluji, tedy žiji.",
+        "Vždycky to byla cache!",
+        "Ovládám kabely jako šaman.",
+        "Bez lana není výšek!",
+        "Smyčky? Kód i horolezení!",
+        "Baterka je nový Bůh.",
+        "Když spadneš, je pozdě šetřit karabiny.",
+        "Čím delší smyčka, tím kratší pád.",
+        "Kódujeme jako šplháme: krok za krokem.",
+        "Výška je relativní – pád je absolutní.",
+        "Pevné připojení? Ano, a taky k zemi!"
       ]
     },
     en: {
       motto: "You don't overcome the tower – you overcome yourself.",
-      poweredBy: "Powered by BudAA with AI in just one hour",
-      note: "This page serves as an online business card and contact for SkyTel Montage. Full website is under construction.",
+      poweredBy: "Created by BudAA with AI in one hour.",
+      note: "This website is a contact and presentation card, not the final version.",
       jokes: [
         "It's not a bug, it's a feature!",
         "I hang, therefore I am.",
         "Coding without comments is like climbing without gear.",
         "Error between chair and keyboard.",
-        "Debugging is ghost hunting in the dark.",
-        "Height? Just another bug in the system!",
-        "I fixed it with duct tape. Climbing and coding.",
-        "Grip the wall or grip your head?",
-        "Script crashed? Fall with style!",
-        "Backup is your belay system – even in IT!",
-        "Network down = wall with no grips.",
-        "Roof-top routing – dance with antennas!",
-        "Transmitter offline = programmer without coffee.",
-        "Connection? Rope or Ethernet?",
-        "Rappelling? Updating firmware!",
-        "Warning: Overheating ropes detected!",
-        "Backend? Frontend? Better go Boulderend.",
-        "Deploy? Bolt and go.",
-        "Server crash? Hope you tied your knot!",
-        "ISP = Intertwined Spider Protocol."
+        "Debugging is like searching for a black loop at night.",
+        "Backup? Maybe later.",
+        "Without bugs, no progress.",
+        "Network down? It's Monday.",
+        "Don't ask why, but it works.",
+        "Compiling... I exist.",
+        "Always blame the cache!",
+        "Cables are my magic ropes.",
+        "Without a rope, no climbing!",
+        "Loops? In code and in climbing!",
+        "Flashlight is the new God.",
+        "Save your carabiners before it's too late.",
+        "Longer sling, shorter fall.",
+        "We code like we climb: step by step.",
+        "Height is relative, falling is absolute.",
+        "Strong connection? Yes, both WiFi and life-line!"
       ]
     },
     de: {
       motto: "Du überwindest nicht den Turm – du überwindest dich selbst.",
-      poweredBy: "Powered by BudAA mit KI in nur einer Stunde",
-      note: "Diese Seite dient als Online-Visitenkarte und Kontakt f\u00fcr SkyTel Montage. Eine vollständige Website ist in Vorbereitung.",
+      poweredBy: "Erstellt von BudAA mit KI in einer Stunde.",
+      note: "Diese Website dient als Visitenkarte und Kontaktseite, nicht als endgültige Version.",
       jokes: [
         "Das ist kein Bug, das ist ein Feature!",
         "Ich hänge, also bin ich.",
-        "Code ohne Kommentare ist wie Klettern ohne Seil.",
+        "Code ohne Kommentare ist wie Klettern ohne Ausrüstung.",
         "Fehler sitzt vor dem Monitor.",
-        "Debugging ist Geisterjagd im Dunkeln.",
-        "Höhe? Nur ein weiterer Fehler im System!",
-        "Mit Klebeband repariert. Beim Klettern und Coden.",
-        "Greife den Griff oder deinen Kopf!",
-        "Skript abgestürzt? Mit Stil fallen!",
-        "Backup ist dein Sicherungssystem – auch in der IT!",
-        "Netzwerk offline = Wand ohne Griffe.",
-        "Dachrouting – Tanz mit Antennen!",
-        "Sender tot = Programmierer ohne Kaffee.",
-        "Anschluss? Seil oder Ethernet?",
-        "Abseilen? Firmware aktualisieren!",
-        "Warnung: Überhitzte Seile entdeckt!",
-        "Backend? Frontend? Lieber Bouldern.",
-        "Deploy? Schrauben und los!",
-        "Server abgestürzt? Knoten vergessen?",
-        "ISP = Ineinander Spinnen Protokoll."
+        "Debugging ist wie Geisterjagd im Dunkeln.",
+        "Backup? Später vielleicht.",
+        "Ohne Fehler kein Fortschritt.",
+        "Netzwerk ausgefallen? Montag eben.",
+        "Warum funktioniert das? Keine Ahnung.",
+        "Kompiliere... existiere.",
+        "Immer ist der Cache schuld!",
+        "Seile sind mein Zauber.",
+        "Ohne Seil kein Klettern!",
+        "Schlingen? Im Code und am Gurt.",
+        "Taschenlampe ist der neue Gott.",
+        "Karabiner sparen? Keine gute Idee.",
+        "Je länger die Schlinge, desto kürzer der Fall.",
+        "Wir codieren wie wir klettern: Schritt für Schritt.",
+        "Höhe ist relativ, Fallen ist absolut.",
+        "Starke Verbindung? WLAN und Seil!"
       ]
     },
     kli: {
       motto: "notlh veS Hutlh 'oH vaj SuvwI' qeylIS.",
-      poweredBy: "BudAA AI wa’ repDaq Qul",
-      note: "De'vamDaq SkyTel Montage QIn 'oH. wIteb De'vam wovbe'bogh 'e' ghoS.",
+      poweredBy: "Qel BudAA lo'taH wa' rep.",
+      note: "nuqneH - 'oH jangbe' vay'.",
       jokes: [
         "Qagh'a'? Qubmey vIneH!",
         "jIyIt, vaj jIyIn.",
-        "QInwIjDaq chut neH.",
-        "cha'DIch nuqneH vIlo'laHbe'.",
+        "QInwIjDaq chut neH",
+        "cha'DIch nuqneH vIlo'laHbe'",
         "'ay' rurbogh QIDwI'.",
-        "Hoch? pe'vIl vIQaw'.",
-        "ghItlhwIj lugh? qet pa'!",
-        "wIj puH HIq SIQ.",
-        "SeHlaw HIvje'! jIyIn.",
-        "DopwIj vIbuS 'ej baH!",
-        "HaSta Qaw' – SIQmoH.",
-        "naQmey DaSam, Hovmey HIq.",
-        "Qaw' vItlhutlh – tugh!",
-        "pa' vIghro' vISam – chaq?",
-        "vIghro' HochDu'vaD Qong!",
-        "qetmeH 'oH neH.",
-        "vISaHbe' – pa' vIlaw'.",
-        "ghojmoHwI' qon – vItlhutlh.",
-        "Qupbogh SeHlaw bIghHa'.",
-        "mach Qongbogh neH!"
+        "yIQaw'! pe'vIl wIlo'!",
+        "Qel neH wIj val.",
+        "cha'logh QongtaHvIS QIH.",
+        "HIQ vIlo'chugh, Qapbej!",
+        "SuS vIlo'chugh, maghoS.",
+        "lojmItmey tIpoSmoH!",
+        "Sevbe'ghach!",
+        "QumpInmey vItoy'!",
+        "mInDu' vIleghlaHbe'.",
+        "romuluSngan vImuv!",
+        "Dochmey pe'!",
+        "ghorgh HoS!",
+        "maHIvtaH!",
+        "SuS vIlaHbe'.",
+        "He' vI'ogh!"
       ]
     }
   };
@@ -139,11 +139,10 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function updateJokes(jokes) {
-    if (!jokeInner) return;
     jokeInner.textContent = jokes[Math.floor(Math.random() * jokes.length)];
     setInterval(() => {
       jokeInner.textContent = jokes[Math.floor(Math.random() * jokes.length)];
-    }, 5000);
+    }, 7000);
   }
 
   document.querySelectorAll(".languages button").forEach(btn => {
@@ -152,25 +151,24 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  applyTranslations("cz"); // Výchozí jazyk
+  // Default language
+  applyTranslations("cz");
 
+  // Intro zmizení
   setTimeout(() => {
     intro.style.opacity = "0";
     intro.style.pointerEvents = "none";
     setTimeout(() => {
       intro.remove();
-      if (video) {
-        video.muted = true;
-        video.play().catch(err => console.error('Video nepřehráno: ', err));
-        document.getElementById('company-name').classList.add('fade-in');
-        document.getElementById('motto').classList.add('fade-in');
+      if (bgVideo) {
+        bgVideo.muted = true;
+        bgVideo.play().catch(err => console.error('Video nepřehráno: ', err));
       }
     }, 2000);
   }, 2000);
 
-  // Matrix efekt po 30 sekundách
+  // Matrix efekt po 30s
   setTimeout(() => {
-    video.pause();
     matrix.style.opacity = "1";
     startMatrix();
   }, 30000);
@@ -180,22 +178,18 @@ document.addEventListener("DOMContentLoaded", () => {
     const height = window.innerHeight;
     const columns = Math.floor(width / 15);
     const drops = Array(columns).fill(1);
-
     const ctx = createMatrixCanvas();
+
     setInterval(() => {
       ctx.fillStyle = "rgba(0, 0, 0, 0.1)";
       ctx.fillRect(0, 0, width, height);
-
-      ctx.fillStyle = `hsl(${Math.random() * 360}, 100%, 70%)`;
+      ctx.fillStyle = "#00ff00";
       ctx.font = "15px monospace";
 
       for (let i = 0; i < drops.length; i++) {
-        const char = Math.random() < 0.003 ? "W+A" : (Math.random() > 0.5 ? "0" : "1");
-        ctx.fillText(char, i * 15, drops[i] * 15);
-
-        if (drops[i] * 15 > height && Math.random() > 0.975) {
-          drops[i] = 0;
-        }
+        const text = Math.random() > 0.5 ? "0" : "1";
+        ctx.fillText(text, i * 15, drops[i] * 15);
+        if (drops[i] * 15 > height && Math.random() > 0.975) drops[i] = 0;
         drops[i]++;
       }
     }, 70);
@@ -209,10 +203,8 @@ document.addEventListener("DOMContentLoaded", () => {
     return canvas.getContext("2d");
   }
 
-  // Pohyb boxu vybavení
-  let x = 100, y = 100;
-  let dx = 2.5, dy = 2;
-
+  // Pohyb vybavení
+  let x = 100, y = 100, dx = 2, dy = 2;
   function animateMovingBox() {
     const vw = window.innerWidth;
     const vh = window.innerHeight;
