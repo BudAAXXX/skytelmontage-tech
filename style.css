@@ -12,12 +12,12 @@ html, body {
 /* Video */
 #bgVideo {
   position: fixed;
-  top: 0;
+  top: -5vh;  /* Oříznutí 5% z horního okraje */
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 110vh;  /* Oříznutí 5% z dolního okraje */
   object-fit: cover;
-  object-position: center center;
+  object-position: center;  /* Video bude vycentrováno */
   z-index: -1;
 }
 
@@ -165,4 +165,14 @@ footer {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+/* Oprava textu na bílém pozadí */
+a {
+  color: white;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #00aaff;
 }
