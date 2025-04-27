@@ -3,12 +3,13 @@ html, body {
   padding: 0;
   width: 100%;
   height: 100%;
+  background: transparent;
   font-family: 'Segoe UI', sans-serif;
-  background: black; /* fallback barva když by video nejelo */
   color: white;
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
+/* Video */
 #bgVideo {
   position: fixed;
   top: 0;
@@ -19,7 +20,7 @@ html, body {
   z-index: -1;
 }
 
-/* Intro - logo */
+/* Intro */
 #intro {
   position: fixed;
   top: 0;
@@ -40,20 +41,16 @@ html, body {
   animation: fadein 2s ease-in-out;
 }
 
-/* Fade-in animace */
 @keyframes fadein {
   from { opacity: 0; transform: scale(0.9); }
   to { opacity: 1; transform: scale(1); }
 }
 
-/* Všechny sekce budou průhledné nad videem */
-.content,
-footer,
-#joke-box {
+/* Obsah */
+.content, footer, #joke-box, header, .languages, #moving-box, #instagram-link {
   background: transparent;
 }
 
-/* Texty */
 .content {
   position: relative;
   z-index: 2;
@@ -65,19 +62,16 @@ footer,
   text-align: center;
 }
 
-/* Nadpis firmy */
 #company-name {
   font-size: 3rem;
   text-shadow: 0 0 5px #00f, 0 0 10px #0ff;
 }
 
-/* Motto */
 #motto {
   font-size: 1.5rem;
   text-shadow: 0 0 5px #0ff;
 }
 
-/* Joke box */
 #joke-box {
   margin-top: 2rem;
 }
@@ -91,7 +85,6 @@ footer,
   animation: floatText 3s ease-in-out infinite;
 }
 
-/* Plovoucí text vtipu */
 @keyframes floatText {
   0% { transform: translateY(0); }
   50% { transform: translateY(-5px); }
@@ -105,7 +98,7 @@ footer {
   color: #ccc;
 }
 
-/* Instagram ikona */
+/* Instagram */
 #instagram-link {
   position: fixed;
   bottom: 70px;
@@ -133,19 +126,13 @@ footer {
   z-index: 20;
 }
 
-.languages button {
-  background: none;
-  border: none;
-  cursor: pointer;
-}
-
 .languages img {
   width: 36px;
   height: 24px;
   filter: drop-shadow(0 0 5px black);
 }
 
-/* Pohyb boxu vybavení */
+/* Pohybující box */
 #moving-box {
   position: absolute;
   width: 200px;
@@ -160,7 +147,7 @@ footer {
   object-fit: contain;
 }
 
-/* Matrix efekt */
+/* Matrix */
 #matrix {
   position: fixed;
   top: 0;
@@ -171,7 +158,7 @@ footer {
   z-index: 1;
 }
 
-/* Fade-in pro texty */
+/* Fade-in */
 .fade-in {
   animation: fadeInMove 2s ease forwards;
   opacity: 0;
