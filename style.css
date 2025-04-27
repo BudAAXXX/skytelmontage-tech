@@ -17,6 +17,7 @@ html, body {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center center;
   z-index: -1;
 }
 
@@ -41,12 +42,12 @@ html, body {
   animation: fadein 2s ease-in-out;
 }
 
+/* Animace */
 @keyframes fadein {
   from { opacity: 0; transform: scale(0.9); }
   to { opacity: 1; transform: scale(1); }
 }
 
-/* Obsah */
 .content, footer, #joke-box, header, .languages, #moving-box, #instagram-link {
   background: transparent;
 }
@@ -91,32 +92,28 @@ html, body {
   100% { transform: translateY(0); }
 }
 
-/* Footer */
 footer {
   margin-top: 3rem;
   font-size: 0.9rem;
   color: #ccc;
 }
 
-/* Instagram */
-#instagram-link {
-  position: fixed;
-  bottom: 70px;
-  right: 10px;
-  z-index: 20;
+/* Instagram, LinkedIn */
+#social-links a {
+  margin: 0 10px;
 }
 
-#instagram-link img {
-  width: 50px;
-  height: 50px;
+#social-links img {
+  width: 40px;
+  height: 40px;
   transition: transform 0.3s ease;
 }
 
-#instagram-link img:hover {
+#social-links img:hover {
   transform: scale(1.2);
 }
 
-/* Jazykové přepínače */
+/* Jazykové emotikony */
 .languages {
   position: fixed;
   right: 10px;
@@ -126,13 +123,13 @@ footer {
   z-index: 20;
 }
 
-.languages img {
-  width: 36px;
-  height: 24px;
-  filter: drop-shadow(0 0 5px black);
+.languages button {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
 }
 
-/* Pohybující box */
 #moving-box {
   position: absolute;
   width: 200px;
@@ -147,7 +144,6 @@ footer {
   object-fit: contain;
 }
 
-/* Matrix */
 #matrix {
   position: fixed;
   top: 0;
@@ -158,7 +154,6 @@ footer {
   z-index: 1;
 }
 
-/* Fade-in */
 .fade-in {
   animation: fadeInMove 2s ease forwards;
   opacity: 0;
