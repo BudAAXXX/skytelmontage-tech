@@ -7,42 +7,40 @@ html, body {
   font-family: 'Segoe UI', sans-serif;
   color: white;
   overflow: hidden;
+  box-sizing: border-box;
 }
 
-/* Video */
 #bgVideo {
   position: fixed;
-  top: -5vh;  /* Oříznutí 5% z horního okraje */
+  top: -5vh;
   left: 0;
   width: 100%;
-  height: 110vh;  /* Oříznutí 5% z dolního okraje */
+  height: 110vh;
   object-fit: cover;
-  object-position: center;  /* Video bude vycentrováno */
+  object-position: center;
   z-index: -1;
 }
 
-/* Responsivní úpravy pro mobilní zařízení */
 @media (max-width: 768px) {
   #bgVideo {
     top: 0;
-    height: 100vh;  /* Na mobilech video vyplní obrazovku */
+    height: 100vh;
   }
 
   #intro img {
-    width: 90%;  /* Zmenšíme logo na mobilech */
+    width: 90%;
   }
 
   .languages {
-    font-size: 1.5rem;  /* Zmenšíme velikost emotikonů pro mobil */
+    font-size: 1.5rem;
   }
 
   #moving-box {
-    width: 150px;  /* Menší pohybující se box */
+    width: 150px;
     height: 150px;
   }
 }
 
-/* Intro */
 #intro {
   position: fixed;
   top: 0;
@@ -63,13 +61,12 @@ html, body {
   animation: fadein 2s ease-in-out;
 }
 
-/* Animace */
 @keyframes fadein {
   from { opacity: 0; transform: scale(0.9); }
   to { opacity: 1; transform: scale(1); }
 }
 
-.content, footer, #joke-box, header, .languages, #moving-box, #instagram-link {
+.content, footer, header, .languages, #moving-box {
   background: transparent;
 }
 
@@ -84,42 +81,12 @@ html, body {
   text-align: center;
 }
 
-#company-name {
-  font-size: 3rem;
-  text-shadow: 0 0 5px #00f, 0 0 10px #0ff;
-}
-
-#motto {
-  font-size: 1.5rem;
-  text-shadow: 0 0 5px #0ff;
-}
-
-#joke-box {
-  margin-top: 2rem;
-}
-
-.joke-inner {
-  background: rgba(0, 0, 50, 0.5);
-  padding: 12px 24px;
-  border-radius: 12px;
-  font-size: 1.2rem;
-  color: #00ccff;
-  animation: floatText 3s ease-in-out infinite;
-}
-
-@keyframes floatText {
-  0% { transform: translateY(0); }
-  50% { transform: translateY(-5px); }
-  100% { transform: translateY(0); }
-}
-
 footer {
   margin-top: 3rem;
   font-size: 0.9rem;
   color: #ccc;
 }
 
-/* Instagram, LinkedIn */
 #social-links a {
   margin: 0 10px;
 }
@@ -134,7 +101,6 @@ footer {
   transform: scale(1.2);
 }
 
-/* Jazykové emotikony */
 .languages {
   position: fixed;
   right: 10px;
@@ -163,6 +129,7 @@ footer {
   width: 100%;
   height: 100%;
   object-fit: contain;
+  will-change: transform;
 }
 
 #matrix {
@@ -186,14 +153,4 @@ footer {
     opacity: 1;
     transform: translateY(0);
   }
-}
-
-/* Oprava textu na bílém pozadí */
-a {
-  color: white;
-  text-decoration: none;
-}
-
-a:hover {
-  color: #00aaff;
 }
