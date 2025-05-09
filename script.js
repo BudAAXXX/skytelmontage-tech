@@ -2,42 +2,78 @@ document.addEventListener("DOMContentLoaded", () => {
   const intro = document.getElementById("intro");
   const bgVideo = document.getElementById("bgVideo");
   const matrix = document.getElementById("matrix");
+  const mottoEl = document.getElementById("motto");
+  const jokeInner = document.querySelector(".joke-inner");
   const box = document.getElementById("moving-box");
   const imgEl = document.getElementById("moving-image");
 
-  const images = [
-    "Lano.png",
-    "brzda.png",
-    "grillon(1).png",
-    "karabina01.png",
-    "sedacka.png",
-    "vak05.png"
-  ];
+  const translations = {
+    cz: {
+      companyName: "SkyTel Montage",
+      slogan: "Váš partner pro výškové a telekomunikační projekty v celé Evropě.",
+      motto: "Nepřekonáváš věž – překonáváš sám sebe.",
+      poweredBy: "Vytvořeno BudAA za 1 hodinu s pomocí AI.",
+      note: "Stránka slouží jako kontaktní vizitka, nikoliv finální verze.",
+      jokes: [
+        "To není bug, to je feature!",
+        "Visím, tedy jsem.",
+        "Chyba mezi židlí a klávesnicí.",
+        "Bez lana není lezení.",
+        "Backup? Možná příště."
+      ]
+    },
+    en: {
+      companyName: "SkyTel Montage",
+      slogan: "Your partner for telecom and high-altitude projects across Europe.",
+      motto: "You don't overcome the tower – you overcome yourself.",
+      poweredBy: "Created by BudAA within 1 hour with AI support.",
+      note: "This page serves as a contact card, not a final website.",
+      jokes: [
+        "It's not a bug, it's a feature!",
+        "I hang, therefore I am.",
+        "Error between chair and keyboard.",
+        "Without rope, no climbing!",
+        "Backup? Maybe next time."
+      ]
+    }
+  };
 
-  function getRandomImage() {
-    return images[Math.floor(Math.random() * images.length)];
+  function applyTranslations(lang) {
+    const t = translations[lang] || translations.cz;
+    document.getElementById('company-name').textContent = t.companyName;
+    document.getElementById('slogan').textContent = t.slogan;
+    mottoEl.textContent = t.motto;
+    document.getElementById('powered-by').textContent = t.poweredBy;
+    document.getElementById('note').textContent = t.note;
+    updateJokes(t.jokes);
   }
 
-  // Jazykové přepínače – připraveno pro budoucí překlady
+  function updateJokes(jokes) {
+    jokeInner.textContent = jokes[Math.floor(Math.random() * jokes.length)];
+    setInterval(() => {
+      jokeInner.textContent = jokes[Math.floor(Math.random() * jokes.length)];
+    }, 5000);
+  }
+
   document.querySelectorAll(".languages button").forEach(btn => {
     btn.addEventListener("click", () => {
-      console.log(`Přepnuto na jazyk: ${btn.dataset.lang}`);
+      applyTranslations(btn.dataset.lang);
     });
   });
 
-  // Intro přechod
+  applyTranslations("cz");
+
   setTimeout(() => {
     intro.style.opacity = "0";
     intro.style.pointerEvents = "none";
     setTimeout(() => {
       intro.remove();
       if (bgVideo) {
-        bgVideo.play().catch(err => console.error("Video error:", err));
+        bgVideo.play().catch(err => console.error('Video error:', err));
       }
     }, 2000);
   }, 2000);
 
-  // Matrix efekt
   setTimeout(() => {
     matrix.style.opacity = "1";
     startMatrix();
@@ -48,11 +84,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const height = window.innerHeight;
     const columns = Math.floor(width / 15);
     const drops = Array(columns).fill(1);
-    const canvas = document.createElement("canvas");
-    matrix.appendChild(canvas);
-    const ctx = canvas.getContext("2d");
-    canvas.width = width;
-    canvas.height = height;
+    const ctx = createMatrixCanvas();
 
     setInterval(() => {
       ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
@@ -69,8 +101,19 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 70);
   }
 
-  // Pohybující se box
+  function createMatrixCanvas() {
+    const canvas = document.createElement("canvas");
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    matrix.appendChild(canvas);
+    return canvas.getContext("2d");
+  }
+
+  const images = ["Lano.png", "Karabina.png", "Helma.png", "Postroj.png"];
   let x = 100, y = 100, dx = 2.5, dy = 2;
+  function getRandomImage() {
+    return images[Math.floor(Math.random() * images.length)];
+  }
   function animateMovingBox() {
     const vw = window.innerWidth;
     const vh = window.innerHeight;
