@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ochrana soukromí | SkyTel Montage</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<video id="bgVideo" autoplay muted loop playsinline>
+  <source src="Video123.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
+<div class="content fade-in">
+  <h1>Ochrana soukromí</h1>
+  <p>Tato stránka slouží pouze jako kontaktní vizitka. Žádná data nejsou sbírána, ukládána ani předávána třetím stranám.</p>
+</div>
+
+</body>
+</html>
