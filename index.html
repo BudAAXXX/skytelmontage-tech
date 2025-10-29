@@ -2,75 +2,127 @@
 <html lang="cs">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="SkyTel Montage - 8 let zkušeností v telekomunikacích v Německu. Specialista na Deutsche Telekom, Vodafone, Telefonica Germany.">
-  <meta property="og:title" content="SkyTel Montage | Telekomunikace Německo">
-  <meta property="og:description" content="8 let praxe v Německu, team leader, specialista pro Deutsche Telekom, Vodafone, Telefonica Germany.">
-  <meta property="og:image" content="logo.png">
-  <meta property="og:url" content="https://SkyTelMontage.tech">
-  <meta property="og:type" content="website">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>SkyTel Montage</title>
-  <link rel="stylesheet" href="style.css">
+
+  <!-- SEO -->
+  <meta name="description" content="SkyTel Montage – výškové a telekomunikační projekty v Německu a EU. 8 let praxe, zkušenosti s Deutsche Telekom, Vodafone, Telefónica Germany.">
+  <link rel="canonical" href="https://skytelmontage.tech/">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="SkyTel Montage | Telekomunikace Německo">
+  <meta property="og:description" content="8 let praxe v Německu. Team leader a specialista pro Deutsche Telekom, Vodafone, Telefónica Germany.">
+  <meta property="og:image" content="logo.png">
+  <meta property="og:url" content="https://skytelmontage.tech/">
+  <meta property="og:type" content="website">
+
+  <!-- Favicon -->
   <link rel="icon" href="favicon.png" type="image/png">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Bezpečnost: nastavte CSP na serveru (příklad)
+  Content-Security-Policy: default-src 'self'; img-src 'self' data:; media-src 'self'; style-src 'self'; script-src 'self'; frame-ancestors 'none'; base-uri 'self';
+  -->
+
+  <!-- Strukturovaná data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "SkyTel Montage",
+    "url": "https://skytelmontage.tech/",
+    "logo": "https://skytelmontage.tech/logo.png",
+    "sameAs": [
+      "https://www.instagram.com/stories/highlights/18312041011227550/",
+      "https://www.linkedin.com/in/patrik-budinsk%C3%BD-793385192/"
+    ]
+  }
+  </script>
+
+  <!-- JS -->
   <script defer src="script.js"></script>
 </head>
 <body>
 
-<video id="bgVideo" autoplay muted loop playsinline>
+<noscript>
+  <div class="noscript">Pro plnou funkčnost povolte JavaScript.</div>
+</noscript>
+
+<!-- Pozadí video: dekorativní -->
+<video id="bgVideo" autoplay muted loop playsinline preload="none" aria-hidden="true">
   <source src="Video123.mp4" type="video/mp4">
-  Your browser does not support the video tag.
 </video>
 
-<div id="intro">
-  <img src="logo-intro.png" alt="SkyTel Montage" loading="lazy">
+<!-- Intro logo -->
+<div id="intro" aria-label="SkyTel Montage">
+  <img src="logo-intro.png" alt="SkyTel Montage logo" loading="lazy" width="240" height="240">
 </div>
 
-<div class="content">
+<div class="content" role="main">
   <header class="centered fade-in">
     <h1 id="company-name">SkyTel Montage</h1>
     <p id="slogan">Váš partner pro výškové a telekomunikační projekty v celé Evropě.</p>
-    <p id="motto"></p>
+    <p id="motto" aria-live="polite"></p>
   </header>
 
-  <div id="joke-box" class="fade-in">
-    <div class="joke-inner"></div>
-  </div>
+  <!-- Hierarchie obsahu pro SEO -->
+  <section class="fade-in" aria-labelledby="o-nas-heading">
+    <h2 id="o-nas-heading">O nás</h2>
+    <p>8 let zkušeností v Německu. Realizace a servis pro Deutsche Telekom, Vodafone a Telefónica Germany.</p>
+  </section>
 
-  <footer class="centered fade-in">
+  <section class="fade-in" aria-labelledby="sluzby-heading">
+    <h2 id="sluzby-heading">Služby</h2>
+    <ul>
+      <li>Montáže a servis telekomunikačních technologií</li>
+      <li>Práce ve výškách a záchranné postupy</li>
+      <li>Elektro dohled a dokumentace dle DE/CZ norem</li>
+    </ul>
+  </section>
+
+  <!-- Dynamický box s vtipem / citátem -->
+  <section id="joke-box" class="fade-in" aria-labelledby="status-heading">
+    <h2 id="status-heading" class="visually-hidden">Status</h2>
+    <div class="joke-inner" aria-live="polite"></div>
+  </section>
+
+  <footer class="centered fade-in" role="contentinfo">
     <p id="powered-by"></p>
     <p id="note"></p>
     <p>
-      <a href="privacy.html" style="color: white;">🛡️</a> |
-      <a href="impressum.html" style="color: white;">📜</a>
+      <a href="privacy.html" aria-label="Zásady ochrany soukromí">🛡️</a> |
+      <a href="impressum.html" aria-label="Impressum / Povinné údaje">📜</a>
     </p>
   </footer>
 </div>
 
-<!-- Instagram a LinkedIn ikony -->
-<div id="social-links">
-  <a href="https://www.instagram.com/stories/highlights/18312041011227550/" target="_blank" rel="noopener noreferrer">
-    <img src="images/instagram-icon.png" alt="Instagram" loading="lazy">
+<!-- Sociální sítě -->
+<nav id="social-links" aria-label="Sociální sítě">
+  <a href="https://www.instagram.com/stories/highlights/18312041011227550/" target="_blank" rel="noopener noreferrer" aria-label="Instagram SkyTel Montage">
+    <img src="images/instagram-icon.png" alt="Instagram" loading="lazy" width="28" height="28">
   </a>
-  <a href="https://www.linkedin.com/in/patrik-budinsk%C3%BD-793385192/" target="_blank" rel="noopener noreferrer">
-    <img src="images/linkedin-icon.png" alt="LinkedIn" loading="lazy">
+  <a href="https://www.linkedin.com/in/patrik-budinsk%C3%BD-793385192/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Patrik Budinský">
+    <img src="images/linkedin-icon.png" alt="LinkedIn" loading="lazy" width="28" height="28">
   </a>
+</nav>
+
+<!-- Pohybující se box s obrázkem vybavení, dekorativní -->
+<div id="moving-box" aria-hidden="true">
+  <img id="moving-image" src="Lano.png" alt="" loading="lazy" width="120" height="120">
 </div>
 
-<!-- Pohybující se box -->
-<div id="moving-box">
-  <img id="moving-image" src="Lano.png" alt="Vybavení" loading="lazy">
+<!-- Jazykové přepínače -->
+<div class="languages" role="navigation" aria-label="Jazyk">
+  <button type="button" data-lang="cs" aria-label="Čeština">🇨🇿</button>
+  <button type="button" data-lang="en" aria-label="Angličtina">🇬🇧</button>
+  <button type="button" data-lang="de" aria-label="Němčina">🇩🇪</button>
+  <button type="button" data-lang="kli" aria-label="Klingonština">🖖</button>
 </div>
 
-<!-- Jazykové přepínače jako emotikony -->
-<div class="languages">
-  <button data-lang="cz">🇨🇿</button>
-  <button data-lang="en">🇬🇧</button>
-  <button data-lang="de">🇩🇪</button>
-  <button data-lang="kli">🖖</button>
-</div>
+<!-- Matrix efekt, dekorativní -->
+<div id="matrix" aria-hidden="true"></div>
 
-<!-- Matrix efekt -->
-<div id="matrix"></div>
-<script defer src="script.js"></script>
 </body>
 </html>
