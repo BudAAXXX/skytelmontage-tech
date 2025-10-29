@@ -1,248 +1,73 @@
-// ===== script.js =====
-(function () {
-  'use strict';
-
-  const $ = (sel) => document.querySelector(sel);
-
-  // Bezpečný getElement
-  const elements = {
-    company: $('#company-name'),
-    slogan: $('#slogan'),
-    motto: $('#motto'),
-    jokeInner: $('#joke-box .joke-inner'),
-    powered: $('#powered-by'),
-    note: $('#note'),
-    langBtns: document.querySelectorAll('.languages button'),
-    matrixHost: $('#matrix'),
-    movingBox: $('#moving-box'),
-    movingImg: $('#moving-image'),
-    htmlEl: document.documentElement
+(() => {
+  // i18n
+  const I18N = {
+    cs:{headline:"SkyTel Montage",subtitle:"Váš partner pro výškové a telekomunikační projekty v celé Evropě.",partners:"Partneři",certs:"Certifikace a školení",equipment:"Vybavení"},
+    en:{headline:"SkyTel Montage",subtitle:"Your partner for telecom and rope-access projects across Europe.",partners:"Partners",certs:"Certifications & Training",equipment:"Equipment"},
+    de:{headline:"SkyTel Montage",subtitle:"Ihr Partner für Telekommunikation und Höhenarbeit in ganz Europa.",partners:"Partner",certs:"Zertifikate & Schulungen",equipment:"Ausrüstung"},
+    kli:{headline:"SkyTel Montage",subtitle:"batlh • HoS • yaj",partners:"Qochbe'",certs:"patlhmey",equipment:"maqtagh"}
   };
-
-  // I18N obsah
-  const i18n = {
-    cs: {
-      company: 'SkyTel Montage',
-      slogan: 'Váš partner pro výškové a telekomunikační projekty v celé Evropě.',
-      mottos: [
-        'Bezpečnost. Kvalita. Transparentnost.',
-        'DGUV a BOZP v praxi, ne na papíře.',
-        'Doručíme hotové řešení, ne výmluvu.'
-      ],
-      jokes: [
-        'Kontrola kotvení: dvakrát měř, jednou leť.',
-        'Nejtišší alarm? Když chybí zajištění. Ten neuslyšíš, ale ucítíš.',
-        'Když prší, leze se pomaleji. Data taky.'
-      ],
-      powered: '© 2025 SkyTel Montage',
-      note: 'Projekty v DE/EU. Dokumentace dle DE/CZ norem.'
-    },
-    en: {
-      company: 'SkyTel Montage',
-      slogan: 'Your partner for telecom and rope access projects across Europe.',
-      mottos: [
-        'Safety. Quality. Transparency.',
-        'DGUV and EHS that actually work.',
-        'We deliver outcomes, not excuses.'
-      ],
-      jokes: [
-        'Anchor check: measure twice, climb once.',
-        'The quietest alarm is missing protection. You won’t hear it, you’ll feel it.',
-        'When it rains, climbing slows. So does data.'
-      ],
-      powered: '© 2025 SkyTel Montage',
-      note: 'Projects in DE/EU. Documentation aligned with DE/CZ standards.'
-    },
-    de: {
-      company: 'SkyTel Montage',
-      slogan: 'Ihr Partner für Telekommunikation und Höhenarbeit in Europa.',
-      mottos: [
-        'Sicherheit. Qualität. Transparenz.',
-        'DGUV und Arbeitsschutz, die funktionieren.',
-        'Wir liefern Ergebnisse, keine Ausreden.'
-      ],
-      jokes: [
-        'Anker-Check: zweimal messen, einmal steigen.',
-        'Der leiseste Alarm ist fehlender Schutz. Man hört ihn nicht, man spürt ihn.',
-        'Bei Regen wird’s langsamer. Am Mast und im Netz.'
-      ],
-      powered: '© 2025 SkyTel Montage',
-      note: 'Projekte in DE/EU. Dokumentation nach DE/CZ-Standards.'
-    },
-    // Záměrně vtipný dummy profil pro Klingonštinu
-    kli: {
-      company: 'SkyTel Montage',
-      slogan: 'tlhIngan Hol: European telecom ready.',
-      mottos: ['batlh. HoS. yaj.'],
-      jokes: ['QI’yaH: Fall-arrest first, honor later.'],
-      powered: '© 2025 SkyTel Montage',
-      note: 'This language mode is for fun.'
-    }
+  const SEO = {
+    cs:{title:"SkyTel Montage s.r.o. | Telekom a výškové práce v DE/EU",desc:"8 let praxe v Německu. Montáže a servis telekom sítí, práce ve výškách (PSAgA), elektro kvalifikace NV 194/2022 §7, lékařské prohlídky G25/G37/G41, Siemens SIMATIC S7/TIA. Dokumentace dle DE/CZ norem."},
+    en:{title:"SkyTel Montage s.r.o. | Telecom & Rope Access in DE/EU",desc:"8 years in Germany. Telecom rollout and service, rope access (PSAgA), electrical qualification NV 194/2022 §7, medical G25/G37/G41, Siemens SIMATIC S7/TIA. Documentation compliant with DE/CZ standards."},
+    de:{title:"SkyTel Montage s.r.o. | Telekom & Höhenarbeit in DE/EU",desc:"8 Jahre Erfahrung in Deutschland. Rollout und Service, Höhenarbeit (PSAgA), Elektro-Qualifikation NV 194/2022 §7, G25/G37/G41, Siemens SIMATIC S7/TIA. Dokumentation nach DE/CZ-Standards."}
   };
+  function applySEO(l){const s=SEO[l]||SEO.cs;document.title=s.title;let md=document.querySelector('meta[name="description"]');if(!md){md=document.createElement('meta');md.setAttribute('name','description');document.head.appendChild(md);}md.setAttribute('content',s.desc);}
 
-  // Stav
-  let lang = 'cs';
-  let mottoIdx = 0;
-  let jokeIdx = 0;
-  let mottoTimer = null;
-  let jokeTimer = null;
-  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  // Render textů
-  function renderTexts() {
-    const t = i18n[lang] || i18n.cs;
-    if (elements.company) elements.company.textContent = t.company;
-    if (elements.slogan) elements.slogan.textContent = t.slogan;
-    if (elements.motto) elements.motto.textContent = t.mottos[mottoIdx % t.mottos.length];
-    if (elements.jokeInner) elements.jokeInner.textContent = t.jokes[jokeIdx % t.jokes.length];
-    if (elements.powered) elements.powered.textContent = t.powered;
-    if (elements.note) elements.note.textContent = t.note;
-  }
-
-  // Rotátory
-  function startRotators() {
-    const t = i18n[lang] || i18n.cs;
-
-    clearInterval(mottoTimer);
-    clearInterval(jokeTimer);
-
-    mottoTimer = setInterval(() => {
-      mottoIdx = (mottoIdx + 1) % t.mottos.length;
-      if (elements.motto) {
-        elements.motto.style.opacity = '0';
-        setTimeout(() => {
-          elements.motto.textContent = t.mottos[mottoIdx];
-          elements.motto.style.opacity = '1';
-        }, 200);
-      }
-    }, 4000);
-
-    jokeTimer = setInterval(() => {
-      jokeIdx = (jokeIdx + 1) % t.jokes.length;
-      if (elements.jokeInner) {
-        elements.jokeInner.style.opacity = '0';
-        setTimeout(() => {
-          elements.jokeInner.textContent = t.jokes[jokeIdx];
-          elements.jokeInner.style.opacity = '1';
-        }, 200);
-      }
-    }, 6000);
-  }
-
-  // Přepínač jazyka
-  function setLanguage(newLang) {
-    if (!i18n[newLang]) return;
-    lang = newLang;
-    mottoIdx = 0;
-    jokeIdx = 0;
-    document.documentElement.setAttribute('lang', newLang === 'cs' ? 'cs' : newLang);
-    elements.langBtns.forEach(btn => {
-      const active = btn.getAttribute('data-lang') === newLang;
-      if (active) btn.setAttribute('aria-pressed', 'true'); else btn.removeAttribute('aria-pressed');
+  function setLang(l){
+    document.documentElement.lang = l;
+    document.querySelectorAll("[data-i18n]").forEach(e=>{
+      const k=e.dataset.i18n; if(I18N[l]&&I18N[l][k]) e.textContent=I18N[l][k];
     });
-    renderTexts();
-    startRotators();
+    document.querySelectorAll(".lang button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.lang===l?"true":"false"));
+    applySEO(l);
+    const url = new URL(location.href); url.searchParams.set('lang', l); history.replaceState(null,'',url.toString());
   }
 
-  function initLangButtons() {
-    elements.langBtns.forEach(btn => {
-      btn.addEventListener('click', () => setLanguage(btn.getAttribute('data-lang')));
+  document.addEventListener("DOMContentLoaded", () => {
+    // přepínač jazyků
+    document.querySelectorAll(".lang button").forEach(btn=>btn.addEventListener("click",()=>setLang(btn.dataset.lang)));
+    const l = new URL(location.href).searchParams.get('lang') || 'cs';
+    setLang(l);
+
+    // schovej rozbité logo partnera
+    document.querySelectorAll("#partner-logos img").forEach(img=>{
+      img.addEventListener('error',()=>img.style.display='none');
+      img.loading = "lazy";
     });
-  }
 
-  // Matrix efekt
-  function initMatrix() {
-    if (!elements.matrixHost || reducedMotion) return;
+    // === EQUIPMENT ROTATOR + GALLERY ===
+    const EQUIP = [
+      "Lano.png",
+      "karabina0.png","karabina01.png","karabina02.png","karabina08.png","karabina13.png","karabina15.png","karabina17.png","karabina18.png","karabina19.png","karabina20.png","karabina26.png","karabina28.png","karabina29.png",
+      "kladka01.png","kladka02.png","kladka04.png","kotevnik.png","obrtlik.png",
+      "ocelka01.png","ocelka02.png","ocelka03.png","ocelka04.png",
+      "sedak.png","sedacka.png","smyce01.png","vak.png","vak03.png","vak05.png",
+      "rig.png","sada.png","brzda.png","jummar.png","haky.png","grillon(1).png"
+    ];
+    function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+    const list = shuffle([...new Set(EQUIP)]);
+    list.forEach(src=>{const p=new Image();p.src=src;});
 
-    const canvas = document.createElement('canvas');
-    const ctx = canvas.getContext('2d');
-    elements.matrixHost.appendChild(canvas);
+    // rotátor pro #moving-image
+    (function(){
+      const img=document.getElementById('moving-image'); if(!img) return;
+      let i=0;
+      function next(){ if(!list.length) return; const src=list[i%list.length]; i++; img.onerror=()=>next(); img.src=src; }
+      next(); setInterval(next, 5000);
+    })();
 
-    function resize() {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      columns = Math.floor(canvas.width / fontSize);
-      drops = new Array(columns).fill(1);
-    }
+    // galerie
+    (function(){
+      const wrap=document.getElementById('equip'); if(!wrap) return;
+      wrap.innerHTML=""; shuffle([...list]).forEach(src=>{const el=document.createElement('img'); el.loading="lazy"; el.alt=src; el.src=src; el.onerror=()=>el.remove(); wrap.appendChild(el);});
+    })();
 
-    const chars = 'アカサタナハマヤラワ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    const fontSize = 16;
-    let columns = 0;
-    let drops = [];
-
-    resize();
-    window.addEventListener('resize', resize, { passive: true });
-
-    function draw() {
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.08)';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-      ctx.fillStyle = '#8bf0ff';
-      ctx.font = `${fontSize}px monospace`;
-
-      for (let i = 0; i < drops.length; i++) {
-        const text = chars.charAt(Math.floor(Math.random() * chars.length));
-        const x = i * fontSize;
-        const y = drops[i] * fontSize;
-        ctx.fillText(text, x, y);
-
-        if (y > canvas.height && Math.random() > 0.975) {
-          drops[i] = 0;
-        }
-        drops[i]++;
-      }
-      requestAnimationFrame(draw);
-    }
-    requestAnimationFrame(draw);
-  }
-
-  // Animace pohybujícího se obrázku
-  function initMovingBox() {
-    if (!elements.movingBox || reducedMotion) return;
-
-    const speedX = 120;  // px/s
-    const amp = 80;      // amplituda křivky
-    const period = 4000; // ms
-    let start = null;
-
-    function step(ts) {
-      if (start === null) start = ts;
-      const t = ts - start;
-
-      const w = window.innerWidth;
-      const h = window.innerHeight;
-      const x = (t / 1000) * speedX % (w + 160) - 160; // plynulý loop
-      const y = h * 0.35 + Math.sin((t % period) / period * Math.PI * 2) * amp;
-
-      elements.movingBox.style.transform = `translate(${x}px, ${y}px)`;
-      requestAnimationFrame(step);
-    }
-    requestAnimationFrame(step);
-  }
-
-  // Bezpečnost: pauza videa na low-power zařízeních
-  function optimizeVideo() {
-    const video = $('#bgVideo');
-    if (!video) return;
-    // Pokud je šířka < 480 px, nespouštěj video
-    if (window.innerWidth < 480) {
-      try { video.pause(); } catch (_) {}
-    }
-  }
-
-  // Init
-  function init() {
-    initLangButtons();
-    setLanguage('cs');
-    initMatrix();
-    initMovingBox();
-    optimizeVideo();
-  }
-
-  // Spuštění
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init, { once: true });
-  } else {
-    init();
-  }
+    // animace „pohyblivého“ boxu
+    (function(){
+      const box=document.getElementById('moving-box'); if(!box) return;
+      let start=null; const speed=130, amp=70, period=4200;
+      function loop(ts){ if(!start) start=ts; const t=ts-start; const x=(t/1000)*speed%(innerWidth+160)-160; const y=innerHeight*0.35+Math.sin((t%period)/period*Math.PI*2)*amp; box.style.transform=`translate(${x}px,${y}px)`; requestAnimationFrame(loop); }
+      requestAnimationFrame(loop);
+    })();
+  });
 })();
