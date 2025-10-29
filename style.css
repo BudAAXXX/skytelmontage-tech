@@ -1,192 +1,231 @@
+/* ===== style.css ===== */
+
+/* Základ */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
 html, body {
-  margin: 0;
-  padding: 0;
-  width: 100%;
   height: 100%;
-  background: transparent;
-  font-family: 'Segoe UI', sans-serif;
-  color: white;
-  overflow: hidden;
 }
 
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  color: #fff;
+  background: #000;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Video pozadí */
 #bgVideo {
   position: fixed;
-  top: -5vh;
-  left: 0;
+  inset: 0;
   width: 100%;
-  height: 110vh;
+  height: 100%;
   object-fit: cover;
-  object-position: center;
+  z-index: -2;
+  filter: brightness(0.35) contrast(1.1);
+}
+
+/* Překryv pro lepší čitelnost */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(1200px 600px at 50% 30%, rgba(0,0,0,.15), rgba(0,0,0,.75));
   z-index: -1;
 }
 
-@media (max-width: 768px) {
-  #bgVideo {
-    top: 0;
-    height: 100vh;
-  }
-
-  #intro img {
-    width: 90%;
-  }
-
-  .languages {
-    font-size: 1.5rem;
-  }
-
-  #moving-box {
-    width: 150px;
-    height: 150px;
-  }
-}
-
+/* Intro logo */
 #intro {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: black;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
-  transition: opacity 2s ease;
+  top: 4vh;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  pointer-events: none;
 }
-
 #intro img {
-  max-width: 70%;
-  max-height: 70%;
-  animation: fadein 2s ease-in-out;
+  width: clamp(120px, 14vw, 240px);
+  height: auto;
+  filter: drop-shadow(0 10px 24px rgba(0,0,0,.6));
 }
 
-@keyframes fadein {
-  from { opacity: 0; transform: scale(0.9); }
-  to { opacity: 1; transform: scale(1); }
-}
-
-.content, footer, #joke-box, header, .languages, #moving-box, #social-links {
-  background: transparent;
-}
-
+/* Hlavní obsah */
 .content {
-  position: relative;
-  z-index: 2;
-  padding: 2rem;
-  text-align: center;
+  min-height: 100%;
+  display: grid;
+  place-items: center;
+  padding: clamp(16px, 4vw, 48px);
+  gap: 24px;
 }
 
 .centered {
   text-align: center;
+  max-width: 1000px;
+  margin-inline: auto;
 }
 
-#company-name {
-  font-size: 3rem;
-  text-shadow: 0 0 5px #00f, 0 0 10px #0ff;
+h1 {
+  font-size: clamp(28px, 6vw, 56px);
+  letter-spacing: .5px;
+  margin: 0 0 8px;
+}
+
+#slogan { 
+  font-size: clamp(16px, 2.4vw, 22px);
+  margin: 0 0 6px;
+  opacity: .9;
 }
 
 #motto {
-  font-size: 1.5rem;
-  text-shadow: 0 0 5px #0ff;
+  min-height: 1.5em;
+  font-size: clamp(14px, 2vw, 18px);
+  color: #cde8ff;
 }
 
-#joke-box {
-  margin-top: 2rem;
+/* Sekce */
+section {
+  max-width: 1000px;
+  width: 100%;
+  background: rgba(10, 16, 22, .55);
+  border: 1px solid rgba(255,255,255,.06);
+  backdrop-filter: blur(6px);
+  border-radius: 14px;
+  padding: clamp(14px, 3vw, 22px);
+  box-shadow: 0 10px 30px rgba(0,0,0,.35);
 }
 
-.joke-inner {
-  background: rgba(0, 0, 50, 0.5);
-  padding: 12px 24px;
-  border-radius: 12px;
-  font-size: 1.2rem;
-  color: #00ccff;
-  animation: floatText 3s ease-in-out infinite;
+/* Vtip / status box */
+#joke-box .joke-inner {
+  min-height: 2.2em;
+  font-size: clamp(14px, 1.8vw, 18px);
+  color: #a7ffb5;
 }
 
-@keyframes floatText {
-  0% { transform: translateY(0); }
-  50% { transform: translateY(-5px); }
-  100% { transform: translateY(0); }
+/* Footer */
+footer p {
+  margin: 6px 0;
+  opacity: .9;
+}
+footer a {
+  color: #fff;
+  text-decoration: none;
+}
+footer a:hover {
+  text-decoration: underline;
 }
 
-footer {
-  margin-top: 3rem;
-  font-size: 0.9rem;
-  color: #ccc;
-}
-
-#social-links a {
-  margin: 0 10px;
-}
-
-#social-links img {
-  width: 40px;
-  height: 40px;
-  transition: transform 0.3s ease;
-}
-
-#social-links img:hover {
-  transform: scale(1.2);
-}
-
-.languages {
+/* Social odkazy */
+#social-links {
   position: fixed;
-  right: 10px;
-  bottom: 10px;
+  bottom: 16px;
+  left: 16px;
   display: flex;
   gap: 10px;
-  z-index: 20;
+  z-index: 3;
 }
+#social-links img {
+  width: 28px;
+  height: 28px;
+  opacity: .9;
+  transition: transform .2s ease, opacity .2s ease;
+}
+#social-links img:hover { transform: scale(1.05); opacity: 1; }
 
+/* Jazykové přepínače */
+.languages {
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+  display: flex;
+  gap: 8px;
+  z-index: 3;
+}
 .languages button {
-  background: none;
-  border: none;
-  font-size: 2rem;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(0,0,0,.4);
+  color: #fff;
+  font-size: 18px;
+  padding: 8px 10px;
+  border-radius: 12px;
   cursor: pointer;
+  backdrop-filter: blur(6px);
+}
+.languages button:hover,
+.languages button[aria-pressed="true"] {
+  border-color: rgba(173,216,230,.9);
+  box-shadow: 0 0 0 2px rgba(173,216,230,.25) inset;
 }
 
+/* Pohybující se box */
 #moving-box {
-  position: absolute;
-  width: 200px;
-  height: 200px;
-  z-index: 10;
+  position: fixed;
+  top: 30%;
+  left: 0;
+  width: 120px;
+  height: 120px;
   pointer-events: none;
+  z-index: 1;
+  opacity: .85;
 }
-
-#moving-box img {
+#moving-image {
   width: 100%;
   height: 100%;
   object-fit: contain;
+  filter: drop-shadow(0 8px 18px rgba(0,0,0,.6));
 }
 
+/* Matrix plátno */
 #matrix {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  z-index: 1;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  mix-blend-mode: screen;
 }
 
+/* Animace a efekty */
 .fade-in {
-  animation: fadeInMove 2s ease forwards;
-  opacity: 0;
-  transform: translateY(20px);
+  animation: fadeInUp .8s ease both;
+}
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
-@keyframes fadeInMove {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* Noscript */
+.noscript {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  background: #b30000;
+  color: #fff;
+  text-align: center;
+  padding: 8px 12px;
+  z-index: 5;
+  font-weight: 600;
 }
 
-a {
-  color: white;
-  text-decoration: none;
+/* Přístupnost pro čtečky */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0, 0, 1px, 1px);
+  white-space: nowrap; border: 0;
 }
 
-a:hover {
-  color: #00aaff;
+/* Menší displeje */
+@media (max-width: 560px) {
+  #social-links { bottom: 72px; }
+}
+
+/* Uživatelé s omezením animací */
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+  #moving-box { display: none; }
+  #matrix { display: none; }
 }
