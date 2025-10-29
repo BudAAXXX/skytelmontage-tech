@@ -5,13 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <title>SkyTel Montage s.r.o. | Telekom a výškové práce v DE/EU</title>
-  <meta name="description" content="8 let praxe v Německu. Montáže a servis telekom sítí, práce ve výškách (PSAgA), elektro kvalifikace NV 194/2022 §7, lékařské prohlídky G25/G37/G41, Siemens SIMATIC S7/TIA. Dokumentace dle DE/CZ norem.">
+  <meta name="description" content="8 let praxe v Německu. Montáže a servis telekom sítí, práce ve výškách (PSAgA), elektro kvalifikace NV 194/2022 §7, G25/G37/G41, Siemens SIMATIC S7/TIA. Dokumentace dle DE/CZ norem.">
+
   <link rel="alternate" href="https://skytelmontage.tech/?lang=cs" hreflang="cs">
   <link rel="alternate" href="https://skytelmontage.tech/?lang=en" hreflang="en">
   <link rel="alternate" href="https://skytelmontage.tech/?lang=de" hreflang="de">
   <link rel="alternate" href="https://skytelmontage.tech/" hreflang="x-default">
 
-  <link rel="icon" type="image/png" sizes="32x32" href="logo.png">
   <link rel="icon" type="image/png" sizes="192x192" href="logo.png">
   <link rel="apple-touch-icon" href="logo.png">
   <meta name="theme-color" content="#0b2e4e">
@@ -31,8 +31,10 @@
     "url":"https://skytelmontage.tech/",
     "logo":"https://skytelmontage.tech/logo.png",
     "sameAs":["https://www.linkedin.com/in/patrik-budinsk%C3%BD-793385192/"],
-    "founder":{"@type":"Person","name":"Patrik Budinský","jobTitle":"Technický ředitel"},
-    "employee":[{"@type":"Person","name":"Michaela Budinská","jobTitle":"Jednatelka"}],
+    "employee":[
+      {"@type":"Person","name":"Michaela Budinská","jobTitle":"Jednatelka"},
+      {"@type":"Person","name":"Patrik Budinský","jobTitle":"Technický ředitel"}
+    ],
     "areaServed":["DE","CZ","EU"]
   }
   </script>
@@ -42,33 +44,42 @@
 </head>
 <body>
 
+<noscript><div class="noscript">Povolte JavaScript.</div></noscript>
+
+<!-- ostré video -->
 <video id="bgVideo" autoplay muted loop playsinline preload="metadata" aria-hidden="true">
   <source src="Video123.mp4" type="video/mp4" />
 </video>
 
-<!-- Filmové intro loga -->
+<!-- matrix efekt -->
+<canvas id="matrix" aria-hidden="true"></canvas>
+
+<!-- filmové intro loga -->
 <div id="intro">
   <img src="logo.png" alt="SkyTel Montage" id="intro-logo">
 </div>
 
 <header class="hero">
-  <img src="logo.png" alt="SkyTel Montage" class="main-logo" width="240" height="240">
+  <img src="logo.png" alt="SkyTel Montage" class="main-logo" width="260" height="260">
   <h1 data-i18n="headline">SkyTel Montage</h1>
   <p data-i18n="subtitle">Váš partner pro výškové a telekomunikační projekty v celé Evropě.</p>
-  <p class="roles"><strong>Technický ředitel:</strong> Patrik Budinský | <strong>Jednatelka:</strong> Michaela Budinská | <strong>SkyTel Montage s.r.o.</strong></p>
-
-  <div class="lang" role="navigation" aria-label="Language">
+  <p class="roles">
+    <strong>Technický ředitel:</strong> Patrik Budinský &nbsp;|&nbsp;
+    <strong>Jednatelka:</strong> Michaela Budinská &nbsp;|&nbsp;
+    <strong>SkyTel Montage s.r.o.</strong>
+  </p>
+  <nav class="lang" aria-label="Language">
     <button data-lang="cs" aria-pressed="true">🇨🇿</button>
     <button data-lang="en">🇬🇧</button>
     <button data-lang="de">🇩🇪</button>
     <button data-lang="kli">🖖</button>
-  </div>
+  </nav>
 </header>
 
 <main>
   <section id="partners">
     <h2 data-i18n="partners">Partneři</h2>
-    <div class="partner-logos" id="partner-logos">
+    <div class="partner-logos">
       <img src="telekom.png" alt="Deutsche Telekom">
       <img src="vodafone.png" alt="Vodafone">
       <img src="telefonica.png" alt="Telefónica Germany">
@@ -86,11 +97,9 @@
       <li data-i18n="c5">Siemens SIMATIC S7 / TIA Portal</li>
       <li data-i18n="c6">Vendor training – Telekom / Vodafone / Telefónica Germany / Weis Appetito</li>
     </ul>
-  </section>
-
-  <section id="gallery">
-    <h2 data-i18n="equipment">Vybavení</h2>
-    <div class="gallery" id="equip"></div>
+    <p class="note" data-i18n="note">
+      Toto je základ. Dle požadavků projektu doplníme další školení a certifikace. Tým je vícemanový.
+    </p>
   </section>
 </main>
 
@@ -103,11 +112,6 @@
     <a href="https://www.linkedin.com/in/patrik-budinsk%C3%BD-793385192/" target="_blank" rel="noopener">LinkedIn</a>
   </p>
 </footer>
-
-<!-- Rotující „pohyblivý“ obrázek vybavení -->
-<div id="moving-box" aria-hidden="true">
-  <img id="moving-image" src="Lano.png" alt="">
-</div>
 
 </body>
 </html>
