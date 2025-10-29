@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>SkyTel Montage</title>
 
   <!-- SEO -->
@@ -16,42 +16,20 @@
   <meta property="og:url" content="https://skytelmontage.tech/">
   <meta property="og:type" content="website">
 
-  <!-- Favicon -->
   <link rel="icon" href="favicon.png" type="image/png">
 
-  <!-- CSS -->
-  <link rel="stylesheet" href="style.css">
-
-  <!-- Bezpečnost: nastavte CSP na serveru (příklad)
-  Content-Security-Policy: default-src 'self'; img-src 'self' data:; media-src 'self'; style-src 'self'; script-src 'self'; frame-ancestors 'none'; base-uri 'self';
-  -->
-
-  <!-- Strukturovaná data -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "SkyTel Montage",
-    "url": "https://skytelmontage.tech/",
-    "logo": "https://skytelmontage.tech/logo.png",
-    "sameAs": [
-      "https://www.instagram.com/stories/highlights/18312041011227550/",
-      "https://www.linkedin.com/in/patrik-budinsk%C3%BD-793385192/"
-    ]
-  }
-  </script>
-
-  <!-- JS -->
+  <link rel="stylesheet" href="style.css" />
   <script defer src="script.js"></script>
 </head>
 <body>
 
-<noscript>
-  <div class="noscript">Pro plnou funkčnost povolte JavaScript.</div>
-</noscript>
+<noscript><div class="noscript">Pro plnou funkčnost povolte JavaScript.</div></noscript>
 
-<!-- Pozadí video: dekorativní -->
-<video id="bgVideo" autoplay muted loop playsinline preload="none" aria-hidden="true">
+<!-- Ostré video bez filtrů + poster -->
+<video id="bgVideo" autoplay muted loop playsinline preload="metadata" aria-hidden="true" poster="poster.jpg">
+  <!-- nahrajte vlastní soubory do /video a přejmenujte cesty; dočasně padá na Video123.mp4 -->
+  <source src="video/skytel-1080p.webm" type="video/webm">
+  <source src="video/skytel-1080p.mp4" type="video/mp4">
   <source src="Video123.mp4" type="video/mp4">
 </video>
 
@@ -62,12 +40,17 @@
 
 <div class="content" role="main">
   <header class="centered fade-in">
+    <img src="logo.png" alt="SkyTel Montage logo" width="120" height="120" style="filter: drop-shadow(0 6px 16px rgba(0,0,0,.5)); margin-bottom:8px;">
     <h1 id="company-name">SkyTel Montage</h1>
     <p id="slogan">Váš partner pro výškové a telekomunikační projekty v celé Evropě.</p>
     <p id="motto" aria-live="polite"></p>
+    <p class="roles">
+      <strong>Technický ředitel:</strong> Patrik Budinský &nbsp;|&nbsp;
+      <strong>Jednatelka:</strong> Michaela Budinská &nbsp;|&nbsp;
+      <strong>SkyTel Montage s.r.o.</strong>
+    </p>
   </header>
 
-  <!-- Hierarchie obsahu pro SEO -->
   <section class="fade-in" aria-labelledby="o-nas-heading">
     <h2 id="o-nas-heading">O nás</h2>
     <p>8 let zkušeností v Německu. Realizace a servis pro Deutsche Telekom, Vodafone a Telefónica Germany.</p>
@@ -82,7 +65,6 @@
     </ul>
   </section>
 
-  <!-- Dynamický box s vtipem / citátem -->
   <section id="joke-box" class="fade-in" aria-labelledby="status-heading">
     <h2 id="status-heading" class="visually-hidden">Status</h2>
     <div class="joke-inner" aria-live="polite"></div>
@@ -98,17 +80,17 @@
   </footer>
 </div>
 
-<!-- Sociální sítě -->
+<!-- Pouze LinkedIn -->
 <nav id="social-links" aria-label="Sociální sítě">
-  <a href="https://www.instagram.com/stories/highlights/18312041011227550/" target="_blank" rel="noopener noreferrer" aria-label="Instagram SkyTel Montage">
-    <img src="images/instagram-icon.png" alt="Instagram" loading="lazy" width="28" height="28">
-  </a>
   <a href="https://www.linkedin.com/in/patrik-budinsk%C3%BD-793385192/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Patrik Budinský">
-    <img src="images/linkedin-icon.png" alt="LinkedIn" loading="lazy" width="28" height="28">
+    <!-- inline SVG, žádné PNG cesty -->
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" role="img" aria-hidden="true">
+      <path d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM0 8h5v16H0zM8 8h4.8v2.2h.07c.67-1.2 2.3-2.46 4.73-2.46C21.6 7.74 24 10 24 14.3V24h-5v-8.4c0-2-0.04-4.6-2.8-4.6-2.8 0-3.23 2.18-3.23 4.44V24H8z"/>
+    </svg>
   </a>
 </nav>
 
-<!-- Pohybující se box s obrázkem vybavení, dekorativní -->
+<!-- Pohybující se obrázek (Lano.png v kořeni) -->
 <div id="moving-box" aria-hidden="true">
   <img id="moving-image" src="Lano.png" alt="" loading="lazy" width="120" height="120">
 </div>
@@ -118,10 +100,9 @@
   <button type="button" data-lang="cs" aria-label="Čeština">🇨🇿</button>
   <button type="button" data-lang="en" aria-label="Angličtina">🇬🇧</button>
   <button type="button" data-lang="de" aria-label="Němčina">🇩🇪</button>
-  <button type="button" data-lang="kli" aria-label="Klingonština">🖖</button>
 </div>
 
-<!-- Matrix efekt, dekorativní -->
+<!-- Matrix efekt -->
 <div id="matrix" aria-hidden="true"></div>
 
 </body>
