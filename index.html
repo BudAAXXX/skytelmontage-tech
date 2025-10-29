@@ -3,107 +3,111 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>SkyTel Montage</title>
 
-  <!-- SEO -->
-  <meta name="description" content="SkyTel Montage – výškové a telekomunikační projekty v Německu a EU. 8 let praxe, zkušenosti s Deutsche Telekom, Vodafone, Telefónica Germany.">
-  <link rel="canonical" href="https://skytelmontage.tech/">
+  <title>SkyTel Montage s.r.o. | Telekom a výškové práce v DE/EU</title>
+  <meta name="description" content="8 let praxe v Německu. Montáže a servis telekom sítí, práce ve výškách (PSAgA), elektro kvalifikace NV 194/2022 §7, lékařské prohlídky G25/G37/G41, Siemens SIMATIC S7/TIA. Dokumentace dle DE/CZ norem.">
+  <link rel="alternate" href="https://skytelmontage.tech/?lang=cs" hreflang="cs">
+  <link rel="alternate" href="https://skytelmontage.tech/?lang=en" hreflang="en">
+  <link rel="alternate" href="https://skytelmontage.tech/?lang=de" hreflang="de">
+  <link rel="alternate" href="https://skytelmontage.tech/" hreflang="x-default">
 
-  <!-- Open Graph -->
-  <meta property="og:title" content="SkyTel Montage | Telekomunikace Německo">
-  <meta property="og:description" content="8 let praxe v Německu. Team leader a specialista pro Deutsche Telekom, Vodafone, Telefónica Germany.">
-  <meta property="og:image" content="logo.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="logo.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="logo.png">
+  <link rel="apple-touch-icon" href="logo.png">
+  <meta name="theme-color" content="#0b2e4e">
+
+  <meta property="og:site_name" content="SkyTel Montage s.r.o.">
+  <meta property="og:title" content="SkyTel Montage s.r.o. | Telekom a výškové práce v DE/EU">
+  <meta property="og:description" content="8 let praxe v Německu. PSAgA, NV 194/2022 §7, G25/G37/G41, Siemens SIMATIC S7/TIA.">
+  <meta property="og:image" content="https://skytelmontage.tech/logo.png">
   <meta property="og:url" content="https://skytelmontage.tech/">
-  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary">
 
-  <link rel="icon" href="favicon.png" type="image/png">
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Organization",
+    "name":"SkyTel Montage s.r.o.",
+    "url":"https://skytelmontage.tech/",
+    "logo":"https://skytelmontage.tech/logo.png",
+    "sameAs":["https://www.linkedin.com/in/patrik-budinsk%C3%BD-793385192/"],
+    "founder":{"@type":"Person","name":"Patrik Budinský","jobTitle":"Technický ředitel"},
+    "employee":[{"@type":"Person","name":"Michaela Budinská","jobTitle":"Jednatelka"}],
+    "areaServed":["DE","CZ","EU"]
+  }
+  </script>
 
   <link rel="stylesheet" href="style.css" />
   <script defer src="script.js"></script>
 </head>
 <body>
 
-<noscript><div class="noscript">Pro plnou funkčnost povolte JavaScript.</div></noscript>
-
-<!-- Ostré video bez filtrů + poster -->
-<video id="bgVideo" autoplay muted loop playsinline preload="metadata" aria-hidden="true" poster="poster.jpg">
-  <!-- nahrajte vlastní soubory do /video a přejmenujte cesty; dočasně padá na Video123.mp4 -->
-  <source src="video/skytel-1080p.webm" type="video/webm">
-  <source src="video/skytel-1080p.mp4" type="video/mp4">
-  <source src="Video123.mp4" type="video/mp4">
+<video id="bgVideo" autoplay muted loop playsinline preload="metadata" aria-hidden="true">
+  <source src="Video123.mp4" type="video/mp4" />
 </video>
 
-<!-- Intro logo -->
-<div id="intro" aria-label="SkyTel Montage">
-  <img src="logo-intro.png" alt="SkyTel Montage logo" loading="lazy" width="240" height="240">
+<!-- Filmové intro loga -->
+<div id="intro">
+  <img src="logo.png" alt="SkyTel Montage" id="intro-logo">
 </div>
 
-<div class="content" role="main">
-  <header class="centered fade-in">
-    <img src="logo.png" alt="SkyTel Montage logo" width="120" height="120" style="filter: drop-shadow(0 6px 16px rgba(0,0,0,.5)); margin-bottom:8px;">
-    <h1 id="company-name">SkyTel Montage</h1>
-    <p id="slogan">Váš partner pro výškové a telekomunikační projekty v celé Evropě.</p>
-    <p id="motto" aria-live="polite"></p>
-    <p class="roles">
-      <strong>Technický ředitel:</strong> Patrik Budinský &nbsp;|&nbsp;
-      <strong>Jednatelka:</strong> Michaela Budinská &nbsp;|&nbsp;
-      <strong>SkyTel Montage s.r.o.</strong>
-    </p>
-  </header>
+<header class="hero">
+  <img src="logo.png" alt="SkyTel Montage" class="main-logo" width="240" height="240">
+  <h1 data-i18n="headline">SkyTel Montage</h1>
+  <p data-i18n="subtitle">Váš partner pro výškové a telekomunikační projekty v celé Evropě.</p>
+  <p class="roles"><strong>Technický ředitel:</strong> Patrik Budinský | <strong>Jednatelka:</strong> Michaela Budinská | <strong>SkyTel Montage s.r.o.</strong></p>
 
-  <section class="fade-in" aria-labelledby="o-nas-heading">
-    <h2 id="o-nas-heading">O nás</h2>
-    <p>8 let zkušeností v Německu. Realizace a servis pro Deutsche Telekom, Vodafone a Telefónica Germany.</p>
+  <div class="lang" role="navigation" aria-label="Language">
+    <button data-lang="cs" aria-pressed="true">🇨🇿</button>
+    <button data-lang="en">🇬🇧</button>
+    <button data-lang="de">🇩🇪</button>
+    <button data-lang="kli">🖖</button>
+  </div>
+</header>
+
+<main>
+  <section id="partners">
+    <h2 data-i18n="partners">Partneři</h2>
+    <div class="partner-logos" id="partner-logos">
+      <img src="telekom.png" alt="Deutsche Telekom">
+      <img src="vodafone.png" alt="Vodafone">
+      <img src="telefonica.png" alt="Telefónica Germany">
+      <img src="weis-appetito.png" alt="Weis Appetito Telecom">
+    </div>
   </section>
 
-  <section class="fade-in" aria-labelledby="sluzby-heading">
-    <h2 id="sluzby-heading">Služby</h2>
+  <section id="certs">
+    <h2 data-i18n="certs">Certifikace a školení</h2>
     <ul>
-      <li>Montáže a servis telekomunikačních technologií</li>
-      <li>Práce ve výškách a záchranné postupy</li>
-      <li>Elektro dohled a dokumentace dle DE/CZ norem</li>
+      <li data-i18n="c1">Elektro kvalifikace §6/§7 NV 194/2022 (Elektrofachkraft)</li>
+      <li data-i18n="c2">PSAgA – práce ve výškách a záchranné postupy</li>
+      <li data-i18n="c3">G25 / G37 / G41 – lékařské prohlídky</li>
+      <li data-i18n="c4">První pomoc 12 h</li>
+      <li data-i18n="c5">Siemens SIMATIC S7 / TIA Portal</li>
+      <li data-i18n="c6">Vendor training – Telekom / Vodafone / Telefónica Germany / Weis Appetito</li>
     </ul>
   </section>
 
-  <section id="joke-box" class="fade-in" aria-labelledby="status-heading">
-    <h2 id="status-heading" class="visually-hidden">Status</h2>
-    <div class="joke-inner" aria-live="polite"></div>
+  <section id="gallery">
+    <h2 data-i18n="equipment">Vybavení</h2>
+    <div class="gallery" id="equip"></div>
   </section>
+</main>
 
-  <footer class="centered fade-in" role="contentinfo">
-    <p id="powered-by"></p>
-    <p id="note"></p>
-    <p>
-      <a href="privacy.html" aria-label="Zásady ochrany soukromí">🛡️</a> |
-      <a href="impressum.html" aria-label="Impressum / Povinné údaje">📜</a>
-    </p>
-  </footer>
-</div>
+<footer>
+  <p>© 2025 SkyTel Montage s.r.o.</p>
+  <p>
+    <a href="privacy.html">🛡️</a> |
+    <a href="impressum.html">📜</a> |
+    <a href="mailto:patrik.budinsky@skytelmontage.tech">patrik.budinsky@skytelmontage.tech</a> |
+    <a href="https://www.linkedin.com/in/patrik-budinsk%C3%BD-793385192/" target="_blank" rel="noopener">LinkedIn</a>
+  </p>
+</footer>
 
-<!-- Pouze LinkedIn -->
-<nav id="social-links" aria-label="Sociální sítě">
-  <a href="https://www.linkedin.com/in/patrik-budinsk%C3%BD-793385192/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Patrik Budinský">
-    <!-- inline SVG, žádné PNG cesty -->
-    <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" role="img" aria-hidden="true">
-      <path d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM0 8h5v16H0zM8 8h4.8v2.2h.07c.67-1.2 2.3-2.46 4.73-2.46C21.6 7.74 24 10 24 14.3V24h-5v-8.4c0-2-0.04-4.6-2.8-4.6-2.8 0-3.23 2.18-3.23 4.44V24H8z"/>
-    </svg>
-  </a>
-</nav>
-
-<!-- Pohybující se obrázek (Lano.png v kořeni) -->
+<!-- Rotující „pohyblivý“ obrázek vybavení -->
 <div id="moving-box" aria-hidden="true">
-  <img id="moving-image" src="Lano.png" alt="" loading="lazy" width="120" height="120">
+  <img id="moving-image" src="Lano.png" alt="">
 </div>
-
-<!-- Jazykové přepínače -->
-<div class="languages" role="navigation" aria-label="Jazyk">
-  <button type="button" data-lang="cs" aria-label="Čeština">🇨🇿</button>
-  <button type="button" data-lang="en" aria-label="Angličtina">🇬🇧</button>
-  <button type="button" data-lang="de" aria-label="Němčina">🇩🇪</button>
-</div>
-
-<!-- Matrix efekt -->
-<div id="matrix" aria-hidden="true"></div>
 
 </body>
 </html>
