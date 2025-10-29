@@ -1,140 +1,248 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const intro = document.getElementById("intro");
-  const bgVideo = document.getElementById("bgVideo");
-  const matrix = document.getElementById("matrix");
-  const mottoEl = document.getElementById("motto");
-  const jokeInner = document.querySelector(".joke-inner");
-  const box = document.getElementById("moving-box");
-  const imgEl = document.getElementById("moving-image");
+// ===== script.js =====
+(function () {
+  'use strict';
 
-  const translations = {
-    cz: {
-      companyName: "SkyTel Montage",
-      slogan: "Váš partner pro výškové a telekomunikační projekty v celé Evropě.",
-      motto: "Nepřekonáváš věž – překonáváš sám sebe.",
-      poweredBy: "Vytvořeno BudAA za 1 hodinu s pomocí AI.",
-      note: "Stránka slouží jako kontaktní vizitka, nikoliv finální verze.",
+  const $ = (sel) => document.querySelector(sel);
+
+  // Bezpečný getElement
+  const elements = {
+    company: $('#company-name'),
+    slogan: $('#slogan'),
+    motto: $('#motto'),
+    jokeInner: $('#joke-box .joke-inner'),
+    powered: $('#powered-by'),
+    note: $('#note'),
+    langBtns: document.querySelectorAll('.languages button'),
+    matrixHost: $('#matrix'),
+    movingBox: $('#moving-box'),
+    movingImg: $('#moving-image'),
+    htmlEl: document.documentElement
+  };
+
+  // I18N obsah
+  const i18n = {
+    cs: {
+      company: 'SkyTel Montage',
+      slogan: 'Váš partner pro výškové a telekomunikační projekty v celé Evropě.',
+      mottos: [
+        'Bezpečnost. Kvalita. Transparentnost.',
+        'DGUV a BOZP v praxi, ne na papíře.',
+        'Doručíme hotové řešení, ne výmluvu.'
+      ],
       jokes: [
-        "To není bug, to je feature!",
-        "Visím, tedy jsem.",
-        "Chyba mezi židlí a klávesnicí.",
-        "Bez lana není lezení.",
-        "Backup? Možná příště."
-      ]
+        'Kontrola kotvení: dvakrát měř, jednou leť.',
+        'Nejtišší alarm? Když chybí zajištění. Ten neuslyšíš, ale ucítíš.',
+        'Když prší, leze se pomaleji. Data taky.'
+      ],
+      powered: '© 2025 SkyTel Montage',
+      note: 'Projekty v DE/EU. Dokumentace dle DE/CZ norem.'
     },
     en: {
-      companyName: "SkyTel Montage",
-      slogan: "Your partner for telecom and high-altitude projects across Europe.",
-      motto: "You don't overcome the tower – you overcome yourself.",
-      poweredBy: "Created by BudAA within 1 hour with AI support.",
-      note: "This page serves as a contact card, not a final website.",
+      company: 'SkyTel Montage',
+      slogan: 'Your partner for telecom and rope access projects across Europe.',
+      mottos: [
+        'Safety. Quality. Transparency.',
+        'DGUV and EHS that actually work.',
+        'We deliver outcomes, not excuses.'
+      ],
       jokes: [
-        "It's not a bug, it's a feature!",
-        "I hang, therefore I am.",
-        "Error between chair and keyboard.",
-        "Without rope, no climbing!",
-        "Backup? Maybe next time."
-      ]
+        'Anchor check: measure twice, climb once.',
+        'The quietest alarm is missing protection. You won’t hear it, you’ll feel it.',
+        'When it rains, climbing slows. So does data.'
+      ],
+      powered: '© 2025 SkyTel Montage',
+      note: 'Projects in DE/EU. Documentation aligned with DE/CZ standards.'
+    },
+    de: {
+      company: 'SkyTel Montage',
+      slogan: 'Ihr Partner für Telekommunikation und Höhenarbeit in Europa.',
+      mottos: [
+        'Sicherheit. Qualität. Transparenz.',
+        'DGUV und Arbeitsschutz, die funktionieren.',
+        'Wir liefern Ergebnisse, keine Ausreden.'
+      ],
+      jokes: [
+        'Anker-Check: zweimal messen, einmal steigen.',
+        'Der leiseste Alarm ist fehlender Schutz. Man hört ihn nicht, man spürt ihn.',
+        'Bei Regen wird’s langsamer. Am Mast und im Netz.'
+      ],
+      powered: '© 2025 SkyTel Montage',
+      note: 'Projekte in DE/EU. Dokumentation nach DE/CZ-Standards.'
+    },
+    // Záměrně vtipný dummy profil pro Klingonštinu
+    kli: {
+      company: 'SkyTel Montage',
+      slogan: 'tlhIngan Hol: European telecom ready.',
+      mottos: ['batlh. HoS. yaj.'],
+      jokes: ['QI’yaH: Fall-arrest first, honor later.'],
+      powered: '© 2025 SkyTel Montage',
+      note: 'This language mode is for fun.'
     }
   };
 
-  function applyTranslations(lang) {
-    const t = translations[lang] || translations.cz;
-    document.getElementById('company-name').textContent = t.companyName;
-    document.getElementById('slogan').textContent = t.slogan;
-    mottoEl.textContent = t.motto;
-    document.getElementById('powered-by').textContent = t.poweredBy;
-    document.getElementById('note').textContent = t.note;
-    updateJokes(t.jokes);
+  // Stav
+  let lang = 'cs';
+  let mottoIdx = 0;
+  let jokeIdx = 0;
+  let mottoTimer = null;
+  let jokeTimer = null;
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Render textů
+  function renderTexts() {
+    const t = i18n[lang] || i18n.cs;
+    if (elements.company) elements.company.textContent = t.company;
+    if (elements.slogan) elements.slogan.textContent = t.slogan;
+    if (elements.motto) elements.motto.textContent = t.mottos[mottoIdx % t.mottos.length];
+    if (elements.jokeInner) elements.jokeInner.textContent = t.jokes[jokeIdx % t.jokes.length];
+    if (elements.powered) elements.powered.textContent = t.powered;
+    if (elements.note) elements.note.textContent = t.note;
   }
 
-  function updateJokes(jokes) {
-    jokeInner.textContent = jokes[Math.floor(Math.random() * jokes.length)];
-    setInterval(() => {
-      jokeInner.textContent = jokes[Math.floor(Math.random() * jokes.length)];
-    }, 5000);
-  }
+  // Rotátory
+  function startRotators() {
+    const t = i18n[lang] || i18n.cs;
 
-  document.querySelectorAll(".languages button").forEach(btn => {
-    btn.addEventListener("click", () => {
-      applyTranslations(btn.dataset.lang);
-    });
-  });
+    clearInterval(mottoTimer);
+    clearInterval(jokeTimer);
 
-  applyTranslations("cz");
-
-  setTimeout(() => {
-    intro.style.opacity = "0";
-    intro.style.pointerEvents = "none";
-    setTimeout(() => {
-      intro.remove();
-      if (bgVideo) {
-        bgVideo.play().catch(err => console.error('Video error:', err));
+    mottoTimer = setInterval(() => {
+      mottoIdx = (mottoIdx + 1) % t.mottos.length;
+      if (elements.motto) {
+        elements.motto.style.opacity = '0';
+        setTimeout(() => {
+          elements.motto.textContent = t.mottos[mottoIdx];
+          elements.motto.style.opacity = '1';
+        }, 200);
       }
-    }, 2000);
-  }, 2000);
+    }, 4000);
 
-  setTimeout(() => {
-    matrix.style.opacity = "1";
-    startMatrix();
-  }, 30000);
+    jokeTimer = setInterval(() => {
+      jokeIdx = (jokeIdx + 1) % t.jokes.length;
+      if (elements.jokeInner) {
+        elements.jokeInner.style.opacity = '0';
+        setTimeout(() => {
+          elements.jokeInner.textContent = t.jokes[jokeIdx];
+          elements.jokeInner.style.opacity = '1';
+        }, 200);
+      }
+    }, 6000);
+  }
 
-  function startMatrix() {
-    const width = window.innerWidth;
-    const height = window.innerHeight;
-    const columns = Math.floor(width / 15);
-    const drops = Array(columns).fill(1);
-    const ctx = createMatrixCanvas();
+  // Přepínač jazyka
+  function setLanguage(newLang) {
+    if (!i18n[newLang]) return;
+    lang = newLang;
+    mottoIdx = 0;
+    jokeIdx = 0;
+    document.documentElement.setAttribute('lang', newLang === 'cs' ? 'cs' : newLang);
+    elements.langBtns.forEach(btn => {
+      const active = btn.getAttribute('data-lang') === newLang;
+      if (active) btn.setAttribute('aria-pressed', 'true'); else btn.removeAttribute('aria-pressed');
+    });
+    renderTexts();
+    startRotators();
+  }
 
-    setInterval(() => {
-      ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
-      ctx.fillRect(0, 0, width, height);
-      ctx.fillStyle = "#00ff00";
-      ctx.font = "15px monospace";
+  function initLangButtons() {
+    elements.langBtns.forEach(btn => {
+      btn.addEventListener('click', () => setLanguage(btn.getAttribute('data-lang')));
+    });
+  }
+
+  // Matrix efekt
+  function initMatrix() {
+    if (!elements.matrixHost || reducedMotion) return;
+
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    elements.matrixHost.appendChild(canvas);
+
+    function resize() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      columns = Math.floor(canvas.width / fontSize);
+      drops = new Array(columns).fill(1);
+    }
+
+    const chars = 'アカサタナハマヤラワ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    const fontSize = 16;
+    let columns = 0;
+    let drops = [];
+
+    resize();
+    window.addEventListener('resize', resize, { passive: true });
+
+    function draw() {
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.08)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.fillStyle = '#8bf0ff';
+      ctx.font = `${fontSize}px monospace`;
 
       for (let i = 0; i < drops.length; i++) {
-        const text = Math.random() > 0.5 ? "0" : "1";
-        ctx.fillText(text, i * 15, drops[i] * 15);
-        if (drops[i] * 15 > height && Math.random() > 0.975) drops[i] = 0;
+        const text = chars.charAt(Math.floor(Math.random() * chars.length));
+        const x = i * fontSize;
+        const y = drops[i] * fontSize;
+        ctx.fillText(text, x, y);
+
+        if (y > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
         drops[i]++;
       }
-    }, 70);
-  }
-
-  function createMatrixCanvas() {
-    const canvas = document.createElement("canvas");
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    matrix.appendChild(canvas);
-    return canvas.getContext("2d");
-  }
-
-  const images = ["Lano.png", "Karabina.png", "Helma.png", "Postroj.png"];
-  let x = 100, y = 100, dx = 2.5, dy = 2;
-  function getRandomImage() {
-    return images[Math.floor(Math.random() * images.length)];
-  }
-  function animateMovingBox() {
-    const vw = window.innerWidth;
-    const vh = window.innerHeight;
-    const r = box.getBoundingClientRect();
-
-    if (x + r.width >= vw || x <= 0) {
-      dx *= -1;
-      imgEl.src = getRandomImage();
+      requestAnimationFrame(draw);
     }
-    if (y + r.height >= vh || y <= 0) {
-      dy *= -1;
-      imgEl.src = getRandomImage();
-    }
-
-    x += dx;
-    y += dy;
-    box.style.left = `${x}px`;
-    box.style.top = `${y}px`;
-
-    requestAnimationFrame(animateMovingBox);
+    requestAnimationFrame(draw);
   }
 
-  requestAnimationFrame(animateMovingBox);
-});
+  // Animace pohybujícího se obrázku
+  function initMovingBox() {
+    if (!elements.movingBox || reducedMotion) return;
+
+    const speedX = 120;  // px/s
+    const amp = 80;      // amplituda křivky
+    const period = 4000; // ms
+    let start = null;
+
+    function step(ts) {
+      if (start === null) start = ts;
+      const t = ts - start;
+
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+      const x = (t / 1000) * speedX % (w + 160) - 160; // plynulý loop
+      const y = h * 0.35 + Math.sin((t % period) / period * Math.PI * 2) * amp;
+
+      elements.movingBox.style.transform = `translate(${x}px, ${y}px)`;
+      requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  // Bezpečnost: pauza videa na low-power zařízeních
+  function optimizeVideo() {
+    const video = $('#bgVideo');
+    if (!video) return;
+    // Pokud je šířka < 480 px, nespouštěj video
+    if (window.innerWidth < 480) {
+      try { video.pause(); } catch (_) {}
+    }
+  }
+
+  // Init
+  function init() {
+    initLangButtons();
+    setLanguage('cs');
+    initMatrix();
+    initMovingBox();
+    optimizeVideo();
+  }
+
+  // Spuštění
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init, { once: true });
+  } else {
+    init();
+  }
+})();
