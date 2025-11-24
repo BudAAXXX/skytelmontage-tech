@@ -9,54 +9,70 @@
 
   <link rel="icon" type="image/png" sizes="192x192" href="logo.png">
   <meta name="theme-color" content="#0b2e4e">
+
   <link rel="stylesheet" href="style.css" />
   <script defer src="script.js"></script>
 </head>
 <body>
 
-<!-- Video pozadí -->
-<video id="bgVideo" autoplay muted loop playsinline preload="metadata" aria-hidden="true">
-  <source src="Video123.mp4" type="video/mp4" />
-</video>
+  <!-- Video pozadí -->
+  <video id="bgVideo" autoplay muted loop playsinline preload="metadata" aria-hidden="true">
+    <source src="Video123.mp4" type="video/mp4" />
+  </video>
 
-<!-- Matrix efekt -->
-<canvas id="matrix" aria-hidden="true"></canvas>
+  <!-- Matrix efekt -->
+  <canvas id="matrix" aria-hidden="true"></canvas>
 
-<!-- Intro logo -->
-<div id="intro">
-  <img src="logo.png" alt="SkyTel Montage" id="intro-logo">
-</div>
+  <!-- Intro logo -->
+  <div id="intro">
+    <img src="logo.png" alt="SkyTel Montage" id="intro-logo">
+  </div>
 
-<header class="hero">
-  <img src="logo.png" alt="SkyTel Montage" class="main-logo">
-  <h1>SkyTel Montage</h1>
-  <p>Váš partner pro výškové a telekomunikační projekty v celé Evropě.</p>
-  <p class="roles">
-    <strong>Technický ředitel:</strong> Patrik Budinský |
-    <strong>Jednatelka:</strong> Michaela Budinská |
-    <strong>SkyTel Montage s.r.o.</strong>
-  </p>
-</header>
+  <header class="hero">
+    <img src="logo.png" alt="SkyTel Montage" class="main-logo">
 
-<!-- Partneři -->
-<main>
-  <section id="partners">
-    <h2>Partneři</h2>
-    <div class="partner-logos">
+    <!-- Futuristický název – animovaný v JS jako „číselník“ -->
+    <h1 id="tickerTitle" class="ticker" data-text="SkyTel Montage">
+      SkyTel Montage
+    </h1>
 
+    <p class="hero-subtitle">
+      Telecom & rope-access team ready for DE/EU projects.
+    </p>
+
+    <p class="roles">
+      <strong>CEO / Owner:</strong> Patrik Budinský |
+      <strong>Chief Tower Hacker:</strong> SkyTel Montage Crew
+    </p>
+
+    <!-- Hlavní link hub -->
+    <div class="hero-links">
+      <a class="btn-link" href="https://www.instagram.com/high_voltage_drive/" target="_blank" rel="noopener">
+        Instagram
+      </a>
+      <a class="btn-link" href="https://www.linkedin.com/in/patrik-budinsk%C3%BD-793385192/" target="_blank" rel="noopener">
+        LinkedIn
+      </a>
     </div>
-  </section>
-</main>
+  </header>
 
-<footer>
-  <p>© 2025 SkyTel Montage s.r.o.</p>
-  <p>
-    <a href="privacy.html">🛡️</a> |
-    <a href="impressum.html">📜</a> |
-    <a href="mailto:patrik.budinsky@skytelmontage.tech">patrik.budinsky@skytelmontage.tech</a> |
-    <a href="https://www.linkedin.com/in/patrik-budinsk%C3%BD-793385192/" target="_blank" rel="noopener">LinkedIn</a>
-  </p>
-</footer>
+  <main>
+    <!-- Volitelná sekce, můžeš klidně nechat prázdnou nebo smazat -->
+    <section id="partners">
+      <h2>Partneři</h2>
+      <div class="partner-logos">
+        <!-- pokud přidáš loga, JS je lazy-loadne a skryje nefunkční -->
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 SkyTel Montage s.r.o.</p>
+    <p>
+      <a href="https://www.instagram.com/high_voltage_drive/" target="_blank" rel="noopener">Instagram</a> |
+      <a href="https://www.linkedin.com/in/patrik-budinsk%C3%BD-793385192/" target="_blank" rel="noopener">LinkedIn</a>
+    </p>
+  </footer>
 
 </body>
 </html>
