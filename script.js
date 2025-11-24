@@ -21,23 +21,7 @@
       service3: "Tahání a organizace kabeláže, značení, základní elektro zkoušky a funkční testy požadované projektem.",
       service4: "Fotodokumentace a as-built dokumentace v DE/EN/CZ podle požadavků zákazníka.",
 
-      approachTitle: "Jak pracujeme na stavbě",
-      approachIntro: "Tým je nastavený tak, aby plánování, práce ve výškách i dokumentace šly přes jednu zodpovědnou osobu. Pro objednatele je díky tomu jednodušší komunikace a snižuje se riziko nedorozumění mezi více subdodavateli.",
-      approach1: "Jasné potvrzení rozsahu zakázky před výjezdem, včetně podmínek přístupu, základního rigging konceptu a požadované dokumentace.",
-      approach2: "Každodenní vyhodnocení rizik na místě, krátký toolbox talk a operativní koordinace s objednatelem nebo stavbyvedoucím.",
-      approach3: "Čisté provedení s důrazem na kabel management, ochranu proti korozi a správné dotažení mechanických spojů.",
-      approach4: "Závěrečná vizuální kontrola, fotodokumentace a stručný report s případnými otevřenými body.",
-
-      safetyTitle: "Bezpečnost a kvalifikace",
-      safetyIntro: "Práce ve výškách a na živé telekomunikační infrastruktuře vyžaduje kombinaci elektro kvalifikace, školení pro práce s osobními zachycovacími systémy (PSAgA) a znalost příslušných předpisů. Tyto oblasti bereme jako jeden celek, ne jen jako povinnou administrativu.",
-      safety1: "Elektro kvalifikace dle NV 194/2022 §6/§7 používaná jako základ pro ekvivalent Elektrofachkraft v projektech v rámci EU.",
-      safety2: "Pravidelná školení PSAgA / práce ve výškách se zaměřením na telekomunikační konstrukce, zajištění a záchranné postupy.",
-      safety3: "Interní dokumentace v návaznosti na platné předpisy a požadavky konkrétního projektu (hodnocení rizik, záchranné koncepty, evidence nářadí a OOPP).",
-      safety4: "Preferujeme dlouhodobou spolupráci se stabilním týmem místo neustálého střídání posádek.",
-
-      contactTitle: "Kontakt a spolupráce",
-      contactIntro: "Pro technické dotazy, plánování nových projektů nebo ověření dokumentace použijte přímý kontakt níže. Preferujeme jasně definovaný rozsah, realistické termíny a dlouhodobou spolupráci na telekomunikačních projektech v rámci EU.",
-      contactBilling: "Fakturace probíhá přes české s.r.o. s registrací k DPH v EU. Nastavení smluv a dokumentace lze přizpůsobit požadavkům hlavních dodavatelů a operátorů.",
+      
       contactRoleLine: "Patrik Budinský – majitel, CEO vesmíru a technický ředitel",
 
       joke1: "Některé lekce získáte na školení. Jiné ve chvíli, kdy „partner“ zmizí i s vaším lanem a rescue setem.",
@@ -90,23 +74,7 @@
       service3: "Cable routing, labelling, basic electrical checks and functional tests requested by the project.",
       service4: "Photo documentation and as-built documentation in DE/EN/CZ according to client standards.",
 
-      approachTitle: "How we work on site",
-      approachIntro: "The crew is organised so that planning, work at height and documentation go through one responsible person. This simplifies communication for the client and reduces the risk of misunderstandings between different subcontractors.",
-      approach1: "Clear scope confirmation before deployment, including access conditions, basic rigging concept and expected documentation.",
-      approach2: "Daily on-site risk assessment, short toolbox talk and operational coordination with the client or site manager.",
-      approach3: "Clean execution with focus on cable management, corrosion protection and correct torque of mechanical joints.",
-      approach4: "Final visual check, photo documentation and a concise report highlighting any open points.",
-
-      safetyTitle: "Safety and qualification",
-      safetyIntro: "Work at height and on active telecom infrastructure requires a combination of electrical qualification, PSAgA training and knowledge of applicable safety rules. We treat these areas as one package rather than “extra paperwork”.",
-      safety1: "Electrical qualification according to NV 194/2022 §6/§7 (Czech standard) used as basis for Elektrofachkraft equivalence in projects within the EU.",
-      safety2: "Regular PSAgA / rope-access training focused on telecom structures, rescue procedures and self-rescue scenarios.",
-      safety3: "Internal documentation aligned with applicable regulations and project requirements (risk assessments, rescue concepts, tool and PPE records).",
-      safety4: "Preference for long-term cooperation with stable crews instead of constantly rotating teams.",
-
-      contactTitle: "Contact & cooperation",
-      contactIntro: "For technical questions, planning of new projects or verification of documentation, please use the direct contact below. We prefer clear scopes, realistic schedules and long-term cooperation on telecom projects within the EU.",
-      contactBilling: "Invoicing is carried out via a Czech limited company (s.r.o.) with EU VAT registration. Contractual models and documentation can be adapted to the requirements of main contractors and operators.",
+      
       contactRoleLine: "Patrik Budinský – Owner, CEO of the Universe and Technical Director",
 
       joke1: "Some lessons come from training. Others from projects where a “partner” disappears together with your ropes and rescue kit.",
@@ -159,18 +127,7 @@
       service3: "Kabelzug, strukturierte Verlegung, Beschriftung sowie grundlegende Elektroprüfungen und Funktionstests gemäß Projektvorgaben.",
       service4: "Fotodokumentation und As-Built-Dokumentation in DE/EN/CZ gemäß Kundenvorgaben.",
 
-      approachTitle: "Arbeitsweise auf der Baustelle",
-      approachIntro: "Das Team ist so organisiert, dass Planung, Arbeiten in der Höhe und Dokumentation über eine verantwortliche Person laufen. Dies vereinfacht die Kommunikation für den Auftraggeber und reduziert das Risiko von Missverständnissen zwischen mehreren Subunternehmern.",
-      approach1: "Klare Leistungsabstimmung vor dem Einsatz, einschließlich Zugangsbedingungen, grundlegendem Rigging-Konzept und erforderlicher Dokumentation.",
-      approach2: "Tägliche Gefährdungsbeurteilung vor Ort, kurze Toolbox-Besprechung und operative Abstimmung mit Auftraggeber oder Bauleitung.",
-      approach3: "Saubere Ausführung mit Fokus auf Kabelmanagement, Korrosionsschutz und korrektes Anzugsdrehmoment von Verbindungen.",
-      approach4: "Abschließende Sichtprüfung, Fotodokumentation und kurzer Bericht mit eventuell offenen Punkten.",
-
-      safetyTitle: "Sicherheit und Qualifikation",
-      safetyIntro: "Arbeiten in der Höhe und an aktiver Telekommunikationsinfrastruktur erfordern eine Kombination aus Elektro-Qualifikation, PSAgA-Schulung und Kenntnis der relevanten Arbeitsschutzvorschriften. Diese Bereiche verstehen wir als Gesamtpaket und nicht nur als zusätzliche Bürokratie.",
-      safety1: "Elektro-Qualifikation nach NV 194/2022 §6/§7 (CZ), verwendet als Grundlage für eine Einstufung als Elektrofachkraft in Projekten innerhalb der EU.",
-      safety2: "Regelmäßige PSAgA- / Rope-Access-Schulungen mit Fokus auf Telekommunikationsstrukturen, Rettungsverfahren und Self-Rescue-Szenarien.",
-      safety3: "Interne Dokumentation in Anlehnung an geltende Vorschriften und projektspezifische Anforderungen (Gefährdungsbeurteilungen, Rettungskonzepte, Werkzeug- und PSA-Nachweise).",
+     
       safety4: "Bevorzugt werden langfristige Einsätze mit stabilen Teams statt ständig wechselnder Crews.",
 
       contactTitle: "Kontakt & Zusammenarbeit",
