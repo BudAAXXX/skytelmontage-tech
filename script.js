@@ -7,223 +7,290 @@
 
   const I18N = {
     cs: {
-      subtitle: "Specializované rope-access a elektro týmy pro výstavbu, modernizaci a servis mobilních a rádiových sítí v Německu a celé EU.",
-      roles: "Majitel, jednatel a technický ředitel: Patrik Budinský (interně: CEO vesmíru)",
+      noscriptText: "Tento web používá JavaScript pro vizuální efekty a přepínání jazyků. Základní informace o službách jsou dostupné i bez JavaScriptu.",
 
-      statExperience: "let projektové práce na německých telekomunikačních stavbách",
-      statCrews: "rope-access montážní týmy připravené k nasazení",
-      statAge: "let – věk nejstaršího technika na crew listu",
-      statNote: "Hodnoty jsou orientační a liší se podle konkrétní zakázky. Velikost týmu a rozsah prací se vždy stanovují individuálně podle projektu.",
+      subtitle: "Specializovaný rope-access a elektro tým pro výstavbu, modernizaci a servis telekomunikačních pracovišť v České republice a v celé Evropské unii.",
+      roles: "Majitel, jednatel a technický ředitel: Patrik Budinský (interně přezdíván „CEO vesmíru“).",
+
+      joke1: "Některé lekce získáš na školení. Jiné ve chvíli, kdy „partner“ zmizí i s tvým lanem a rescue setem.",
+      joke2: "Výsledek: dnes lezeme pod vlastním jménem, s vlastním vybavením a vlastní odpovědností.",
+
+      servicesTitle: "Co děláme",
+      servicesIntro1: "SkyTel Montage se zaměřuje na výstavbu, modernizaci a servis mobilních a rádiových sítí na území České republiky a v rámci celé Evropské unie. Zajišťujeme kompletní montáž ocelových konstrukcí, anténních systémů, přenosových prvků a kabelových tras – od přípravy a instalace až po technickou a foto dokumentaci.",
+      servicesIntro2: "Typické zakázky zahrnují roll-out nových lokalit, swap a upgrade programy, migrace technologií a také opravné či havarijní zásahy po poruchách nebo poškození počasím.",
+      service1: "Instalace a swap mobilních lokalit (2G–5G, mikrovlnné spoje, rádiové systémy).",
+      service2: "Montáž ocelových konstrukcí, anténních systémů, bezpečných přístupů a kotevních bodů.",
+      service3: "Tahání a organizace kabeláže, značení, základní elektro zkoušky a funkční testy požadované projektem.",
+      service4: "Fotodokumentace a as-built dokumentace v DE/EN/CZ podle standardů projektu.",
+
+      approachTitle: "Jak pracujeme na stavbě",
+      approachIntro: "Posádka je nastavená tak, aby plánování, práce ve výškách i dokumentace šly přes jednu zodpovědnou osobu. Pro objednatele je tak jednodušší komunikace a snižuje se riziko nedorozumění mezi více subdodavateli.",
+      approach1: "Jasné potvrzení rozsahu zakázky před výjezdem, včetně podmínek přístupu, rigging konceptu a požadované dokumentace.",
+      approach2: "Každodenní vyhodnocení rizik na místě, krátký toolbox talk a koordinace s objednatelem nebo stavbyvedoucím.",
+      approach3: "Čisté provedení s důrazem na kabel management, ochranu proti korozi a správné dotažení mechanických spojů.",
+      approach4: "Závěrečná vizuální kontrola, fotodokumentace a stručný report s případnými otevřenými body.",
+
+      safetyTitle: "Bezpečnost a kvalifikace",
+      safetyIntro: "Práce ve výškách a na živé telekomunikační infrastruktuře vyžaduje kombinaci elektro kvalifikace, školení PSAgA a znalost předpisů. Tyto oblasti bereme jako jeden celek, ne jen jako povinnou administrativu.",
+      safety1: "Elektro kvalifikace dle NV 194/2022 §6/§7 používaná jako základ pro ekvivalent Elektrofachkraft v projektech.",
+      safety2: "Pravidelné školení PSAgA / rope access se zaměřením na telekomunikační konstrukce, záchranné postupy a self-rescue scénáře.",
+      safety3: "Interní dokumentace v návaznosti na DGUV a národní požadavky (hodnocení rizik, záchranné koncepty, evidence nářadí a OOPP).",
+      safety4: "Preferujeme dlouhodobou spolupráci s ověřeným týmem místo neustálého střídání posádek.",
+
+      contactTitle: "Kontakt a spolupráce",
+      contactIntro: "Pro technické dotazy, plánování nových projektů nebo sladění dokumentace použijte přímý kontakt níže. Preferujeme jasně definovaný rozsah, realistické termíny a dlouhodobou spolupráci na telekomunikačních projektech v ČR a celé EU.",
+      contactCompany: "<strong>SkyTel Montage s.r.o.</strong><br>BUSINESS CENTRUM, Řeznická 1332<br>460&nbsp;01 Liberec, Česká republika",
+      contactPerson: "Patrik Budinský – majitel, jednatel a technický ředitel<br>Tel.: +420&nbsp;739&nbsp;977&nbsp;089<br>E-mail: <a href=\"mailto:patrik.budinsky@skytelmontage.tech\">patrik.budinsky@skytelmontage.tech</a>",
+      contactBilling: "Fakturace probíhá přes české s.r.o. s EU DIČ. Nastavení smluv a dokumentace lze přizpůsobit požadavkům objednatele.",
 
       partners: "Partneři",
       partnersNote: "Soon.",
 
-      servicesTitle: "Co děláme",
-      servicesIntro1: "SkyTel Montage se zaměřuje na výstavbu, modernizaci a servis mobilních a rádiových sítí v Německu. Zajišťujeme kompletní anténní a přenosové systémy na stožárech, střechách i speciálních konstrukcích – od montáže ocelových prvků a tahání kabeláže přes instalaci a měření aktivních technologií až po fotodokumentaci a předávací protokoly.",
-      servicesIntro2: "Práce kombinuje rope access techniky, elektro kvalifikaci a projektovou dokumentaci podle německých a českých norem. Typické rozsahy zahrnují roll-out nových lokalit, swap a upgrade programy a pravidelnou i havarijní údržbu.",
-      service1: "Výstavba a swap mobilních lokalit (2G–5G, mikrovlnné spoje, rádiové systémy).",
-      service2: "Montáž ocelových konstrukcí, anténních systémů a bezpečných přístupů / kotevních bodů.",
-      service3: "Tahání a organizace kabeláže, značení a základní elektro zkoušky.",
-      service4: "Fotodokumentace, řešení punchlistů a as-built dokumentace v DE/EN/CZ.",
+      snakeTitle: "Snake",
 
-      teamTitle: "Tým a organizace práce",
-      teamIntro: "SkyTel Montage staví na malých stabilních posádkách, které kombinují elektro kvalifikaci, školení pro práce ve výškách (PSAgA) a praxi z německých telekomunikačních projektů. Týmy jsou nastavené tak, aby zvládly celý montážní cyklus – od přípravy pracoviště až po fotodokumentaci a předávací protokoly.",
-      teamCompTitle: "Role v týmu",
-      teamLead: "Vedoucí technik / team lead: elektro kvalifikace (NV 194/2022 §6/§7 nebo ekvivalent Elektrofachkraft), koordinace prací, řízení BOZP/DGUV a kontrola kvality.",
-      ropeL2: "Rope-access technik (L2): montáž ocelových a anténních prvků, tahání kabeláže, instalace kotevních bodů a spolupráce na záchranných postupech.",
-      ropeTech: "Rope-access technik / montér: dokončovací práce, čisté vedení kabelů, značení, fotodokumentace a kontrola detailů podle standardů projektu.",
-
-      billingTitle: "Co se účtuje za každého člena týmu",
-      billingDayRate: "Denní sazba: odborná práce na stavbě, příprava, dokumentace a použití běžného nářadí.",
-      billingTravel: "Cestovní náklady: podíl na dodávce, PHM, mýtu a parkování podle projektu a počtu techniků.",
-      billingPerDiem: "Diety a ubytování: standardně dle německých / českých sazeb, účtováno dle smluvního ujednání.",
-      billingEquipment: "Speciální vybavení: případné příplatky za specifickou měřicí a testovací techniku (např. EMF, elektro měření, speciální rescue sety) vyžadovanou projektem.",
-
-      paymentTitle: "Možnosti plateb",
-      paymentCompany: "Fakturace přes české s.r.o. (EU DIČ): fakturace v EUR nebo CZK, standardní splatnost.",
-      paymentMilestones: "Fakturace po milnících: rozdělení projektu na etapy (např. výstavba, zprovoznění, předání).",
-      paymentMonthly: "Pravidelné měsíční faktury: souhrnná faktura za všechna pracoviště a odpracované dny v daném měsíci.",
-
-      benefitsTitle: "Výhody pro partnery",
-      benefit1: "Jeden kontaktní bod (Owner / CEO) s jasnou odpovědností za plánování, bezpečnost a dodání.",
-      benefit2: "Foto a technická dokumentace v DE/EN/CZ podle standardů projektu (např. W+A, DFMG, operátoři).",
-      benefit3: "Možnost rychlého nasazení na urgentní zásahy (víkendy / noc) dle kapacit a smlouvy.",
-      benefit4: "Transparentní rozpad nákladů na každého člena týmu a použité vybavení, vhodné pro audity a refakturaci.",
-
-      joke1: "Některé lekce získáš na školení. Jiné ve chvíli, kdy subdodavatel zmizí i s tvým lanem a rescue setem.",
-      joke2: "Výsledek: dnes lezeme pod vlastním jménem, s vlastním vybavením a vlastní odpovědností.",
+      footerImpressum: "Impressum",
+      footerPrivacy: "Ochrana soukromí",
 
       cookieText: "Tento web používá pouze technicky nezbytné soubory cookie (např. pro volbu jazyka a skrytí tohoto oznámení). Nepoužíváme analytické ani marketingové cookies.",
-      cookieOk: "Rozumím"
-    },
-    en: {
-      subtitle: "Specialised rope-access and electrical teams for installation, upgrade and service of mobile and radio networks in Germany and across the EU.",
-      roles: "Owner, CEO & Technical Director: Patrik Budinský (internally known as “CEO vesmíru”)",
+      cookieOk: "Rozumím",
 
-      statExperience: "years of project work on German telecom sites",
-      statCrews: "rope-access installation crews that can be deployed",
-      statAge: "years – age of the oldest technician on the crew list",
-      statNote: "Figures are indicative and may differ per project. Final crew size and scope are always agreed individually with the client.",
+      notFoundTitle: "404 – Stránka nenalezena",
+      notFoundText: "Stránka, kterou hledáte, nebyla nalezena nebo již neexistuje.",
+      notFoundBack: "Zpět na hlavní stránku",
+
+      impressumTitle: "Impressum",
+      impressumCompany: "<strong>SkyTel Montage s.r.o.</strong><br>BUSINESS CENTRUM, Řeznická 1332<br>460&nbsp;01 Liberec, Česká republika",
+      impressumRepresented: "Zastoupená:",
+      impressumCEO: "Patrik Budinský – majitel, jednatel a technický ředitel",
+      impressumRegisterNote: "Údaje z obchodního rejstříku budou doplněny po zápisu.",
+      impressumContactLabel: "Kontaktní údaje:",
+      impressumContactLines: "Telefon: +420&nbsp;739&nbsp;977&nbsp;089<br>E-mail: <a href=\"mailto:patrik.budinsky@skytelmontage.tech\">patrik.budinsky@skytelmontage.tech</a>",
+
+      privacyTitle: "Zásady ochrany osobních údajů",
+      privacyIntro: "Tato stránka slouží jako firemní prezentace. Neshromažďujeme analytická ani marketingová data a nesdílíme údaje s třetími stranami.",
+      privacyNoCookies: "Používáme pouze technicky nezbytné soubory cookie – konkrétně pro zapamatování zvoleného jazyka a skrytí lišty s informací o cookies. Bez nich by web nefungoval komfortně. Nepoužíváme cookies pro sledování návštěvníků, profilování nebo reklamu.",
+      privacyLogFiles: "Server může standardně zaznamenávat technické logy (např. IP adresu, čas přístupu, URL a kód odpovědi) za účelem zajištění provozu, bezpečnosti a řešení incidentů. Tyto logy nejsou používány k marketingové analýze.",
+      privacyContact: "V případě dotazů k ochraně osobních údajů nás můžete kontaktovat na adrese: <a href=\"mailto:patrik.budinsky@skytelmontage.tech\">patrik.budinsky@skytelmontage.tech</a>."
+    },
+
+    en: {
+      noscriptText: "This website uses JavaScript for visual effects and language switching. Core information about our services is available even without JavaScript.",
+
+      subtitle: "Specialised rope-access and electrical team for construction, modernisation and service of telecom sites within the Czech Republic and across the European Union.",
+      roles: "Owner, managing director and technical lead: Patrik Budinský (internally referred to as “CEO of the Universe”).",
+
+      joke1: "Some lessons come from training. Others from projects where a “partner” disappears together with your ropes and rescue kit.",
+      joke2: "Today we climb only under our own name, with our own gear and our own responsibility.",
+
+      servicesTitle: "What we do",
+      servicesIntro1: "SkyTel Montage focuses on the construction, modernisation and service of mobile and radio network infrastructure within the Czech Republic and across the European Union. We provide complete installation of steelwork, antenna systems, transmission components and cable routes – from preparation and assembly to technical and photo documentation.",
+      servicesIntro2: "Typical scopes include roll-out of new sites, swap and upgrade programmes, technology migration and corrective or emergency maintenance after faults or weather damage.",
+      service1: "Installation and swap of mobile sites (2G–5G, microwave links, radio systems).",
+      service2: "Assembly of steelwork, antenna systems, safe access routes and anchor points.",
+      service3: "Cable routing, labelling, basic electrical checks and functional tests requested by the project.",
+      service4: "Photo documentation and as-built documentation in DE/EN/CZ according to project standards.",
+
+      approachTitle: "How we work on site",
+      approachIntro: "The crew is organised so that planning, work at height and documentation go through one responsible person. This simplifies communication for the client and reduces the risk of misunderstandings between different subcontractors.",
+      approach1: "Clear scope confirmation before deployment, including access conditions, rigging concept and expected documentation.",
+      approach2: "Daily on-site risk assessment, short toolbox talk and coordination with the client or site manager.",
+      approach3: "Clean execution with focus on cable management, corrosion protection and correct torque of mechanical joints.",
+      approach4: "Final visual check, photo documentation and a concise report highlighting any open points.",
+
+      safetyTitle: "Safety and qualification",
+      safetyIntro: "Work at height and on live telecom infrastructure requires a combination of electrical qualification, PSAgA training and knowledge of safety regulations. We treat these areas as one package rather than „extra paperwork“.",
+      safety1: "Electrical qualification according to NV 194/2022 §6/§7 (Czech standard), used as basis for Elektrofachkraft equivalence in projects.",
+      safety2: "Regular PSAgA / rope-access training focused on telecom structures, rescue procedures and self-rescue scenarios.",
+      safety3: "Internal documentation aligned with DGUV and national requirements (risk assessments, rescue concepts, tool and PPE records).",
+      safety4: "Preference for long-term cooperation with the same team members instead of constantly rotating crews.",
+
+      contactTitle: "Contact & cooperation",
+      contactIntro: "For technical questions, project planning or documentation alignment, please use the direct contact below. We prefer clear scopes, realistic schedules and long-term cooperation on telecom projects in the Czech Republic and across the EU.",
+      contactCompany: "<strong>SkyTel Montage s.r.o.</strong><br>BUSINESS CENTRUM, Řeznická 1332<br>460&nbsp;01 Liberec, Czech Republic",
+      contactPerson: "Patrik Budinský – owner, managing director and technical lead<br>Tel.: +420&nbsp;739&nbsp;977&nbsp;089<br>E-mail: <a href=\"mailto:patrik.budinsky@skytelmontage.tech\">patrik.budinsky@skytelmontage.tech</a>",
+      contactBilling: "Invoicing is carried out via a Czech limited company (s.r.o.) with EU VAT registration. Contract and documentation formats can be adapted to the client’s requirements.",
 
       partners: "Partners",
       partnersNote: "Soon.",
 
-      servicesTitle: "What we do",
-      servicesIntro1: "SkyTel Montage focuses on the installation, modernisation and service of mobile and radio networks in Germany. We deliver complete antenna and transmission systems on towers, rooftops and special structures – from steelwork and cable routing through installation and testing of active equipment to final photo documentation and handover reports.",
-      servicesIntro2: "The work combines rope-access techniques, electrical qualification and project documentation according to German and Czech standards. Typical scopes include greenfield roll-out, swap and upgrade programmes and corrective or emergency maintenance.",
-      service1: "New build and swap of mobile sites (2G–5G, microwave links, radio systems).",
-      service2: "Assembly of steel structures, antenna systems and safe access / anchor points.",
-      service3: "Structured cable routing, labelling and basic electrical tests.",
-      service4: "Photo documentation, punch list handling and as-built reports in DE/EN/CZ.",
+      snakeTitle: "Snake",
 
-      teamTitle: "Team and work organisation",
-      teamIntro: "SkyTel Montage works with small, stable crews that combine electrical qualification, PSAgA rope-access training and hands-on experience from German telecom projects. Each crew is structured to handle the full installation cycle – from site preparation to photo documentation and handover reports.",
-      teamCompTitle: "Roles in the crew",
-      teamLead: "Lead technician / team lead: electrical qualification (NV 194/2022 §6/§7 or equivalent Elektrofachkraft), coordination of works, responsibility for HSE (BOZP/DGUV) and quality control.",
-      ropeL2: "Rope-access technician (L2): assembly of steel and antenna structures, cable routing, installation of anchor points and support with rescue procedures.",
-      ropeTech: "Rope-access technician / rigger: finishing work, clean cable routing and labelling, photo documentation and detailed checks according to project standards.",
-
-      billingTitle: "What is billed per team member",
-      billingDayRate: "Day rate: professional work on site, preparation, documentation and standard tools.",
-      billingTravel: "Travel costs: share of van, fuel, tolls and parking, allocated according to project and crew size.",
-      billingPerDiem: "Per diems & accommodation: usually according to German / Czech rates, invoiced as agreed.",
-      billingEquipment: "Special equipment: optional surcharges for specific measurement and test equipment (e.g. EMF meters, electrical testers, special rescue kits) requested by the project.",
-
-      paymentTitle: "Payment options",
-      paymentCompany: "Invoicing via Czech limited company (EU VAT): invoicing in EUR or CZK, standard payment terms.",
-      paymentMilestones: "Milestone-based billing: project split into phases such as build, commissioning and final acceptance.",
-      paymentMonthly: "Monthly summary invoices: one consolidated invoice per month for all sites and days worked.",
-
-      benefitsTitle: "Benefits for partners",
-      benefit1: "Single point of contact (Owner / CEO) with clear responsibility for planning, safety and delivery.",
-      benefit2: "Photo and technical documentation in DE/EN/CZ according to project standards (e.g. W+A, DFMG, operators).",
-      benefit3: "Option for rapid deployment on urgent calls (weekends / nights), depending on capacity and contract.",
-      benefit4: "Transparent breakdown of costs per team member and equipment, suitable for audits and recharging.",
-
-      joke1: "Some lessons you learn in training. Others when a subcontractor disappears together with your ropes and rescue kit.",
-      joke2: "Result: today we climb under our own name, with our own gear and our own responsibility.",
+      footerImpressum: "Impressum",
+      footerPrivacy: "Privacy",
 
       cookieText: "This website uses only technically necessary cookies (for example to remember your language selection and hide this notice). No analytics or marketing cookies are used.",
-      cookieOk: "OK"
-    },
-    de: {
-      subtitle: "Spezialisierte Rope-Access- und Elektroteams für Aufbau, Modernisierung und Service von Mobilfunk- und Funknetzen in Deutschland und ganz Europa.",
-      roles: "Inhaber, Geschäftsführer und Technischer Leiter: Patrik Budinský (intern: CEO des Universums)",
+      cookieOk: "OK",
 
-      statExperience: "Jahre Projekterfahrung auf deutschen Telekommunikationsstandorten",
-      statCrews: "Rope-Access-Montageteams, die einsatzbereit sind",
-      statAge: "Jahre – Alter des ältesten Technikers auf der Crew-Liste",
-      statNote: "Die Kennzahlen sind Richtwerte und können je nach Projekt variieren. Teamgröße und Leistungsumfang werden immer projektspezifisch abgestimmt.",
+      notFoundTitle: "404 – Page not found",
+      notFoundText: "The page you are looking for was not found or no longer exists.",
+      notFoundBack: "Back to the main page",
+
+      impressumTitle: "Impressum",
+      impressumCompany: "<strong>SkyTel Montage s.r.o.</strong><br>BUSINESS CENTRUM, Řeznická 1332<br>460&nbsp;01 Liberec, Czech Republic",
+      impressumRepresented: "Represented by:",
+      impressumCEO: "Patrik Budinský – owner, managing director and technical lead",
+      impressumRegisterNote: "Commercial register details will be added after registration.",
+      impressumContactLabel: "Contact:",
+      impressumContactLines: "Phone: +420&nbsp;739&nbsp;977&nbsp;089<br>E-mail: <a href=\"mailto:patrik.budinsky@skytelmontage.tech\">patrik.budinsky@skytelmontage.tech</a>",
+
+      privacyTitle: "Privacy policy",
+      privacyIntro: "This site is used as a company presentation. We do not collect analytics or marketing data and do not share data with third parties.",
+      privacyNoCookies: "We use only technically necessary cookies – specifically to remember your language selection and to hide the cookie information banner. Without these cookies, the site would not function comfortably. We do not use cookies for tracking, profiling or advertising.",
+      privacyLogFiles: "The server may record technical logs (e.g. IP address, access time, URL and response code) for the purpose of operation, security and incident handling. These logs are not used for marketing analysis.",
+      privacyContact: "For questions regarding data protection, please contact us at: <a href=\"mailto:patrik.budinsky@skytelmontage.tech\">patrik.budinsky@skytelmontage.tech</a>."
+    },
+
+    de: {
+      noscriptText: "Diese Website verwendet JavaScript für visuelle Effekte und die Sprachumschaltung. Zentrale Informationen zu unseren Leistungen sind auch ohne JavaScript verfügbar.",
+
+      subtitle: "Spezialisiertes Rope-Access- und Elektrotechnik-Team für Aufbau, Modernisierung und Service von Telekomstandorten in der Tschechischen Republik und in der gesamten Europäischen Union.",
+      roles: "Inhaber, Geschäftsführer und technischer Leiter: Patrik Budinský (intern als „CEO des Universums“ bezeichnet).",
+
+      joke1: "Manche Lektionen stammen aus Schulungen. Andere aus Projekten, bei denen ein „Partner“ mitsamt Seilen und Rettungssatz verschwindet.",
+      joke2: "Ergebnis: Heute klettern wir nur noch unter eigenem Namen, mit eigener Ausrüstung und eigener Verantwortung.",
+
+      servicesTitle: "Leistungen",
+      servicesIntro1: "SkyTel Montage konzentriert sich auf Aufbau, Modernisierung und Service von Mobilfunk- und Funknetz-Infrastruktur in der Tschechischen Republik sowie in der gesamten Europäischen Union. Wir liefern vollständige Montage von Stahlbau, Antennensystemen, Übertragungselementen und Kabelwegen – von der Vorbereitung über die Installation bis hin zur technischen- und Fotodokumentation.",
+      servicesIntro2: "Typische Leistungen sind Rollout neuer Standorte, Swap- und Upgrade-Programme, Technologiemigration sowie reguläre und Notfallwartung nach Störungen oder Wetterschäden.",
+      service1: "Montage und Swap von Mobilfunkstandorten (2G–5G, Richtfunkstrecken, Funksysteme).",
+      service2: "Montage von Stahlstrukturen, Antennensystemen, sicheren Zugängen und Anschlagpunkten.",
+      service3: "Kabelzug, strukturierte Verlegung, Beschriftung sowie grundlegende Elektroprüfungen und Funktionstests gemäß Projektvorgaben.",
+      service4: "Fotodokumentation und As-Built-Dokumentation in DE/EN/CZ gemäß Projektanforderungen.",
+
+      approachTitle: "Arbeitsweise auf der Baustelle",
+      approachIntro: "Das Team ist so organisiert, dass Planung, Höhenarbeit und Dokumentation über eine verantwortliche Person laufen. Dies vereinfacht die Kommunikation für den Auftraggeber und reduziert das Risiko von Missverständnissen zwischen mehreren Subunternehmern.",
+      approach1: "Klare Leistungsabstimmung vor dem Einsatz, einschließlich Zugangsbedingungen, Rigging-Konzept und erforderlicher Dokumentation.",
+      approach2: "Tägliche Gefährdungsbeurteilung vor Ort, kurze Toolbox-Besprechung und Abstimmung mit Auftraggeber oder Bauleitung.",
+      approach3: "Saubere Ausführung mit Fokus auf Kabelmanagement, Korrosionsschutz und korrektes Anzugsdrehmoment von Verbindungen.",
+      approach4: "Abschließende Sichtprüfung, Fotodokumentation und kurzer Bericht mit eventuell offenen Punkten.",
+
+      safetyTitle: "Sicherheit und Qualifikation",
+      safetyIntro: "Arbeiten in der Höhe und an aktiver Telekommunikationsinfrastruktur erfordern eine Kombination aus Elektro-Qualifikation, PSAgA-Schulung und Kenntnis der Arbeitsschutzregeln. Diese Bereiche verstehen wir als Gesamtpaket, nicht nur als zusätzliche Bürokratie.",
+      safety1: "Elektro-Qualifikation nach NV 194/2022 §6/§7 (CZ), verwendet als Grundlage für eine Einstufung als Elektrofachkraft in Projekten.",
+      safety2: "Regelmäßige PSAgA- / Rope-Access-Schulungen mit Fokus auf Telekommunikationsstrukturen, Rettungsverfahren und Self-Rescue-Szenarien.",
+      safety3: "Interne Dokumentation in Anlehnung an DGUV und nationale Anforderungen (Gefährdungsbeurteilungen, Rettungskonzepte, Werkzeug- und PSA-Nachweise).",
+      safety4: "Bevorzugt werden langfristige Einsätze mit denselben Teammitgliedern statt ständig wechselnder Crews.",
+
+      contactTitle: "Kontakt & Zusammenarbeit",
+      contactIntro: "Für technische Rückfragen, Projektplanung oder Abstimmung von Dokumentation nutzen Sie bitte den direkten Kontakt unten. Bevorzugt werden klar definierte Leistungen, realistische Zeitpläne und langfristige Zusammenarbeit bei Telekommunikationsprojekten in der Tschechischen Republik und in der EU.",
+      contactCompany: "<strong>SkyTel Montage s.r.o.</strong><br>BUSINESS CENTRUM, Řeznická 1332<br>460&nbsp;01 Liberec, Tschechische Republik",
+      contactPerson: "Patrik Budinský – Inhaber, Geschäftsführer und technischer Leiter<br>Tel.: +420&nbsp;739&nbsp;977&nbsp;089<br>E-Mail: <a href=\"mailto:patrik.budinsky@skytelmontage.tech\">patrik.budinsky@skytelmontage.tech</a>",
+      contactBilling: "Die Abrechnung erfolgt über eine tschechische s.r.o. mit EU-USt-ID. Vertragsmodelle und Dokumentation können an die Anforderungen des Auftraggebers angepasst werden.",
 
       partners: "Partner",
       partnersNote: "Soon.",
 
-      servicesTitle: "Leistungen",
-      servicesIntro1: "SkyTel Montage konzentriert sich auf Aufbau, Modernisierung und Service von Mobilfunk- und Funknetzen in Deutschland. Wir liefern komplette Antennen- und Übertragungssysteme auf Masten, Dächern und Sonderkonstruktionen – vom Stahlbau und Kabelzug über Montage und Messung aktiver Technik bis zur Foto- und Abnahmedokumentation.",
-      servicesIntro2: "Die Arbeit verbindet Seilzugangstechnik, Elektro-Qualifikation und Projektdokumentation nach deutschen und tschechischen Normen. Typische Leistungen sind Rollout neuer Standorte, Swap- und Upgrade-Programme sowie reguläre und Notfallwartung.",
-      service1: "Neubau und Swap von Mobilfunkstandorten (2G–5G, Richtfunkstrecken, Funksysteme).",
-      service2: "Montage von Stahlstrukturen, Antennensystemen und sicheren Zugängen / Anschlagpunkten.",
-      service3: "Kabelzug, strukturierte Verlegung, Beschriftung und grundlegende Elektroprüfungen.",
-      service4: "Fotodokumentation, Bearbeitung von Punchlisten und As-Built-Dokumentation in DE/EN/CZ.",
+      snakeTitle: "Snake",
 
-      teamTitle: "Team und Arbeitsorganisation",
-      teamIntro: "SkyTel Montage setzt kleine, eingespielte Teams ein, die Elektro-Qualifikation, PSAgA-Höhenarbeit und Praxiserfahrung aus deutschen Telekommunikationsprojekten verbinden. Die Teams sind so strukturiert, dass sie den gesamten Montagezyklus abdecken – von der Baustellenvorbereitung bis zur Foto- und Abnahmedokumentation.",
-      teamCompTitle: "Rollen im Team",
-      teamLead: "Lead-Techniker / Teamleiter: Elektro-Qualifikation (NV 194/2022 §6/§7 bzw. gleichwertige Elektrofachkraft), Koordination der Arbeiten, Verantwortung für Arbeitssicherheit (DGUV) und Qualitätskontrolle.",
-      ropeL2: "Rope-Access-Techniker (L2): Montage von Stahl- und Antennenstrukturen, Kabelzug, Installation von Anschlagpunkten und Unterstützung bei Rettungskonzepten.",
-      ropeTech: "Rope-Access-Techniker / Monteur: Fertigstellungsarbeiten, saubere Kabelverlegung und Beschriftung, Fotodokumentation und Detailprüfung gemäß Projektstandard.",
-
-      billingTitle: "Was pro Teammitglied abgerechnet wird",
-      billingDayRate: "Tagessatz: fachgerechte Arbeit vor Ort, Vorbereitung, Dokumentation und Standardwerkzeug.",
-      billingTravel: "Reisekosten: Anteil an Transporter, Kraftstoff, Maut und Parken – je nach Projekt und Teamgröße.",
-      billingPerDiem: "Spesen & Unterkunft: in der Regel nach deutschen / tschechischen Sätzen, gemäß vertraglicher Vereinbarung.",
-      billingEquipment: "Spezialausrüstung: optionale Zuschläge für spezielle Mess- und Prüftechnik (z. B. EMF-Messgeräte, Elektroprüfer, spezielle Rettungssätze), falls projektspezifisch gefordert.",
-
-      paymentTitle: "Zahlungsoptionen",
-      paymentCompany: "Abrechnung über tschechische s.r.o. (EU-USt-ID): Abrechnung in EUR oder CZK, übliche Zahlungsziele.",
-      paymentMilestones: "Abrechnung nach Meilensteinen: Aufteilung des Projekts in Phasen wie Aufbau, Inbetriebnahme und Abnahme.",
-      paymentMonthly: "Monatliche Sammelrechnungen: eine konsolidierte Rechnung pro Monat für alle Standorte und Einsatztage.",
-
-      benefitsTitle: "Vorteile für Partner",
-      benefit1: "Ein zentraler Ansprechpartner (Owner / CEO) mit klarer Verantwortung für Planung, Sicherheit und Lieferung.",
-      benefit2: "Foto- und technische Dokumentation in DE/EN/CZ gemäß Projektanforderungen (z. B. W+A, DFMG, Netzbetreiber).",
-      benefit3: "Möglichkeit eines schnellen Einsatzes bei Notfällen (Wochenende / Nacht) abhängig von Kapazität und Vertrag.",
-      benefit4: "Transparente Kostenaufteilung pro Teammitglied und Ausrüstung, geeignet für Audits und Weiterverrechnung.",
-
-      joke1: "Manche Lektionen lernt man in Schulungen. Andere, wenn ein Subunternehmer mitsamt Seilen und Rettungsset verschwindet.",
-      joke2: "Ergebnis: Heute klettern wir unter eigenem Namen, mit eigener Ausrüstung und eigener Verantwortung.",
+      footerImpressum: "Impressum",
+      footerPrivacy: "Datenschutz",
 
       cookieText: "Diese Website verwendet nur technisch notwendige Cookies (z. B. zur Sprachwahl und zum Ausblenden dieses Hinweises). Analyse- oder Marketing-Cookies werden nicht eingesetzt.",
-      cookieOk: "Verstanden"
+      cookieOk: "Verstanden",
+
+      notFoundTitle: "404 – Seite nicht gefunden",
+      notFoundText: "Die gesuchte Seite wurde nicht gefunden oder existiert nicht mehr.",
+      notFoundBack: "Zurück zur Startseite",
+
+      impressumTitle: "Impressum",
+      impressumCompany: "<strong>SkyTel Montage s.r.o.</strong><br>BUSINESS CENTRUM, Řeznická 1332<br>460&nbsp;01 Liberec, Tschechische Republik",
+      impressumRepresented: "Vertreten durch:",
+      impressumCEO: "Patrik Budinský – Inhaber, Geschäftsführer und technischer Leiter",
+      impressumRegisterNote: "Handelsregisterangaben werden nach Eintragung ergänzt.",
+      impressumContactLabel: "Kontakt:",
+      impressumContactLines: "Telefon: +420&nbsp;739&nbsp;977&nbsp;089<br>E-Mail: <a href=\"mailto:patrik.budinsky@skytelmontage.tech\">patrik.budinsky@skytelmontage.tech</a>",
+
+      privacyTitle: "Datenschutzerklärung",
+      privacyIntro: "Diese Seite dient als Unternehmenspräsentation. Es werden keine Analyse- oder Marketing-Daten erhoben und keine Daten an Dritte weitergegeben.",
+      privacyNoCookies: "Wir verwenden nur technisch notwendige Cookies – insbesondere zur Speicherung der gewählten Sprache und zum Ausblenden des Cookie-Hinweises. Ohne diese Cookies wäre die Nutzung der Seite eingeschränkt. Es werden keine Cookies für Tracking, Profiling oder Werbung eingesetzt.",
+      privacyLogFiles: "Der Server kann technische Log-Dateien erfassen (z. B. IP-Adresse, Zugriffszeit, URL und Antwortcode), um Betrieb, Sicherheit und Störungsbehebung zu gewährleisten. Diese Log-Dateien werden nicht für Marketingzwecke ausgewertet.",
+      privacyContact: "Bei Fragen zum Datenschutz erreichen Sie uns unter: <a href=\"mailto:patrik.budinsky@skytelmontage.tech\">patrik.budinsky@skytelmontage.tech</a>."
     },
+
     kli: {
-      subtitle: "telecom QeD • jenwI' Segh woch • yuQvam HochDaq ghom.",
-      roles: "Owner, CEO & qum taj: Patrik Budinský (CEO vesmíru)",
+      noscriptText: "De'vam laDmeH JavaScript lo'lu' – 'ach De' potlh tu'lu'bej je.",
 
-      statExperience: "DISmeymey GermanyDaq Qu'",
-      statCrews: "ghommey Qam ghom chenmoHlaHbogh",
-      statAge: "ben – ghomDaq poQbogh tIQ law'",
-      statNote: "mIvmeyvam qech neH; malja' wa'DIchDaq latlh nab wIchav.",
+      subtitle: "telecom QeD, Qam Qu' je – Czech yuQDaq je EU HochDaq.",
+      roles: "Owner, qumwI' je QeD DevwI': Patrik Budinský (ghomDaq „‘u’ CEO“ ponglu').",
 
-      partners: "jupmey (Partner)",
-      partnersNote: "nItebHa’ ghomchoH. (Soon.)",
+      joke1: "wa'logh ghomDaq ghom – loghDaq \"jup\"vam lano'mey' je toD janmey je ghajtaHvIS nargh.",
+      joke2: "DaH: pongmaj neH wIlo', janmaj neH wIlo', pIm DevwI' tu'lu'be'.",
 
-      servicesTitle: "ghom wIvang",
-      servicesIntro1: "SkyTel Montage GermanyDaq telecom patmey qach, tI' je QapmoH.",
-      servicesIntro2: "Qam, HoS QeD, De' naQ ghaj ghom.",
-      service1: "mobIl pat chu' chenmoH.",
-      service2: "Hachmey, ‘antenna’mey, naQHom je lan.",
-      service3: "SIrghmey je peQ Janmey rar.",
-      service4: "mIllogh De' je De' naQ qon.",
+      servicesTitle: "nuq wIDo",
+      servicesIntro1: "SkyTel Montage Czech yuQDaq je EUDaq mobIl je radio patmey chenmoH, tI' je laH. Stahl, antenna'mey, rarwI' janmey je SIrghmey wIlan – nabvo', chenmoH, De' qon je.",
+      servicesIntro2: "Qu'mey motlh: ghoS chu' (roll-out), choH (swap, upgrade), pat choH je QapHa'meH Qutlh.",
+      service1: "mobIl patmey (2G–5G, microwave, radio) chenmoH je choH.",
+      service2: "Stahl qachmey, antenna'mey, He' Qan je QanDu' lanlu'.",
+      service3: "SIrghmey rar, De' ngaSbogh permey, pat patmey tI'lu'.",
+      service4: "mIllogh De' je De' naQ (DE/EN/CZ) chenmoHlu'.",
 
-      teamTitle: "ghom & malja' nIl",
-      teamIntro: "SkyTel Montage ghomvam Germany EU jeDaq Qam Qu' vatlh DISmey.",
-      teamCompTitle: "ghom mIS Hutlh",
-      teamLead: "DevwI' QeD: HoS QeD pat, Qan je chutlhu’ ghaj.",
-      ropeL2: "Qam ghomwI' (L2): rar, SIrgh, naQHom lan, toD nab.",
-      ropeTech: "Qam ghomwI' latlh: De' ten, rInmoH, mIllogh De' qon.",
+      approachTitle: "chay' wIQap",
+      approachIntro: "wa' DevwI'vaD nab, Qam Qu' je De' naQ boQlu', vaj Qum ngeDqu'.",
+      approach1: "Qu' nab pup, He' nab, rigging nab je De' poQlu'bogh wIwuq pa' maSuch.",
+      approach2: "jaj HochDaq Qan nab chu', ghomvaD QInHom je DevwI' je latlhpu'.",
+      approach3: "QaptaHvIS, SIrghmey naQ, natlhHa' je wI'Ijchu'.",
+      approach4: "rInDI', mIllogh De' naQ je potlhmey wI'ang.",
 
-      billingTitle: "wa' ghomwI'vaD nuq wI'ang",
-      billingDayRate: "jajmeH Huch: Qu' nIv, ghu' gher, De' qon.",
-      billingTravel: "lengmeH Huch: Duj, patlh, maw', mebpa'mey je.",
-      billingPerDiem: "SojDaj & QottaH.",
-      billingEquipment: "jan le': EMF, toD janmey le'.",
+      safetyTitle: "Qan & laHmey",
+      safetyIntro: "Qam Qu' je telecom pat Hutlhbe' HoS QeD, PSAgA Qeq je chut Sov.",
+      safety1: "NV 194/2022 §6/§7 pat Dalo', 'oH HoS QeD pat ghajbogh Doch'e'.",
+      safety2: "PSAgA / rope-access Qeq motlh, toD mIw le' je self-rescue mIw je.",
+      safety3: "DGUV rur De'naQ, Qan nabmey, toD nabmey, janmey je OOPP ghItlhmey.",
+      safety4: "ghom wa' rap maSaH – ghom choHqu'be'.",
 
-      paymentTitle: "Huch QaymeH mIw",
-      paymentCompany: "Czech s.r.o. (EU VAT) mIrDaq pat.",
-      paymentMilestones: "wab Deghmey mIr.",
-      paymentMonthly: "jar wa' Sammey.",
+      contactTitle: "Qum & malja'",
+      contactIntro: "projektevmey, De' nab pagh De' naQvam qelchugh, Qum. nab law', poH qar je malja' nIl wImaS.",
+      contactCompany: "<strong>SkyTel Montage s.r.o.</strong><br>BUSINESS CENTRUM, Řeznická 1332<br>460&nbsp;01 Liberec, Czech Republic",
+      contactPerson: "Patrik Budinský – Owner, qumwI' je QeD DevwI'<br>Tel.: +420&nbsp;739&nbsp;977&nbsp;089<br>E-mail: <a href=\"mailto:patrik.budinsky@skytelmontage.tech\">patrik.budinsky@skytelmontage.tech</a>",
+      contactBilling: "Huch QaymeH Czech s.r.o. (EU VAT) lo'lu'. nabmey je De' ghItlhmey malja' poQwI'vaD tIchoHlaH.",
 
-      benefitsTitle: "jupvaD QaQbogh Dochmey",
-      benefit1: "wa' ghot neH nab, Qan, Qul je luDev.",
-      benefit2: "mIllogh De' DE/EN/CZ HolDaq.",
-      benefit3: "ram / wa'leS nom ghom chenmoHlaH.",
-      benefit4: "Hoch ghomwI'vaD Huch Qanchu'.",
+      partners: "jupmey",
+      partnersNote: "Soon.",
 
-      joke1: "wa' subdodavatel jorDI', lano' ghajQo' wIwuq.",
-      joke2: "qaStaHvIS ret: 1 000 EUR lano'. malja'wa' ngoQ: 0.",
+      snakeTitle: "Snake",
 
-      cookieText: "cookie le' neH lo'meH nuqneH. De' nIDbe', mebpu' ngan je'be'.",
-      cookieOk: "maj"
+      footerImpressum: "Impressum",
+      footerPrivacy: "Privacy",
+
+      cookieText: "cookie le' neH lo'meH – Hol wIv De' je De'vam QIn Hal So'laH. nID, maHvaD De' lajbe'lu', je'lu'be'.",
+      cookieOk: "maj",
+
+      notFoundTitle: "404 – tu'lu'be'",
+      notFoundText: "nuq DanejtaH tu'lu'be' – rIn puS pagh pImta'.",
+      notFoundBack: "Qu'majDaq chegh",
+
+      impressumTitle: "Impressum",
+      impressumCompany: "<strong>SkyTel Montage s.r.o.</strong><br>BUSINESS CENTRUM, Řeznická 1332<br>460&nbsp;01 Liberec, Czech Republic",
+      impressumRepresented: "DevwI':",
+      impressumCEO: "Patrik Budinský – Owner, qumwI', QeD DevwI'",
+      impressumRegisterNote: "malja' De' (Handelsregister) Deghmey ghItlhlu'DI', De'vam lutuQ.",
+      impressumContactLabel: "Qum:",
+      impressumContactLines: "Phone: +420&nbsp;739&nbsp;977&nbsp;089<br>E-mail: <a href=\"mailto:patrik.budinsky@skytelmontage.tech\">patrik.budinsky@skytelmontage.tech</a>",
+
+      privacyTitle: "Privacy De'",
+      privacyIntro: "De'vam malja' lanmeH jan neH. De' nIDmeH pagh marketing De' wIlo'be', not wIje'.",
+      privacyNoCookies: "cookie lo'lu'neS neH Dochmeyvammo': Hol wIv, cookie QIn So' je. tracking, profile chenmoH pagh web quảng cáo wIlo'be'.",
+      privacyLogFiles: "Server log De' Qan (IP, poH, URL, rap) ghajlaH – HoS, Qan, Qaw' DI'on je. marketingmeH Qul net chaw'be'.",
+      privacyContact: "Privacy De' Dalo' DaneHchugh, Qum: <a href=\"mailto:patrik.budinsky@skytelmontage.tech\">patrik.budinsky@skytelmontage.tech</a>."
     }
   };
 
   const SEO = {
     cs: {
-      title: "SkyTel Montage s.r.o. | Telekomunikační montáže a práce ve výškách v DE/EU",
-      desc: "SkyTel Montage – český specializovaný dodavatel výstavby, modernizace a servisu mobilních a rádiových sítí v Německu. Týmy s elektro kvalifikací NV 194/2022 §6/§7, PSAgA a dokumentací podle německých a českých norem."
+      title: "SkyTel Montage s.r.o. | Telekomunikační montáže a práce ve výškách v ČR a EU",
+      desc: "SkyTel Montage – český specializovaný dodavatel výstavby, modernizace a servisu mobilních a rádiových sítí v České republice a celé EU. Rope-access tým s elektro kvalifikací NV 194/2022 §6/§7, PSAgA a dokumentací dle německých a českých norem."
     },
     en: {
-      title: "SkyTel Montage s.r.o. | Telecom & Rope Access in DE/EU",
-      desc: "SkyTel Montage – specialist for installation, upgrade and service of mobile and radio networks in Germany and across the EU. Rope-access crews with electrical qualification (NV 194/2022 §6/§7), PSAgA and documentation according to German and Czech standards."
+      title: "SkyTel Montage s.r.o. | Telecom & Rope Access in CZ/EU",
+      desc: "SkyTel Montage – specialist for construction, modernisation and service of mobile and radio networks within the Czech Republic and across the European Union. Rope-access crew with electrical qualification (NV 194/2022 §6/§7), PSAgA and documentation according to German and Czech standards."
     },
     de: {
-      title: "SkyTel Montage s.r.o. | Telekom & Höhenarbeit in DE/EU",
-      desc: "SkyTel Montage – tschechischer Spezialist für Aufbau, Modernisierung und Service von Mobilfunk- und Funknetzen in Deutschland. Rollout, Umbau und Service in Höhenarbeit (PSAgA), Elektro-Qualifikation NV 194/2022 §6/§7 und Dokumentation nach deutschen und tschechischen Normen."
+      title: "SkyTel Montage s.r.o. | Telekom & Höhenarbeit in CZ/EU",
+      desc: "SkyTel Montage – tschechischer Spezialist für Aufbau, Modernisierung und Service von Mobilfunk- und Funknetzen in der Tschechischen Republik und in der EU. Rope-Access-Team mit Elektro-Qualifikation NV 194/2022 §6/§7, PSAgA und Dokumentation nach deutschen und tschechischen Normen."
     },
     kli: {
       title: "SkyTel Montage | telecom QeD je Qam ghom",
-      desc: "SkyTel Montage – GermanyDaq Qu' nIv chavbogh Czech ghom: telecom, Qam, HoS QeD je De' nIv."
+      desc: "SkyTel Montage – Czech ghom, telecom QeD je Qam Qu' EU HochDaq."
     }
   };
 
@@ -231,7 +298,7 @@
   const FAVICON_FRAMES = ['logo.png', 'logo-intro.png'];
 
   /* =========================
-     Helpers: cookies
+     Cookie helpers
   ========================== */
 
   function setCookie(name, value, days) {
@@ -261,9 +328,13 @@
     }
     md.setAttribute('content', s.desc);
 
-    const url = new URL(location.href);
-    url.searchParams.set('lang', lang);
-    history.replaceState(null, '', url.toString());
+    try {
+      const url = new URL(location.href);
+      url.searchParams.set('lang', lang);
+      history.replaceState(null, '', url.toString());
+    } catch {
+      // ignore
+    }
   }
 
   function setLang(lang) {
@@ -274,8 +345,12 @@
 
     document.querySelectorAll('[data-i18n]').forEach(el => {
       const key = el.dataset.i18n;
-      if (dict[key]) {
-        el.textContent = dict[key];
+      const val = dict[key];
+      if (!val) return;
+      if (val.indexOf('<') !== -1) {
+        el.innerHTML = val;
+      } else {
+        el.textContent = val;
       }
     });
 
@@ -291,8 +366,12 @@
     const cookieLang = getCookie('stm_lang');
     if (SUPPORTED_LANGS.includes(cookieLang)) return cookieLang;
 
-    const urlLang = new URL(location.href).searchParams.get('lang');
-    if (SUPPORTED_LANGS.includes(urlLang)) return urlLang;
+    try {
+      const urlLang = new URL(location.href).searchParams.get('lang');
+      if (SUPPORTED_LANGS.includes(urlLang)) return urlLang;
+    } catch {
+      // ignore
+    }
 
     const navLangs = navigator.languages && navigator.languages.length
       ? navigator.languages
@@ -341,76 +420,50 @@
   }
 
   /* =========================
-     Ticker title
+     Brand title – rotating letters
   ========================== */
 
-  function initTickerTitle() {
-    const el = document.getElementById('tickerTitle');
+  function initBrandTitle() {
+    const el = document.getElementById('brandTitle');
     if (!el) return;
 
-    const finalText = el.dataset.text || el.textContent || '';
+    const finalText = (el.dataset.text || el.textContent || '').toUpperCase();
     const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
 
     el.textContent = '';
 
     [...finalText].forEach((finalChar, index) => {
       const span = document.createElement('span');
-      span.className = 'ticker-char';
+      span.className = 'brand-char';
 
       if (finalChar === ' ') {
         span.textContent = ' ';
+        span.classList.add('brand-space');
         el.appendChild(span);
         return;
       }
 
-      span.textContent = ' ';
+      span.textContent = finalChar;
       el.appendChild(span);
 
       let iterations = 0;
-      const maxIterations = 10 + Math.floor(Math.random() * 6);
-      const delay = 40;
-
-      setTimeout(() => {
-        const interval = setInterval(() => {
-          span.textContent = chars[Math.floor(Math.random() * chars.length)];
-          iterations++;
-          if (iterations >= maxIterations) {
-            clearInterval(interval);
-            span.textContent = finalChar;
-          }
-        }, delay);
-      }, index * 80);
-    });
-  }
-
-  /* =========================
-     Stats (scramble to data-final)
-  ========================== */
-
-  function initStats() {
-    const numbers = document.querySelectorAll('.stat-number');
-    if (!numbers.length) return;
-
-    numbers.forEach((el, idx) => {
-      const finalValue = parseInt(el.dataset.final, 10);
-      if (Number.isNaN(finalValue)) return;
-
-      let iterations = 0;
-      const maxIterations = 25 + idx * 5;
-
-      function scramble() {
+      const maxIterations = 16 + Math.floor(Math.random() * 10);
+      const interval = setInterval(() => {
         iterations++;
-        if (iterations < maxIterations) {
-          el.textContent = Math.floor(Math.random() * (finalValue + 12));
-          requestAnimationFrame(scramble);
-        } else {
-          el.textContent = finalValue;
-        }
-      }
+        const progress = iterations / maxIterations;
+        const angle = 360 * progress;
 
-      setTimeout(() => {
-        requestAnimationFrame(scramble);
-      }, idx * 200);
+        if (iterations < maxIterations) {
+          const randomChar = chars[Math.floor(Math.random() * chars.length)];
+          span.textContent = randomChar;
+          span.style.transform = `rotateY(${angle}deg)`;
+        } else {
+          span.textContent = finalChar;
+          span.style.transform = 'rotateY(0deg)';
+          span.classList.add('brand-char-final');
+          clearInterval(interval);
+        }
+      }, 50 + index * 3);
     });
   }
 
@@ -526,31 +579,33 @@
     function step() {
       if (!alive) {
         draw(true);
-      } else {
-        const head = snake[0];
-        const next = { x: head.x + dir.x, y: head.y + dir.y };
-
-        if (next.x < 0) next.x = cols - 1;
-        if (next.x >= cols) next.x = 0;
-        if (next.y < 0) next.y = rows - 1;
-        if (next.y >= rows) next.y = 0;
-
-        if (snake.some(seg => seg.x === next.x && seg.y === next.y)) {
-          alive = false;
-          draw(true);
-        } else {
-          snake.unshift(next);
-
-          if (next.x === food.x && next.y === food.y) {
-            food = spawnFood();
-          } else {
-            snake.pop();
-          }
-
-          lastDir = { ...dir };
-          draw(false);
-        }
+        return;
       }
+
+      const head = snake[0];
+      const next = { x: head.x + dir.x, y: head.y + dir.y };
+
+      if (next.x < 0) next.x = cols - 1;
+      if (next.x >= cols) next.x = 0;
+      if (next.y < 0) next.y = rows - 1;
+      if (next.y >= rows) next.y = 0;
+
+      if (snake.some(seg => seg.x === next.x && seg.y === next.y)) {
+        alive = false;
+        draw(true);
+        return;
+      }
+
+      snake.unshift(next);
+
+      if (next.x === food.x && next.y === food.y) {
+        food = spawnFood();
+      } else {
+        snake.pop();
+      }
+
+      lastDir = { ...dir };
+      draw(false);
     }
 
     function draw(gameOver) {
@@ -568,7 +623,7 @@
       });
 
       if (gameOver) {
-        ctx.fillStyle = 'rgba(0,0,0,0.5)';
+        ctx.fillStyle = 'rgba(0,0,0,0.6)';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         ctx.fillStyle = '#fff';
         ctx.font = '10px monospace';
@@ -763,9 +818,6 @@
     const startLang = detectLang();
     setLang(startLang);
 
-    initFaviconAnimator();
-    initCookieBanner();
-
     document.querySelectorAll('.lang-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         const lang = btn.dataset.lang;
@@ -773,16 +825,9 @@
       });
     });
 
-    document.querySelectorAll('.partner-logos img').forEach(img => {
-      img.loading = 'lazy';
-      img.decoding = 'async';
-      img.addEventListener('error', () => {
-        img.style.display = 'none';
-      });
-    });
-
-    initTickerTitle();
-    initStats();
+    initCookieBanner();
+    initFaviconAnimator();
+    initBrandTitle();
     initMatrix();
     initSnake();
     initFloaters();
