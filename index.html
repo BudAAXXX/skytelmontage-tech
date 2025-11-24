@@ -5,8 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <title>SkyTel Montage s.r.o. | Telecom & Rope Access in DE/EU</title>
-  <meta name="description" content="SkyTel Montage – specialist for construction, modernisation and maintenance of radio and telecom systems in Germany and across the EU. Rope access (PSAgA), electrical qualification (NV 194/2022 §6/§7) and documentation according to German and Czech standards.">
+  <meta name="description" content="SkyTel Montage – specialist for installation, upgrade and service of mobile and radio networks in Germany and across the EU. Rope-access crews with electrical qualification (NV 194/2022 §6/§7), PSAgA and documentation according to German and Czech standards.">
 
+  <!-- favicon / app icon -->
   <link id="favicon" rel="icon" type="image/png" href="logo.png">
   <link rel="apple-touch-icon" href="logo.png">
   <meta name="theme-color" content="#0b2e4e">
@@ -16,11 +17,20 @@
 </head>
 <body>
 
-<noscript>
-  <div class="noscript">
-    This website uses JavaScript for animations and language switching. Please enable JavaScript for the full experience.
+  <noscript>
+    <div class="noscript">
+      This website uses JavaScript for visual effects and language switching.
+      Core information about our services is available even without JavaScript.
+    </div>
+  </noscript>
+
+  <!-- Cookie info (only technically necessary cookies) -->
+  <div id="cookie-banner" class="cookie-banner" role="dialog" aria-live="polite" aria-label="Cookie information">
+    <p data-i18n="cookieText">
+      This website uses only technically necessary cookies (for example to remember your language selection and hide this notice). No analytics or marketing cookies are used.
+    </p>
+    <button type="button" id="cookie-accept" class="cookie-btn" data-i18n="cookieOk">OK</button>
   </div>
-</noscript>
 
   <!-- Video background -->
   <video id="bgVideo" autoplay muted loop playsinline preload="metadata" aria-hidden="true">
@@ -35,7 +45,7 @@
 
   <!-- Intro logo -->
   <div id="intro">
-    <img src="logo.png" alt="SkyTel Montage" id="intro-logo">
+    <img src="logo-intro.png" alt="SkyTel Montage" id="intro-logo">
   </div>
 
   <header class="hero">
@@ -47,39 +57,39 @@
     </h1>
 
     <p class="hero-subtitle" data-i18n="subtitle">
-      Specialist telecom and rope-access crew for construction, modernisation and service of mobile networks in Germany and across the EU.
+      Specialised rope-access and electrical teams for installation, upgrade and service of mobile and radio networks in Germany and across the EU.
     </p>
 
     <p class="roles" data-i18n="roles">
-      CEO / Owner: Patrik Budinský | Technical Director: SkyTel Montage Crew
+      Owner, CEO &amp; Technical Director: Patrik Budinský (internally: CEO vesmíru)
     </p>
 
-    <!-- Parodic stats -->
-    <div class="stats" aria-label="Project statistics">
+    <!-- Key figures -->
+    <div class="stats" aria-label="Key figures">
       <div class="stat">
-        <span class="stat-number" data-stat="cheated">0</span>
-        <span class="stat-label" data-i18n="statCheated">subcontractors trying to ghost us (target value)</span>
+        <span class="stat-number" data-stat="experience" data-final="8">8</span>
+        <span class="stat-label" data-i18n="statExperience">years of project work on German telecom sites</span>
       </div>
       <div class="stat">
-        <span class="stat-number" data-stat="robbed">0</span>
-        <span class="stat-label" data-i18n="statRobbed">unpaid invoices left behind by others (target value)</span>
+        <span class="stat-number" data-stat="crews" data-final="2">2</span>
+        <span class="stat-label" data-i18n="statCrews">rope-access installation crews that can be deployed</span>
       </div>
       <div class="stat">
-        <span class="stat-number" data-stat="lostGear">0</span>
-        <span class="stat-label" data-i18n="statLostGear">EUR of gear that goes missing again (target value)</span>
+        <span class="stat-number" data-stat="age" data-final="36">36</span>
+        <span class="stat-label" data-i18n="statAge">years – age of the oldest technician on the crew list</span>
       </div>
       <p class="stats-note" data-i18n="statNote">
-        Parody counter based on real project history. The plan is to keep all values frozen at zero.
+        Figures are indicative and may differ per project. Detailed planning, crew size and scope are always agreed individually.
       </p>
     </div>
 
-    <!-- Short jokes / subtle story -->
+    <!-- Light internal jokes -->
     <div class="micro-jokes">
       <p data-i18n="joke1">
-        After one subcontractor vanished together with our ropes and rescue kit, we decided to climb only under our own name.
+        Some lessons you learn in training. Others when a subcontractor disappears together with your ropes and rescue kit.
       </p>
       <p data-i18n="joke2">
-        Estimated value of gear that disappeared in the past: about 1 000 EUR. Target for the future: 0 EUR and 0 excuses.
+        Result: today we climb under our own name, with our own gear and our own responsibility.
       </p>
     </div>
 
@@ -95,79 +105,59 @@
   </header>
 
   <main>
-
-    <!-- Services / What we do -->
+    <!-- Services -->
     <section id="services">
-      <h2 data-i18n="servicesTitle">Telecom services in Germany and the EU</h2>
-      <p data-i18n="servicesIntro">
-        SkyTel Montage focuses on construction, modernisation and service of radio and telecom systems for network operators and general contractors. We work on towers, rooftops and special structures from greenfield sites to swap programmes and emergency interventions.
+      <h2 data-i18n="servicesTitle">What we do</h2>
+      <p data-i18n="servicesIntro1">
+        SkyTel Montage focuses on the installation, modernisation and service of mobile and radio networks in Germany. We deliver complete antenna and transmission systems on towers, rooftops and special structures – from steelwork and cable routing through installation and testing of active equipment to final photo documentation and handover reports.
       </p>
-      <ul class="service-list">
-        <li data-i18n="servicesItem1">
-          Installation of steel structures, antenna systems and RF / microwave links, including cable trays and grounding.
-        </li>
-        <li data-i18n="servicesItem2">
-          Modernisation and swap of existing sites (antennas, RRUs, cabling), integration support and basic measurements.
-        </li>
-        <li data-i18n="servicesItem3">
-          Troubleshooting and corrective maintenance at height, including access planning and rescue concepts (PSAgA).
-        </li>
-        <li data-i18n="servicesItem4">
-          Photo and technical documentation according to German and Czech project standards (DE/EN/CZ).
-        </li>
+      <p data-i18n="servicesIntro2">
+        The work combines rope-access techniques, electrical qualification and project documentation according to German and Czech standards. Typical scopes include greenfield roll-out, swap and upgrade programmes and corrective or emergency maintenance.
+      </p>
+
+      <ul class="services-list">
+        <li data-i18n="service1">New build and swap of mobile sites (2G–5G, microwave links, radio systems).</li>
+        <li data-i18n="service2">Assembly of steel structures, antenna systems and safe access / anchor points.</li>
+        <li data-i18n="service3">Structured cable routing, labelling and basic electrical tests.</li>
+        <li data-i18n="service4">Photo documentation, punch list handling and as-built reports in DE/EN/CZ.</li>
       </ul>
     </section>
 
-    <!-- Team & cooperation -->
+    <!-- Team & organisation -->
     <section id="team">
-      <h2 data-i18n="teamTitle">Team & cooperation conditions</h2>
+      <h2 data-i18n="teamTitle">Team and work organisation</h2>
       <p data-i18n="teamIntro">
-        SkyTel Montage deploys multi-person teams for telecom rollout, maintenance and emergency work at height in Germany and across the EU. The crew combines electrical qualification, rope-access skills (PSAgA) and experience from projects for major operators and general contractors.
+        SkyTel Montage works with small, stable crews that combine electrical qualification, PSAgA rope-access training and hands-on experience from German telecom projects. Each crew is structured to handle the full installation cycle – from site preparation to photo documentation and handover reports.
       </p>
 
-      <h3 data-i18n="teamCompTitle">Typical team composition</h3>
-      <ul class="service-list">
-        <li data-i18n="teamLead">
-          Lead technician / team lead: electrical qualification (NV 194/2022 §6/§7 or equivalent Elektrofachkraft), responsible for safety (DGUV) and quality.
-        </li>
-        <li data-i18n="ropeL2">
-          Rope-access technician (L2): assembly, cable routing, installation of brackets and anchors, rescue planning.
-        </li>
-        <li data-i18n="ropeTech">
-          Rope-access technician / rigger: additional work, finishing, photo documentation and detailed checks.
-        </li>
+      <h3 data-i18n="teamCompTitle">Roles in the crew</h3>
+      <ul class="text-list">
+        <li data-i18n="teamLead">Lead technician / team lead: electrical qualification (NV 194/2022 §6/§7 or equivalent Elektrofachkraft), coordination of works, responsibility for HSE (BOZP/DGUV) and quality control.</li>
+        <li data-i18n="ropeL2">Rope-access technician (L2): assembly of steel and antenna structures, cable routing, installation of anchor points and support with rescue procedures.</li>
+        <li data-i18n="ropeTech">Rope-access technician / rigger: finishing work, clean cable routing and labelling, photo documentation and detailed checks according to project standards.</li>
       </ul>
 
       <h3 data-i18n="billingTitle">What is billed per team member</h3>
-      <ul class="service-list">
-        <li data-i18n="billingDayRate">
-          Day rate: professional work on site, preparation, documentation and standard tools.
-        </li>
-        <li data-i18n="billingTravel">
-          Travel costs: share of van, fuel, tolls and parking, allocated according to project and crew size.
-        </li>
-        <li data-i18n="billingPerDiem">
-          Per diems & accommodation: usually according to German / Czech rates, invoiced as agreed.
-        </li>
-        <li data-i18n="billingEquipment">
-          Special equipment: optional surcharges for specific measurement and test equipment (e.g. EMF meters, electrical testers, special rescue kits) requested by the project.
-        </li>
+      <ul class="text-list">
+        <li data-i18n="billingDayRate">Day rate: professional work on site, preparation, documentation and standard tools.</li>
+        <li data-i18n="billingTravel">Travel costs: share of van, fuel, tolls and parking, allocated according to project and crew size.</li>
+        <li data-i18n="billingPerDiem">Per diems &amp; accommodation: usually according to German / Czech rates, invoiced as agreed.</li>
+        <li data-i18n="billingEquipment">Special equipment: optional surcharges for specific measurement and test equipment (e.g. EMF meters, electrical testers, special rescue kits) requested by the project.</li>
+      </ul>
+
+      <h3 data-i18n="paymentTitle">Payment options</h3>
+      <ul class="text-list">
+        <li data-i18n="paymentCompany">Invoicing via Czech limited company (EU VAT): invoicing in EUR or CZK, standard payment terms.</li>
+        <li data-i18n="paymentMilestones">Milestone-based billing: project split into phases such as build, commissioning and final acceptance.</li>
+        <li data-i18n="paymentMonthly">Monthly summary invoices: one consolidated invoice per month for all sites and days worked.</li>
       </ul>
 
       <h3 data-i18n="benefitsTitle">Benefits for partners</h3>
-      <ul class="service-list">
-        <li data-i18n="benefit1">
-          Single point of contact (CEO / team lead) with clear responsibility for planning, safety and delivery.
-        </li>
-        <li data-i18n="benefit2">
-          Photo and technical documentation in DE/EN/CZ according to project standards (e.g. W+A, DFMG, operators).
-        </li>
-        <li data-i18n="benefit3">
-          Option for rapid deployment on urgent calls (weekends / nights), depending on capacity and contract.
-        </li>
-        <li data-i18n="benefit4">
-          Transparent breakdown of costs per team member and equipment, suitable for audits and recharging.
-        </li>
+      <ul class="text-list">
+        <li data-i18n="benefit1">Single point of contact (Owner / CEO) with clear responsibility for planning, safety and delivery.</li>
+        <li data-i18n="benefit2">Photo and technical documentation in DE/EN/CZ according to project standards (e.g. W+A, DFMG, operators).</li>
+        <li data-i18n="benefit3">Option for rapid deployment on urgent calls (weekends / nights), depending on capacity and contract.</li>
+        <li data-i18n="benefit4">Transparent breakdown of costs per team member and equipment, suitable for audits and recharging.</li>
       </ul>
     </section>
 
@@ -177,11 +167,11 @@
       <div class="partner-logos">
         <!-- future logos -->
       </div>
-      <p class="note" data-i18n="partnersNote">Reference projects and partners will be added after the first completed projects under the SkyTel Montage brand.</p>
+      <p class="note" data-i18n="partnersNote">Soon.</p>
     </section>
   </main>
 
-  <!-- Snake mini game (desktop only, hidden on small screens by CSS) -->
+  <!-- Snake mini game (desktop only, hidden on mobile via CSS) -->
   <div class="snake-wrapper">
     <div class="snake-header">
       Snake
@@ -198,26 +188,15 @@
     <button type="button" class="lang-btn" data-lang="kli" aria-pressed="false" title="Klingon">🖖</button>
   </div>
 
-  <!-- Cookie / storage notice (informative, no consent banner) -->
-  <div id="cookieNotice" class="cookie-notice" hidden>
-    <p data-i18n="cookieText">
-      This website does not use tracking cookies or analytics. A small local storage entry is used only to remember that you closed this notice. Details in the Privacy Policy.
-    </p>
-    <button type="button" id="cookieOk" class="cookie-btn" data-i18n="cookieButton">
-      OK
-    </button>
-  </div>
-
   <footer>
     <p>© 2025 SkyTel Montage s.r.o.</p>
     <p>
-      BUSINESS CENTRUM, Řeznická 1332, 460 01 Liberec, Czech Republic |
-      Tel: +420&nbsp;739&nbsp;977&nbsp;089 |
-      <a href="mailto:patrik.budinsky@skytelmontage.tech">patrik.budinsky@skytelmontage.tech</a>
+      <a href="impressum.html">Impressum</a> |
+      <a href="privacy.html">Datenschutz / Ochrana soukromí</a>
     </p>
     <p>
-      <a href="impressum.html">Impressum</a> |
-      <a href="privacy.html">Privacy / Datenschutz</a>
+      <a href="https://www.instagram.com/high_voltage_drive/" target="_blank" rel="noopener">Instagram</a> |
+      <a href="https://www.linkedin.com/in/patrik-budinsk%C3%BD-793385192/" target="_blank" rel="noopener">LinkedIn</a>
     </p>
   </footer>
 
