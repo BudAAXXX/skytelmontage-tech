@@ -1,20 +1,56 @@
 <!DOCTYPE html>
-<html lang="cs">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>404 – Stránka nenalezena | SkyTel Montage</title>
+  <title>404 – Page not found | SkyTel Montage</title>
+  <link id="favicon" rel="icon" type="image/png" href="logo.png">
+  <meta name="theme-color" content="#0b2e4e">
   <link rel="stylesheet" href="style.css">
+  <script defer src="script.js"></script>
 </head>
 <body>
-  <div class="centered" style="max-width:600px;margin:60px auto;text-align:center;padding:0 20px;">
-    <h1>404 – Stránka nenalezena</h1>
-    <p>Omlouváme se, ale stránka, kterou hledáte, neexistuje nebo byla přesunuta.</p>
+
+  <!-- Cookie info -->
+  <div id="cookie-banner" class="cookie-banner" role="dialog" aria-live="polite" aria-label="Cookie information">
+    <p data-i18n="cookieText">
+      This website uses only technically necessary cookies (for example to remember your language selection and hide this notice). No analytics or marketing cookies are used.
+    </p>
+    <button type="button" id="cookie-accept" class="cookie-btn" data-i18n="cookieOk">OK</button>
+  </div>
+
+  <!-- Background -->
+  <video id="bgVideo" autoplay muted loop playsinline preload="metadata" aria-hidden="true">
+    <source src="Video123.mp4" type="video/mp4" />
+  </video>
+  <canvas id="matrix" aria-hidden="true"></canvas>
+  <div id="floaters-layer" aria-hidden="true"></div>
+
+  <div class="notfound-center">
+    <h1 data-i18n="notFoundTitle">404 – Page not found</h1>
+    <p data-i18n="notFoundText">
+      Sorry, the page you are looking for does not exist or has been moved.
+    </p>
     <p>
-      <a href="index.html">Zpět na hlavní stránku</a> |
-      <a href="impressum.html">Impressum</a> |
-      <a href="privacy.html">Ochrana soukromí</a>
+      <a href="index.html" data-i18n="notFoundBack">Back to the main page</a>
     </p>
   </div>
+
+  <!-- Language switcher -->
+  <div class="lang-switch" aria-label="Language switch">
+    <button type="button" class="lang-btn" data-lang="cs" aria-pressed="false" title="Čeština">🇨🇿</button>
+    <button type="button" class="lang-btn" data-lang="en" aria-pressed="true" title="English">🇬🇧</button>
+    <button type="button" class="lang-btn" data-lang="de" aria-pressed="false" title="Deutsch">🇩🇪</button>
+    <button type="button" class="lang-btn" data-lang="kli" aria-pressed="false" title="Klingon">🖖</button>
+  </div>
+
+  <footer>
+    <p>© 2025 SkyTel Montage s.r.o.</p>
+    <p>
+      <a href="impressum.html" data-i18n="footerImprint">Impressum</a> |
+      <a href="privacy.html" data-i18n="footerPrivacy">Privacy policy</a>
+    </p>
+  </footer>
+
 </body>
 </html>
