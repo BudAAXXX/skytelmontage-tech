@@ -7,27 +7,31 @@
 
   const I18N = {
     cs: {
-      subtitle: "Telekomunikační a výškový tým připravený pro projekty v Německu a celé EU.",
-      roles: "CEO / Owner: Patrik Budinský | Chief Tower Hacker: SkyTel Montage Crew",
+      subtitle: "Specializované rope-access a elektro týmy pro výstavbu, modernizaci a servis mobilních a rádiových sítí v Německu a celé EU.",
+      roles: "Majitel, jednatel a technický ředitel: Patrik Budinský (interně: CEO vesmíru)",
 
-      statCheated: "podvedených lidí",
-      statRobbed: "okradených lidí",
-      statLostGear: "ztracených lan & rescue setů",
-      statNote: "Živé počítadlo. V ideálním světě nechceme tyhle hodnoty nikdy změnit.",
-
-      slogan1: "Nekrotíš věž – překonáváš sám sebe.",
-      slogan2: "Lezci na oceli, AI v pozadí – čistá práce, čistá data.",
-      slogan3: "Od kotevního bodu po protokol o převzetí – jeden tým, jedna odpovědnost.",
+      statExperience: "let projektové práce na německých telekomunikačních stavbách",
+      statCrews: "rope-access montážní týmy připravené k nasazení",
+      statAge: "let – věk nejstaršího technika na crew listu",
+      statNote: "Hodnoty jsou orientační a liší se podle konkrétní zakázky. Velikost týmu a rozsah prací se vždy stanovují individuálně podle projektu.",
 
       partners: "Partneři",
       partnersNote: "Soon.",
 
-      teamTitle: "Tým & podmínky spolupráce",
-      teamIntro: "SkyTel Montage nasazuje vícemanové týmy pro výstavbu, servis a emergency zásahy na telekomunikačních stavbách v Německu a po celé EU. Tým kombinuje elektro kvalifikaci, práce ve výškách (PSAgA) a zkušenosti z projektů pro velké operátory a generální dodavatele.",
-      teamCompTitle: "Typické složení týmu",
-      teamLead: "Vedoucí technik / team lead: elektro kvalifikace (NV 194/2022 §6/§7 nebo ekvivalent Elektrofachkraft), odpovědnost za BOZP/DGUV a kvalitu.",
-      ropeL2: "Rope-access technik (L2): montáž, tahání kabelů, instalace konzol a kotevních bodů, příprava záchranných postupů.",
-      ropeTech: "Rope-access technik / montér: doplňkové práce, kompletace, foto-dokumentace a kontrola detailů.",
+      servicesTitle: "Co děláme",
+      servicesIntro1: "SkyTel Montage se zaměřuje na výstavbu, modernizaci a servis mobilních a rádiových sítí v Německu. Zajišťujeme kompletní anténní a přenosové systémy na stožárech, střechách i speciálních konstrukcích – od montáže ocelových prvků a tahání kabeláže přes instalaci a měření aktivních technologií až po fotodokumentaci a předávací protokoly.",
+      servicesIntro2: "Práce kombinuje rope access techniky, elektro kvalifikaci a projektovou dokumentaci podle německých a českých norem. Typické rozsahy zahrnují roll-out nových lokalit, swap a upgrade programy a pravidelnou i havarijní údržbu.",
+      service1: "Výstavba a swap mobilních lokalit (2G–5G, mikrovlnné spoje, rádiové systémy).",
+      service2: "Montáž ocelových konstrukcí, anténních systémů a bezpečných přístupů / kotevních bodů.",
+      service3: "Tahání a organizace kabeláže, značení a základní elektro zkoušky.",
+      service4: "Fotodokumentace, řešení punchlistů a as-built dokumentace v DE/EN/CZ.",
+
+      teamTitle: "Tým a organizace práce",
+      teamIntro: "SkyTel Montage staví na malých stabilních posádkách, které kombinují elektro kvalifikaci, školení pro práce ve výškách (PSAgA) a praxi z německých telekomunikačních projektů. Týmy jsou nastavené tak, aby zvládly celý montážní cyklus – od přípravy pracoviště až po fotodokumentaci a předávací protokoly.",
+      teamCompTitle: "Role v týmu",
+      teamLead: "Vedoucí technik / team lead: elektro kvalifikace (NV 194/2022 §6/§7 nebo ekvivalent Elektrofachkraft), koordinace prací, řízení BOZP/DGUV a kontrola kvality.",
+      ropeL2: "Rope-access technik (L2): montáž ocelových a anténních prvků, tahání kabeláže, instalace kotevních bodů a spolupráce na záchranných postupech.",
+      ropeTech: "Rope-access technik / montér: dokončovací práce, čisté vedení kabelů, značení, fotodokumentace a kontrola detailů podle standardů projektu.",
 
       billingTitle: "Co se účtuje za každého člena týmu",
       billingDayRate: "Denní sazba: odborná práce na stavbě, příprava, dokumentace a použití běžného nářadí.",
@@ -41,35 +45,43 @@
       paymentMonthly: "Pravidelné měsíční faktury: souhrnná faktura za všechna pracoviště a odpracované dny v daném měsíci.",
 
       benefitsTitle: "Výhody pro partnery",
-      benefit1: "Jeden kontaktní bod (CEO / team lead) s jasnou odpovědností za plánování, bezpečnost a dodání.",
+      benefit1: "Jeden kontaktní bod (Owner / CEO) s jasnou odpovědností za plánování, bezpečnost a dodání.",
       benefit2: "Foto a technická dokumentace v DE/EN/CZ podle standardů projektu (např. W+A, DFMG, operátoři).",
       benefit3: "Možnost rychlého nasazení na urgentní zásahy (víkendy / noc) dle kapacit a smlouvy.",
       benefit4: "Transparentní rozpad nákladů na každého člena týmu a použité vybavení, vhodné pro audity a refakturaci.",
 
-      experimentalNote: "Tato stránka slouží pouze pro experimentální účely a nejde o finální podobu webu. Děkujeme za pochopení."
+      joke1: "Některé lekce získáš na školení. Jiné ve chvíli, kdy subdodavatel zmizí i s tvým lanem a rescue setem.",
+      joke2: "Výsledek: dnes lezeme pod vlastním jménem, s vlastním vybavením a vlastní odpovědností.",
+
+      cookieText: "Tento web používá pouze technicky nezbytné soubory cookie (např. pro volbu jazyka a skrytí tohoto oznámení). Nepoužíváme analytické ani marketingové cookies.",
+      cookieOk: "Rozumím"
     },
     en: {
-      subtitle: "Telecom and rope-access team ready for projects in Germany and across the EU.",
-      roles: "CEO / Owner: Patrik Budinský | Chief Tower Hacker: SkyTel Montage Crew",
+      subtitle: "Specialised rope-access and electrical teams for installation, upgrade and service of mobile and radio networks in Germany and across the EU.",
+      roles: "Owner, CEO & Technical Director: Patrik Budinský (internally known as “CEO vesmíru”)",
 
-      statCheated: "people cheated",
-      statRobbed: "people robbed",
-      statLostGear: "lost ropes & rescue kits",
-      statNote: "Live counter. Our goal is to keep every value at zero.",
-
-      slogan1: "You don’t overcome the tower – you overcome yourself.",
-      slogan2: "Climbers on steel, AI in the background – clean work, clean data.",
-      slogan3: "From anchor point to acceptance report – one team, one responsibility.",
+      statExperience: "years of project work on German telecom sites",
+      statCrews: "rope-access installation crews that can be deployed",
+      statAge: "years – age of the oldest technician on the crew list",
+      statNote: "Figures are indicative and may differ per project. Final crew size and scope are always agreed individually with the client.",
 
       partners: "Partners",
       partnersNote: "Soon.",
 
-      teamTitle: "Team & cooperation conditions",
-      teamIntro: "SkyTel Montage deploys multi-person teams for telecom rollout, maintenance and emergency work at height in Germany and across the EU. The crew combines electrical qualifications, rope-access skills (PSAgA) and experience from projects for major operators and general contractors.",
-      teamCompTitle: "Typical team composition",
-      teamLead: "Lead technician / team lead: electrical qualification (NV 194/2022 §6/§7 or equivalent Elektrofachkraft), responsible for safety (BOZP/DGUV) and quality.",
-      ropeL2: "Rope-access technician (L2): assembly, cable routing, installation of brackets and anchors, rescue planning.",
-      ropeTech: "Rope-access technician / rigger: additional work, finishing, photo documentation and detailed checks.",
+      servicesTitle: "What we do",
+      servicesIntro1: "SkyTel Montage focuses on the installation, modernisation and service of mobile and radio networks in Germany. We deliver complete antenna and transmission systems on towers, rooftops and special structures – from steelwork and cable routing through installation and testing of active equipment to final photo documentation and handover reports.",
+      servicesIntro2: "The work combines rope-access techniques, electrical qualification and project documentation according to German and Czech standards. Typical scopes include greenfield roll-out, swap and upgrade programmes and corrective or emergency maintenance.",
+      service1: "New build and swap of mobile sites (2G–5G, microwave links, radio systems).",
+      service2: "Assembly of steel structures, antenna systems and safe access / anchor points.",
+      service3: "Structured cable routing, labelling and basic electrical tests.",
+      service4: "Photo documentation, punch list handling and as-built reports in DE/EN/CZ.",
+
+      teamTitle: "Team and work organisation",
+      teamIntro: "SkyTel Montage works with small, stable crews that combine electrical qualification, PSAgA rope-access training and hands-on experience from German telecom projects. Each crew is structured to handle the full installation cycle – from site preparation to photo documentation and handover reports.",
+      teamCompTitle: "Roles in the crew",
+      teamLead: "Lead technician / team lead: electrical qualification (NV 194/2022 §6/§7 or equivalent Elektrofachkraft), coordination of works, responsibility for HSE (BOZP/DGUV) and quality control.",
+      ropeL2: "Rope-access technician (L2): assembly of steel and antenna structures, cable routing, installation of anchor points and support with rescue procedures.",
+      ropeTech: "Rope-access technician / rigger: finishing work, clean cable routing and labelling, photo documentation and detailed checks according to project standards.",
 
       billingTitle: "What is billed per team member",
       billingDayRate: "Day rate: professional work on site, preparation, documentation and standard tools.",
@@ -83,35 +95,43 @@
       paymentMonthly: "Monthly summary invoices: one consolidated invoice per month for all sites and days worked.",
 
       benefitsTitle: "Benefits for partners",
-      benefit1: "Single point of contact (CEO / team lead) with clear responsibility for planning, safety and delivery.",
+      benefit1: "Single point of contact (Owner / CEO) with clear responsibility for planning, safety and delivery.",
       benefit2: "Photo and technical documentation in DE/EN/CZ according to project standards (e.g. W+A, DFMG, operators).",
       benefit3: "Option for rapid deployment on urgent calls (weekends / nights), depending on capacity and contract.",
       benefit4: "Transparent breakdown of costs per team member and equipment, suitable for audits and recharging.",
 
-      experimentalNote: "This page is used purely for experimental purposes and is not the final version of the website. Thank you for your understanding."
+      joke1: "Some lessons you learn in training. Others when a subcontractor disappears together with your ropes and rescue kit.",
+      joke2: "Result: today we climb under our own name, with our own gear and our own responsibility.",
+
+      cookieText: "This website uses only technically necessary cookies (for example to remember your language selection and hide this notice). No analytics or marketing cookies are used.",
+      cookieOk: "OK"
     },
     de: {
-      subtitle: "Telekom- und Höhenarbeitsteam für Projekte in Deutschland und ganz Europa.",
-      roles: "CEO / Owner: Patrik Budinský | Chief Tower Hacker: SkyTel Montage Crew",
+      subtitle: "Spezialisierte Rope-Access- und Elektroteams für Aufbau, Modernisierung und Service von Mobilfunk- und Funknetzen in Deutschland und ganz Europa.",
+      roles: "Inhaber, Geschäftsführer und Technischer Leiter: Patrik Budinský (intern: CEO des Universums)",
 
-      statCheated: "getäuschte Personen",
-      statRobbed: "beraubte Personen",
-      statLostGear: "verlorene Seile & Rettungssets",
-      statNote: "Live-Zähler. Ziel: alle Werte dauerhaft bei Null halten.",
-
-      slogan1: "Du bezwingst nicht den Mast – du überwindest dich selbst.",
-      slogan2: "Kletterer am Stahl, KI im Hintergrund – saubere Arbeit, saubere Daten.",
-      slogan3: "Vom Anschlagpunkt bis zum Abnahmeprotokoll – ein Team, eine Verantwortung.",
+      statExperience: "Jahre Projekterfahrung auf deutschen Telekommunikationsstandorten",
+      statCrews: "Rope-Access-Montageteams, die einsatzbereit sind",
+      statAge: "Jahre – Alter des ältesten Technikers auf der Crew-Liste",
+      statNote: "Die Kennzahlen sind Richtwerte und können je nach Projekt variieren. Teamgröße und Leistungsumfang werden immer projektspezifisch abgestimmt.",
 
       partners: "Partner",
       partnersNote: "Soon.",
 
-      teamTitle: "Team & Rahmenbedingungen der Zusammenarbeit",
-      teamIntro: "SkyTel Montage setzt mehrköpfige Teams für Rollout, Service und Notfalleinsätze an Telekommunikationsanlagen in Deutschland und der EU ein. Das Team verbindet Elektro-Qualifikation, Höhenarbeit (PSAgA) und Erfahrung aus Projekten für Netzbetreiber und Generalunternehmer.",
-      teamCompTitle: "Typische Teamzusammensetzung",
-      teamLead: "Lead-Techniker / Teamleiter: Elektro-Qualifikation (NV 194/2022 §6/§7 bzw. gleichwertige Elektrofachkraft), verantwortlich für Arbeitssicherheit (DGUV) und Qualität.",
-      ropeL2: "Rope-Access-Techniker (L2): Montage, Kabelzug, Installation von Konsolen und Anschlagpunkten, Rettungsplanung.",
-      ropeTech: "Rope-Access-Techniker / Monteur: Zusatzarbeiten, Fertigstellung, Fotodokumentation und Detailkontrolle.",
+      servicesTitle: "Leistungen",
+      servicesIntro1: "SkyTel Montage konzentriert sich auf Aufbau, Modernisierung und Service von Mobilfunk- und Funknetzen in Deutschland. Wir liefern komplette Antennen- und Übertragungssysteme auf Masten, Dächern und Sonderkonstruktionen – vom Stahlbau und Kabelzug über Montage und Messung aktiver Technik bis zur Foto- und Abnahmedokumentation.",
+      servicesIntro2: "Die Arbeit verbindet Seilzugangstechnik, Elektro-Qualifikation und Projektdokumentation nach deutschen und tschechischen Normen. Typische Leistungen sind Rollout neuer Standorte, Swap- und Upgrade-Programme sowie reguläre und Notfallwartung.",
+      service1: "Neubau und Swap von Mobilfunkstandorten (2G–5G, Richtfunkstrecken, Funksysteme).",
+      service2: "Montage von Stahlstrukturen, Antennensystemen und sicheren Zugängen / Anschlagpunkten.",
+      service3: "Kabelzug, strukturierte Verlegung, Beschriftung und grundlegende Elektroprüfungen.",
+      service4: "Fotodokumentation, Bearbeitung von Punchlisten und As-Built-Dokumentation in DE/EN/CZ.",
+
+      teamTitle: "Team und Arbeitsorganisation",
+      teamIntro: "SkyTel Montage setzt kleine, eingespielte Teams ein, die Elektro-Qualifikation, PSAgA-Höhenarbeit und Praxiserfahrung aus deutschen Telekommunikationsprojekten verbinden. Die Teams sind so strukturiert, dass sie den gesamten Montagezyklus abdecken – von der Baustellenvorbereitung bis zur Foto- und Abnahmedokumentation.",
+      teamCompTitle: "Rollen im Team",
+      teamLead: "Lead-Techniker / Teamleiter: Elektro-Qualifikation (NV 194/2022 §6/§7 bzw. gleichwertige Elektrofachkraft), Koordination der Arbeiten, Verantwortung für Arbeitssicherheit (DGUV) und Qualitätskontrolle.",
+      ropeL2: "Rope-Access-Techniker (L2): Montage von Stahl- und Antennenstrukturen, Kabelzug, Installation von Anschlagpunkten und Unterstützung bei Rettungskonzepten.",
+      ropeTech: "Rope-Access-Techniker / Monteur: Fertigstellungsarbeiten, saubere Kabelverlegung und Beschriftung, Fotodokumentation und Detailprüfung gemäß Projektstandard.",
 
       billingTitle: "Was pro Teammitglied abgerechnet wird",
       billingDayRate: "Tagessatz: fachgerechte Arbeit vor Ort, Vorbereitung, Dokumentation und Standardwerkzeug.",
@@ -125,77 +145,109 @@
       paymentMonthly: "Monatliche Sammelrechnungen: eine konsolidierte Rechnung pro Monat für alle Standorte und Einsatztage.",
 
       benefitsTitle: "Vorteile für Partner",
-      benefit1: "Ein zentraler Ansprechpartner (CEO / Teamleiter) mit klarer Verantwortung für Planung, Sicherheit und Lieferung.",
+      benefit1: "Ein zentraler Ansprechpartner (Owner / CEO) mit klarer Verantwortung für Planung, Sicherheit und Lieferung.",
       benefit2: "Foto- und technische Dokumentation in DE/EN/CZ gemäß Projektanforderungen (z. B. W+A, DFMG, Netzbetreiber).",
       benefit3: "Möglichkeit eines schnellen Einsatzes bei Notfällen (Wochenende / Nacht) abhängig von Kapazität und Vertrag.",
       benefit4: "Transparente Kostenaufteilung pro Teammitglied und Ausrüstung, geeignet für Audits und Weiterverrechnung.",
 
-      experimentalNote: "Diese Seite dient ausschließlich zu experimentellen Zwecken und stellt nicht die endgültige Version der Website dar. Vielen Dank für Ihr Verständnis."
+      joke1: "Manche Lektionen lernt man in Schulungen. Andere, wenn ein Subunternehmer mitsamt Seilen und Rettungsset verschwindet.",
+      joke2: "Ergebnis: Heute klettern wir unter eigenem Namen, mit eigener Ausrüstung und eigener Verantwortung.",
+
+      cookieText: "Diese Website verwendet nur technisch notwendige Cookies (z. B. zur Sprachwahl und zum Ausblenden dieses Hinweises). Analyse- oder Marketing-Cookies werden nicht eingesetzt.",
+      cookieOk: "Verstanden"
     },
     kli: {
       subtitle: "telecom QeD • jenwI' Segh woch • yuQvam HochDaq ghom.",
-      roles: "CEO / joHwI': Patrik Budinský | qum tajHommey: SkyTel Montage ghom",
+      roles: "Owner, CEO & qum taj: Patrik Budinský (CEO vesmíru)",
 
-      statCheated: "nuchpu’ napHa’",
-      statRobbed: "Huch luHevbe’bogh nuvpu’",
-      statLostGear: "lujorqu'pu' lano' & toD janmey",
-      statNote: "mIvmey bIH. HochHom Dochmeyvam wIneH: pagh, pagh, pagh.",
-
-      slogan1: "SamchoHbe’ Hoch ‘u’ – bIqun jeqlIj neH.",
-      slogan2: "yoSDajDaq leS nagh, ‘emDaq vangtaH AI – ta’ law’, Qagh puS.",
-      slogan3: "naQHom muvDI’ Qav wIv De’ – wa’ ghom, wa’ pARmaq.",
+      statExperience: "DISmeymey GermanyDaq Qu'",
+      statCrews: "ghommey Qam ghom chenmoHlaHbogh",
+      statAge: "ben – ghomDaq poQbogh tIQ law'",
+      statNote: "mIvmeyvam qech neH; malja' wa'DIchDaq latlh nab wIchav.",
 
       partners: "jupmey (Partner)",
       partnersNote: "nItebHa’ ghomchoH. (Soon.)",
 
-      teamTitle: "ghom je malja’ nIl",
-      teamIntro: "SkyTel Montage ghomvam tlhoy’ ghochDaq QanchoHmeH, QaptaHmeH, SIghmoHmeH je QeD lo’taH, ‘oH Germany EU jeDaq. QeD QeDpIn, QamchoH (PSAgA) je Qu’ nIv Sov lughajchaj.",
-      teamCompTitle: "ghom mIS Hutlh",
-      teamLead: "DevwI’ QeD: HoS QeD pat (NV 194/2022 §6/§7), Qan je chutlhu’ (DGUV) je povqu’ ghu’ nIv DevwI’.",
-      ropeL2: "Qam ghomwI’ (L2): rar, SIrgh, naQHom lan, QanDu’ Qav cher, toDmeH mIw nIqel.",
-      ropeTech: "Qam ghomwI’ latlh: De’ ten, ghu’ rInmoH, mIllogh De’ qon je muSHa’ghachHa’ ngaS.",
+      servicesTitle: "ghom wIvang",
+      servicesIntro1: "SkyTel Montage GermanyDaq telecom patmey qach, tI' je QapmoH.",
+      servicesIntro2: "Qam, HoS QeD, De' naQ ghaj ghom.",
+      service1: "mobIl pat chu' chenmoH.",
+      service2: "Hachmey, ‘antenna’mey, naQHom je lan.",
+      service3: "SIrghmey je peQ Janmey rar.",
+      service4: "mIllogh De' je De' naQ qon.",
 
-      billingTitle: "wa’ ghomwI’vaD nuq wI’ang",
-      billingDayRate: "jajmeH Huch: Qu’ nIv, ghu’ gher, De’ qon je jan loj.",
-      billingTravel: "lengmeH Huch: Duj, patlh, maw’, mebpa’mey je ngaSbogh pImHey, ghom tInqu’ ‘etlh.",
-      billingPerDiem: "SojDaj, QottaH: Germany / Czech patlhmeyvam rur, qarDajDaq nargh.",
-      billingEquipment: "jan le’: EMF QI’meH janmey, pI’meH QI’meH janmey, toD janmey le’ je – poQlu’chugh neH.",
+      teamTitle: "ghom & malja' nIl",
+      teamIntro: "SkyTel Montage ghomvam Germany EU jeDaq Qam Qu' vatlh DISmey.",
+      teamCompTitle: "ghom mIS Hutlh",
+      teamLead: "DevwI' QeD: HoS QeD pat, Qan je chutlhu’ ghaj.",
+      ropeL2: "Qam ghomwI' (L2): rar, SIrgh, naQHom lan, toD nab.",
+      ropeTech: "Qam ghomwI' latlh: De' ten, rInmoH, mIllogh De' qon.",
+
+      billingTitle: "wa' ghomwI'vaD nuq wI'ang",
+      billingDayRate: "jajmeH Huch: Qu' nIv, ghu' gher, De' qon.",
+      billingTravel: "lengmeH Huch: Duj, patlh, maw', mebpa'mey je.",
+      billingPerDiem: "SojDaj & QottaH.",
+      billingEquipment: "jan le': EMF, toD janmey le'.",
 
       paymentTitle: "Huch QaymeH mIw",
-      paymentCompany: "Czech s.r.o. (EU VAT) mIrDaq pat: Huch EUR / CZK qaStaHvIS poQbogh poH.",
-      paymentMilestones: "wab Deghmey mIr: chenmoH, tIj, Qav De’ nIqelmeH wanI’ mIrHom.",
-      paymentMonthly: "jar wa’: jar Hochlogh ghommeyvaD wa’ DeghHom.",
+      paymentCompany: "Czech s.r.o. (EU VAT) mIrDaq pat.",
+      paymentMilestones: "wab Deghmey mIr.",
+      paymentMonthly: "jar wa' Sammey.",
 
       benefitsTitle: "jupvaD QaQbogh Dochmey",
-      benefit1: "wa’ ghot neH DawIvlaH (CEO / DevwI’), nab, Qan, Qul je luDevchu’.",
-      benefit2: "mIllogh De’ je De’ nIv DE/EN/CZ HolDaq chenmoHlu’, malja’ patmey tIbuS.",
-      benefit3: "poH povHa’ ghorgh (wa’leS / ram) nom ghom wIchenmoHlaH, chaw’ Degh pablu’taHvIS.",
-      benefit4: "ghomwI’ HochvaD Huch Qanchu’, janmey je – mIwvam chovlu’laH ‘ej qaSqa’moHlu’laH.",
+      benefit1: "wa' ghot neH nab, Qan, Qul je luDev.",
+      benefit2: "mIllogh De' DE/EN/CZ HolDaq.",
+      benefit3: "ram / wa'leS nom ghom chenmoHlaH.",
+      benefit4: "Hoch ghomwI'vaD Huch Qanchu'.",
 
-      experimentalNote: "De’vam wIqel neH; ‘oH nIvqu’ De’ qav qachbe’. yajmeH qatlho’."
+      joke1: "wa' subdodavatel jorDI', lano' ghajQo' wIwuq.",
+      joke2: "qaStaHvIS ret: 1 000 EUR lano'. malja'wa' ngoQ: 0.",
+
+      cookieText: "cookie le' neH lo'meH nuqneH. De' nIDbe', mebpu' ngan je'be'.",
+      cookieOk: "maj"
     }
   };
 
   const SEO = {
     cs: {
-      title: "SkyTel Montage s.r.o. | Telekomunikační a výškové práce v DE/EU",
-      desc: "SkyTel Montage – český tým s více než 8 lety zkušeností na telekomunikačních projektech v Německu. Montáže a servis sítí, práce ve výškách (PSAgA), elektro kvalifikace NV 194/2022 §6/§7 a kompletní dokumentace dle DE/CZ norem."
+      title: "SkyTel Montage s.r.o. | Telekomunikační montáže a práce ve výškách v DE/EU",
+      desc: "SkyTel Montage – český specializovaný dodavatel výstavby, modernizace a servisu mobilních a rádiových sítí v Německu. Týmy s elektro kvalifikací NV 194/2022 §6/§7, PSAgA a dokumentací podle německých a českých norem."
     },
     en: {
       title: "SkyTel Montage s.r.o. | Telecom & Rope Access in DE/EU",
-      desc: "SkyTel Montage – Czech-based telecom and rope-access team with 8+ years of project experience in Germany. Network rollout, upgrades and service at height, electrical qualification (NV 194/2022 §6/§7) and documentation according to German and Czech standards."
+      desc: "SkyTel Montage – specialist for installation, upgrade and service of mobile and radio networks in Germany and across the EU. Rope-access crews with electrical qualification (NV 194/2022 §6/§7), PSAgA and documentation according to German and Czech standards."
     },
     de: {
       title: "SkyTel Montage s.r.o. | Telekom & Höhenarbeit in DE/EU",
-      desc: "SkyTel Montage – tschechisches Team mit über 8 Jahren Erfahrung auf Telekommunikationsprojekten in Deutschland. Rollout, Umbau und Service von Netzen in Höhenarbeit (PSAgA), Elektro-Qualifikation nach NV 194/2022 §6/§7 und Projektdokumentation gemäß deutschen und tschechischen Normen."
+      desc: "SkyTel Montage – tschechischer Spezialist für Aufbau, Modernisierung und Service von Mobilfunk- und Funknetzen in Deutschland. Rollout, Umbau und Service in Höhenarbeit (PSAgA), Elektro-Qualifikation NV 194/2022 §6/§7 und Dokumentation nach deutschen und tschechischen Normen."
     },
     kli: {
       title: "SkyTel Montage | telecom QeD je Qam ghom",
-      desc: "SkyTel Montage – GermanyDaq Qu’ nIv chavbogh Czech ghom: telecom, Qam, HoS QeD je De’ nIv."
+      desc: "SkyTel Montage – GermanyDaq Qu' nIv chavbogh Czech ghom: telecom, Qam, HoS QeD je De' nIv."
     }
   };
 
   const SUPPORTED_LANGS = ['cs', 'en', 'de', 'kli'];
+  const FAVICON_FRAMES = ['logo.png', 'logo-intro.png'];
+
+  /* =========================
+     Helpers: cookies
+  ========================== */
+
+  function setCookie(name, value, days) {
+    const expires = new Date(Date.now() + days * 864e5).toUTCString();
+    document.cookie = `${name}=${encodeURIComponent(value)}; expires=${expires}; path=/; SameSite=Lax`;
+  }
+
+  function getCookie(name) {
+    const part = document.cookie.split('; ').find(row => row.startsWith(name + '='));
+    if (!part) return null;
+    return decodeURIComponent(part.split('=')[1] || '');
+  }
+
+  /* =========================
+     SEO + language
+  ========================== */
 
   function applySEO(lang) {
     const s = SEO[lang] || SEO.en;
@@ -232,9 +284,13 @@
     });
 
     applySEO(safe);
+    setCookie('stm_lang', safe, 365);
   }
 
   function detectLang() {
+    const cookieLang = getCookie('stm_lang');
+    if (SUPPORTED_LANGS.includes(cookieLang)) return cookieLang;
+
     const urlLang = new URL(location.href).searchParams.get('lang');
     if (SUPPORTED_LANGS.includes(urlLang)) return urlLang;
 
@@ -247,6 +303,41 @@
     if (primary.some(l => l.startsWith('cs') || l.startsWith('sk'))) return 'cs';
     if (primary.some(l => l.startsWith('de'))) return 'de';
     return 'en';
+  }
+
+  /* =========================
+     Favicon animation
+  ========================== */
+
+  function initFaviconAnimator() {
+    const link = document.querySelector('#favicon');
+    if (!link || FAVICON_FRAMES.length < 2) return;
+
+    let i = 0;
+    setInterval(() => {
+      i = (i + 1) % FAVICON_FRAMES.length;
+      link.href = FAVICON_FRAMES[i];
+    }, 2000);
+  }
+
+  /* =========================
+     Cookie banner
+  ========================== */
+
+  function initCookieBanner() {
+    const banner = document.getElementById('cookie-banner');
+    const btn = document.getElementById('cookie-accept');
+    if (!banner || !btn) return;
+
+    if (getCookie('stm_cookie_ok') === '1') {
+      banner.classList.add('cookie-hidden');
+      return;
+    }
+
+    btn.addEventListener('click', () => {
+      setCookie('stm_cookie_ok', '1', 365);
+      banner.classList.add('cookie-hidden');
+    });
   }
 
   /* =========================
@@ -293,7 +384,7 @@
   }
 
   /* =========================
-     Fun stats (scramble to 0)
+     Stats (scramble to data-final)
   ========================== */
 
   function initStats() {
@@ -301,14 +392,16 @@
     if (!numbers.length) return;
 
     numbers.forEach((el, idx) => {
-      const finalValue = 0;
+      const finalValue = parseInt(el.dataset.final, 10);
+      if (Number.isNaN(finalValue)) return;
+
       let iterations = 0;
       const maxIterations = 25 + idx * 5;
 
       function scramble() {
         iterations++;
         if (iterations < maxIterations) {
-          el.textContent = Math.floor(Math.random() * 120);
+          el.textContent = Math.floor(Math.random() * (finalValue + 12));
           requestAnimationFrame(scramble);
         } else {
           el.textContent = finalValue;
@@ -433,33 +526,31 @@
     function step() {
       if (!alive) {
         draw(true);
-        return;
-      }
-
-      const head = snake[0];
-      const next = { x: head.x + dir.x, y: head.y + dir.y };
-
-      if (next.x < 0) next.x = cols - 1;
-      if (next.x >= cols) next.x = 0;
-      if (next.y < 0) next.y = rows - 1;
-      if (next.y >= rows) next.y = 0;
-
-      if (snake.some(seg => seg.x === next.x && seg.y === next.y)) {
-        alive = false;
-        draw(true);
-        return;
-      }
-
-      snake.unshift(next);
-
-      if (next.x === food.x && next.y === food.y) {
-        food = spawnFood();
       } else {
-        snake.pop();
-      }
+        const head = snake[0];
+        const next = { x: head.x + dir.x, y: head.y + dir.y };
 
-      lastDir = { ...dir };
-      draw(false);
+        if (next.x < 0) next.x = cols - 1;
+        if (next.x >= cols) next.x = 0;
+        if (next.y < 0) next.y = rows - 1;
+        if (next.y >= rows) next.y = 0;
+
+        if (snake.some(seg => seg.x === next.x && seg.y === next.y)) {
+          alive = false;
+          draw(true);
+        } else {
+          snake.unshift(next);
+
+          if (next.x === food.x && next.y === food.y) {
+            food = spawnFood();
+          } else {
+            snake.pop();
+          }
+
+          lastDir = { ...dir };
+          draw(false);
+        }
+      }
     }
 
     function draw(gameOver) {
@@ -671,6 +762,9 @@
   document.addEventListener('DOMContentLoaded', () => {
     const startLang = detectLang();
     setLang(startLang);
+
+    initFaviconAnimator();
+    initCookieBanner();
 
     document.querySelectorAll('.lang-btn').forEach(btn => {
       btn.addEventListener('click', () => {
