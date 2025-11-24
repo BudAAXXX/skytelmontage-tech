@@ -4,70 +4,73 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Zásady ochrany osobních údajů – SkyTel Montage</title>
+  <link id="favicon" rel="icon" type="image/png" href="logo.png">
+  <meta name="theme-color" content="#0b2e4e">
   <link rel="stylesheet" href="style.css">
+  <script defer src="script.js"></script>
 </head>
 <body>
-  <section style="max-width:900px;margin:40px auto;text-align:left;padding:0 20px;">
-    <h1>Zásady ochrany osobních údajů</h1>
 
-    <p>
-      <strong>Správce údajů:</strong><br>
-      SkyTel Montage s.r.o.<br>
-      BUSINESS CENTRUM, Řeznická 1332, 460 01 Liberec, Česká republika<br>
-      E-mail: <a href="mailto:patrik.budinsky@skytelmontage.tech">patrik.budinsky@skytelmontage.tech</a><br>
-      Telefon: +420 739 977 089
+  <!-- Cookie info -->
+  <div id="cookie-banner" class="cookie-banner" role="dialog" aria-live="polite" aria-label="Cookie information">
+    <p data-i18n="cookieText">
+      This website uses only technically necessary cookies (for example to remember your language selection and hide this notice). No analytics or marketing cookies are used.
     </p>
+    <button type="button" id="cookie-accept" class="cookie-btn" data-i18n="cookieOk">OK</button>
+  </div>
 
-    <h2>Jaké údaje zpracováváme</h2>
+  <!-- Background -->
+  <video id="bgVideo" autoplay muted loop playsinline preload="metadata" aria-hidden="true">
+    <source src="Video123.mp4" type="video/mp4" />
+  </video>
+  <canvas id="matrix" aria-hidden="true"></canvas>
+  <div id="floaters-layer" aria-hidden="true"></div>
+
+  <div class="legal-container">
+    <div class="legal-box">
+      <h1 data-i18n="privacyHeading">Zásady ochrany osobních údajů</h1>
+
+      <p data-i18n="privacyIntro">
+        Tato stránka slouží jako základní firemní prezentace a kontaktní vizitka. Rozsah zpracování osobních údajů je omezen na nezbytné minimum.
+      </p>
+
+      <p data-i18n="privacyCookies">
+        Cookies: používáme pouze technicky nezbytné soubory cookie, například pro volbu jazyka a skrytí cookie lišty. Tyto cookies neslouží k analýze návštěvnosti ani k marketingu.
+      </p>
+
+      <p data-i18n="privacyNoTracking">
+        Nesledujeme návštěvníky pomocí analytických, marketingových či jiných sledovacích nástrojů třetích stran.
+      </p>
+
+      <p data-i18n="privacyContactData">
+        Pokud nás kontaktujete e-mailem nebo telefonicky, zpracováváme vámi poskytnuté kontaktní údaje pouze za účelem vyřízení dotazu nebo přípravy spolupráce.
+      </p>
+
+      <p data-i18n="privacyRights">
+        Osobní údaje zpracováváme v souladu s platnými právními předpisy. Máte právo požadovat přístup k údajům, jejich opravu nebo výmaz v rozsahu, v jakém je to právně možné.
+      </p>
+
+      <p data-i18n="privacyContact">
+        Pro dotazy k ochraně osobních údajů použijte prosím kontakt: patrik.budinsky@skytelmontage.tech.
+      </p>
+    </div>
+  </div>
+
+  <!-- Language switcher -->
+  <div class="lang-switch" aria-label="Language switch">
+    <button type="button" class="lang-btn" data-lang="cs" aria-pressed="true" title="Čeština">🇨🇿</button>
+    <button type="button" class="lang-btn" data-lang="en" aria-pressed="false" title="English">🇬🇧</button>
+    <button type="button" class="lang-btn" data-lang="de" aria-pressed="false" title="Deutsch">🇩🇪</button>
+    <button type="button" class="lang-btn" data-lang="kli" aria-pressed="false" title="Klingon">🖖</button>
+  </div>
+
+  <footer>
+    <p>© 2025 SkyTel Montage s.r.o.</p>
     <p>
-      Tento web nesbírá žádné osobní údaje automaticky pro marketing nebo analytiku.
-      Může docházet pouze k následujícím zpracováním:
+      <a href="index.html" data-i18n="footerBackHome">Zpět na hlavní stránku</a> |
+      <a href="impressum.html" data-i18n="footerImprint">Impressum</a>
     </p>
-    <ul>
-      <li>
-        technické logy webhostingu (IP adresa, čas přístupu, URL),
-        které jsou nezbytné pro provoz a zabezpečení serveru;
-      </li>
-      <li>
-        údaje, které nám dobrovolně poskytnete v rámci e-mailové komunikace
-        (jméno, kontaktní údaje, obsah dotazu).
-      </li>
-    </ul>
+  </footer>
 
-    <h2>Cookies</h2>
-    <p>
-      Web používá pouze technicky nezbytné soubory cookie:
-    </p>
-    <ul>
-      <li><strong>stm_lang</strong> – uchovává zvolený jazyk webu, platnost max. 12 měsíců;</li>
-      <li><strong>stm_cookie_ok</strong> – informace o tom, že jste potvrdili zobrazené cookie oznámení, platnost max. 12 měsíců.</li>
-    </ul>
-    <p>
-      Tyto cookies jsou nezbytné pro správné fungování webu a nevyžadují souhlas.
-      Nepoužíváme žádné cookies pro analytiku, marketing ani profilování.
-    </p>
-
-    <h2>Právní základy zpracování</h2>
-    <ul>
-      <li>plnění právních povinností a oprávněný zájem na provozu a zabezpečení webu,</li>
-      <li>oprávněný zájem na komunikaci se stávajícími i potenciálními obchodními partnery.</li>
-    </ul>
-
-    <h2>Doba uchování</h2>
-    <p>
-      Technické logy serveru jsou uchovávány po nezbytně nutnou dobu, typicky několik týdnů.
-      E-mailová komunikace je uchovávána po dobu řešení vašeho dotazu a následně dle zákonných
-      požadavků (např. účetnictví).
-    </p>
-
-    <h2>Vaše práva</h2>
-    <p>
-      V souladu s GDPR máte právo zejména na přístup k osobním údajům, opravu nebo výmaz,
-      omezení zpracování, námitku proti zpracování a podání stížnosti k dozorovému úřadu
-      (v ČR Úřad pro ochranu osobních údajů).
-    </p>
-
-    <p><a href="index.html">Zpět na hlavní stránku</a></p>
-  </section>
 </body>
 </html>
