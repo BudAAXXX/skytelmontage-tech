@@ -1,107 +1,107 @@
 (() => {
   'use strict';
 
-  // i18n texty
-  const I18N = {
-    cs: {
-      headline: "SkyTel Montage",
-      subtitle: "Váš partner pro výškové a telekomunikační projekty v celé Evropě.",
-      partners: "Partneři",
-      certs: "Certifikace a školení",
-      note: "Toto je základ. Dle požadavků projektu doplníme další školení a certifikace. Tým je vícemanový."
-    },
-    en: {
-      headline: "SkyTel Montage",
-      subtitle: "Your partner for telecom and rope-access projects across Europe.",
-      partners: "Partners",
-      certs: "Certifications & Training",
-      note: "This is the baseline. We add project-specific trainings and certs as required. Multi-person team."
-    },
-    de: {
-      headline: "SkyTel Montage",
-      subtitle: "Ihr Partner für Telekommunikation und Höhenarbeit in ganz Europa.",
-      partners: "Partner",
-      certs: "Zertifikate & Schulungen",
-      note: "Dies ist die Basis. Projektbezogene Schulungen/Zertifikate ergänzen wir nach Vorgabe. Mehrköpfiges Team."
-    },
-    kli: {
-      headline: "SkyTel Montage",
-      subtitle: "batlh • HoS • yaj",
-      partners: "Qochbe'",
-      certs: "patlhmey",
-      note: "De'vam 'oH. poQlu'taHvIS DIchel."
-    }
-  };
+  // Futuristický „číselník“ pro název SkyTel Montage
+  function initTickerTitle() {
+    const el = document.getElementById('tickerTitle');
+    if (!el) return;
 
-  // SEO texty
-  const SEO = {
-    cs: {
-      title: "SkyTel Montage s.r.o. | Telekom a výškové práce v DE/EU",
-      desc: "8 let praxe v Německu. Montáže a servis telekom sítí, práce ve výškách (PSAgA), elektro kvalifikace NV 194/2022 §7, G25/G37/G41, Siemens SIMATIC S7/TIA. Dokumentace dle DE/CZ norem."
-    },
-    en: {
-      title: "SkyTel Montage s.r.o. | Telecom & Rope Access in DE/EU",
-      desc: "8 years in Germany. Telecom rollout and service, rope access (PSAgA), electrical qualification NV 194/2022 §7, G25/G37/G41, Siemens SIMATIC S7/TIA. Documentation per DE/CZ standards."
-    },
-    de: {
-      title: "SkyTel Montage s.r.o. | Telekom & Höhenarbeit in DE/EU",
-      desc: "8 Jahre Erfahrung in Deutschland. Rollout und Service, Höhenarbeit (PSAgA), Elektro-Qualifikation NV 194/2022 §7, G25/G37/G41, Siemens SIMATIC S7/TIA. Dokumentation nach DE/CZ-Standards."
-    }
-  };
+    const finalText = el.dataset.text || el.textContent || '';
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
 
-  function applySEO(lang) {
-    const s = SEO[lang] || SEO.cs;
-    document.title = s.title;
-    let md = document.querySelector('meta[name="description"]');
-    if (!md) { md = document.createElement('meta'); md.setAttribute('name','description'); document.head.appendChild(md); }
-    md.setAttribute('content', s.desc);
-    const url = new URL(location.href);
-    url.searchParams.set('lang', lang);
-    history.replaceState(null, '', url.toString());
+    // vyčisti původní obsah
+    el.textContent = '';
+
+    [...finalText].forEach((finalChar, index) => {
+      const span = document.createElement('span');
+      span.className = 'ticker-char';
+
+      // mezera zůstane mezera, bez animace
+      if (finalChar === ' ') {
+        span.textContent = ' ';
+        el.appendChild(span);
+        return;
+      }
+
+      span.textContent = ' ';
+      el.appendChild(span);
+
+      let iterations = 0;
+      const maxIterations = 10 + Math.floor(Math.random() * 6); // 10–15 cyklů
+      const delay = 40; // rychlost překlikávání znaku
+
+      setTimeout(() => {
+        const interval = setInterval(() => {
+          span.textContent = chars[Math.floor(Math.random() * chars.length)];
+          iterations++;
+          if (iterations >= maxIterations) {
+            clearInterval(interval);
+            span.textContent = finalChar;
+          }
+        }, delay);
+      }, index * 80); // postupné zpoždění pro jednotlivá písmena
+    });
   }
 
-  // přepínač jazyků
-  function setLang(lang) {
-    document.documentElement.lang = lang;
-    const dict = I18N[lang] || I18N.cs;
-    document.querySelectorAll('[data-i18n]').forEach(el => {
-      const k = el.dataset.i18n;
-      if (dict[k]) el.textContent = dict[k];
-    });
-    document.querySelectorAll('.lang button').forEach(b => {
-      b.setAttribute('aria-pressed', String(b.dataset.lang === lang));
-    });
-    applySEO(lang);
-  }
-
-  // matrix efekt (výkonově šetrný)
+  // matrix efekt (výkonově šetrný + zpomalený)
   function initMatrix() {
     const canvas = document.getElementById('matrix');
     if (!canvas) return;
-    const ctx = canvas.getContext('2d');
 
+    // respektuj prefers-reduced-motion
+    const prefersReduced = window.matchMedia &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReduced) {
+      return;
+    }
+
+    const ctx = canvas.getContext('2d');
     const DPR = Math.min(2, window.devicePixelRatio || 1);
     const fontSize = 16;
     const chars = 'アカサタナハマヤラワ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
     let columns = 0;
     let drops = [];
+    let tick = 0;
+    let running = true;
 
     function resize() {
-      canvas.width = Math.floor(innerWidth * DPR);
-      canvas.height = Math.floor(innerHeight * DPR);
-      canvas.style.width = innerWidth + 'px';
-      canvas.style.height = innerHeight + 'px';
+      canvas.width = Math.floor(window.innerWidth * DPR);
+      canvas.height = Math.floor(window.innerHeight * DPR);
+      canvas.style.width = window.innerWidth + 'px';
+      canvas.style.height = window.innerHeight + 'px';
       ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
-      columns = Math.floor(innerWidth / fontSize);
+      columns = Math.floor(window.innerWidth / fontSize);
       drops = new Array(columns).fill(1);
     }
+
     resize();
-    addEventListener('resize', resize, { passive: true });
+    window.addEventListener('resize', resize, { passive: true });
+
+    // pauza při skrytém tabu (volitelné, ale pomáhá výkonu)
+    document.addEventListener('visibilitychange', () => {
+      running = document.visibilityState === 'visible';
+      if (running) {
+        requestAnimationFrame(draw);
+      }
+    });
 
     function draw() {
+      if (!running) {
+        requestAnimationFrame(draw);
+        return;
+      }
+
+      tick++;
+
+      // zpomalení: vykresli jen každý 3. frame
+      if (tick % 3 !== 0) {
+        requestAnimationFrame(draw);
+        return;
+      }
+
       ctx.fillStyle = 'rgba(0,0,0,0.08)';
-      ctx.fillRect(0, 0, innerWidth, innerHeight);
+      ctx.fillRect(0, 0, window.innerWidth, window.innerHeight);
 
       ctx.fillStyle = '#8bd3ff';
       ctx.font = `${fontSize}px monospace`;
@@ -112,30 +112,32 @@
         const y = drops[i] * fontSize;
         ctx.fillText(text, x, y);
 
-        if (y > innerHeight && Math.random() > 0.975) drops[i] = 0;
+        if (y > window.innerHeight && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
         drops[i]++;
       }
+
       requestAnimationFrame(draw);
     }
+
     requestAnimationFrame(draw);
   }
 
-  // init
   document.addEventListener('DOMContentLoaded', () => {
-    // jazyk z URL
-    const urlLang = new URL(location.href).searchParams.get('lang') || 'cs';
-    setLang(urlLang);
+    // název „SkyTel Montage“ jako číselník
+    initTickerTitle();
 
-    document.querySelectorAll('.lang button').forEach(btn => {
-      btn.addEventListener('click', () => setLang(btn.dataset.lang));
-    });
-
-    // skryj chybějící partnerská loga
+    // skryj chybějící partnerská loga (pokud nějaká přidáš)
     document.querySelectorAll('.partner-logos img').forEach(img => {
       img.loading = 'lazy';
-      img.addEventListener('error', () => img.style.display = 'none');
+      img.decoding = 'async';
+      img.addEventListener('error', () => {
+        img.style.display = 'none';
+      });
     });
 
+    // matrix efekt
     initMatrix();
   });
 })();
