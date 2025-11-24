@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="cs">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <title>SkyTel Montage s.r.o. | Telekom a výškové práce v DE/EU</title>
-  <meta name="description" content="SkyTel Montage – 8 let praxe v Německu. Montáže telekom sítí, práce ve výškách (PSAgA), elektro kvalifikace §6/§7 NV 194/2022, Siemens SIMATIC S7/TIA. Dokumentace dle DE/CZ norem.">
+  <title>SkyTel Montage | Telecom & Rope Access</title>
+  <meta name="description" content="SkyTel Montage – telecom installations, rope-access work at height, electrical expertise and project support for network operators and contractors across Europe.">
 
   <link rel="icon" type="image/png" sizes="192x192" href="logo.png">
   <meta name="theme-color" content="#0b2e4e">
@@ -15,13 +15,16 @@
 </head>
 <body>
 
-  <!-- Video pozadí -->
+  <!-- Video background -->
   <video id="bgVideo" autoplay muted loop playsinline preload="metadata" aria-hidden="true">
     <source src="Video123.mp4" type="video/mp4" />
   </video>
 
-  <!-- Matrix efekt -->
+  <!-- Matrix effect -->
   <canvas id="matrix" aria-hidden="true"></canvas>
+
+  <!-- Flying gear (created by JS) -->
+  <div id="floaters-layer" aria-hidden="true"></div>
 
   <!-- Intro logo -->
   <div id="intro">
@@ -31,45 +34,139 @@
   <header class="hero">
     <img src="logo.png" alt="SkyTel Montage" class="main-logo">
 
-    <!-- Futuristický název – animovaný v JS jako „číselník“ -->
+    <!-- Futuristic ticker title -->
     <h1 id="tickerTitle" class="ticker" data-text="SkyTel Montage">
       SkyTel Montage
     </h1>
 
-    <p class="hero-subtitle">
+    <p class="hero-subtitle" data-i18n="subtitle">
       Telecom & rope-access team ready for DE/EU projects.
     </p>
 
-    <p class="roles">
-      <strong>CEO / Owner:</strong> Patrik Budinský |
-      <strong>Chief Tower Hacker:</strong> SkyTel Montage Crew
+    <p class="roles" data-i18n="roles">
+      CEO / Owner: Patrik Budinský | Chief Tower Hacker: SkyTel Montage Crew
     </p>
 
-    <!-- Hlavní link hub -->
+    <!-- Slogans -->
+    <div class="slogans">
+      <p data-i18n="slogan1">You don’t overcome the tower – you overcome yourself.</p>
+      <p data-i18n="slogan2">Climbers on steel, AI in the background – clean work, clean data.</p>
+      <p data-i18n="slogan3">From anchor point to acceptance report – one team, one responsibility.</p>
+    </div>
+
+    <!-- Link hub – icons only -->
     <div class="hero-links">
-      <a class="btn-link" href="https://www.instagram.com/high_voltage_drive/" target="_blank" rel="noopener">
-        Instagram
+      <a class="btn-link" href="https://www.instagram.com/high_voltage_drive/" target="_blank" rel="noopener" aria-label="Instagram">
+        <span class="icon icon-instagram" aria-hidden="true"></span>
       </a>
-      <a class="btn-link" href="https://www.linkedin.com/in/patrik-budinsk%C3%BD-793385192/" target="_blank" rel="noopener">
-        LinkedIn
+      <a class="btn-link" href="https://www.linkedin.com/in/patrik-budinsk%C3%BD-793385192/" target="_blank" rel="noopener" aria-label="LinkedIn">
+        <span class="icon icon-linkedin" aria-hidden="true"></span>
       </a>
     </div>
   </header>
 
   <main>
-    <!-- Volitelná sekce, můžeš klidně nechat prázdnou nebo smazat -->
+    <!-- Partners -->
     <section id="partners">
-      <h2>Partneři</h2>
+      <h2 data-i18n="partners">Partners</h2>
       <div class="partner-logos">
-        <!-- pokud přidáš loga, JS je lazy-loadne a skryje nefunkční -->
+        <!-- future logos -->
       </div>
+      <p class="note" data-i18n="partnersNote">Soon.</p>
+    </section>
+
+    <!-- Team & cooperation -->
+    <section id="team">
+      <h2 data-i18n="teamTitle">Team & cooperation conditions</h2>
+
+      <p data-i18n="teamIntro">
+        SkyTel Montage operates multi-person teams for telecom build, maintenance and emergency work at height in Germany and across the EU. The crew combines electrical qualification, rope-access skills (PSAgA) and hands-on experience from projects for major operators and general contractors.
+      </p>
+
+      <h3 data-i18n="teamCompTitle">Typical team composition</h3>
+      <ul>
+        <li data-i18n="teamLead">
+          Lead technician / team lead: electrical qualification (NV 194/2022 §6/§7 or equivalent Elektrofachkraft), responsibility for safety (BOZP/DGUV) and quality.
+        </li>
+        <li data-i18n="ropeL2">
+          Rope-access technician (L2): assembly, cable routing, installation of brackets and anchor points, rescue planning.
+        </li>
+        <li data-i18n="ropeTech">
+          Rope-access technician / rigger: additional works, finishing, photo documentation and detail checks.
+        </li>
+      </ul>
+
+      <h3 data-i18n="billingTitle">What is billed per team member</h3>
+      <ul>
+        <li data-i18n="billingDayRate">
+          Day rate: professional work on site, preparation, documentation and use of standard tools.
+        </li>
+        <li data-i18n="billingTravel">
+          Travel costs: share of van rental, fuel, tolls and parking, allocated according to project and number of technicians.
+        </li>
+        <li data-i18n="billingPerDiem">
+          Per diems & accommodation: usually according to German / Czech rates, invoiced as agreed in the contract.
+        </li>
+        <li data-i18n="billingEquipment">
+          Special equipment: optional surcharges for specific measurement or test equipment (e.g. EMF meters, electrical testers, special rescue kits) requested by the project.
+        </li>
+      </ul>
+
+      <h3 data-i18n="paymentTitle">Payment options</h3>
+      <ul>
+        <li data-i18n="paymentCompany">
+          Invoicing via Czech limited company (EU VAT): invoicing in EUR or CZK, standard payment terms.
+        </li>
+        <li data-i18n="paymentMilestones">
+          Milestone-based billing: project split into phases such as build, commissioning and final acceptance.
+        </li>
+        <li data-i18n="paymentMonthly">
+          Monthly summary invoices: one consolidated invoice per month for all sites and days worked.
+        </li>
+      </ul>
+
+      <h3 data-i18n="benefitsTitle">Benefits for partners</h3>
+      <ul>
+        <li data-i18n="benefit1">
+          Single point of contact (CEO / team lead) with clear responsibility for planning, safety and delivery.
+        </li>
+        <li data-i18n="benefit2">
+          Photo and technical documentation prepared in DE/EN/CZ according to project standards (e.g. W+A, DFMG, operators).
+        </li>
+        <li data-i18n="benefit3">
+          Option for rapid deployment on urgent calls (weekends / nights), depending on capacity and contract.
+        </li>
+        <li data-i18n="benefit4">
+          Transparent breakdown of costs per team member and per used equipment, suitable for audits and recharging.
+        </li>
+      </ul>
     </section>
   </main>
 
+  <!-- Snake mini game -->
+  <div class="snake-wrapper">
+    <div class="snake-header">
+      Snake
+      <span class="snake-hint">↑↓←→</span>
+    </div>
+    <canvas id="snakeCanvas" width="160" height="120" aria-label="Snake mini game" tabindex="0"></canvas>
+  </div>
+
+  <!-- Language switcher (flags) -->
+  <div class="lang-switch" aria-label="Language switch">
+    <button type="button" class="lang-btn" data-lang="cs" aria-pressed="false" title="Čeština">🇨🇿</button>
+    <button type="button" class="lang-btn" data-lang="en" aria-pressed="true" title="English">🇬🇧</button>
+    <button type="button" class="lang-btn" data-lang="de" aria-pressed="false" title="Deutsch">🇩🇪</button>
+    <button type="button" class="lang-btn" data-lang="kli" aria-pressed="false" title="Klingon">🖖</button>
+  </div>
+
   <footer>
+    <p class="experimental-note" data-i18n="experimentalNote">
+      This page is used purely for experimental purposes and is not the final version of the website. Thank you for your understanding.
+    </p>
     <p>© 2025 SkyTel Montage s.r.o.</p>
     <p>
-      <a href="https://www.instagram.com/high_voltage_drive/" target="_blank" rel="noopener">Instagram</a> |
+      <a href="https://www.instagram.com/high_voltage_drive/" target="_blank" rel="noopener" aria-label="Instagram">Instagram</a> |
       <a href="https://www.linkedin.com/in/patrik-budinsk%C3%BD-793385192/" target="_blank" rel="noopener">LinkedIn</a>
     </p>
   </footer>
