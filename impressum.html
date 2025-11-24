@@ -4,50 +4,68 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Impressum – SkyTel Montage s.r.o.</title>
+  <link id="favicon" rel="icon" type="image/png" href="logo.png">
+  <meta name="theme-color" content="#0b2e4e">
   <link rel="stylesheet" href="style.css">
+  <script defer src="script.js"></script>
 </head>
 <body>
-  <section style="max-width:900px;margin:40px auto;padding:0 20px;">
-    <h1>Impressum</h1>
 
-    <p><strong>SkyTel Montage s.r.o.</strong></p>
-    <p>
-      Sitz / Registered office:<br>
-      BUSINESS CENTRUM, Řeznická 1332<br>
-      460&nbsp;01 Liberec<br>
-      Tschechische Republik
+  <!-- Cookie info -->
+  <div id="cookie-banner" class="cookie-banner" role="dialog" aria-live="polite" aria-label="Cookie information">
+    <p data-i18n="cookieText">
+      This website uses only technically necessary cookies (for example to remember your language selection and hide this notice). No analytics or marketing cookies are used.
     </p>
+    <button type="button" id="cookie-accept" class="cookie-btn" data-i18n="cookieOk">OK</button>
+  </div>
 
+  <!-- Background -->
+  <video id="bgVideo" autoplay muted loop playsinline preload="metadata" aria-hidden="true">
+    <source src="Video123.mp4" type="video/mp4" />
+  </video>
+  <canvas id="matrix" aria-hidden="true"></canvas>
+  <div id="floaters-layer" aria-hidden="true"></div>
+
+  <div class="legal-container">
+    <div class="legal-box">
+      <h1 data-i18n="impressumHeading">Impressum</h1>
+      <p data-i18n="impressumCompany">SkyTel Montage s.r.o.</p>
+      <p data-i18n="impressumLegalForm">
+        Rechtsform: Gesellschaft mit beschränkter Haftung (s.r.o.) nach tschechischem Recht.
+      </p>
+      <p data-i18n="impressumResp">
+        Inhaltlich verantwortlich: Patrik Budinský (Inhaber und Geschäftsführer).
+      </p>
+      <p data-i18n="impressumAddress">
+        Sitz: BUSINESS CENTRUM, Řeznická 1332, 460 01 Liberec, Tschechische Republik.
+      </p>
+      <p data-i18n="impressumContact">
+        Kontakt: patrik.budinsky@skytelmontage.tech, Tel. +420 739 977 089.
+      </p>
+      <p data-i18n="impressumRegisterNote">
+        Angaben zum Handelsregistereintrag werden nach erfolgter Eintragung ergänzt.
+      </p>
+      <p class="legal-meta">
+        SkyTel Montage s.r.o. erbringt Dienstleistungen im Bereich Montage, Modernisierung und Service von Telekommunikationsanlagen innerhalb der Europäischen Union. Diese Seite stellt eine allgemeine Unternehmenspräsentation dar und erhebt keinen Anspruch auf Vollständigkeit aller projektspezifischen Vertragsbeziehungen.
+      </p>
+    </div>
+  </div>
+
+  <!-- Language switcher -->
+  <div class="lang-switch" aria-label="Language switch">
+    <button type="button" class="lang-btn" data-lang="cs" aria-pressed="false" title="Čeština">🇨🇿</button>
+    <button type="button" class="lang-btn" data-lang="en" aria-pressed="false" title="English">🇬🇧</button>
+    <button type="button" class="lang-btn" data-lang="de" aria-pressed="true" title="Deutsch">🇩🇪</button>
+    <button type="button" class="lang-btn" data-lang="kli" aria-pressed="false" title="Klingon">🖖</button>
+  </div>
+
+  <footer>
+    <p>© 2025 SkyTel Montage s.r.o.</p>
     <p>
-      Rechtsform: Gesellschaft mit beschränkter Haftung nach tschechischem Recht (s.r.o.)<br>
-      Vertretungsberechtigter Geschäftsführer:<br>
-      <strong>Patrik Budinský</strong><br>
-      (Inhaber, Geschäftsführer und Technischer Leiter)
+      <a href="index.html" data-i18n="footerBackHome">Back to the main page</a> |
+      <a href="privacy.html" data-i18n="footerPrivacy">Privacy policy</a>
     </p>
+  </footer>
 
-    <p>
-      Telefon: +420&nbsp;739&nbsp;977&nbsp;089<br>
-      E-Mail: <a href="mailto:patrik.budinsky@skytelmontage.tech">patrik.budinsky@skytelmontage.tech</a>
-    </p>
-
-    <p>
-      Handelsregister: Angaben werden nach Eintragung ergänzt.<br>
-      USt-IdNr.: wird nach Erteilung ergänzt.
-    </p>
-
-    <h2>Haftungsausschluss</h2>
-    <p>
-      Die Inhalte dieser Website wurden mit größter Sorgfalt erstellt. Für die Richtigkeit,
-      Vollständigkeit und Aktualität der Inhalte kann jedoch keine Gewähr übernommen werden.
-      Änderungen der bereitgestellten Informationen bleiben jederzeit vorbehalten.
-    </p>
-
-    <p>
-      Externe Links werden regelmäßig mit Sorgfalt geprüft. Für Inhalte externer Seiten,
-      auf die wir verlinken, sind ausschließlich deren Betreiber verantwortlich.
-    </p>
-
-    <p><a href="index.html">Zurück zur Startseite</a></p>
-  </section>
 </body>
 </html>
