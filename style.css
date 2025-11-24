@@ -142,7 +142,7 @@ body::before {
 /* stats */
 .stats {
   margin: 14px auto 4px;
-  max-width: 520px;
+  max-width: 720px;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 10px;
@@ -158,10 +158,11 @@ body::before {
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
 }
 
 .stat-number {
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   font-weight: 700;
   letter-spacing: 0.06em;
 }
@@ -173,18 +174,18 @@ body::before {
 .stats-note {
   grid-column: 1 / -1;
   margin: 4px 0 0;
-  font-size: 0.75rem;
-  opacity: 0.85;
+  font-size: 0.76rem;
+  opacity: 0.88;
 }
 
-/* slogans */
-.slogans {
-  margin-top: 10px;
-  font-size: 0.9rem;
-  opacity: 0.92;
+/* micro jokes */
+.micro-jokes {
+  margin: 10px auto 0;
+  max-width: 720px;
+  font-size: 0.8rem;
+  opacity: 0.9;
 }
-
-.slogans p {
+.micro-jokes p {
   margin: 2px 0;
 }
 
@@ -330,6 +331,18 @@ h2 {
   filter: drop-shadow(0 0 4px rgba(255,255,255,.5));
 }
 
+/* services & text lists */
+.services-list,
+.text-list {
+  margin: 8px 0 0;
+  padding-left: 1.1rem;
+  font-size: 0.9rem;
+}
+.services-list li,
+.text-list li {
+  margin: 3px 0;
+}
+
 /* Snake */
 .snake-wrapper {
   position: fixed;
@@ -418,13 +431,6 @@ footer a:hover {
   text-decoration: underline;
 }
 
-.experimental-note {
-  max-width: 900px;
-  margin: 0 auto 10px;
-  font-size: 13px;
-  opacity: 0.85;
-}
-
 /* noscript */
 .noscript {
   position: fixed;
@@ -437,6 +443,43 @@ footer a:hover {
   padding: 8px 12px;
   z-index: 10;
   font-weight: 600;
+}
+
+/* cookie banner */
+.cookie-banner {
+  position: fixed;
+  left: 50%;
+  bottom: 12px;
+  transform: translateX(-50%);
+  max-width: 640px;
+  width: calc(100% - 24px);
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: rgba(0,0,0,0.88);
+  border: 1px solid rgba(139,211,255,0.7);
+  box-shadow: 0 0 16px rgba(0,0,0,0.9);
+  font-size: 0.8rem;
+  z-index: 20;
+}
+.cookie-banner p {
+  margin: 0 0 6px;
+}
+.cookie-btn {
+  border: 1px solid rgba(139,211,255,0.9);
+  background: rgba(10,30,50,0.9);
+  color: #fff;
+  border-radius: 999px;
+  padding: 4px 12px;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+.cookie-btn:hover,
+.cookie-btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 10px rgba(139,211,255,0.9);
+}
+.cookie-hidden {
+  display: none;
 }
 
 /* reduce motion */
@@ -454,19 +497,24 @@ footer a:hover {
 }
 
 /* small screens */
-@media (max-width: 600px) {
+@media (max-width: 800px) {
   .stats {
     grid-template-columns: 1fr;
   }
+}
 
+@media (max-width: 600px) {
   .snake-wrapper {
-    right: 8px;
-    bottom: 80px;
-    width: 160px;
+    display: none; /* Snake nebude na mobilu vidět */
   }
 
   .lang-switch {
     right: 8px;
     bottom: 8px;
+  }
+
+  .cookie-banner {
+    bottom: 8px;
+    width: calc(100% - 16px);
   }
 }
