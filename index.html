@@ -1,101 +1,274 @@
 <!doctype html>
-<html lang="cs">
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>CSND — Standalone Network Deployment</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Telekomunikační a elektro instalace, práce ve výškách, field deployment CZ / DE.">
-  <meta name="theme-color" content="#05070c">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SkyTelMontage — Telecom Field Deployment</title>
+  <meta name="description" content="Telecom field deployment, RF verification, fiber works and working-at-height support. CZ ⇄ DE (NRW). EN/DE reporting." />
+  <meta name="theme-color" content="#05070c" />
 
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
 
-<!-- INTRO -->
-<div id="intro" class="intro">
-  <div class="intro-box">
-    <img src="logo-intro.png" alt="CSND">
-    <div class="intro-text">
-      <strong>CSND</strong>
-      <span>Standalone Network Deployment</span>
+<!-- SAFE INTRO (will always remove itself) -->
+<div id="intro" class="intro" aria-hidden="false">
+  <div class="intro-panel">
+    <div class="intro-top">
+      <img class="intro-logo" src="logo.png" alt="Logo" />
+      <div class="intro-title">
+        <div class="t1">SKYTELMONTAGE</div>
+        <div class="t2">TELECOM FIELD DEPLOYMENT • CZ ⇄ DE</div>
+      </div>
+    </div>
+
+    <div class="intro-hero">
+      <img class="intro-img" src="logo-intro.png" alt="Intro" />
+      <div class="intro-hud" aria-hidden="true">
+        <div class="ig"></div>
+        <div class="is"></div>
+        <div class="ic"></div>
+      </div>
+    </div>
+
+    <div class="intro-bottom">
+      <div class="dots" aria-hidden="true"><span></span><span></span><span></span></div>
+      <div class="intro-sub">Loading operation view…</div>
     </div>
   </div>
 </div>
 
+<!-- Background -->
+<div class="bg" aria-hidden="true">
+  <div class="bg-grid"></div>
+  <div class="bg-scan"></div>
+  <div class="bg-glow g1"></div>
+  <div class="bg-glow g2"></div>
+  <div class="bg-noise"></div>
+</div>
+
 <header class="topbar">
   <div class="brand">
-    <img src="logo.png" alt="CSND">
-    <div>
-      <b>CSND</b>
-      <small>Standalone Network Deployment</small>
+    <img src="logo.png" alt="Logo" class="brand-logo" />
+    <div class="brand-txt">
+      <div class="b1">SKYTELMONTAGE</div>
+      <div class="b2">Telecom Field Deployment</div>
     </div>
   </div>
 
-  <nav>
-    <a href="#video">Operation</a>
+  <nav class="nav">
+    <a href="#operation">Operation</a>
+    <a href="#capabilities">Capabilities</a>
     <a href="#gear">Gear</a>
-    <a href="impressum.html">Impressum</a>
-    <a href="privacy.html">Privacy</a>
+    <a href="#contact">Contact</a>
   </nav>
+
+  <div class="actions">
+    <a class="btn ghost" href="#contact">Request availability</a>
+    <a class="btn solid" href="#operation">View operation</a>
+  </div>
 </header>
 
-<main>
+<main class="wrap">
 
-<!-- VIDEO HUD -->
-<section id="video" class="hud">
-  <div class="hud-frame">
-
-    <div class="hud-head">
-      <span>FIELD / ROOFTOP / DC</span>
-      <span class="ok">READY</span>
+  <!-- OPERATION -->
+  <section id="operation" class="section">
+    <div class="head">
+      <h1 class="h1">
+        Telecom field deployment,
+        <span class="grad">operator-ready deliverables.</span>
+      </h1>
+      <p class="lead">
+        On-site execution for telecom and infrastructure projects across CZ and DE (NRW). Clear documentation, disciplined safety practices, and EN/DE reporting.
+      </p>
     </div>
 
-    <div class="hud-video">
-      <video autoplay muted loop playsinline poster="Lano.png">
-        <source src="Video123.mp4" type="video/mp4">
-      </video>
-
-      <div class="hud-overlay">
-        <div class="grid"></div>
-        <div class="scan"></div>
-
-        <div class="hud-readout">
-          <div>HSE: <b>OK</b></div>
-          <div>DOC: <b>PACK</b></div>
-          <div>ZONE: <b>NRW</b></div>
+    <div class="opgrid">
+      <!-- Video HUD -->
+      <div class="hudframe">
+        <div class="hudhead">
+          <div class="left">
+            <span class="pill">CZ ⇄ DE</span>
+            <span class="pill">NRW</span>
+            <span class="pill">FIELD</span>
+            <span class="pill">ROOFTOP / DC</span>
+          </div>
+          <div class="right">
+            <span class="pill ok">READY</span>
+          </div>
         </div>
 
-        <div class="hud-thumbs">
-          <img src="brzda.png">
-          <img src="jummar.png">
-          <img src="karabina01.png">
-          <img src="karabina13.png">
-          <img src="kladka01.png">
-          <img src="kotvenik.png">
-          <img src="grillon(1).png">
-          <img src="rig.png">
+        <div class="hudvideo">
+          <video id="siteVideo" autoplay muted loop playsinline preload="metadata" poster="Lano.png">
+            <source src="Video123.mp4" type="video/mp4" />
+          </video>
+
+          <!-- In case autoplay is blocked -->
+          <button id="playBtn" class="playbtn" type="button" aria-label="Play video">
+            ▶ Play
+          </button>
+
+          <div class="overlay" aria-hidden="true">
+            <div class="grid"></div>
+            <div class="scan"></div>
+            <div class="corners"></div>
+
+            <!-- Soft shields to hide diagonal edge overlays without editing the file -->
+            <div class="shield left"></div>
+            <div class="shield right"></div>
+
+            <div class="readout">
+              <div class="rrow"><span>HSE</span><b>OK</b></div>
+              <div class="rrow"><span>DOC</span><b>PACK</b></div>
+              <div class="rrow"><span>RF</span><b>SUB-6</b></div>
+              <div class="rrow"><span>LANG</span><b>EN / DE</b></div>
+            </div>
+
+            <div class="thumbs" id="hudThumbs" aria-hidden="true"></div>
+          </div>
+        </div>
+
+        <div class="hudfoot">
+          <div class="kpi">
+            <div class="k1">Scope</div>
+            <div class="k2">Telecom • RF • Fiber • Height work</div>
+          </div>
+          <div class="kpi">
+            <div class="k1">Deliverables</div>
+            <div class="k2">Photo pack • Logs • Handover report</div>
+          </div>
+          <div class="kpi">
+            <div class="k1">Response</div>
+            <div class="k2">Availability on request</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Terminal -->
+      <div class="panel term">
+        <div class="termbar">
+          <div class="lights"><i class="r"></i><i class="y"></i><i class="g"></i></div>
+          <div class="path">/ops/console</div>
+          <div class="ver">v1.0</div>
+        </div>
+        <div class="termbody">
+          <div class="line"><span class="p">ops</span>$ <span class="cmd">deploy --site NRW-###</span></div>
+          <div class="out">✔ access / setup .......... OK</div>
+          <div class="out">✔ installation / checks ... OK</div>
+          <div class="out">✔ documentation pack ...... READY</div>
+
+          <div class="sp"></div>
+
+          <div class="line"><span class="p">ops</span>$ <span class="cmd">rf_verify --sub6</span></div>
+          <div class="out">• RF measurement & verification across the sub-6 GHz spectrum</div>
+          <div class="out dim">→ documented results / reporting</div>
+
+          <div class="sp"></div>
+
+          <div class="line"><span class="p">ops</span>$ <span class="cmd">handover --lang EN DE</span></div>
+          <div class="out">• photo documentation</div>
+          <div class="out">• measurement logs (where applicable)</div>
+          <div class="out">• as-built notes (scope-based)</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CAPABILITIES -->
+  <section id="capabilities" class="section">
+    <div class="head">
+      <h2 class="h2">Capabilities</h2>
+      <p class="sub">
+        Structured on-site execution for telecom projects. Outputs prepared for acceptance and handover.
+      </p>
+    </div>
+
+    <div class="cards">
+      <div class="card">
+        <h3>RF Measurement & Verification</h3>
+        <p>
+          RF measurement and verification across the <b>sub-6 GHz spectrum</b>, covering commonly deployed cellular frequency bands,
+          performed using calibrated RF test and measurement instruments (Site Master class or equivalent).
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>Fiber Works</h3>
+        <p>Fiber splicing activities and verification of optical paths, including scope-based documentation and as-built notes.</p>
+      </div>
+
+      <div class="card">
+        <h3>Working at Height</h3>
+        <p>Rooftops, masts and steel structures supported with rope-access techniques where applicable, with safety-first execution.</p>
+      </div>
+
+      <div class="card">
+        <h3>Rapid Response</h3>
+        <p>Short-notice on-site interventions within agreed scope, with clear reporting and photo documentation.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- GEAR -->
+  <section id="gear" class="section">
+    <div class="head">
+      <h2 class="h2">Gear (current set)</h2>
+      <p class="sub">
+        Current equipment photos from the repository. More items can be added later without changing the layout.
+      </p>
+    </div>
+
+    <div class="controls">
+      <input id="gearSearch" class="search" placeholder="Search (e.g. karabina, kladka, sedak, vak)..." />
+      <div class="hint">Click a card to open detail</div>
+    </div>
+
+    <div class="geargrid" id="gearGrid"></div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="section">
+    <div class="head">
+      <h2 class="h2">Contact</h2>
+      <p class="sub">Send location, timeline, scope, and contact person. We reply with availability and execution plan.</p>
+    </div>
+
+    <div class="contact">
+      <div class="panel cbox">
+        <div class="c1">E-mail</div>
+        <p class="cm">Fastest way to get a response.</p>
+        <a class="btn solid" href="mailto:info@skytelmontage.tech?subject=Request%20%E2%80%94%20SkyTelMontage&body=Location%3A%0ATimeline%3A%0AScope%3A%0AContact%3A%0A">info@skytelmontage.tech</a>
+        <div class="sep"></div>
+        <div class="cm small">
+          <a href="impressum.html">Impressum</a> • <a href="privacy.html">Privacy</a>
+        </div>
+      </div>
+
+      <div class="panel cbox">
+        <div class="c1">Deliverables</div>
+        <div class="kv">
+          <div class="kvrow"><span>Photo pack</span><b>Included</b></div>
+          <div class="kvrow"><span>Logs</span><b>Scope-based</b></div>
+          <div class="kvrow"><span>Report</span><b>EN / DE</b></div>
+          <div class="kvrow"><span>As-built</span><b>Scope-based</b></div>
         </div>
       </div>
     </div>
 
-  </div>
-</section>
-
-<!-- GEAR -->
-<section id="gear" class="gear">
-  <h2>GEAR VAULT</h2>
-
-  <div class="gear-grid" id="gearGrid"></div>
-</section>
+    <footer class="foot">
+      <span>© <span id="y"></span> SkyTelMontage</span>
+      <span>Hosted on GitHub Pages</span>
+    </footer>
+  </section>
 
 </main>
 
 <!-- LIGHTBOX -->
-<div class="lightbox" id="lightbox">
-  <button id="close">×</button>
-  <img id="lbImg">
-  <div id="lbCap"></div>
+<div class="lightbox" id="lightbox" aria-hidden="true">
+  <button class="lbclose" id="lbClose" aria-label="Close">×</button>
+  <img id="lbImg" alt="" />
+  <div class="lbcap" id="lbCap"></div>
 </div>
 
 <script src="script.js"></script>
